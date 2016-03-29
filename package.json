@@ -1,0 +1,32 @@
+{
+  "name": "SharePlatform",
+  "version": "1.0.0",
+  "description": "a platform to record tech post in Biz section",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Share",
+    "Program"
+  ],
+  "author": "Jos Tung",
+  "license": "ISC",
+  "Dependencies": {
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7",
+    "react-router": "^2.0.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-webpack": "^1.5.0"
+  },
+  "dependencies": {
+    "express": "^4.13.4",
+    "express-ntlm": "^2.1.4",
+    "express-session": "^1.13.0",
+    "socket.io": "^1.4.5"
+  }
+}
