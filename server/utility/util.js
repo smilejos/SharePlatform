@@ -1,3 +1,4 @@
+"use strict";
 let zlib = require('zlib');
 
 exports.writeError = (msg, res) => {

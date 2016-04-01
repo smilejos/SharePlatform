@@ -1,6 +1,7 @@
 "use strict";
 let router  = require('express').Router();
 let fs      = require('fs');
+let util    = require('../utility/util');
 
 router.use((req, res, next) => {
   console.log('Time:', Date.now());
@@ -9,7 +10,7 @@ router.use((req, res, next) => {
 
 router.get('/', (req, res) => {
     req.session.user = req.ntlm;
-    res.sendfile('./public/index.html');
+    res.sendfile('./build/index.html');
 });
 
 router.get('/bundle.js', (req, res) => {
