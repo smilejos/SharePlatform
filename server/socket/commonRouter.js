@@ -7,6 +7,9 @@ module.exports = function(){
 		console.log('login item', item);
         client.request.session.user.UserName = item.IdNo;
         let self = handler.setOnline(item.IdNo, client.id); 
+
+        console.log(self);
+
         socket.emit('receiveRealTimeMember', {
             list : handler.getOnlineList(),
             self : self
@@ -30,26 +33,27 @@ module.exports = function(){
 
     function _disconnect(socket, client) {
         console.log('Common disconnect', client.id);
-        if(client.request.session.user && client.request.session.user.UserName){
-            handler.setOffline(client.request.session.user.UserName);
-            socket.emit('receiveRealTimeMember', {
-                list :  handler.getOnlineList()
-            });    
-        }
+        // if(client.request.session.user && client.request.session.user.UserName){
+        //     handler.setOffline(client.request.session.user.UserName);
+        //     socket.emit('receiveRealTimeMember', {
+        //         list :  handler.getOnlineList()
+        //     });    
+        // }
     };
 
 	return {
 		listen: function(socket, client) {
 			console.log('Common connected', client.id);
-			/*let user = client.request.session.user;
+			let user = client.request.session.user;
 		    if( user) {
 		        let IdNo = user.UserName;
-		        handler.setOnline(IdNo);    
-		    }
+		        let self = handler.setOnline(IdNo);    
 
-		    client.emit('receiveRealTimeMember', {
-		        List :  handler.getOnlineList()
-		    });*/
+		        client.emit('receiveRealTimeMember', {
+		        	List :  handler.getOnlineList(),
+		        	self : self
+		    	});
+		    }
 
 			client.on('login', (item) => {
 		        _login(socket, client, item);

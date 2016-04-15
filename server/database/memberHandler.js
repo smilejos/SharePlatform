@@ -10,7 +10,10 @@ module.exports = function(){
 		};
 
 	function _getRawDataFromDatabase (callback){
-		let sqlString = "select a.Id_No, a.Card_Na, b.ETitle_na as Title_na  from HRIS.dbo.Nemployee a left join HRIS.dbo.ztitle b on a.Title_no = b.Title_no";
+		let sqlString = " select a.Id_No, a.Card_Na, a.E_Mail, a.Tel_O as Tel_No, b.ETitle_na as Title_na, a.Dept_No, c.EDept_Na1 as Dept_Name, c.EDept_FuNa as Dept_FullName" +
+						" from HRIS.dbo.Nemployee a " + 
+						" left join HRIS.dbo.ztitle b on a.Title_no = b.Title_no" +
+						" left join HRIS.dbo.NSection c on a.Dept_no = c.Dept_no";
 		sql.connect(config, function(err) {
 			let request = new sql.Request();
 	    	request.query(sqlString, function(err, recordset) {

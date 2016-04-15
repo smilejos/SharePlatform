@@ -1,0 +1,31 @@
+.personalBox {
+	.image {
+		position: relative;
+		width: 250px;
+		height: 100px;
+		display: inline-block;
+	}
+
+	.personal {
+		position: relative;
+		width: 250px;
+
+		.information {
+			font-family: Roboto,sans-serif;
+			line-height: 16px;
+			padding: 10px;
+
+			.primaryText {
+				color: #444;
+				font-size: 16px;
+			}
+
+			.secondaryText {
+				color: #999;
+				font-size: 14px;
+			}
+			
+		}
+	}	
+}
+

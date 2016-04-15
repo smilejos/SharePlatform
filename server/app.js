@@ -21,6 +21,10 @@ let socket = io.listen(server);
 let common = socket.of('/Common');
 let article = socket.of('/Article');
 
+socket.use(function(socket, next){
+    sessionMiddleware(socket.request, socket.request.res, next);
+});
+
 socket.on('connection', (client) => {
     console.log('sockets connected', client.id);
     client.on('disconnect', () => {
@@ -29,11 +33,11 @@ socket.on('connection', (client) => {
 });
 
 common.on('connection', (client) => {
-    CommonRouter.listen(common, client);
+    commonRouter.listen(common, client);
 });
 
 article.on('connection', (client) => {
-    ArticleRouter.listen(client);
+    articleRouter.listen(client);
 });
 
 console.log("Start server with port:8888")

@@ -4,7 +4,7 @@
   "description": "a platform to record tech post in Biz section",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "gulp"
   },
   "keywords": [
     "Share",
@@ -31,10 +31,12 @@
     "express": "^4.13.4",
     "express-ntlm": "^2.1.4",
     "express-session": "^1.13.0",
+    "material-ui": "^0.15.0-alpha.2",
     "mssql": "^3.1.2",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-router": "^2.0.1",
-    "socket.io": "^1.4.5"
+    "socket.io": "^1.4.5",
+    "socket.io-client": "^1.4.5"
   }
 }

@@ -15,10 +15,11 @@ let paths = {
     app: './server/app.js'
 };
 
+console.log(process.env.PROD_ENV);
 
 let watchConfig = {
     scss : './public/style/scss/*.scss',
-    components : './public/components/*.jsx',
+    components : './public/components/**/*.jsx',
     server : './server/*.js'
 };
 
@@ -39,16 +40,25 @@ let webpackConfig = {
                 presets:['react', 'es2015'] 
             }
         }]
-    }
+    },
+    plugins: process.env.PROD_ENV == "production" ? [
+        new webpack.optimize.UglifyJsPlugin({
+            include: /\.js$/,
+            minimize: true,
+            compress: {
+                warnings: false
+            }
+        }) 
+    ]: []
 };
 
 var nodemonConfig = {
     execMap: {
         js: 'node'
     },
-    script: './server/app.js',
+    script: 'server/app.js',
     ext: 'js',
-    watch: 'server/*.js'
+    watch: 'server/**/*.js'
 };
 
 gulp.task('compass', function() {
@@ -58,10 +68,11 @@ gulp.task('compass', function() {
     });
     gulp.src(paths.main)
         .pipe(compass({
-            css: paths.build,
-            sass: paths.sass,
-            image: paths.imgs
-    }));
+                css: paths.build,
+                sass: paths.sass,
+                image: paths.imgs
+            })
+        );
     
         // .pipe(minifyCSS({
         //     noAdvanced: false,
