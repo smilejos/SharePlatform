@@ -1,14 +1,21 @@
 .personalBox {
+	position: relative;
+	width: 800px;
+	left: 50%;
+	margin-left: -400px;
+
 	.image {
 		position: relative;
 		width: 250px;
-		height: 100px;
+		height: 150px;
 		display: inline-block;
 	}
 
 	.personal {
 		position: relative;
 		width: 250px;
+		height: 150px;
+		display: inline-block;
 
 		.information {
 			font-family: Roboto,sans-serif;
@@ -24,7 +31,6 @@
 				color: #999;
 				font-size: 14px;
 			}
-			
 		}
 	}	
 }

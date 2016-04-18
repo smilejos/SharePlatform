@@ -4,6 +4,8 @@ import { render } from 'react-dom'
 import { Link } from 'react-router'
 import io from 'socket.io-client'
 
+import ArticleList from '../article/ArticleList.jsx'
+
 class App extends React.Component {
     constructor(props){
         super(props);
@@ -76,6 +78,7 @@ class Information extends React.Component {
                         { "#" + this.props.selfUser.Tel_No }
                     </div>
                 </div>
+                <ArticleList userId= { this.props.selfUser.Id_No } />
             </div>
         )
     }

@@ -15,8 +15,6 @@ let paths = {
     app: './server/app.js'
 };
 
-console.log(process.env.PROD_ENV);
-
 let watchConfig = {
     scss : './public/style/scss/*.scss',
     components : './public/components/**/*.jsx',

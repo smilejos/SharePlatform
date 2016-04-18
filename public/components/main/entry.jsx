@@ -11,10 +11,7 @@ import Personal from '../common/Personal.jsx'
 render((
   <Router history={browserHistory}>
     <Route path="/" component={ Personal }>
-      <Route path="user/:userID" component={User}>
-        <Route path="tasks/:taskID" component={Task} />
-        <Redirect from="todos/:taskID" to="tasks/:taskID" />
-      </Route>
+      <Route path="user/:userID" component={Personal}></Route>
     </Route>
   </Router>
 ), document.getElementById('app'))

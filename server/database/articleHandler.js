@@ -9,42 +9,53 @@ module.exports = function(){
 		};
 
 	function _getNewestArticle(callback){
-		let sqlString = " select top 20 ArticleNo, Title, Author, Tag, Dtime from dbo.Article " + 
-						" order by Dtime DESC ";
+		let sqlString = " select top 10 a.ArticleNo, a.Title, b.Card_Na as AuthorName, a.Author, a.Tag, a.UpdateTime, a.PublishTime " +
+						" from dbo.Article a " + 
+						" left join HRIS.dbo.NEmployee b on a.Author = b.Id_No " + 
+						" order by a.UpdateTime DESC ";
 		
 		_executeSqlComment(sqlString, callback);
 	}
 
 	function _getSpecificAuthor(Id_No, callback){
-		let sqlString = " select ArticleNo, Title, Author, Tag, Dtime from dbo.Article " + 
-						" where Author = '" + Id_No + "' order by Dtime DESC ";
-		
+		let sqlString = " select a.ArticleNo, a.Title, b.Card_Na as AuthorName, a.Author, a.Tag, a.UpdateTime, a.PublishTime " +
+						" from dbo.Article a " + 
+						" left join HRIS.dbo.NEmployee b on a.Author = b.Id_No " + 
+						" where Author = '" + Id_No + "'" +
+						" order by a.UpdateTime DESC ";
+
 		_executeSqlComment(sqlString, callback);
 	}
 
 	function _getSpecificTag(Tag, callback){
-		let sqlString = " select ArticleNo, Title, Author, Tag, Dtime from dbo.Article " +
-						" where Tag = '" + Tag + "' order by Dtime DESC ";
-		
+		let sqlString = " select a.ArticleNo, a.Title, b.Card_Na as AuthorName, a.Author, a.Tag, a.UpdateTime, a.PublishTime " +
+						" from dbo.Article a " + 
+						" left join HRIS.dbo.NEmployee b on a.Author = b.Id_No " + 
+						" where Tag = '" + Tag + "'" +
+						" order by a.UpdateTime DESC ";
+
 		_executeSqlComment(sqlString, callback);
 	}
 
 	function _getSpecificArticle(ArticleNo, callback){
-		let sqlString = " select ArticleNo, Title, Author, Content, Tag, Dtime " +
-						" from dbo.Article where ArticleNo = '" + ArticleNo + "'";
+		let sqlString = " select a.ArticleNo, a.Title, b.Card_Na as AuthorName, a.Author, a.Tag, a.UpdateTime, a.PublishTime " +
+						" from dbo.Article a " + 
+						" left join HRIS.dbo.NEmployee b on a.Author = b.Id_No " + 
+						" where ArticleNo = '" + ArticleNo + "'" +
+						" order by a.UpdateTime DESC ";
 
 		_executeSqlComment(sqlString, callback);
 	}
 
 	function _modifyArticle(Article, callback){
-		let sqlString = " update dbo.Article set Title = '"+ Article.Title +"', Content = '" +Article.Content+ "', Tag = '" +Article.Tag+ "', Dtime = getDate() where ArticleNo = '" + Article.ArticleNo + "'";
+		let sqlString = " update dbo.Article set Title = '"+ Article.Title +"', Content = '" +Article.Content+ "', Tag = '" +Article.Tag+ "', UpdateTime = getDate() where ArticleNo = '" + Article.ArticleNo + "'";
 		
 		_executeSqlComment(sqlString, callback);
 	}
 
 	function _publishArticle(Article, callback){
-		let sqlString = " insert into  dbo.Article (Title, Author, Content, Tag, Dtime) "+
-		                " values ('" +Article.Title +"','"+ Article.Author +"','"+ Article.Content +"','"+ Article.Tag +"', getDate())";
+		let sqlString = " insert into  dbo.Article (Title, Author, Content, Tag, UpdateTime, PublishTime) "+
+		                " values ('" +Article.Title +"','"+ Article.Author +"','"+ Article.Content +"','"+ Article.Tag +"', getDate(), getDate())";
 		
 		_executeSqlComment(sqlString, callback);
 	}
@@ -52,8 +63,8 @@ module.exports = function(){
 	function _executeSqlComment(sqlComment, callback) {
 		sql.connect(config, (err) => {
 			let request = new sql.Request();
-	    	request.query(sqlString, (err, recordset) => {
-	    		callback(recordset[0]);
+	    	request.query(sqlComment, (err, recordset) => {
+	    		callback(recordset);
 	    	});
 		});
 	}

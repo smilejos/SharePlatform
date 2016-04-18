@@ -1,0 +1,93 @@
+.ArticleList {
+	position: relative;
+	width: 600px;
+	height: auto;
+	left: 50%;
+	margin-left: -300px;
+
+	.ArticleItem {
+		position: relative;
+		border: solid #eee 1px;
+		padding: 10px 10px;
+		margin: 5px;
+		width: 600px;
+		height: 40px;
+		display: block;
+		color: black;
+		
+		.ArticleTitle {
+			position: relative;
+			float: left;
+			width: 80%;
+			font-size: 18px;
+			line-height: 20px;
+		}
+
+		.ArticleAuthor {
+			position: relative;
+			float: left;
+			width: 20%;
+			font-size: 14px;
+			line-height: 20px;
+		}
+	}
+}
+
+.ArticleList {
+	position: relative;
+	width: 600px;
+	height: auto;
+	left: 50%;
+	margin-left: -300px;
+
+	.ArticleActivity {
+		position: relative;
+		font-style: sans-serif;
+		padding: 1em 0 1em 45px;
+		border-top: 1px solid #f1f1f1;
+		width: 600px;
+		font-weight: normal;
+		display: block;
+		color: black;
+		
+		.ArticleAuthor {
+			position: relative;
+			text-decoration: none;
+			color: #4078c0;
+			font-size: 13px;
+			line-height: 14px;
+
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+
+		.ArticleAction {
+			position: relative;
+			margin: 5px;
+			color: #666;
+			font-size: 13px;
+			line-height: 14px;
+		}
+
+		.ArticleTitle {
+			position: relative;
+			text-decoration: none;
+			color: #4078c0;
+			font-size: 13px;
+			line-height: 14px;
+
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+
+		.ArticleTime {
+			position: relative;
+			margin: 5px;
+			color: #bbb;
+			font-size: 13px;
+			line-height: 14px;
+		}
+	}
+}

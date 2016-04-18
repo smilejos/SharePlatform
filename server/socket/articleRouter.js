@@ -32,7 +32,7 @@ module.exports = function(){
             });
             
         } else {
-            ArticleHandler.getNewestArticl( (list) => {
+            ArticleHandler.getNewestArticle( (list) => {
                 client.emit('receiveList', list);
             });
         }
