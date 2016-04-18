@@ -57,20 +57,23 @@ export default class ArticleList extends React.Component {
         );
     }
 }
-    
+
 class ArticleItem extends React.Component {
+
     render() {
+        console.log(this.props.Article);
         return (
             <div className="ArticleActivity">
                 <Link to={ "/user/" + this.props.Article.Author } className="ArticleAuthor">
                     { this.props.Article.AuthorName }
                 </Link>
-                <span className="ArticleAction">Publish</span>
+                <span className="ArticleAction">
+                    { moment(this.props.Article.UpdateTime).isSame(this.props.Article.PublishTime ) ? "Publish" : "Update" }
+                </span>
                 <Link to={ "/article/" + this.props.Article.ArticleNo } className="ArticleTitle">
                     { this.props.Article.Title }
                 </Link>
-                <span className="ArticleTime">{ moment( this.props.Article.UpdateTime ).fromNow() }</span>
-                
+                <span className="ArticleTime">{ moment( this.props.Article.UpdateTime.replace("Z", "") ).fromNow() }</span>
             </div>
         );
     }

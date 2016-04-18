@@ -1,5 +1,7 @@
 "use strict";
+
 module.exports = function(){
+	let util    = require('../utility/util');
 	var ArticleHandler = require('../database/articleHandler');
 
 	function _publishArticle(client, item) {
@@ -36,6 +38,11 @@ module.exports = function(){
                 client.emit('receiveList', list);
             });
         }
+	}
+
+	function _updateTimeZone(item)
+	{
+		//To-Do Update all timezone
 	}
 
 	return {

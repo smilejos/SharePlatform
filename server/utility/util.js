@@ -29,3 +29,7 @@ exports.write = (string, type, res) => {
         res.end();
     });
 }
+
+exports.replaceTimeZone = (string) => {
+    return string.replace("Z", "");
+}
