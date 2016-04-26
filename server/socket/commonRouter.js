@@ -50,7 +50,7 @@ module.exports = function(){
 		        let self = handler.setOnline(IdNo);    
 
 		        client.emit('receiveRealTimeMember', {
-		        	List :  handler.getOnlineList(),
+		        	List : handler.getOnlineList(),
 		        	self : self
 		    	});
 		    }

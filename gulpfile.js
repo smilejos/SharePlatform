@@ -18,6 +18,7 @@ let paths = {
 let watchConfig = {
     scss : './public/style/scss/*.scss',
     components : './public/components/**/*.jsx',
+    program : './public/**/*.js',
     server : './server/*.js'
 };
 
@@ -31,13 +32,21 @@ let webpackConfig = {
     },
     module: {
         loaders: [{  
-            test: /\.jsx$/,  
-            loader: 'babel',
-            exclude: /node_modules/,
-            query: { 
-                presets:['react', 'es2015'] 
+                test: /\.jsx$/,  
+                loader: 'babel',
+                exclude: /node_modules/,
+                query: { 
+                    presets:['react', 'es2015'] 
+                }
+            },{
+                test: /\.js$/,
+                loader: 'babel-loader',
+                exclude: /node_modules/,
+                query: {
+                    presets: ['es2015']
+                }
             }
-        }]
+        ]
     },
     plugins: process.env.PROD_ENV == "production" ? [
         new webpack.optimize.UglifyJsPlugin({
@@ -99,4 +108,5 @@ gulp.task('nodemon', function() {
 
 gulp.task('default', ['build', 'compass', 'nodemon']);  //, 'nodemon'
 gulp.watch(watchConfig.components, ['build']); //restart my server 
+gulp.watch(watchConfig.program, ['build']); //restart my server 
 gulp.watch(watchConfig.scss, ['compass']); //restart my server 

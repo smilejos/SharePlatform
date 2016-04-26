@@ -31,12 +31,16 @@
     "express": "^4.13.4",
     "express-ntlm": "^2.1.4",
     "express-session": "^1.13.0",
+    "lodash": "^4.11.1",
     "material-ui": "^0.15.0-alpha.2",
     "moment": "^2.13.0",
     "mssql": "^3.1.2",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
+    "react-redux": "^4.4.5",
     "react-router": "^2.0.1",
+    "react-router-redux": "^4.0.2",
+    "redux": "^3.5.2",
     "socket.io": "^1.4.5",
     "socket.io-client": "^1.4.5"
   }

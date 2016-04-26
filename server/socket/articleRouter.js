@@ -48,22 +48,22 @@ module.exports = function(){
 	return {
 		listen: function(client) {
 			console.log('Article connected', client.id);
-			client.on('publish', (item) => {
+			client.on('publishArticle', (item) => {
 				console.log("define publish");
 		        _publishArticle(client, item);
 		    });
 
-		    client.on('update', (item) => {
+		    client.on('updateArticle', (item) => {
 		    	console.log("define update");
 		    	_updateArticle(client, item);
 		    }); 
 
-		    client.on('retrieveArticle', (item) => {
+		    client.on('requestArticle', (item) => {
 		    	console.log("define retrieveArticle");
 		       _getArticle(client, item);
 		    });
 
-		    client.on('retrieveList', (item) => {
+		    client.on('requestArticleList', (item) => {
 		    	console.log("define retrieveList");
 		       _getArticleList(client, item);
 		    });
