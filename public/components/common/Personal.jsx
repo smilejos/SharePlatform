@@ -8,22 +8,25 @@ import io from 'socket.io-client'
 
 import ArticleList from '../article/ArticleList.jsx'
 
+
 class App extends React.Component {
     constructor(props){
         super(props);
-        console.log("props", this.props.state);
     }
 
     componentDidMount() {
         console.log("componentDidMount");
     }
 
+    componentDidUpdate() {
+        console.log("componentDidUpdate");
+    }
+
     render() {
-        //const { messages, dispatch } = this.props;
         return (
             <div className="personalBox">
-                Hello
                 <div className="image"></div>
+                <Information selfUser= { this.props.self } />
             </div>
         )
     }
@@ -66,12 +69,12 @@ class Information extends React.Component {
     }
 }
 
-
 function mapStateToProps(state) {
-  return { state: state }
+  return { 
+        self: state.memberReducer.self
+    }
 }
 
 export default connect(
-  mapStateToProps,
-  null
+  mapStateToProps
 )(App)

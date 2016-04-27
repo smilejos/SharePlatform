@@ -1,6 +1,6 @@
 "use strict";
 import { REQUEST_POSTS, REQUEST_POST, RECEIVE_POSTS, RECEIVE_POST, PUBLISH_POST, UPDATE_POST, COMPLETE_POST } from '../constants/ArticleActionTypes';
-import { socket_article as socket } from '../utility/socketHandler.js';
+import { socket_article as socket } from '../utility/socketHandler';
 import moment from 'moment';
 
 export function requestArticleList(item) {

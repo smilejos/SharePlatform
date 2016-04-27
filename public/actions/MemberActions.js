@@ -1,5 +1,5 @@
 "use strict";
-import { QUERY_USER, REQUEST_USER_DATA, RETRIEVE_USER_DATA } from '../constants/ArticleActionTypes';
+import { QUERY_USER, REQUEST_USER_DATA, RETRIEVE_USER_DATA, RECEIVE_ONLINE_DATA  } from '../constants/MemberActionTypes';
 import { socket_common as socket } from '../utility/socketHandler.js';
 
 export function getUser(IdNo) {

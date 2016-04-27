@@ -21,7 +21,6 @@ module.exports = function(){
 	}
 
 	function _getArticle(client, item) {
-		console.log('articleNo', item);
 	    ArticleHandler.getSpecificArticle(item, (article) => {
 	        client.emit('retrieveArticle', article);
 	    });

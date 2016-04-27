@@ -6,12 +6,20 @@ import union from 'lodash/union'
 export default function articles(state = {
         users: [],
         online_Users: [],
-        self: {}
+        self: {
+        	Dept_No: '',
+        	Dept_Name: '',
+        	Dept_FullName: '',
+        	Title_na: '',
+        	Card_Na: '',
+        	Tel_No: '',
+        	Id_No: ''
+        }
     }, action) {
 	switch (action.type) {
         case QUERY_USER:
             return state;
-		case RETRIEVE_USER_DATA:
+		case RECEIVE_ONLINE_DATA:
 			return merge({}, state, {
           		online_Users: action.online_Users,
           		self: action.self,

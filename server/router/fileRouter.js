@@ -4,7 +4,6 @@ let fs      = require('fs');
 let util    = require('../utility/util');
 
 router.use((req, res, next) => {
-  console.log('Time:', Date.now());
   next();
 });
 

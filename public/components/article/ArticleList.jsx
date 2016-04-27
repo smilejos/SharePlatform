@@ -4,50 +4,44 @@ import { render } from 'react-dom'
 import moment from 'moment'
 import { Link } from 'react-router'
 import io from 'socket.io-client'
+import * as ArticleActions from '../../actions/ArticleActions'
+import { bindActionCreators  } from 'redux'
+import { connect } from 'react-redux'
 
-export default class ArticleList extends React.Component {
+
+class ArticleList extends React.Component {
     constructor(props){
         super(props);
-        console.log("componentDidMount", props.userId);
-        this.state = { 
-            list: [],
-            socket: null
-        };
     }
 
     componentDidMount() {
-        // || this.props.params.userId
+        let { requestArticleList } = this.props.actions;
         var userId = this.props.userId;
-        this.state.socket = io('/Article');
-        console.log("componentDidMount", userId);
         if( userId ) {
-
-            this.state.socket.emit('retrieveList', {
-                isSpecificUser : true,
-                Id_No : userId
+            console.log('send request with Id_No');
+            requestArticleList({
+                isSpecificUser: true,
+                Id_No: userId
             });
         } else {
-            this.state.socket.emit('retrieveList', {
-                isSpecificUser : false
+            console.log('send request without Id_No');
+            requestArticleList({
+                isSpecificUser: false
             });
         }
+    }
 
-        this.state.socket.on('receiveList', this._receiveList.bind(this));
+    componentDidUpdate() {
+        
     }
 
     componentWillUnmount() {
-        this.state.socket.disconnect();
-    }
-
-    _receiveList(list) {
-        this.setState({
-            list : list
-        });
+        
     }
 
     render() {
-        console.log(this.state.list);
-        var List = this.state.list.map(function(item, index){
+        console.log('list', this.props.list);
+        var List = this.props.list.map(function(item, index){
             return <ArticleItem key={item.ArticleNo} Article={item}  />
         });
         return (
@@ -78,3 +72,16 @@ class ArticleItem extends React.Component {
         );
     }
 }
+
+function mapStateToProps(state) {
+    return { list: state.articleReducer.articles }
+}
+
+function mapDispatchToProps(dispatch) {
+    return { actions: bindActionCreators(ArticleActions, dispatch) }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ArticleList)

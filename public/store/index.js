@@ -2,7 +2,7 @@
 import { rootReducer } from '../reducers/index'
 import { createStore } from 'redux'
 
-export default function configureStore(initialState) {
+function configureStore(initialState) {
 	const store = createStore(rootReducer, initialState);
 	if (module.hot) {
 	    // Enable Webpack hot module replacement for reducers
@@ -15,3 +15,6 @@ export default function configureStore(initialState) {
 	console.log(store);
   	return store;
 }
+
+const _configureStore = configureStore();
+export default _configureStore;
