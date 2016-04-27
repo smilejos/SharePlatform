@@ -1,5 +1,5 @@
 "use strict";
-import { REQUEST_POSTS, REQUEST_POST, RECEIVE_POSTS, RECEIVE_POST, PUBLISH_POST, UPDATE_POST, COMPLETE_POST } from '../constants/ArticleActionTypes';
+import { REQUEST_POSTS, REQUEST_POST, RECEIVE_POSTS, RECEIVE_POST, PUBLISH_POST, UPDATE_POST, COMPLETE_POST, LEAVE_POST } from '../constants/ArticleActionTypes';
 import { socket_article as socket } from '../utility/socketHandler';
 import moment from 'moment';
 
@@ -11,6 +11,7 @@ export function requestArticleList(item) {
 }
 
 export function requestArticle(item) {
+	console.log('item', item);
 	socket.emit('requestArticle', item);
 	return {
 		type: REQUEST_POST,
@@ -51,3 +52,8 @@ export function completeArticle() {
 	};
 }
 
+export function leaveArticle() {
+	return {
+		type: LEAVE_POST
+	};
+}

@@ -58,12 +58,12 @@ module.exports = function(){
 		    }); 
 
 		    client.on('requestArticle', (item) => {
-		    	console.log("define retrieveArticle");
+		    	console.log("define requestArticle");
 		       _getArticle(client, item);
 		    });
 
 		    client.on('requestArticleList', (item) => {
-		    	console.log("define retrieveList");
+		    	console.log("define requestArticleList");
 		       _getArticleList(client, item);
 		    });
 

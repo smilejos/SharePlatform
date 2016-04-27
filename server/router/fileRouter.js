@@ -36,4 +36,41 @@ router.get('/markdown.css', (req, res) => {
     });
 });
 
+router.get('/font-awesome.css', (req, res) => {
+    fs.readFile('./node_modules/font-awesome/css/font-awesome.css', (err, data) => {
+        util.write(data, 'text/css', res);
+    });
+});
+
+router.get('/fonts/fontawesome-webfont.eot', (req, res) => {
+    fs.readFile('./node_modules/font-awesome/fonts/fontawesome-webfont.eot', (err, data) => {
+        util.write(data, 'text/css', res);
+    });
+});
+
+router.get('/fonts/fontawesome-webfont.svg', (req, res) => {
+    fs.readFile('./node_modules/font-awesome/fonts/fontawesome-webfont.svg', (err, data) => {
+        util.write(data, 'text/css', res);
+    });
+});
+
+router.get('/fonts/fontawesome-webfont.ttf', (req, res) => {
+    fs.readFile('./node_modules/font-awesome/fonts/fontawesome-webfont.ttf', (err, data) => {
+        util.write(data, 'text/css', res);
+    });
+});
+
+router.get('/fonts/fontawesome-webfont.woff', (req, res) => {
+    fs.readFile('./node_modules/font-awesome/fonts/fontawesome-webfont.woff', (err, data) => {
+        util.write(data, 'text/css', res);
+    });
+});
+
+router.get('/fonts/fontawesome-webfont.woff2', (req, res) => {
+    fs.readFile('./node_modules/font-awesome/fonts/fontawesome-webfont.woff2', (err, data) => {
+        util.write(data, 'text/css', res);
+    });
+});
+
+
 module.exports = router;

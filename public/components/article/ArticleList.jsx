@@ -14,29 +14,31 @@ class ArticleList extends React.Component {
         super(props);
     }
 
-    componentDidMount() {
+    componentWillMount() {
         let { requestArticleList } = this.props.actions;
         var userId = this.props.userId;
         if( userId ) {
-            console.log('send request with Id_No');
             requestArticleList({
                 isSpecificUser: true,
                 Id_No: userId
             });
         } else {
-            console.log('send request without Id_No');
             requestArticleList({
                 isSpecificUser: false
             });
         }
     }
 
+    componentWillReceiveProps() {
+        console.log('componentWillReceiveProps');
+    }
+
     componentDidUpdate() {
-        
+
     }
 
     componentWillUnmount() {
-        
+
     }
 
     render() {
@@ -55,7 +57,6 @@ class ArticleList extends React.Component {
 class ArticleItem extends React.Component {
 
     render() {
-        console.log(this.props.Article);
         return (
             <div className="ArticleActivity">
                 <Link to={ "/user/" + this.props.Article.Author } className="ArticleAuthor">

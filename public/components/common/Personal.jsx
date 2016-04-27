@@ -15,11 +15,11 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        console.log("componentDidMount");
+        console.log("Personal.jsx componentDidMount");
     }
 
     componentDidUpdate() {
-        console.log("componentDidUpdate");
+        console.log("Personal.jsx componentDidUpdate");
     }
 
     render() {

@@ -1,0 +1,30 @@
+.ArticlePage{
+	position: relative;
+	max-width: 880px;
+	height: auto;
+	padding: 40px 0px 20px;
+	background-color: #fff;
+	left: 50%;
+	margin-left: -440px;
+
+	.ArticleTitle{
+		position: relative;
+		font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+		font-size: 2.2em;
+		font-weight: bold;
+		padding: 4px;
+		line-height: 1.2;
+		border-bottom: 1px solid #eee;
+		width: 100%;
+	}
+	.markdown-body{
+		position: relative;
+		border: solid #eee 1px;
+		overflow: auto;
+		width: 100%;
+	}
+
+	.MarkdownModify{
+
+	}
+}

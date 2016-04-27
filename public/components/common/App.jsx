@@ -4,17 +4,43 @@ import { render } from 'react-dom'
 import { Link } from 'react-router'
 
 class App extends React.Component {
-  render() {
-    return (
-      <div>
-        <ul>
-          <li><Link to="/user/123" activeClassName="active">Bob</Link></li>
-          <li><Link to="/user/abc" activeClassName="active">Sally</Link></li>
-        </ul>
-        {this.props.children}
-      </div>
-    )
-  }
+
+    componentWillMount() {
+        console.log('Trace componentWillMount');
+    }
+
+    componentDidMount() {
+        console.log('Trace componentDidMount');
+    }
+
+    componentWillReceiveProps() {
+        console.log('Trace componentWillReceiveProps');
+    }
+    
+    shouldComponentUpdate () {
+        console.log('Trace shouldComponentUpdate');
+        return true;
+    } 
+
+    componentWillUpdate() {
+        console.log('Trace componentWillUpdate');
+    }
+
+    componentDidUpdate() {
+        console.log('Trace componentDidUpdate');
+    }
+
+    componentWillUnmount() {
+        console.log('Trace componentWillUnmount');
+    }
+
+    render() {
+        return (
+            <div>
+                {this.props.children}
+            </div>
+        )
+    }
 }
 
 export default App;
