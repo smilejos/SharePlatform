@@ -5,34 +5,34 @@ import { Link } from 'react-router'
 
 class App extends React.Component {
 
-    componentWillMount() {
-        console.log('Trace componentWillMount');
-    }
+    // componentWillMount() {
+    //     console.log('Trace componentWillMount');
+    // }
 
-    componentDidMount() {
-        console.log('Trace componentDidMount');
-    }
+    // componentDidMount() {
+    //     console.log('Trace componentDidMount');
+    // }
 
-    componentWillReceiveProps() {
-        console.log('Trace componentWillReceiveProps');
-    }
+    // componentWillReceiveProps() {
+    //     console.log('Trace componentWillReceiveProps');
+    // }
     
-    shouldComponentUpdate () {
-        console.log('Trace shouldComponentUpdate');
-        return true;
-    } 
+    // shouldComponentUpdate () {
+    //     console.log('Trace shouldComponentUpdate');
+    //     return true;
+    // } 
 
-    componentWillUpdate() {
-        console.log('Trace componentWillUpdate');
-    }
+    // componentWillUpdate() {
+    //     console.log('Trace componentWillUpdate');
+    // }
 
-    componentDidUpdate() {
-        console.log('Trace componentDidUpdate');
-    }
+    // componentDidUpdate() {
+    //     console.log('Trace componentDidUpdate');
+    // }
 
-    componentWillUnmount() {
-        console.log('Trace componentWillUnmount');
-    }
+    // componentWillUnmount() {
+    //     console.log('Trace componentWillUnmount');
+    // }
 
     render() {
         return (

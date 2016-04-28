@@ -4,14 +4,13 @@ import { socket_article as socket } from '../utility/socketHandler';
 import moment from 'moment';
 
 export function requestArticleList(item) {
-	socket.emit('requestArticleList', item);
+	socket.emit('requestArticleList', item);	
 	return {
-		type: REQUEST_POSTS,
-	};
+		type: REQUEST_POSTS
+	}
 }
 
 export function requestArticle(item) {
-	console.log('item', item);
 	socket.emit('requestArticle', item);
 	return {
 		type: REQUEST_POST,

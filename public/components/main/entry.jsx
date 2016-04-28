@@ -7,7 +7,8 @@ import { Provider } from 'react-redux'
 import { socket_common, socket_article } from '../../utility/socketHandler'
 import store from '../../store/index'
 
-import Personal from '../common/Personal.jsx'
+import PersonalPage from '../common/PersonalPage.jsx'
+import UserPage from '../common/UserPage.jsx'
 import Article from '../article/Article.jsx'
 import App from '../common/App.jsx'
 
@@ -17,8 +18,8 @@ render((
 	<Provider store={store}>
 		<Router history={history}>
 		    <Route path="/" component={App}>
-		    	<IndexRoute component={Personal} />
-		      	<Route path="user/:userID" component={Personal} />
+		    	<IndexRoute component={PersonalPage} />
+		      	<Route path="user/:userID" component={UserPage} />
 		      	<Route path="article/:articleNo" component={Article} />
 		    </Route>
 	  	</Router>

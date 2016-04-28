@@ -16,6 +16,11 @@ module.exports = function(){
         });
     };
 
+    function _getEmployeeData(socket, Id_No) {
+        socket.emit('retrieveUser', handler.getEmployee(Id_No));
+    };
+
+
     function _sendMessage(client, item) {
         client.to(item.target).emit('receiveMessage', {
             sender : client.request.session.user.UserName,
@@ -54,6 +59,10 @@ module.exports = function(){
 		        	self : self
 		    	});
 		    }
+
+		    client.on('getEmployeeData', (item) => {
+		        _getEmployeeData(socket, item);
+		    });
 
 			client.on('login', (item) => {
 		        _login(socket, client, item);

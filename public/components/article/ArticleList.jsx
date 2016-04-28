@@ -30,7 +30,7 @@ class ArticleList extends React.Component {
     }
 
     componentWillReceiveProps() {
-        console.log('componentWillReceiveProps');
+        //console.log('componentWillReceiveProps');
     }
 
     componentDidUpdate() {
@@ -42,7 +42,6 @@ class ArticleList extends React.Component {
     }
 
     render() {
-        console.log('list', this.props.list);
         var List = this.props.list.map(function(item, index){
             return <ArticleItem key={item.ArticleNo} Article={item}  />
         });
