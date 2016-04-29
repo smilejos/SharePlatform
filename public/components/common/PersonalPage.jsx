@@ -30,7 +30,7 @@ class App extends React.Component {
                     <div className="image"></div>
                     <PersonalInfo user= { this.props.self } />
                 </div>
-                <ArticleList userId= { this.props.self.Id_No } />
+                <ArticleList />
             </div>
         )
     }

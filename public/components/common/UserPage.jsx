@@ -16,15 +16,7 @@ class App extends React.Component {
         let { getUser } = this.props.actions;
         getUser(this.props.params.userID);
     }
-
-    componentDidMount() {
-        console.log("UserPage.jsx componentDidMount");
-    }
-
-    componentDidUpdate() {
-        console.log("UserPage.jsx componentDidUpdate");
-    }
-
+    
     render() {
         return (
             <div>
@@ -32,7 +24,7 @@ class App extends React.Component {
                     <div className="image"></div>
                     <PersonalInfo user= { this.props.user } />
                 </div>
-                <ArticleList userId= { this.props.user.Id_No } />
+                <ArticleList userId= { this.props.params.userID } />
             </div>
         )
     }

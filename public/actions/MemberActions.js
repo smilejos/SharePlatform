@@ -5,18 +5,24 @@ import find from 'lodash/find'
 
 export function getUser(Id_No) {
 	return (dispatch, getState) => {
-		console.log( getState() );
+		console.log('getUser', Id_No );
 		let _user = find(getState().memberReducer.users, {
 			Id_No: Id_No
 		});
+		console.log('getUser', _user );
 		if( _user ) {
-			return {
-				type: QUERY_USER,
-				IdNo
-			};
+			dispatch(changeUser(Id_No));
 		} else {
+			console.log('dispatch');
 			dispatch(requestUser(Id_No));
 		}
+	};
+}
+
+export function changeUser(Id_No) {
+	return {
+		type: QUERY_USER,
+		Id_No
 	};
 }
 

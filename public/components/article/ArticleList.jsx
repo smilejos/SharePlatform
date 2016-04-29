@@ -8,7 +8,6 @@ import * as ArticleActions from '../../actions/ArticleActions'
 import { bindActionCreators  } from 'redux'
 import { connect } from 'react-redux'
 
-
 class ArticleList extends React.Component {
     constructor(props){
         super(props);
@@ -29,8 +28,14 @@ class ArticleList extends React.Component {
         }
     }
 
-    componentWillReceiveProps() {
-        //console.log('componentWillReceiveProps');
+    componentWillReceiveProps(nextProps) {
+        let { requestArticleList } = this.props.actions;
+        if( nextProps.userId != this.props.userId ) {
+            requestArticleList({
+                isSpecificUser: true,
+                Id_No: nextProps.userId
+            });
+        }
     }
 
     componentDidUpdate() {
@@ -42,9 +47,12 @@ class ArticleList extends React.Component {
     }
 
     render() {
-        var List = this.props.list.map(function(item, index){
-            return <ArticleItem key={item.ArticleNo} Article={item}  />
-        });
+        let List = null;
+        if( this.props.list ) {
+            List = this.props.list.map(function(item, index){
+                return <ArticleItem key={item.ArticleNo} Article={item}  />
+            });    
+        }
         return (
             <div className="ArticleList">
                 {List}

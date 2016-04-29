@@ -18,6 +18,7 @@ export function requestArticle(item) {
 }
 
 export function receiveArticles(articles) {
+	console.log('receiveArticles', articles)
 	return {
 		type: RECEIVE_POSTS,
 		articles

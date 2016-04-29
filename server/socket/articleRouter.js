@@ -28,11 +28,13 @@ module.exports = function(){
 
 	function _getArticleList(client, item) {
 		if(item.isSpecificUser) {
+			console.log('_getArticleList SpecificUser', item.Id_No);
             ArticleHandler.getSpecificAuthor(item.Id_No, (list) => {
                 client.emit('receiveList', list);
             });
             
         } else {
+        	console.log('_getArticleList Non SpecificUser');
             ArticleHandler.getNewestArticle( (list) => {
                 client.emit('receiveList', list);
             });
