@@ -1,0 +1,25 @@
+.Menu{
+	position: fixed;
+	height: 15px;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	padding: 5px 0 5px 10px;
+	border-bottom: 1px solid #eee;
+	background: #fff;
+	z-index: 9999;
+	
+	.MenuItem{
+		position: relative;
+		color: #666;
+		font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+		font-size: 12px;
+		line-height: 12px;
+		margin: 0 10px 0px 2px;
+		text-decoration: none;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}

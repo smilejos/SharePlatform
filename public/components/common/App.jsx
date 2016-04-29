@@ -2,6 +2,7 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { Link } from 'react-router'
+import Menu from '../common/Menu.jsx'
 
 class App extends React.Component {
 
@@ -37,7 +38,10 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                {this.props.children}
+                <Menu />
+                <div className="container">
+                    {this.props.children}
+                </div>
             </div>
         )
     }

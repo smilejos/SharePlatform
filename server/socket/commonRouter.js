@@ -63,7 +63,7 @@ module.exports = function(){
 		    client.on('getEmployeeData', (item) => {
 		        _getEmployeeData(socket, item);
 		    });
-
+				
 			client.on('login', (item) => {
 		        _login(socket, client, item);
 		    });
