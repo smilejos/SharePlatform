@@ -24,9 +24,10 @@ class Article extends React.Component {
             content = <div />;
         }  
         return (
-            <div>
-                <div className="MarkdownModify">
-                    <Link to={ "/creation/" + this.props.params.articleNo }>Modify</Link>
+            <div className="ArticleContent">
+                <div className="ArticleControl">
+                    <i className="fa fa-edit fa-lg" />
+                    <Link className="ArticleEdit" to={ "/creation/" + this.props.params.articleNo }>Edit</Link>
                 </div>
                 { content }
             </div>

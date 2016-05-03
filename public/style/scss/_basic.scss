@@ -6,8 +6,24 @@ $DefaultColor: #eee;
 
 .container{
 	position: absolute;
+	overflow-y: scroll;
 	top: 25px;
 	bottom: 0px;
 	left: 0px;
 	right: 0px;
+}
+
+::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+    background: #fff;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #aaa;
+    -webkit-border-radius: 6ex;
+}
+
+::-webkit-scrollbar-corner {
+    background: #fff;
 }
