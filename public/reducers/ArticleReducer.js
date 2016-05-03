@@ -1,5 +1,6 @@
 "use strict";
-import { REQUEST_POST, REQUEST_POSTS, RECEIVE_POSTS, RECEIVE_POST, PUBLISH_POST, UPDATE_POST, COMPLETE_POST, LEAVE_POST } from '../constants/ArticleActionTypes';
+import { REQUEST_POST, REQUEST_POSTS, RECEIVE_POSTS, RECEIVE_POST, PUBLISH_POST, UPDATE_POST, 
+    COMPLETE_POST, LEAVE_POST, EDIT_POST } from '../constants/ArticleActionTypes';
 import merge from 'lodash/merge'
 import union from 'lodash/union'
 import assignIn from 'lodash/assignIn'
@@ -46,6 +47,10 @@ export default function articles(state = {
     case LEAVE_POST:
         return assignIn({}, state, {
             article: null,
+        });
+    case EDIT_POST:
+        return assignIn({}, state, {
+            article: action.article,
         });
 	default:
 		return state;

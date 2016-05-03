@@ -13,8 +13,6 @@ import ArticleContent from '../article/ArticleContent.jsx'
 class Article extends React.Component {
     constructor(props){
         super(props);
-        let { requestArticle } = this.props.actions;
-        requestArticle(this.props.params.articleNo);
     }
 
     render() {
@@ -28,7 +26,7 @@ class Article extends React.Component {
             <div className="ArticleContent">
                 <div className="ArticleControl">
                     <i className="fa fa-edit fa-lg" />
-                    <Link className="ArticleEdit" to={ "/articleEditor/" + this.props.params.articleNo }>Edit</Link>
+                    <Link className="ArticleEdit" to={ "/articleEditor/" + this.props.params.articleNo  }>Return to Edit</Link>
                 </div>
                 { content }
             </div>

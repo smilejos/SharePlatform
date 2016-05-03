@@ -1,5 +1,6 @@
 "use strict";
-import { REQUEST_POSTS, REQUEST_POST, RECEIVE_POSTS, RECEIVE_POST, PUBLISH_POST, UPDATE_POST, COMPLETE_POST, LEAVE_POST } from '../constants/ArticleActionTypes';
+import { REQUEST_POST, REQUEST_POSTS, RECEIVE_POSTS, RECEIVE_POST, PUBLISH_POST, UPDATE_POST, 
+    COMPLETE_POST, LEAVE_POST, EDIT_POST } from '../constants/ArticleActionTypes';
 import { socket_article as socket } from '../utility/socketHandler';
 import moment from 'moment';
 
@@ -57,3 +58,12 @@ export function leaveArticle() {
 		type: LEAVE_POST
 	};
 }
+
+export function editArticle(article) {
+	return {
+		type: EDIT_POST,
+		article
+	};
+}
+
+
