@@ -5,7 +5,7 @@ import { receiveArticles, receiveArticle } from '../actions/ArticleActions';
 import { receiveRealTimeMember, retrieveUser } from '../actions/MemberActions';
 
 export const socket_article = io('/Article');
-export const socket_common = io('/Common');
+export const socket_member = io('/Member');
 
 
 socket_article.on('retrieveArticle', function(article) {
@@ -16,11 +16,11 @@ socket_article.on('receiveList', function(articles) {
 	store.dispatch(receiveArticles(articles));
 });
 
-socket_common.on('receiveRealTimeMember', function(result) {
+socket_member.on('receiveRealTimeMember', function(result) {
 	store.dispatch(receiveRealTimeMember(result));
 });
 
-socket_common.on('retrieveUser', function(result) {
+socket_member.on('retrieveUser', function(result) {
 	store.dispatch(retrieveUser(result));
 });
 

@@ -1,6 +1,6 @@
 "use strict";
 import { QUERY_USER, REQUEST_USER_DATA, RETRIEVE_USER_DATA, RECEIVE_ONLINE_DATA  } from '../constants/MemberActionTypes';
-import { socket_common as socket } from '../utility/socketHandler.js';
+import { socket_member as socket } from '../utility/socketHandler.js';
 import find from 'lodash/find'
 
 export function getUser(Id_No) {

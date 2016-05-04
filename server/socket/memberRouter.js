@@ -48,7 +48,7 @@ module.exports = function(){
 
 	return {
 		listen: function(socket, client) {
-			console.log('Common connected', client.id);
+			console.log('Member connected', client.id);
 			let user = client.request.session.user;
 		    if( user) {
 		        let IdNo = user.UserName;
