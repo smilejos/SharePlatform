@@ -1,6 +1,7 @@
 .personalBox {
 	position: relative;
 	width: 800px;
+	height: 150px;
 	left: 50%;
 	margin-left: -400px;
 
@@ -8,6 +9,7 @@
 		position: relative;
 		width: 250px;
 		height: 150px;
+		float: left;
 		display: inline-block;
 	}
 
@@ -15,6 +17,7 @@
 		position: relative;
 		width: 250px;
 		height: 150px;
+		float: left;
 		display: inline-block;
 
 		.information {
@@ -32,6 +35,23 @@
 				font-size: 14px;
 			}
 		}
-	}	
+	}
+
+	.control {
+		
+		.controlItem {
+			position: relative;
+			color: #666;
+			font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+			font-size: 12px;
+			line-height: 12px;
+			margin: 0 10px 0px 2px;
+			text-decoration: none;
+
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
 }
 

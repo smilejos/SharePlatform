@@ -24,6 +24,7 @@ render((
 		      	<Route path="user/:userID" component={UserPage} />
 		      	<Route path="article/:articleNo" component={Article} />
 		      	<Route path="articleEditor/:articleNo" component={ArticleEditor} />
+		      	<Route path="articleEditor" component={ArticleEditor} />
 		      	<Route path="articlePreview/:articleNo" component={ArticlePreview} />
 		    </Route>
 	  	</Router>

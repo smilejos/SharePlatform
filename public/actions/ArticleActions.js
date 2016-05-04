@@ -59,6 +59,12 @@ export function leaveArticle() {
 	};
 }
 
+export function cleanArticle() {
+	return {
+		type: LEAVE_POST
+	};
+}
+
 export function editArticle(article) {
 	return {
 		type: EDIT_POST,

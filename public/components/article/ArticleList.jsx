@@ -63,13 +63,7 @@ class ArticleList extends React.Component {
 
 class ArticleItem extends React.Component {
 
-    _onArticleClick() {
-        console.log('_onArticleClick');
-    }
-
-    _onAuthorClick() {
-        
-    }
+    
 
     render() {
         return (
@@ -80,7 +74,7 @@ class ArticleItem extends React.Component {
                 <span className="ArticleAction">
                     { moment(this.props.Article.UpdateTime).isSame(this.props.Article.PublishTime ) ? "Publish" : "Update" }
                 </span>
-                <Link to={ "/article/" + this.props.Article.ArticleNo } className="ArticleTitle" onClick={this._onArticleClick.bind(this)}>
+                <Link to={ "/article/" + this.props.Article.ArticleNo } className="ArticleTitle">
                     { this.props.Article.Title }
                 </Link>
                 <span className="ArticleTime">{ moment( this.props.Article.UpdateTime.replace("Z", "") ).fromNow() }</span>

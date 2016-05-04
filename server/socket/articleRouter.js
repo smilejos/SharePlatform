@@ -7,16 +7,22 @@ module.exports = function(){
 	function _publishArticle(client, item) {
 		item.Author = client.request.session.user.UserName;
         ArticleHandler.publishArticle(item, (recordset, err) =>{
-            console.log('recordset', recordset);
-            console.log('err', err);
+            if( err ) {
+            	
+            } else {
+            	
+            }
         });
 	}
 
 	function _updateArticle(client, item) {
 		item.Author = client.request.session.user.UserName;
         ArticleHandler.modifyArticle(item, (recordset, err) =>{
-            console.log('recordset', recordset);
-            console.log('err', err);
+            if( err ) {
+            	
+            } else {
+            	
+            }
         });
 	}
 
