@@ -17,6 +17,11 @@ class Article extends React.Component {
         requestArticle(this.props.params.articleNo);
     }
 
+    componentWillUnmount() {
+        let { leaveArticle } = this.props.actions;
+        leaveArticle();
+    }
+
     render() {
         let content;
         if( this.props.state.article != null ) {

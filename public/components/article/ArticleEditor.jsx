@@ -12,6 +12,9 @@ class Article extends React.Component {
     constructor(props){
         super(props);
         let { requestArticle } = this.props.actions;
+        if(! this.props.state.article ) {
+            requestArticle(this.props.params.articleNo);    
+        }
     }
 
     _handleUpdate(article) {
@@ -55,6 +58,9 @@ class Article extends React.Component {
     }
 
     render() {
+        let Title = this.props.state.article ? this.props.state.article.Title : "";
+        let Content = this.props.state.article ? this.props.state.article.Content : "";
+
         return (
             <div className="ArticleEditor">
                 <div className="ArticleControl">
@@ -66,14 +72,14 @@ class Article extends React.Component {
                     ref="txtTitle" 
                     placeholder="Article Title" 
                     className="ArticleTitle" 
-                    value={this.props.state.article.Title} 
+                    value={ Title } 
                     onChange={this._handleTitleChange.bind(this)} />
                 <textarea
                     className="ArticleText"
                     onChange={this._handleChange.bind(this)}
                     onKeyDown={this._handleKeydown.bind(this)}
                     ref="textarea"
-                    defaultValue={this.props.state.article.Content} />
+                    value = { Content }/>
                 <button ref="btn" className="ArticlePost" onClick={this._handlePostArticle.bind(this)}>Post</button>
             </div>
         );
