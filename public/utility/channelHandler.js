@@ -1,4 +1,4 @@
-export () => {
+export function channelHandler() {
 	let _channels = [];
 	function _getChannel(Id_No){
 		if( _channels.length > 0) {
@@ -52,4 +52,4 @@ export () => {
 			_channel.isOpen = false;
 		}
 	}
-}();
+};

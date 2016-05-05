@@ -4,11 +4,10 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import { render } from 'react-dom'
 import { Link } from 'react-router'
-import io from 'socket.io-client'
 import * as MemberActions from '../../actions/MemberActions'
 
-import ArticleList from '../article/ArticleList.jsx'
-import PersonalInfo from '../common/PersonalInfo.jsx'
+import ArticleList from '../article/ArticleList'
+import PersonalInfo from '../common/PersonalInfo'
 
 class App extends React.Component {
     constructor(props){

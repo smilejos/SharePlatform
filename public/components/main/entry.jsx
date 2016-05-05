@@ -1,34 +1,21 @@
 "use strict";
 import React from 'react'
 import { render } from 'react-dom'
-import { browserHistory, Router, Route, Link, Redirect, IndexRoute } from 'react-router'
+import { browserHistory, Router } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import { Provider } from 'react-redux'
 import { socket_common, socket_article } from '../../utility/socketHandler'
-import store from '../../store/index'
-
-import PersonalPage from '../common/PersonalPage.jsx'
-import UserPage from '../common/UserPage.jsx'
-import Article from '../article/Article.jsx'
-import ArticleEditor from '../article/ArticleEditor.jsx'
-import ArticlePreview from '../article/ArticlePreview.jsx'
-import App from '../common/App.jsx'
+import store from '../../store/store'
+import routes from '../main/routes'
 
 const history = syncHistoryWithStore(browserHistory, store);
 
 render((
 	<Provider store={store}>
-		<Router history={history}>
-		    <Route path="/" component={App}>
-		    	<IndexRoute component={PersonalPage} />
-		      	<Route path="user/:userID" component={UserPage} />
-		      	<Route path="article/:articleNo" component={Article} />
-		      	<Route path="articleEditor/:articleNo" component={ArticleEditor} />
-		      	<Route path="articleEditor" component={ArticleEditor} />
-		      	<Route path="articlePreview/:articleNo" component={ArticlePreview} />
-		    </Route>
-	  	</Router>
+		<Router history={history}  routes={routes} />
   	</Provider>
 ), document.getElementById('app'))
+
+export default store;
 
 

@@ -2,7 +2,7 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { Link } from 'react-router'
-import Menu from '../common/Menu.jsx'
+import Menu from '../common/Menu'
 
 class App extends React.Component {
 
@@ -36,6 +36,7 @@ class App extends React.Component {
     // }
 
     render() {
+        console.log(this.props.params);
         return (
             <div>
                 <Menu />

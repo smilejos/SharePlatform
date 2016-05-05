@@ -3,7 +3,9 @@ let express       = require('express');
 let ntlm          = require('express-ntlm');
 let session       = require("express-session");
 let io            = require('socket.io');
+let path 		  = require('path');
 let fileRouter    = require('./router/fileRouter');
+//let requestRouter    = require('./router/requestRouter');
 let memberRouter  = require('./socket/memberRouter');
 let articleRouter = require('./socket/articleRouter');
 
@@ -14,7 +16,15 @@ let sessionMiddleware = session({
 
 app.use(ntlm());
 app.use(sessionMiddleware);
-app.use(fileRouter);
+
+
+// serve our static stuff like index.css
+app.get('/', function (req, res) {
+    req.session.user = req.ntlm;
+  	res.sendFile(path.join(__dirname, '../build', 'index.html'))
+})
+app.use(express.static(path.join(__dirname, '../build')))
+//app.use(requestRouter);
 
 let server = app.listen(8888);
 let socket = io.listen(server);

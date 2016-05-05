@@ -1,5 +1,5 @@
 import { createRedux } from 'redux';
-import store from '../store/index';
+import store from '../store/store';
 import io from 'socket.io-client';
 import { receiveArticles, receiveArticle } from '../actions/ArticleActions';
 import { receiveRealTimeMember, retrieveUser } from '../actions/MemberActions';
@@ -22,6 +22,3 @@ socket_member.on('receiveRealTimeMember', function(result) {
 socket_member.on('retrieveUser', function(result) {
 	store.dispatch(retrieveUser(result));
 });
-
-
-

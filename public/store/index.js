@@ -1,10 +1,13 @@
 "use strict";
 import { rootReducer } from '../reducers/index'
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import { routerMiddleware } from 'react-router-redux'
 import thunkMiddleware from 'redux-thunk';
 
-function configureStore() {
-	const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
+function configureStore(history, initialState) {
+	const store = createStore(rootReducer, initialState, 
+		applyMiddleware(thunkMiddleware, routerMiddleware(history)));
+
 	if (module.hot) {
 	    // Enable Webpack hot module replacement for reducers
 	    module.hot.accept('../reducers', () => {
@@ -15,5 +18,5 @@ function configureStore() {
   	return store;
 }
 
-const _configureStore = configureStore();
-export default _configureStore;
+
+export default configureStore;

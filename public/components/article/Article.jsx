@@ -8,7 +8,7 @@ import marked from 'marked'
 import { highlight, highlightAuto } from 'highlight.js'
 import * as ArticleActions from '../../actions/ArticleActions'
 
-import ArticleContent from '../article/ArticleContent.jsx'
+import ArticleContent from '../article/ArticleContent'
 
 class Article extends React.Component {
     constructor(props){
