@@ -23,26 +23,44 @@ class Article extends React.Component {
     }
 
     render() {
-        let content;
+        let content, control ;
         if( this.props.state.article != null ) {
             content = <ArticleContent article = { this.props.state.article } />;
         } else {
             content = <div />;
-        }  
+        }
+
+        if (this.props.state.article != null && this.props.state.article.Author == this.props.self.Id_No ) {
+            control = <ArticleEditButton articleNo = { this.props.params.articleNo } />;
+        } else {
+            control = <div />;
+        }
+
         return (
             <div className="ArticleContent">
-                <div className="ArticleControl">
-                    <i className="fa fa-edit fa-lg" />
-                    <Link className="ArticleEdit" to={ "/articleEditor/" + this.props.params.articleNo }>Edit</Link>
-                </div>
+                { control }
                 { content }
             </div>
         );
     }
 }
 
+class ArticleEditButton extends React.Component {
+    render() {
+        return (
+            <div className="ArticleControl">
+                <i className="fa fa-edit fa-lg" />
+                <Link className="ArticleEdit" to={ "/articleEditor/" + this.props.articleNo }>Edit</Link>
+            </div>
+        )
+    }
+}
+
 function mapStateToProps(state) {
-    return { state: state.articleReducer }
+    return { 
+        state: state.articleReducer,
+        self: state.memberReducer.self
+    }
 }
 
 function mapDispatchToProps(dispatch) {
