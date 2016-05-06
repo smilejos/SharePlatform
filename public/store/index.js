@@ -4,7 +4,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { routerMiddleware } from 'react-router-redux'
 import thunkMiddleware from 'redux-thunk';
 
-function configureStore(history, initialState) {
+export function configureStore(history, initialState) {
 	const store = createStore(rootReducer, initialState, 
 		applyMiddleware(thunkMiddleware, routerMiddleware(history)));
 
@@ -17,6 +17,3 @@ function configureStore(history, initialState) {
   	}
   	return store;
 }
-
-
-export default configureStore;

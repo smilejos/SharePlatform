@@ -4,7 +4,6 @@ import { render } from 'react-dom'
 import { browserHistory, Router } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import { Provider } from 'react-redux'
-import { socket_common, socket_article } from '../../utility/socketHandler'
 import store from '../../store/store'
 import routes from '../main/routes'
 
@@ -15,7 +14,3 @@ render((
 		<Router history={history}  routes={routes} />
   	</Provider>
 ), document.getElementById('app'))
-
-export default store;
-
-

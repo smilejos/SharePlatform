@@ -1,3 +1,3 @@
-import configureStore from '../store/index'
+import { configureStore } from '../store/index'
 const store = configureStore();
 export default store;

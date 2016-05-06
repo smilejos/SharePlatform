@@ -3,6 +3,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import { Link } from 'react-router'
 import Menu from '../common/Menu'
+import { socket_common, socket_article } from '../../utility/socketHandler'
 
 class App extends React.Component {
 

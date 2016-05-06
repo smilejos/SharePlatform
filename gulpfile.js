@@ -61,7 +61,7 @@ let webpackConfig = {
 
 var nodemonConfig = {
     execMap: {
-        js: 'node'
+        js: 'babel-node'
     },
     script: 'server/app.js',
     ext: 'js',
