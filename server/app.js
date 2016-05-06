@@ -5,7 +5,8 @@ let session       = require("express-session");
 let io            = require('socket.io');
 let path 		  = require('path');
 let fileRouter    = require('./router/fileRouter');
-let requestRouter    = require('./router/requestRouter');
+//let requestRouter    = require('./router/requestRouter');
+let requestRouter    = require('./router/requestRouter_dev');
 let memberRouter  = require('./socket/memberRouter');
 let articleRouter = require('./socket/articleRouter');
 
