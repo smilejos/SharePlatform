@@ -28,7 +28,6 @@ app.get('/', function (req, res) {
 app.use(express.static(path.join(__dirname, '../build')))
 app.use(requestRouter);
 
-
 let server = app.listen(8888);
 let socket = io.listen(server);
 let member = socket.of('/Member');

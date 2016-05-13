@@ -10,7 +10,7 @@ module.exports = function(){
 		};
 
 	function _getRawDataFromDatabase (callback){
-		let sqlString = " select a.Id_No, a.Card_Na, a.E_Mail, a.Tel_O as Tel_No, b.ETitle_na as Title_na, a.Dept_No, c.EDept_Na1 as Dept_Name, c.EDept_FuNa as Dept_FullName" +
+		let sqlString = " select a.Id_No, a.card_na, a.e_mail, a.Tel_O as tel_no, b.ETitle_na as title_na, a.dept_no, c.EDept_Na1 as dept_na, c.EDept_FuNa as dept_fullName" +
 						" from HRIS.dbo.Nemployee a " + 
 						" left join HRIS.dbo.ztitle b on a.Title_no = b.Title_no" +
 						" left join HRIS.dbo.NSection c on a.Dept_no = c.Dept_no";

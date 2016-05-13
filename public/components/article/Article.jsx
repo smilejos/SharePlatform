@@ -30,7 +30,7 @@ class Article extends React.Component {
             content = <div />;
         }
 
-        if (this.props.state.article != null && this.props.state.article.Author == this.props.self.Id_No ) {
+        if (this.props.state.article != null && this.props.state.article.author == this.props.self.Id_No ) {
             control = <ArticleEditButton articleNo = { this.props.params.articleNo } />;
         } else {
             control = <div />;

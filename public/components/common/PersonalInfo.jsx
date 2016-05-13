@@ -10,15 +10,15 @@ export default class Information extends React.Component {
             <div className="personal">
                 <div className="information">
                     <div className="primaryText">
-                        { this.props.user.Dept_No + "-" + this.props.user.Dept_Name } 
+                        { this.props.user.dept_no + "-" + this.props.user.dept_na } 
                     </div>
                     <div className="secondaryText"> 
-                        { this.props.user.Dept_FullName }
+                        { this.props.user.dept_fullName }
                     </div>
                 </div>
                 <div className="information">
                     <div className="primaryText">
-                        { this.props.user.Title_na } 
+                        { this.props.user.title_na } 
                     </div>
                     <div className="secondaryText"> 
                         
@@ -26,10 +26,10 @@ export default class Information extends React.Component {
                 </div>
                 <div className="information">
                     <div className="primaryText">
-                        { this.props.user.Card_Na } 
+                        { this.props.user.card_na } 
                     </div>
                     <div className="secondaryText"> 
-                        { "#" + this.props.user.Tel_No }
+                        { "#" + this.props.user.tel_no }
                     </div>
                 </div>
             </div>

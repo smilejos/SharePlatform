@@ -29,13 +29,13 @@ class Article extends React.Component {
 
     _handleChange () {
         let temp = this.props.state.article ? this.props.state.article : {};
-        temp.Content = this.refs.textarea.value;
+        temp.content = this.refs.textarea.value;
         this._handleUpdate(temp);
     }
 
     _handleTitleChange () {
         let temp = this.props.state.article ? this.props.state.article : {};
-        temp.Title = this.refs.txtTitle.value;
+        temp.title = this.refs.txtTitle.value;
         this._handleUpdate(temp);
     }
 
@@ -49,7 +49,7 @@ class Article extends React.Component {
             e.preventDefault();
 
             let temp = this.props.state.article;
-            temp.Content = this.refs.textarea.value;
+            temp.content = this.refs.textarea.value;
             this._handleUpdate(temp);
         }
     }
@@ -57,8 +57,8 @@ class Article extends React.Component {
     _handlePostArticle (){
         let { updateArticle, publishArticle } = this.props.actions;
         let temp = this.props.state.article;
-        temp.Content = this.refs.textarea.value;
-        temp.Title = this.refs.txtTitle.value;
+        temp.content = this.refs.textarea.value;
+        temp.title = this.refs.txtTitle.value;
         
         if(this.props.params.articleNo) {
             updateArticle(temp);
@@ -80,8 +80,8 @@ class Article extends React.Component {
     }
 
     render() {
-        let Title = this.props.state.article ? this.props.state.article.Title : "";
-        let Content = this.props.state.article ? this.props.state.article.Content : "";
+        let title = this.props.state.article ? this.props.state.article.title : "";
+        let content = this.props.state.article ? this.props.state.article.content : "";
 
         return (
             <div className="ArticleEditor">
@@ -94,14 +94,14 @@ class Article extends React.Component {
                     ref="txtTitle" 
                     placeholder="Article Title" 
                     className="ArticleTitle" 
-                    value={ Title } 
+                    value={ title } 
                     onChange={this._handleTitleChange.bind(this)} />
                 <textarea
                     className="ArticleText"
                     onChange={this._handleChange.bind(this)}
                     onKeyDown={this._handleKeydown.bind(this)}
                     ref="textarea"
-                    value = { Content }/>
+                    value = { content }/>
                 <NotificationSystem ref="notification" />
                 <button ref="btn" className="ArticlePost" onClick={this._handlePostArticle.bind(this)}>Post</button>
             </div>

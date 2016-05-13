@@ -46,37 +46,34 @@ class ArticleList extends React.Component {
     }
 
     render() {
-        let List = null;
+        let list = null;
         if( this.props.list ) {
-            List = this.props.list.map(function(item, index){
-                return <ArticleItem key={item.ArticleNo} Article={item}  />
+            list = this.props.list.map(function(item, index){
+                return <ArticleItem key={item.articleNo} article={item}  />
             });    
         }
         return (
             <div className="ArticleList">
-                {List}
+                {list}
             </div>
         );
     }
 }
 
 class ArticleItem extends React.Component {
-
-    
-
     render() {
         return (
             <div className="ArticleActivity">
-                <Link to={ "/user/" + this.props.Article.Author } className="ArticleAuthor">
-                    { this.props.Article.AuthorName }
+                <Link to={ "/user/" + this.props.article.author } className="ArticleAuthor">
+                    { this.props.article.authorName }
                 </Link>
                 <span className="ArticleAction">
-                    { moment(this.props.Article.UpdateTime).isSame(this.props.Article.PublishTime ) ? "Publish" : "Update" }
+                    { moment(this.props.article.updateTime).isSame(this.props.article.publishTime ) ? "Publish" : "Update" }
                 </span>
-                <Link to={ "/article/" + this.props.Article.ArticleNo } className="ArticleTitle">
-                    { this.props.Article.Title }
+                <Link to={ "/article/" + this.props.article.articleNo } className="ArticleTitle">
+                    { this.props.article.title }
                 </Link>
-                <span className="ArticleTime">{ moment( this.props.Article.UpdateTime.replace("Z", "") ).fromNow() }</span>
+                <span className="ArticleTime">{ moment( this.props.article.updateTime.replace("Z", "") ).fromNow() }</span>
             </div>
         );
     }

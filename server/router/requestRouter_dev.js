@@ -5,7 +5,7 @@ import { Provider }                                  from 'react-redux'
 import { createMemoryHistory, match, RouterContext } from 'react-router'
 import { syncHistoryWithStore }                      from 'react-router-redux'
 import { configureStore }                            from '../../public/store/index'
-import routes                                        from'../../public/components/main/routes'
+import routes                                        from '../../public/components/main/routes'
 
 const HTML = ({ content, store }) => (
   	<html>

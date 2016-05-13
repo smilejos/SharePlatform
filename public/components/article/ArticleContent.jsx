@@ -44,9 +44,9 @@ export default class ArticleContent extends React.Component {
         return (
             <div className="ArticlePage">
                 <div className="ArticleTitle">
-                    { this._renderTitle(this.props.article.Title)}
+                    { this._renderTitle(this.props.article.title)}
                 </div>
-                <div className="markdown-body" dangerouslySetInnerHTML={ this._renderMarkup(this.props.article.Content) } /> 
+                <div className="markdown-body" dangerouslySetInnerHTML={ this._renderMarkup(this.props.article.content) } /> 
             </div>
         );
     }

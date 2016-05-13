@@ -7,17 +7,17 @@ import assignIn from 'lodash/assignIn'
 import concat from 'lodash/concat'
 import sortedUniq from 'lodash/sortedUniq'
 
-export default function articles(state = {
+export default function members(state = {
         user: {},
         users: [],
         online_Users: [],
         self: {
-        	Dept_No: '',
-        	Dept_Name: '',
-        	Dept_FullName: '',
-        	Title_na: '',
-        	Card_Na: '',
-        	Tel_No: '',
+        	dept_no: '',
+        	dept_na: '',
+        	dept_fullname: '',
+        	title_na: '',
+        	card_na: '',
+        	tel_no: '',
         	Id_No: ''
         }
     }, action) {

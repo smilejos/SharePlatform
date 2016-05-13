@@ -9,7 +9,7 @@ module.exports = function(){
 		};
 
 	function _getNewestArticle(callback){
-		let sqlString = " select top 10 a.ArticleNo, a.Title, b.Card_Na as AuthorName, a.Author, a.Tag, a.UpdateTime, a.PublishTime " +
+		let sqlString = " select top 10 a.articleNo, a.title, b.Card_Na as authorName, a.author, a.tag, a.updateTime, a.publishTime " +
 						" from dbo.Article a " + 
 						" left join HRIS.dbo.NEmployee b on a.Author = b.Id_No " + 
 						" order by a.UpdateTime DESC ";
@@ -18,7 +18,7 @@ module.exports = function(){
 	}
 
 	function _getSpecificAuthor(Id_No, callback){
-		let sqlString = " select a.ArticleNo, a.Title, b.Card_Na as AuthorName, a.Author, a.Tag, a.UpdateTime, a.PublishTime " +
+		let sqlString = " select a.articleNo, a.title, b.Card_Na as authorName, a.author, a.tag, a.updateTime, a.publishTime " +
 						" from dbo.Article a " + 
 						" left join HRIS.dbo.NEmployee b on a.Author = b.Id_No " + 
 						" where Author = '" + Id_No + "'" +
@@ -27,35 +27,34 @@ module.exports = function(){
 		_executeSqlComment(sqlString, callback);
 	}
 
-	function _getSpecificTag(Tag, callback){
-		let sqlString = " select a.ArticleNo, a.Title, b.Card_Na as AuthorName, a.Author, a.Tag, a.UpdateTime, a.PublishTime " +
+	function _getSpecificTag(tag, callback){
+		let sqlString = " select a.articleNo, a.title, b.Card_Na as authorName, a.author, a.tag, a.updateTime, a.publishTime " +
 						" from dbo.Article a " + 
 						" left join HRIS.dbo.NEmployee b on a.Author = b.Id_No " + 
-						" where Tag = '" + Tag + "'" +
+						" where Tag = '" + tag + "'" +
 						" order by a.UpdateTime DESC ";
 
 		_executeSqlComment(sqlString, callback);
 	}
 
-	function _getSpecificArticle(ArticleNo, callback){
-		let sqlString = " select a.ArticleNo, a.Title, b.Card_Na as AuthorName, a.Author, a.Tag, a.UpdateTime, a.PublishTime, a.Content " +
+	function _getSpecificArticle(articleNo, callback){
+		let sqlString = " select a.articleNo, a.title, b.Card_Na as authorName, a.author, a.tag, a.updateTime, a.publishTime, a.content " +
 						" from dbo.Article a " + 
 						" left join HRIS.dbo.NEmployee b on a.Author = b.Id_No " + 
-						" where ArticleNo = '" + ArticleNo + "'" +
+						" where ArticleNo = '" + articleNo + "'" +
 						" order by a.UpdateTime DESC ";
 
 		_executeSqlComment(sqlString, callback);
 	}
 
-	function _modifyArticle(Article, callback){
-		let sqlString = " update dbo.Article set Title = '"+ Article.Title +"', Content = '" +Article.Content+ "', Tag = '" +Article.Tag+ "', UpdateTime = getDate() where ArticleNo = '" + Article.ArticleNo + "'";
-		
+	function _modifyArticle(article, callback){
+		let sqlString = " update dbo.Article set title = '"+ article.title +"', content = '" +article.content+ "', Tag = '" +article.tag+ "', UpdateTime = getDate() where ArticleNo = '" + article.articleNo + "'";
 		_executeSqlComment(sqlString, callback);
 	}
 
-	function _publishArticle(Article, callback){
-		let sqlString = " insert into  dbo.Article (Title, Author, Content, Tag, UpdateTime, PublishTime) "+
-		                " values ('" +Article.Title +"','"+ Article.Author +"','"+ Article.Content +"','"+ Article.Tag +"', getDate(), getDate())";
+	function _publishArticle(article, callback){
+		let sqlString = " insert into  dbo.Article (title, Author, content, Tag, UpdateTime, PublishTime) "+
+		                " values ('" +article.title +"','"+ article.author +"','"+ article.content +"','"+ article.tag +"', getDate(), getDate())";
 		
 		_executeSqlComment(sqlString, callback);
 	}
@@ -81,21 +80,21 @@ module.exports = function(){
 		getSpecificAuthor: function(Id_No, callback){
 			_getSpecificAuthor(Id_No, callback);
 		},
-		getSpecificTag : function(Tag, callback){
-			_getSpecificTag(Tag, callback);
+		getSpecificTag : function(tag, callback){
+			_getSpecificTag(tag, callback);
 		},
-		getSpecificArticle : function(ArticleNo, callback){
-			_getSpecificArticle(ArticleNo, callback);
+		getSpecificArticle : function(articleNo, callback){
+			_getSpecificArticle(articleNo, callback);
 		},
-		modifyArticle : function(Article, callback){
-			Article.Title = _replaceString(Article.Title);
-			Article.Content = _replaceString(Article.Content);
-			_modifyArticle(Article, callback);
+		modifyArticle : function(article, callback){
+			article.title = _replaceString(article.title);
+			article.content = _replaceString(article.content);
+			_modifyArticle(article, callback);
 		},
-		publishArticle : function(Article, callback){
-			Article.Title = _replaceString(Article.Title);
-			Article.Content = _replaceString(Article.Content);
-			_publishArticle(Article, callback);
+		publishArticle : function(article, callback){
+			article.title = _replaceString(article.title);
+			article.content = _replaceString(article.content);
+			_publishArticle(article, callback);
 		}
 	}
 }();
