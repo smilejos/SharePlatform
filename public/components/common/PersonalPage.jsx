@@ -33,7 +33,7 @@ class App extends React.Component {
     }
 
     render() {
-        console.log( this.props.self);
+        //console.log( this.props.self);
         return (
             <div>
                 <div className="personalBox">
@@ -42,7 +42,7 @@ class App extends React.Component {
                     <div className="control">
                         <div className="controlItem">
                             <i className="fa fa-file-text-o"></i>
-                            <Link to={ "/articleEditor" }>
+                            <Link to={ "/articleEditor/New" }>
                                 Publish Article
                             </Link>    
                         </div>

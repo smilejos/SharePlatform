@@ -1,6 +1,6 @@
 "use strict";
 import { REQUEST_POST, REQUEST_POSTS, RECEIVE_POSTS, RECEIVE_POST, PUBLISH_POST, UPDATE_POST, 
-    COMPLETE_POST, LEAVE_POST, EDIT_POST } from '../constants/ArticleActionTypes';
+    COMPLETE_POST, CLEAN_POST, CLEAN_EDITING_POST, LEAVE_POST, EDIT_POST } from '../constants/ArticleActionTypes';
 import merge from 'lodash/merge'
 import union from 'lodash/union'
 import assignIn from 'lodash/assignIn'
@@ -11,7 +11,8 @@ export default function articles(state = {
         isUploading: false,
         isFilterByAuthor: false,
         articles: [],
-        article: null
+        article: null,
+        editingArticle: null
     }, action) {
 	switch (action.type) {
     case REQUEST_POST:
@@ -31,7 +32,8 @@ export default function articles(state = {
         return assignIn({}, state, {
             isFetching: false,
             isUploading: false,
-            article: action.article[0]
+            article: action.article,
+            editingArticle: action.article
         });
 	case PUBLISH_POST:
 	case UPDATE_POST:
@@ -44,14 +46,20 @@ export default function articles(state = {
 			isFetching: false,
       		isUploading: false
 		});
-    case LEAVE_POST:
+    case CLEAN_POST:
         return assignIn({}, state, {
             article: null,
+        });
+    case CLEAN_EDITING_POST:
+        return assignIn({}, state, {
+            editingArticle: null,
         });
     case EDIT_POST:
         return assignIn({}, state, {
             article: action.article,
+            editingArticle: action.article
         });
+    case LEAVE_POST:
 	default:
 		return state;
 	}

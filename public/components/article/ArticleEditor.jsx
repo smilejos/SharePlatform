@@ -12,19 +12,53 @@ import * as ArticleActions from '../../actions/ArticleActions'
 class Article extends React.Component {
     constructor(props){
         super(props);
-        let { requestArticle } = this.props.actions;
-        if(! this.props.state.article && this.props.params.articleNo) {
-            requestArticle(this.props.params.articleNo);    
+        let { requestArticle, cleanEditingArticle, editArticle } = this.props.actions;
+
+        if (this._isRequestArticle()) {
+            requestArticle(this.props.params.articleNo);   
+        } else if(this._isUnderEditing()){
+            editArticle(this.props.state.article, false);
+        } else {
+            cleanEditingArticle();
         }
     }
 
     componentDidMount() {
+        let { syncArticle, editArticle } = this.props.actions;
         this._notification = this.refs.notification;
+        if(this._isExistArticle()) {
+            console.log('Edit componentDidMount syncArticle');
+            syncArticle(this.props.params.articleNo);
+        }
+    }
+    
+    componentWillUnmount() {
+        let { leaveArticle, cleanArticle } = this.props.actions;
+        if(this._isExistArticle()) {
+            leaveArticle(this.props.params.articleNo);
+        }
+        cleanArticle();
+    }
+
+    _isRequestArticle(){
+        return ( this.props.params.articleNo != "New" && this.props.state.article == null);
+    }
+
+    _isExistArticle() {
+        return ( this.props.params.articleNo != "New");
+    }
+
+    _isUnderEditing(){
+        return ( this.props.state.article != null);
+    }
+
+    _isNewArticle() {
+        return ( this.props.params.articleNo == "New");
     }
 
     _handleUpdate(article) {
         let { editArticle } = this.props.actions;
-        editArticle(article);
+        editArticle(article, true);
     }
 
     _handleChange () {
@@ -60,11 +94,11 @@ class Article extends React.Component {
         temp.content = this.refs.textarea.value;
         temp.title = this.refs.txtTitle.value;
         
-        if(this.props.params.articleNo) {
-            updateArticle(temp);
-        } else {
+        if(this._isNewArticle()) {
             console.log('temp', temp);
             publishArticle(temp);
+        } else {
+            updateArticle(temp);
         }
         
         this._addNotification();
@@ -82,12 +116,12 @@ class Article extends React.Component {
     render() {
         let title = this.props.state.article ? this.props.state.article.title : "";
         let content = this.props.state.article ? this.props.state.article.content : "";
-
+        let articleNo = this.props.params.articleNo != undefined ? this.props.params.articleNo : "New";
         return (
             <div className="ArticleEditor">
                 <div className="ArticleControl">
                     <i className="fa fa-eye fa-lg" />
-                    <Link className="ArticleEdit" to={ "/articlePreview/" + this.props.params.articleNo  }>Preview</Link>
+                    <Link className="ArticleEdit" to={"/articlePreview/" + articleNo }>Preview</Link>
                 </div>
                 <input 
                     type="text" 

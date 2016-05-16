@@ -56,6 +56,7 @@ module.exports = function(){
 		let sqlString = " insert into  dbo.Article (title, Author, content, Tag, UpdateTime, PublishTime) "+
 		                " values ('" +article.title +"','"+ article.author +"','"+ article.content +"','"+ article.tag +"', getDate(), getDate())";
 		
+		console.log('sql command', sqlString);
 		_executeSqlComment(sqlString, callback);
 	}
 
@@ -63,7 +64,7 @@ module.exports = function(){
 		sql.connect(config, (err) => {
 			let request = new sql.Request();
 	    	request.query(sqlComment, (err, recordset) => {
-	    		callback(recordset);
+	    		callback(recordset, err);
 	    	});
 		});
 	}

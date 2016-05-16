@@ -17,9 +17,15 @@ class Article extends React.Component {
         requestArticle(this.props.params.articleNo);
     }
 
+    componentDidMount() {
+        let { syncArticle } = this.props.actions;
+        syncArticle(this.props.params.articleNo);
+    }
+    
     componentWillUnmount() {
-        let { leaveArticle } = this.props.actions;
-        leaveArticle();
+        let { leaveArticle, cleanArticle } = this.props.actions;
+        leaveArticle(this.props.params.articleNo);
+        cleanArticle();
     }
 
     render() {

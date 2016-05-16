@@ -3,81 +3,81 @@ module.exports = function(){
 	let handler = require('../database/memberHandler');
 	handler.initialize();
 
-	function _login(socket, client, item) {
+	function _login(io, socket, item) {
 		console.log('login item', item);
-        client.request.session.user.UserName = item.IdNo;
-        let self = handler.setOnline(item.IdNo, client.id); 
+        socket.request.session.user.UserName = item.IdNo;
+        let self = handler.setOnline(item.IdNo, socket.id); 
 
         console.log(self);
 
-        socket.emit('receiveRealTimeMember', {
+        io.emit('receiveRealTimeMember', {
             list : handler.getOnlineList(),
             self : self
         });
     };
 
-    function _getEmployeeData(socket, Id_No) {
-        socket.emit('retrieveUser', handler.getEmployee(Id_No));
+    function _getEmployeeData(io, Id_No) {
+        io.emit('retrieveUser', handler.getEmployee(Id_No));
     };
 
 
-    function _sendMessage(client, item) {
-        client.to(item.target).emit('receiveMessage', {
-            sender : client.request.session.user.UserName,
+    function _sendMessage(socket, item) {
+        socket.to(item.target).emit('receiveMessage', {
+            sender : socket.request.session.user.UserName,
             message : item.message,
             dateTime : item.dateTime
         });
     };
 
-     function _openChat(client, item) {
-        client.to(item.target).emit('openChat', {
+     function _openChat(socket, item) {
+        socket.to(item.target).emit('openChat', {
             target: item.target,
-            Id_No: client.request.session.user.UserName
+            Id_No: socket.request.session.user.UserName
         });
     };
 
-    function _disconnect(socket, client) {
-        console.log('Common disconnect', client.id);
-        // if(client.request.session.user && client.request.session.user.UserName){
-        //     handler.setOffline(client.request.session.user.UserName);
-        //     socket.emit('receiveRealTimeMember', {
+    function _disconnect(io, socket) {
+        console.log('Common disconnect', socket.id);
+        // if(socket.request.session.user && socket.request.session.user.UserName){
+        //     handler.setOffline(socket.request.session.user.UserName);
+        //     io.emit('receiveRealTimeMember', {
         //         list :  handler.getOnlineList()
         //     });    
         // }
     };
 
 	return {
-		listen: function(socket, client) {
-			console.log('Member connected', client.id, client.request.session.user);
-			let user = client.request.session.user;
+		listen: function(io, socket) {
+			console.log('Member connected', socket.id, socket.request.session.user);
+			let user = socket.request.session.user;
 		    if( user) {
 		        let IdNo = user.UserName;
 		        let self = handler.setOnline(IdNo);    
 
-		        client.emit('receiveRealTimeMember', {
+		        socket.emit('receiveRealTimeMember', {
 		        	List : handler.getOnlineList(),
 		        	self : self
 		    	});
 		    }
 
-		    client.on('getEmployeeData', (item) => {
-		        _getEmployeeData(socket, item);
+		    socket.on('getEmployeeData', (item) => {
+		        _getEmployeeData(io, item);
 		    });
 				
-			client.on('login', (item) => {
-		        _login(socket, client, item);
+			socket.on('login', (item) => {
+		        _login(io, socket, item);
 		    });
 
-	     	client.on('openChat', (item) => {
-		       	_openChat(client, item);
+	     	socket.on('openChat', (item) => {
+		       	_openChat(socket, item);
 		    });
 
-		    client.on('sendMessage', (item) => {
-		    	_sendMessage(client, item);
+		    socket.on('sendMessage', (item) => {
+		    	_sendMessage(socket, item);
 		    }); 
 
-		    client.on('disconnect', () => {
-		       _disconnect(socket, client);
+		    socket.on('disconnect', () => {
+		       _disconnect(io, socket);
 		    });
 		}
 	};

@@ -34,6 +34,7 @@
     "font-awesome": "^4.6.1",
     "github-markdown-css": "^2.2.1",
     "highlight.js": "^9.3.0",
+    "is_js": "^0.8.0",
     "lodash": "^4.11.1",
     "marked": "^0.3.5",
     "material-ui": "^0.15.0-alpha.2",

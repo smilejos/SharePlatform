@@ -15,6 +15,12 @@ socket_article.on('receiveList', function(articles) {
 	store.dispatch(receiveArticles(articles));
 });
 
+socket_article.on('editArticle', function(article) {
+	console.log('receive editArticle from Server', article);
+	store.dispatch(receiveArticle(article));
+});
+
+
 socket_member.on('receiveRealTimeMember', function(result) {
 	store.dispatch(receiveRealTimeMember(result));
 });

@@ -49,7 +49,7 @@ member.on('connection', (client) => {
 });
 
 article.on('connection', (client) => {
-    articleRouter.listen(client);
+    articleRouter.listen(article, client);
 });
 
 console.log("Start server with port:8888")

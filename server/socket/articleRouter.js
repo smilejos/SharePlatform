@@ -2,47 +2,49 @@
 
 module.exports = function(){
 	let util    = require('../utility/util');
+	let is    = require('is_js');
 	var ArticleHandler = require('../database/articleHandler');
 
-	function _publishArticle(client, item) {
-		item.Author = client.request.session.user.UserName;
+	function _publishArticle(socket, item) {
+		item.Author = socket.request.session.user.UserName;
         ArticleHandler.publishArticle(item, (recordset, err) =>{
             if( err ) {
-            	
+            	console.log('err', err);
             } else {
-            	
+            	console.log('success');
             }
         });
 	}
 
-	function _updateArticle(client, item) {
-		item.Author = client.request.session.user.UserName;
+	function _updateArticle(socket, item) {
+		item.Author = socket.request.session.user.UserName;
         ArticleHandler.modifyArticle(item, (recordset, err) =>{
-            if( err ) {
-            	
+             if( err ) {
+            	console.log('err', err);
             } else {
-            	
+            	console.log('success');
             }
         });
 	}
 
-	function _getArticle(client, item) {
-	    ArticleHandler.getSpecificArticle(item, (article) => {
-	        client.emit('retrieveArticle', article);
+	function _getArticle(socket, item) {
+	    ArticleHandler.getSpecificArticle(item, (article, err) => {
+	    	article = is.array(article) ? article[0] : article;
+	        socket.emit('retrieveArticle', article);
 	    });
 	}
 
-	function _getArticleList(client, item) {
+	function _getArticleList(socket, item) {
 		if(item.isSpecificUser) {
 			// console.log('_getArticleList SpecificUser', item.Id_No);
-            ArticleHandler.getSpecificAuthor(item.Id_No, (list) => {
-                client.emit('receiveList', list);
+            ArticleHandler.getSpecificAuthor(item.Id_No, (list, err) => {
+                socket.emit('receiveList', list);
             });
             
         } else {
         	// console.log('_getArticleList Non SpecificUser');
-            ArticleHandler.getNewestArticle( (list) => {
-                client.emit('receiveList', list);
+            ArticleHandler.getNewestArticle( (list, err) => {
+                socket.emit('receiveList', list);
             });
         }
 	}
@@ -53,30 +55,45 @@ module.exports = function(){
 	}
 
 	return {
-		listen: function(client) {
-			console.log('Article connected', client.id);
-			client.on('publishArticle', (item) => {
+		listen: function(io, socket) {
+			
+			socket.on('publishArticle', (item) => {
 				// console.log("define publish");
-		        _publishArticle(client, item);
+		        _publishArticle(socket, item);
 		    });
 
-		    client.on('updateArticle', (item) => {
+		    socket.on('updateArticle', (item) => {
 		    	// console.log("define update");
-		    	_updateArticle(client, item);
+		    	_updateArticle(socket, item);
 		    }); 
 
-		    client.on('requestArticle', (item) => {
+		    socket.on('requestArticle', (item) => {
 		    	// console.log("define requestArticle");
-		       _getArticle(client, item);
+		       _getArticle(socket, item);
 		    });
 
-		    client.on('requestArticleList', (item) => {
+		    socket.on('syncArticle', (articleNo) => {
+		    	// console.log("define requestArticle");
+		    	socket.join(articleNo);
+		    });
+		    
+		    socket.on('leaveArticle', (articleNo) => {
+		    	// console.log("define requestArticle");
+		    	socket.leave (articleNo);
+		    });
+
+		    socket.on('requestArticleList', (item) => {
 		    	// console.log("define requestArticleList");
-		       _getArticleList(client, item);
+		       _getArticleList(socket, item);
 		    });
 
-		    client.on('disconnect', () => {
-		        // console.log('Article disconnect', client.id);
+		    socket.on('disconnect', () => {
+		        // console.log('Article disconnect', socket.id);
+		    });
+
+	     	socket.on('editArticle', (item) => {
+		        //socket.broadcast.emit('editArticle', item);
+		        socket.broadcast.to(item.articleNo).emit('editArticle', item);
 		    });
 		}
 	};

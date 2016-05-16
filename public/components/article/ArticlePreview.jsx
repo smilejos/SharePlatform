@@ -15,10 +15,22 @@ class Article extends React.Component {
         super(props);
     }
 
+    componentWillUnmount() {
+        let { cleanEditingArticle } = this.props.actions;
+        cleanEditingArticle();
+    }
+
+    _transferToPreview(){
+        let { editArticle } = this.props.actions;
+        console.log('Preview _transferToPreview editArticle');
+        editArticle(this.props.state.editingArticle, false);
+    }
+    
     render() {
         let content;
-        if( this.props.state.article != null ) {
-            content = <ArticleContent article = { this.props.state.article } />;
+        let articleNo = this.props.params.articleNo != undefined ? this.props.params.articleNo : "New";
+        if( this.props.state.editingArticle != null ) {
+            content = <ArticleContent article = { this.props.state.editingArticle } />;
         } else {
             content = <div />;
         }  
@@ -26,7 +38,7 @@ class Article extends React.Component {
             <div className="ArticleContent">
                 <div className="ArticleControl">
                     <i className="fa fa-edit fa-lg" />
-                    <Link className="ArticleEdit" to={ "/articleEditor/" + this.props.params.articleNo  }>Return to Edit</Link>
+                    <Link className="ArticleEdit"  onClick={this._transferToPreview.bind(this)} to={"/articleEditor/" + articleNo}>Return to Edit</Link>
                 </div>
                 { content }
             </div>

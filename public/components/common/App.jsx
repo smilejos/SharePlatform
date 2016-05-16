@@ -37,7 +37,7 @@ class App extends React.Component {
     // }
 
     render() {
-        console.log(this.props.params);
+        //console.log(this.props.params);
         return (
             <div>
                 <Menu />

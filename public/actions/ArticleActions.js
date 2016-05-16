@@ -1,6 +1,6 @@
 "use strict";
 import { REQUEST_POST, REQUEST_POSTS, RECEIVE_POSTS, RECEIVE_POST, PUBLISH_POST, UPDATE_POST, 
-    COMPLETE_POST, LEAVE_POST, EDIT_POST } from '../constants/ArticleActionTypes';
+    COMPLETE_POST, CLEAN_POST, CLEAN_EDITING_POST, LEAVE_POST, EDIT_POST, SYNC_POST } from '../constants/ArticleActionTypes';
 import { socket_article as socket } from '../utility/socketHandler';
 import moment from 'moment';
 
@@ -19,7 +19,6 @@ export function requestArticle(item) {
 }
 
 export function receiveArticles(articles) {
-	console.log('receiveArticles', articles)
 	return {
 		type: RECEIVE_POSTS,
 		articles
@@ -53,19 +52,36 @@ export function completeArticle() {
 	};
 }
 
-export function leaveArticle() {
+export function leaveArticle(articleNo) {
+	socket.emit('leaveArticle', articleNo);
 	return {
 		type: LEAVE_POST
+	};
+}
+
+export function syncArticle(articleNo) {
+	socket.emit('syncArticle', articleNo);
+	return {
+		type: SYNC_POST
 	};
 }
 
 export function cleanArticle() {
 	return {
-		type: LEAVE_POST
+		type: CLEAN_POST
 	};
 }
 
-export function editArticle(article) {
+export function cleanEditingArticle() {
+	return {
+		type: CLEAN_EDITING_POST
+	};
+}
+
+export function editArticle(article, isSyncWithServer) {
+	if( isSyncWithServer ) {
+		socket.emit('editArticle', article);	
+	}
 	return {
 		type: EDIT_POST,
 		article
