@@ -6,7 +6,7 @@ module.exports = function(){
 	var ArticleHandler = require('../database/articleHandler');
 
 	function _publishArticle(socket, item) {
-		item.Author = socket.request.session.user.UserName;
+		item.author = socket.request.session.user.UserName;
         ArticleHandler.publishArticle(item, (recordset, err) =>{
             if( err ) {
             	console.log('err', err);
@@ -17,7 +17,7 @@ module.exports = function(){
 	}
 
 	function _updateArticle(socket, item) {
-		item.Author = socket.request.session.user.UserName;
+		item.author = socket.request.session.user.UserName;
         ArticleHandler.modifyArticle(item, (recordset, err) =>{
              if( err ) {
             	console.log('err', err);
