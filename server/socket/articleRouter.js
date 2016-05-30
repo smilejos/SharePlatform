@@ -1,7 +1,6 @@
 "use strict";
 
 module.exports = function(){
-	let util    = require('../utility/util');
 	let is    = require('is_js');
 	var ArticleHandler = require('../database/articleHandler');
 

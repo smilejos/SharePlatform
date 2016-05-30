@@ -6,6 +6,7 @@ import { receiveRealTimeMember, retrieveUser } from '../actions/MemberActions';
 
 export const socket_article = io('/Article');
 export const socket_member = io('/Member');
+export const socket_book = io('/Book');
 
 socket_article.on('retrieveArticle', function(article) {
 	store.dispatch(receiveArticle(article));

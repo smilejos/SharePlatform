@@ -2,7 +2,6 @@
 import { REQUEST_POST, REQUEST_POSTS, RECEIVE_POSTS, RECEIVE_POST, PUBLISH_POST, UPDATE_POST, 
     COMPLETE_POST, CLEAN_POST, CLEAN_EDITING_POST, LEAVE_POST, EDIT_POST, SYNC_POST } from '../constants/ArticleActionTypes';
 import { socket_article as socket } from '../utility/socketHandler';
-import moment from 'moment';
 
 export function requestArticleList(item) {
 	socket.emit('requestArticleList', item);	

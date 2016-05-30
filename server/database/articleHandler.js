@@ -1,12 +1,7 @@
 "use strict";
 module.exports = function(){
 	let sql = require('mssql'), 
-		config = {
-		    user: 'admBlog',
-		    password: 'zzzzzzzz',
-		    server: 'TSQL00',
-		    database: 'JustBlog'
-		};
+		config = require('../config/database');
 
 	function _getNewestArticle(callback){
 		let sqlString = " select top 10 a.articleNo, a.title, b.Card_Na as authorName, a.author, a.tag, a.updateTime, a.publishTime " +

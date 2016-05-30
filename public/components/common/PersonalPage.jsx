@@ -48,7 +48,7 @@ class App extends React.Component {
                         </div>
                         <div className="controlItem">
                             <i className="fa fa-book"></i>
-                            <Link to={ "/" }>
+                            <Link to={ "/createBook" }>
                                 Create Book
                             </Link>
                         </div>

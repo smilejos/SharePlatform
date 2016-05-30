@@ -2,12 +2,7 @@
 module.exports = function(){
 	let employees = [],
 		sql = require('mssql'),
-		config = {
-		    user: 'admTest',
-		    password: 'zzzzzzzz',
-		    server: 'TSQL00',
-		    database: 'HRIS'
-		};
+		config = require('../config/database');
 
 	function _getRawDataFromDatabase (callback){
 		let sqlString = " select a.Id_No, a.card_na, a.e_mail, a.Tel_O as tel_no, b.ETitle_na as title_na, a.dept_no, c.EDept_Na1 as dept_na, c.EDept_FuNa as dept_fullName" +

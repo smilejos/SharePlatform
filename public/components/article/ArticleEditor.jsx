@@ -137,7 +137,7 @@ class Article extends React.Component {
                     ref="textarea"
                     value = { content }/>
                 <NotificationSystem ref="notification" />
-                <button ref="btn" className="ArticlePost" onClick={this._handlePostArticle.bind(this)}>Post</button>
+                <button ref="btn" className="Button" onClick={this._handlePostArticle.bind(this)}>Post</button>
             </div>
         );
     }
