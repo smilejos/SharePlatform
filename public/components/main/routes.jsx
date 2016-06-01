@@ -8,6 +8,7 @@ import Article from '../article/Article'
 import ArticleEditor from '../article/ArticleEditor'
 import ArticlePreview from '../article/ArticlePreview'
 import BookCreator from '../book/BookCreator'
+import BookManager from '../book/BookManager'
 import App from '../common/App'
 
 const routes = (
@@ -18,8 +19,8 @@ const routes = (
 	  	<Route path="articleEditor/:articleNo" component={ArticleEditor} />
 	  	<Route path="articlePreview/:articleNo" component={ArticlePreview} />
 	  	<Route path="createBook" component={BookCreator} />
-	  	<Route path="book/:bookNo" component={ArticlePreview}>
-	  		<Route path="book/:bookNo/:articleNo" component={Article}></Route>
+	  	<Route path="book/:bookNo" component={BookManager}>
+	  		<Route path="book/:bookNo/:articleNo" component={BookManager}></Route>
 	  	</Route>
 	</Route>
 )

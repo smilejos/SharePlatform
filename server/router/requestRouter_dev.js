@@ -10,7 +10,7 @@ import routes                                        from '../../public/componen
 const HTML = ({ content, store }) => (
   	<html>
 		<head>
-			<title>Biz Talk</title>
+			<title>Biz Share Platform</title>
 			<link rel="stylesheet" href="/style.css" type="text/css" />
 			<link rel="stylesheet" href="/codeStyle.css" type="text/css" />
 			<link rel="stylesheet" href="/markdown.css" type="text/css" />	

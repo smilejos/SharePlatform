@@ -1,0 +1,27 @@
+.BookMenu {
+	border: 1px solid #c9c9c9;
+	background-color: #fff;
+    height: auto;
+    width: auto;
+    position: fixed;
+    padding: 10px 0px;
+    border-radius: 5px; 
+    box-shadow: 0 3px 12px rgba(0,0,0,.15);
+    cursor: default;
+    list-style: none;
+    margin: 2px;
+
+    li {
+    	padding: 5px 20px;
+    	cursor: pointer;
+
+    	i {
+    		width: 20px;
+    	}
+
+    	&:hover {
+    		background-color: #428bca;
+    		color: #fff;
+    	}
+    }
+}

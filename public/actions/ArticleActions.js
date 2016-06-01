@@ -7,7 +7,7 @@ export function requestArticleList(item) {
 	socket.emit('requestArticleList', item);	
 	return {
 		type: REQUEST_POSTS
-	}
+	};
 }
 
 export function requestArticle(item) {
@@ -86,5 +86,3 @@ export function editArticle(article, isSyncWithServer) {
 		article
 	};
 }
-
-

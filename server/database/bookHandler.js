@@ -10,6 +10,15 @@ module.exports = function(){
 		_executeSqlComment(sqlString, callback);
 	}
 
+
+	function _getSpecificBook(bookNo, callback){
+		let sqlString = " select bookNo, title, author, updateTime, publishTime, isPrivate " +
+						" from dbo.Book " + 
+						" where BookNo = '" + bookNo + "'";
+
+		_executeSqlComment(sqlString, callback);
+	}
+
 	function _executeSqlComment(sqlComment, callback) {
 		sql.connect(config, (err) => {
 			let request = new sql.Request();
@@ -27,6 +36,9 @@ module.exports = function(){
 	return {
 		createBook: function(book, callback){
 			_createBook(book, callback);
+		},
+		getSpecificBook: function(bookNo, callback){
+			_getSpecificBook(bookNo, callback);
 		}
 	}
 }();

@@ -47,4 +47,3 @@ export function receiveRealTimeMember(result) {
 		self: result.self
 	};
 }
-

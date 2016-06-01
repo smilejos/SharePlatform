@@ -8,9 +8,22 @@ module.exports = function(){
 		item.author = socket.request.session.user.UserName;
         BookHandler.createBook(item, (recordset, err) =>{
             if( err ) {
-            	console.log('err', err);
+            	console.log('createBook err', err);
             } else {
-            	console.log('success');
+            	console.log('createBook success');
+            }
+        });
+	}
+
+	function _getSpecificBook(socket, item) {
+        BookHandler.getSpecificBook(item, (book, err) =>{
+            if( err ) {
+            	console.log('retrieveBook err', err);
+            } else {
+            	book = is.array(book) ? book[0] : book;
+	        	socket.emit('retrieveBook', book);
+	        	console.log('book', book);
+            	console.log('retrieveBook success');
             }
         });
 	}
@@ -19,6 +32,10 @@ module.exports = function(){
 		listen: function(io, socket) {
 			socket.on('createBook', (item) => {
 		        _createBook(socket, item);
+		    });
+
+		    socket.on('requestBook', (item) => {
+		        _getSpecificBook(socket, item);
 		    });
 		}
 	};
