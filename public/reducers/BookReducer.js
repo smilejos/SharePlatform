@@ -15,7 +15,44 @@ export default function book(state = {
             isPrivate: false,
             tag: []
         },
-        chapters: [],
+        chapters: [
+            {
+                chapterNo: 0,
+                chapterOrder: 0,
+                chapterTitle: 'first sample',
+                parts: [
+                    { articleNo: 0, articleOrder: 0, partTitle: 'first part'} ,
+                    { articleNo: 1, articleOrder: 1, partTitle: 'second part'} ,
+                    { articleNo: 2, articleOrder: 2, partTitle: 'third part'} ,
+                    { articleNo: 3, articleOrder: 3, partTitle: 'fourth part'} 
+                ]
+            } , {
+                chapterNo: 1,
+                chapterOrder: 1,
+                chapterTitle: 'second sample',
+                parts: [
+                    { articleNo: 0, articleOrder: 0, partTitle: 'first part'} ,
+                    { articleNo: 1, articleOrder: 1, partTitle: 'second part'} ,
+                    { articleNo: 2, articleOrder: 2, partTitle: 'third part'} ,
+                    { articleNo: 3, articleOrder: 3, partTitle: 'fourth part'} 
+                ]
+            } , {
+                chapterNo: 2,
+                chapterOrder: 2,
+                chapterTitle: 'third sample',
+                parts: [
+                    { articleNo: 0, articleOrder: 0, partTitle: 'first part'} ,
+                    { articleNo: 1, articleOrder: 1, partTitle: 'second part'}
+                ]
+            } , {
+                chapterNo: 3,
+                chapterOrder: 3,
+                chapterTitle: 'fourth sample',
+                parts: [
+                    { articleNo: 0, articleOrder: 0, partTitle: 'first part'} 
+                ]
+            }   
+        ],
         isMenuShow: false,
         MenuPosition: {
             X: 0,

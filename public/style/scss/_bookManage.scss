@@ -12,9 +12,12 @@
     margin: 2px;
 
     li {
-    	padding: 5px 20px;
+    	padding: 5px 15px;
     	cursor: pointer;
-
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-size: 14px;
+        line-height: 16px;
+        
     	i {
     		width: 20px;
     	}
@@ -23,5 +26,38 @@
     		background-color: #428bca;
     		color: #fff;
     	}
+    }
+}
+
+.BookStructure {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    bottom: 0px;
+    width: 200px;
+    padding: 10px;
+    border-right: 1px solid #bbb;
+
+    .ChapterSection {
+
+        .Chapter {
+            padding: 4px 0px 4px 10px;
+            i {
+                margin: 0px 5px;
+            }
+            &:hover {
+                background-color: #eee;
+            }
+        }
+
+        .Part {
+            padding: 4px 0px 4px 30px;
+            i {
+                margin: 0px 5px;
+            }
+            &:hover {
+                background-color: #eee;
+            }
+        }
     }
 }
