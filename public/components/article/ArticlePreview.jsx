@@ -38,7 +38,7 @@ class Article extends React.Component {
             <div className="ArticleContent">
                 <div className="ArticleControl">
                     <i className="fa fa-edit fa-lg" />
-                    <Link className="ArticleEdit"  onClick={this._transferToPreview.bind(this)} to={"/articleEditor/" + articleNo}>Return to Edit</Link>
+                    <Link className="ArticleEdit"  onClick={this._transferToPreview.bind(this)} to={"/ArticleEditor/" + articleNo}>Return to Edit</Link>
                 </div>
                 { content }
             </div>

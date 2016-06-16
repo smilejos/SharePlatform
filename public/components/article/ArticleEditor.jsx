@@ -121,7 +121,7 @@ class Article extends React.Component {
             <div className="ArticleEditor">
                 <div className="ArticleControl">
                     <i className="fa fa-eye fa-lg" />
-                    <Link className="ArticleEdit" to={"/articlePreview/" + articleNo }>Preview</Link>
+                    <Link className="ArticleEdit" to={"/ArticlePreview/" + articleNo }>Preview</Link>
                 </div>
                 <input 
                     type="text" 

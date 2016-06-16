@@ -42,13 +42,13 @@ class App extends React.Component {
                     <div className="control">
                         <div className="controlItem">
                             <i className="fa fa-file-text-o"></i>
-                            <Link to={ "/articleEditor/New" }>
+                            <Link to={ "/ArticleCreator" }>
                                 Publish Article
-                            </Link>    
+                            </Link>
                         </div>
                         <div className="controlItem">
                             <i className="fa fa-book"></i>
-                            <Link to={ "/createBook" }>
+                            <Link to={ "/BookCreator" }>
                                 Create Book
                             </Link>
                         </div>

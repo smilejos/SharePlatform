@@ -30,7 +30,7 @@ class BookCreator extends React.Component {
     render() {
         let book = this.props.state.book;
         return (
-            <div className="BookCreator">
+            <div className="ContentSetting">
                 <div className="Section">
                     <div className="Title">Create a New Book</div>
                     <div className="Description">A book can contains all the article from yours or others.</div>
