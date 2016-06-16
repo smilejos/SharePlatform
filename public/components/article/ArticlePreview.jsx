@@ -22,13 +22,12 @@ class Article extends React.Component {
 
     _transferToPreview(){
         let { editArticle } = this.props.actions;
-        console.log('Preview _transferToPreview editArticle');
         editArticle(this.props.state.editingArticle, false);
     }
     
     render() {
         let content;
-        let articleNo = this.props.params.articleNo != undefined ? this.props.params.articleNo : "New";
+        let articleNo = this.props.params.articleNo;
         if( this.props.state.editingArticle != null ) {
             content = <ArticleContent article = { this.props.state.editingArticle } />;
         } else {

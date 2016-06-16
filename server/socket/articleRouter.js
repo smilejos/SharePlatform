@@ -4,9 +4,9 @@ module.exports = function(){
 	let is    = require('is_js');
 	var ArticleHandler = require('../database/articleHandler');
 
-	function _publishArticle(socket, item) {
+	function _createArticle(socket, item) {
 		item.author = socket.request.session.user.UserName;
-        ArticleHandler.publishArticle(item, (recordset, err) =>{
+        ArticleHandler.createArticle(item, (recordset, err) =>{
             if( err ) {
             	console.log('err', err);
             } else {
@@ -15,9 +15,19 @@ module.exports = function(){
         });
 	}
 
-	function _updateArticle(socket, item) {
-		item.author = socket.request.session.user.UserName;
+	function _modifyArticle(socket, item) {
         ArticleHandler.modifyArticle(item, (recordset, err) =>{
+             if( err ) {
+            	console.log('err', err);
+            } else {
+            	console.log('success');
+            }
+        });
+	}
+
+	function _updateArticle(socket, item) {
+		item.tag = item.tag.length > 0 ? item.tag.join(',') : '';
+        ArticleHandler.updateArticle(item, (recordset, err) =>{
              if( err ) {
             	console.log('err', err);
             } else {
@@ -29,6 +39,7 @@ module.exports = function(){
 	function _getArticle(socket, item) {
 	    ArticleHandler.getSpecificArticle(item, (article, err) => {
 	    	article = is.array(article) ? article[0] : article;
+	    	article.tag = article.tag.length > 0 ? article.tag.split(',') : [];
 	        socket.emit('retrieveArticle', article);
 	    });
 	}
@@ -56,13 +67,18 @@ module.exports = function(){
 	return {
 		listen: function(io, socket) {
 			
-			socket.on('publishArticle', (item) => {
+			socket.on('createArticle', (item) => {
 				// console.log("define publish");
-		        _publishArticle(socket, item);
+		        _createArticle(socket, item);
 		    });
 
-		    socket.on('updateArticle', (item) => {
+			socket.on('modifyArticle', (item) => {
 		    	// console.log("define update");
+		    	_modifyArticle(socket, item);
+		    }); 
+
+		    socket.on('updateArticle', (item) => {
+		    	console.log('socket event', item);
 		    	_updateArticle(socket, item);
 		    }); 
 

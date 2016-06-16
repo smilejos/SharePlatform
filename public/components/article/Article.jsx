@@ -55,6 +55,8 @@ class ArticleEditButton extends React.Component {
     render() {
         return (
             <div className="ArticleControl">
+                <i className="fa fa-cog fa-lg" />
+                <Link className="ArticleEdit" to={ "/articleSetting/" + this.props.articleNo }>Setting</Link>
                 <i className="fa fa-edit fa-lg" />
                 <Link className="ArticleEdit" to={ "/articleEditor/" + this.props.articleNo }>Edit</Link>
             </div>

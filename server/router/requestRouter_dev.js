@@ -15,6 +15,7 @@ const HTML = ({ content, store }) => (
 			<link rel="stylesheet" href="/codeStyle.css" type="text/css" />
 			<link rel="stylesheet" href="/markdown.css" type="text/css" />	
 			<link rel="stylesheet" href="/font-awesome.css" type="text/css" />	
+      <link rel="stylesheet" href="/react-select.css" type="text/css" />
 		</head>
 		<body>
       		<div id="app" dangerouslySetInnerHTML={{ __html: content }}/>

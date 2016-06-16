@@ -1,6 +1,6 @@
 "use strict";
-import { REQUEST_POST, REQUEST_POSTS, RECEIVE_POSTS, RECEIVE_POST, PUBLISH_POST, UPDATE_POST, 
-    COMPLETE_POST, CLEAN_POST, CLEAN_EDITING_POST, LEAVE_POST, EDIT_POST, SYNC_POST } from '../constants/ArticleActionTypes';
+import { REQUEST_POST, REQUEST_POSTS, RECEIVE_POSTS, RECEIVE_POST, CREATE_POST, UPDATE_POST, 
+    COMPLETE_POST, CLEAN_POST, CLEAN_EDITING_POST, LEAVE_POST, EDIT_POST, SYNC_POST, CHANGE_POST_TYPE } from '../constants/ArticleActionTypes';
 import { socket_article as socket } from '../utility/socketHandler';
 
 export function requestArticleList(item) {
@@ -31,17 +31,28 @@ export function receiveArticle(article) {
 	};
 }
 
-export function publishArticle(article) {
-	socket.emit('publishArticle', article);
+export function createArticle(article) {
+	socket.emit('createArticle', article);
 	return {
-		type: PUBLISH_POST
+		type: CREATE_POST
 	};
 }
 
-export function updateArticle(article) {
-	socket.emit('updateArticle', article);
+export function modifyArticle(article) {
+	socket.emit('modifyArticle', article);
 	return {
-		type: UPDATE_POST
+		type: UPDATE_POST,
+		article
+	};
+}
+
+export function updateArticle(article, isUpdateServer) {
+	if( isUpdateServer ) {
+		socket.emit('updateArticle', article);	
+	}
+	return {
+		type: UPDATE_POST,
+		article
 	};
 }
 
@@ -84,5 +95,12 @@ export function editArticle(article, isSyncWithServer) {
 	return {
 		type: EDIT_POST,
 		article
+	};
+}
+
+export function changePostType (isPrivate) {
+	return {
+		type: CHANGE_POST_TYPE,
+		isPrivate
 	};
 }

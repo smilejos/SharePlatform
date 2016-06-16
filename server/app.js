@@ -10,6 +10,7 @@ let requestRouter    = require('./router/requestRouter_dev');
 let memberRouter  = require('./socket/memberRouter');
 let articleRouter = require('./socket/articleRouter');
 let bookRouter = require('./socket/bookRouter');
+let commonRouter = require('./socket/commonRouter');
 
 let app = express();
 let sessionMiddleware = session({
@@ -36,6 +37,7 @@ let socket = io.listen(server);
 let member = socket.of('/Member');
 let article = socket.of('/Article');
 let book = socket.of('/Book');
+let common = socket.of('/Common');
 
 socket.use(function(socket, next){
     sessionMiddleware(socket.request, socket.request.res, next);
@@ -58,6 +60,10 @@ article.on('connection', (client) => {
 
 book.on('connection', (client) => {
     bookRouter.listen(book, client);
+});
+
+common.on('connection', (client) => {
+    commonRouter.listen(common, client);
 });
 
 console.log("Start server with port:8888")

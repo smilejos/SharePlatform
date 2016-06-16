@@ -26,14 +26,14 @@ module.exports = function(){
 		let sqlString = " select a.articleNo, a.title, b.Card_Na as authorName, a.author, a.tag, a.updateTime, a.publishTime " +
 						" from dbo.Article a " + 
 						" left join HRIS.dbo.NEmployee b on a.Author = b.Id_No " + 
-						" where Tag = '" + tag + "'" +
+						" where Tag like '%" + tag + "%'" +
 						" order by a.UpdateTime DESC ";
 
 		_executeSqlComment(sqlString, callback);
 	}
 
 	function _getSpecificArticle(articleNo, callback){
-		let sqlString = " select a.articleNo, a.title, b.Card_Na as authorName, a.author, a.tag, a.updateTime, a.publishTime, a.content " +
+		let sqlString = " select a.articleNo, a.title, b.Card_Na as authorName, a.author, a.tag, a.updateTime, a.publishTime, a.content, a.isPrivate, a.isBookArticle " +
 						" from dbo.Article a " + 
 						" left join HRIS.dbo.NEmployee b on a.Author = b.Id_No " + 
 						" where ArticleNo = '" + articleNo + "'" +
@@ -42,14 +42,21 @@ module.exports = function(){
 		_executeSqlComment(sqlString, callback);
 	}
 
+	/// Modify Article Content
 	function _modifyArticle(article, callback){
-		let sqlString = " update dbo.Article set title = '"+ article.title +"', content = '" +article.content+ "', Tag = '" +article.tag+ "', UpdateTime = getDate() where ArticleNo = '" + article.articleNo + "'";
+		let sqlString = " update dbo.Article set content = '" +article.content+ "', UpdateTime = getDate() where ArticleNo = '" + article.articleNo + "'";
 		_executeSqlComment(sqlString, callback);
 	}
 
-	function _publishArticle(article, callback){
-		let sqlString = " insert into  dbo.Article (title, Author, content, Tag, UpdateTime, PublishTime) "+
-		                " values ('" +article.title +"','"+ article.author +"','"+ article.content +"','"+ article.tag +"', getDate(), getDate())";
+	/// Update Article Attribute (Tag, Title, Private)
+	function _updateArticle(article, callback){
+		let sqlString = " update dbo.Article set title = '"+ article.title +"', Tag = '" +article.tag+ "', isPrivate = '"+article.isPrivate+"', UpdateTime = getDate() where ArticleNo = '" + article.articleNo + "'";
+		_executeSqlComment(sqlString, callback);
+	}
+
+	function _createArticle(article, callback){
+		let sqlString = " insert into  dbo.Article (title, Author, content, Tag, UpdateTime, PublishTime, isPrivate) "+
+		                " values ('" +article.title +"','"+ article.author +"','','"+ article.tag +"', getDate(), getDate(), '"+article.isPrivate+"')";
 		
 		console.log('sql command', sqlString);
 		_executeSqlComment(sqlString, callback);
@@ -68,7 +75,7 @@ module.exports = function(){
 		let regex = /'/gi;
 		return content.replace(regex, "''");
 	}
-
+	
 	return {
 		getNewestArticle: function(callback){
 			_getNewestArticle(callback);
@@ -83,14 +90,17 @@ module.exports = function(){
 			_getSpecificArticle(articleNo, callback);
 		},
 		modifyArticle : function(article, callback){
-			article.title = _replaceString(article.title);
 			article.content = _replaceString(article.content);
 			_modifyArticle(article, callback);
 		},
-		publishArticle : function(article, callback){
+		updateArticle : function(article, callback){
 			article.title = _replaceString(article.title);
-			article.content = _replaceString(article.content);
-			_publishArticle(article, callback);
+			console.log('db event', article);
+			_updateArticle(article, callback);
+		},
+		createArticle : function(article, callback){
+			article.title = _replaceString(article.title);
+			_createArticle(article, callback);
 		}
 	}
 }();

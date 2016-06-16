@@ -9,8 +9,9 @@ module.exports = function(){
 						" from HRIS.dbo.Nemployee a " + 
 						" left join HRIS.dbo.ztitle b on a.Title_no = b.Title_no" +
 						" left join HRIS.dbo.NSection c on a.Dept_no = c.Dept_no";
-		sql.connect(config, function(err) {
-			let request = new sql.Request();
+
+		let connection = new sql.Connection(config, function(err) {
+			let request = connection.request();
 	    	request.query(sqlString, function(err, recordset) {
 	    		employees = recordset;
 	    		callback();

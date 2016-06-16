@@ -4,10 +4,13 @@ import io from 'socket.io-client';
 import { receiveArticles, receiveArticle } from '../actions/ArticleActions';
 import { receiveRealTimeMember, retrieveUser } from '../actions/MemberActions';
 import { receiveBook } from '../actions/BookActions';
+import { receiveCategory } from '../actions/CommonActions';
 
 export const socket_article = io('/Article');
 export const socket_member = io('/Member');
 export const socket_book = io('/Book');
+export const socket_common = io('/Common');
+
 
 // ==================================================
 
@@ -38,4 +41,10 @@ socket_member.on('retrieveUser', function(result) {
 
 socket_book.on('retrieveBook', function(result) {
 	store.dispatch(receiveBook(result));
+});
+
+// ==================================================
+
+socket_common.on('receiveCategory', function(result) {
+	store.dispatch(receiveCategory(result));
 });

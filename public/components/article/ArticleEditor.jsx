@@ -1,7 +1,7 @@
 "use strict";
 import React from 'react'
 import { render } from 'react-dom'
-import { Link } from 'react-router'
+import { Link, browserHistory } from 'react-router'
 import { bindActionCreators  } from 'redux'
 import { connect } from 'react-redux'
 import marked from 'marked'
@@ -12,48 +12,28 @@ import * as ArticleActions from '../../actions/ArticleActions'
 class Article extends React.Component {
     constructor(props){
         super(props);
-        let { requestArticle, cleanEditingArticle, editArticle } = this.props.actions;
+        let { requestArticle, editArticle } = this.props.actions;
 
         if (this._isRequestArticle()) {
             requestArticle(this.props.params.articleNo);   
-        } else if(this._isUnderEditing()){
-            editArticle(this.props.state.article, false);
         } else {
-            cleanEditingArticle();
+            editArticle(this.props.state.article, false);
         }
     }
 
     componentDidMount() {
         let { syncArticle, editArticle } = this.props.actions;
-        this._notification = this.refs.notification;
-        if(this._isExistArticle()) {
-            console.log('Edit componentDidMount syncArticle');
-            syncArticle(this.props.params.articleNo);
-        }
+        syncArticle(this.props.params.articleNo);
     }
     
     componentWillUnmount() {
         let { leaveArticle, cleanArticle } = this.props.actions;
-        if(this._isExistArticle()) {
-            leaveArticle(this.props.params.articleNo);
-        }
+        leaveArticle(this.props.params.articleNo);
         cleanArticle();
     }
 
     _isRequestArticle(){
-        return ( this.props.params.articleNo != "New" && this.props.state.article == null);
-    }
-
-    _isExistArticle() {
-        return ( this.props.params.articleNo != "New");
-    }
-
-    _isUnderEditing(){
-        return ( this.props.state.article != null);
-    }
-
-    _isNewArticle() {
-        return ( this.props.params.articleNo == "New");
+        return ( this.props.state.article.content == '');
     }
 
     _handleUpdate(article) {
@@ -65,6 +45,11 @@ class Article extends React.Component {
         let temp = this.props.state.article ? this.props.state.article : {};
         temp.content = this.refs.textarea.value;
         this._handleUpdate(temp);
+    }
+
+    _handleBack () {
+        let path = '/Article/' + this.props.params.articleNo;
+        browserHistory.push(path);
     }
 
     _handleTitleChange () {
@@ -94,13 +79,7 @@ class Article extends React.Component {
         temp.content = this.refs.textarea.value;
         temp.title = this.refs.txtTitle.value;
         
-        if(this._isNewArticle()) {
-            console.log('temp', temp);
-            publishArticle(temp);
-        } else {
-            updateArticle(temp);
-        }
-        
+        updateArticle(temp);
         this._addNotification();
     }
 
@@ -114,30 +93,29 @@ class Article extends React.Component {
     }
 
     render() {
-        let title = this.props.state.article ? this.props.state.article.title : "";
-        let content = this.props.state.article ? this.props.state.article.content : "";
-        let articleNo = this.props.params.articleNo != undefined ? this.props.params.articleNo : "New";
+        let article = this.props.state.article;
         return (
             <div className="ArticleEditor">
                 <div className="ArticleControl">
                     <i className="fa fa-eye fa-lg" />
-                    <Link className="ArticleEdit" to={"/ArticlePreview/" + articleNo }>Preview</Link>
+                    <Link className="ArticleEdit" to={"/ArticlePreview/" + article.articleNo }>Preview</Link>
                 </div>
                 <input 
                     type="text" 
                     ref="txtTitle" 
                     placeholder="Article Title" 
                     className="ArticleTitle" 
-                    value={ title } 
+                    value={ article.title } 
                     onChange={this._handleTitleChange.bind(this)} />
                 <textarea
                     className="ArticleText"
                     onChange={this._handleChange.bind(this)}
                     onKeyDown={this._handleKeydown.bind(this)}
                     ref="textarea"
-                    value = { content }/>
+                    value = { article.content }/>
                 <NotificationSystem ref="notification" />
-                <button ref="btn" className="Button" onClick={this._handlePostArticle.bind(this)}>Post</button>
+                <button type="button" className="Button" onClick={this._handlePostArticle.bind(this)}>Post</button>
+                <button type="button" className="Button" onClick={this._handleBack.bind(this)}>Return</button>
             </div>
         );
     }
