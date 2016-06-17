@@ -36,6 +36,14 @@ module.exports = function(){
         });
 	}
 
+	function _searchArticles(socket, item) {
+		item.author = socket.request.session.user.UserName;
+		ArticleHandler.getSearchArticles(item, (articles, err) => {
+	    	articles = is.array(articles) ? articles : [];
+	        socket.emit('receiveList', articles);
+	    });
+	}
+
 	function _getArticle(socket, item) {
 	    ArticleHandler.getSpecificArticle(item, (article, err) => {
 	    	article = is.array(article) ? article[0] : article;
@@ -86,6 +94,12 @@ module.exports = function(){
 		    	// console.log("define requestArticle");
 		       _getArticle(socket, item);
 		    });
+
+		    socket.on('searchArticles', (item) => {
+		    	// console.log("define requestArticle");
+		       _searchArticles(socket, item);
+		    });
+
 
 		    socket.on('syncArticle', (articleNo) => {
 		    	// console.log("define requestArticle");

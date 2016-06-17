@@ -4,7 +4,7 @@ import io from 'socket.io-client';
 import { receiveArticles, receiveArticle } from '../actions/ArticleActions';
 import { receiveRealTimeMember, retrieveUser } from '../actions/MemberActions';
 import { receiveBook } from '../actions/BookActions';
-import { receiveCategory } from '../actions/CommonActions';
+import { receiveCategory,  } from '../actions/CommonActions';
 
 export const socket_article = io('/Article');
 export const socket_member = io('/Member');
@@ -23,9 +23,9 @@ socket_article.on('receiveList', function(articles) {
 });
 
 socket_article.on('editArticle', function(article) {
-	console.log('receive editArticle from Server', article);
 	store.dispatch(receiveArticle(article));
 });
+
 
 // ==================================================
 

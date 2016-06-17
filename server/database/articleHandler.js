@@ -5,7 +5,7 @@ module.exports = function(){
 
 	function _getNewestArticle(callback){
 		let sqlString = " select top 10 a.articleNo, a.title, b.Card_Na as authorName, a.author, a.tag, a.updateTime, a.publishTime " +
-						" from dbo.Article a " + 
+						" from dbo.Article a (nolock) " + 
 						" left join HRIS.dbo.NEmployee b on a.Author = b.Id_No " + 
 						" order by a.UpdateTime DESC ";
 		
@@ -14,7 +14,7 @@ module.exports = function(){
 
 	function _getSpecificAuthor(Id_No, callback){
 		let sqlString = " select a.articleNo, a.title, b.Card_Na as authorName, a.author, a.tag, a.updateTime, a.publishTime " +
-						" from dbo.Article a " + 
+						" from dbo.Article a (nolock) " + 
 						" left join HRIS.dbo.NEmployee b on a.Author = b.Id_No " + 
 						" where Author = '" + Id_No + "'" +
 						" order by a.UpdateTime DESC ";
@@ -22,19 +22,27 @@ module.exports = function(){
 		_executeSqlComment(sqlString, callback);
 	}
 
-	function _getSpecificTag(tag, callback){
+	function _getSearchArticles(options, callback){
 		let sqlString = " select a.articleNo, a.title, b.Card_Na as authorName, a.author, a.tag, a.updateTime, a.publishTime " +
-						" from dbo.Article a " + 
+						" from dbo.Article a (nolock) " + 
 						" left join HRIS.dbo.NEmployee b on a.Author = b.Id_No " + 
-						" where Tag like '%" + tag + "%'" +
-						" order by a.UpdateTime DESC ";
+						" where isPrivate = 0 ";
+		
+		if( options.keyword != '' ) {
+			sqlString += " and a.title like '%" + options.keyword + "%' and a.content like '%" + options.keyword + "%'";
+		}
 
+		if( options.isPrivate ) {
+			sqlString += " and a.author = '" + options.author + "'";
+		}
+
+		sqlString += " order by a.UpdateTime DESC ";
 		_executeSqlComment(sqlString, callback);
 	}
 
 	function _getSpecificArticle(articleNo, callback){
 		let sqlString = " select a.articleNo, a.title, b.Card_Na as authorName, a.author, a.tag, a.updateTime, a.publishTime, a.content, a.isPrivate, a.isBookArticle " +
-						" from dbo.Article a " + 
+						" from dbo.Article a (nolock) " + 
 						" left join HRIS.dbo.NEmployee b on a.Author = b.Id_No " + 
 						" where ArticleNo = '" + articleNo + "'" +
 						" order by a.UpdateTime DESC ";
@@ -83,8 +91,8 @@ module.exports = function(){
 		getSpecificAuthor: function(Id_No, callback){
 			_getSpecificAuthor(Id_No, callback);
 		},
-		getSpecificTag : function(tag, callback){
-			_getSpecificTag(tag, callback);
+		getSearchArticles : function(options, callback){
+			_getSearchArticles(options, callback);
 		},
 		getSpecificArticle : function(articleNo, callback){
 			_getSpecificArticle(articleNo, callback);

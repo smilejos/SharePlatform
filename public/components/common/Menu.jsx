@@ -17,16 +17,16 @@ export default class Information extends React.Component {
                 <Link to={ "/" } className="MenuItem">
                     Group
                 </Link>
-                <i className="fa fa-file-text-o"></i>
-                <Link to={ "/" } className="MenuItem">
-                    Articles
-                </Link>
                 <i className="fa fa-book"></i>
                 <Link to={ "/" } className="MenuItem">
                     Books
                 </Link>
-                <i className="fa fa-search"></i>
+                <i className="fa fa-tag"></i>
                 <Link to={ "/" } className="MenuItem">
+                    Tag
+                </Link>
+                <i className="fa fa-search"></i>
+                <Link to={ "/Search" } className="MenuItem">
                     Search
                 </Link>                
             </div>

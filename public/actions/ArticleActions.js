@@ -10,6 +10,13 @@ export function requestArticleList(item) {
 	};
 }
 
+export function searchArticles(options) {
+	socket.emit('searchArticles', options);	
+	return {
+		type: REQUEST_POSTS
+	};
+}
+
 export function requestArticle(item) {
 	socket.emit('requestArticle', item);
 	return {

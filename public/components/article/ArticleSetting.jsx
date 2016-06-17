@@ -91,7 +91,7 @@ class ArticleSetting extends React.Component {
                 <button type="button" className="Button" onClick={this._handleBack.bind(this)}>Return</button>
             </div>;
         }
-        
+
         return (
             <div className="ContentSetting">
                 <div className="Section">
@@ -146,7 +146,6 @@ class ArticleSetting extends React.Component {
         );
     }
 }
-
 
 class ActionButton extends React.Component {
     render() {
