@@ -44,7 +44,7 @@
 		position: relative;
 		font-style: sans-serif;
 		padding: 1em 0 1em 0;
-		border-top: 1px solid #f1f1f1;
+		border-bottom: 1px solid #f1f1f1;
 		width: 600px;
 		font-weight: normal;
 		display: block;
@@ -88,6 +88,24 @@
 			color: #bbb;
 			font-size: 13px;
 			line-height: 14px;
+		}
+
+		.ArticleTags {
+			position: absolute;
+			right: 0px;
+			top: 12px;
+
+			.ArticleTag {
+				position: relative;
+				display: inline-block;
+				margin: 0px 2px;
+				color: #666;
+				font-size: 12px;
+				line-height: 14px;
+				border: #eee 1px solid;
+				padding: 4px 10px;
+				border-radius: 5px;
+			}
 		}
 	}
 }

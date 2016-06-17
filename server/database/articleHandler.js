@@ -29,7 +29,7 @@ module.exports = function(){
 						" where isPrivate = 0 ";
 		
 		if( options.keyword != '' ) {
-			sqlString += " and a.title like '%" + options.keyword + "%' and a.content like '%" + options.keyword + "%'";
+			sqlString += " and ( a.title like '%" + options.keyword + "%' or a.content like '%" + options.keyword + "%' )";
 		}
 
 		if( options.isPrivate ) {

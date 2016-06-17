@@ -6,7 +6,7 @@ import { render } from 'react-dom'
 import { Link } from 'react-router'
 import * as MemberActions from '../../actions/MemberActions'
 
-import ArticleList from '../article/ArticleList'
+import ArticleOverview from '../article/ArticleOverview'
 import PersonalInfo from '../common/PersonalInfo'
 
 class App extends React.Component {
@@ -23,7 +23,7 @@ class App extends React.Component {
                     <div className="image"></div>
                     <PersonalInfo user= { this.props.user } />
                 </div>
-                <ArticleList userId= { this.props.params.userID } />
+                <ArticleOverview userId= { this.props.params.userID } />
             </div>
         )
     }

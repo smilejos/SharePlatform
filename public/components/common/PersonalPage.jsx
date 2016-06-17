@@ -6,7 +6,7 @@ import { render } from 'react-dom'
 import { Link } from 'react-router'
 import * as ArticleActions from '../../actions/ArticleActions'
 
-import ArticleList from '../article/ArticleList'
+import ArticleOverview from '../article/ArticleOverview'
 import PersonalInfo from '../common/PersonalInfo'
 
 
@@ -54,7 +54,7 @@ class App extends React.Component {
                         </div>
                     </div>
                 </div>
-                <ArticleList />
+                <ArticleOverview />
             </div>
         )
     }

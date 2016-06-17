@@ -2,7 +2,8 @@
 
 module.exports = function(){
 	let is    = require('is_js');
-	var ArticleHandler = require('../database/articleHandler');
+	let ArticleHandler = require('../database/articleHandler');
+	let lodash  = require('lodash');
 
 	function _createArticle(socket, item) {
 		item.author = socket.request.session.user.UserName;
@@ -40,6 +41,9 @@ module.exports = function(){
 		item.author = socket.request.session.user.UserName;
 		ArticleHandler.getSearchArticles(item, (articles, err) => {
 	    	articles = is.array(articles) ? articles : [];
+	    	lodash.forEach(articles, function(item, index){
+	    		item.tag = item.tag.length > 0 ? item.tag.split(',') : [];
+	    	});
 	        socket.emit('receiveList', articles);
 	    });
 	}
@@ -55,14 +59,20 @@ module.exports = function(){
 	function _getArticleList(socket, item) {
 		if(item.isSpecificUser) {
 			// console.log('_getArticleList SpecificUser', item.Id_No);
-            ArticleHandler.getSpecificAuthor(item.Id_No, (list, err) => {
-                socket.emit('receiveList', list);
+            ArticleHandler.getSpecificAuthor(item.Id_No, (articles, err) => {
+            	lodash.forEach(articles, function(item, index){
+	    			item.tag = item.tag.length > 0 ? item.tag.split(',') : [];
+	    		});
+                socket.emit('receiveList', articles);
             });
             
         } else {
         	// console.log('_getArticleList Non SpecificUser');
-            ArticleHandler.getNewestArticle( (list, err) => {
-                socket.emit('receiveList', list);
+            ArticleHandler.getNewestArticle( (articles, err) => {
+            	lodash.forEach(articles, function(item, index){
+	    			item.tag = item.tag.length > 0 ? item.tag.split(',') : [];
+	    		});
+                socket.emit('receiveList', articles);
             });
         }
 	}

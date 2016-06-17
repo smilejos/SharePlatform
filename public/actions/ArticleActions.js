@@ -1,6 +1,6 @@
 "use strict";
 import { REQUEST_POST, REQUEST_POSTS, RECEIVE_POSTS, RECEIVE_POST, CREATE_POST, UPDATE_POST, 
-    COMPLETE_POST, CLEAN_POST, CLEAN_EDITING_POST, LEAVE_POST, EDIT_POST, SYNC_POST, CHANGE_POST_TYPE } from '../constants/ArticleActionTypes';
+    COMPLETE_POST, CLEAN_POST, CLEAN_POSTS, CLEAN_EDITING_POST, LEAVE_POST, EDIT_POST, SYNC_POST, CHANGE_POST_TYPE } from '../constants/ArticleActionTypes';
 import { socket_article as socket } from '../utility/socketHandler';
 
 export function requestArticleList(item) {
@@ -86,6 +86,12 @@ export function syncArticle(articleNo) {
 export function cleanArticle() {
 	return {
 		type: CLEAN_POST
+	};
+}
+
+export function cleanArticles() {
+	return {
+		type: CLEAN_POSTS
 	};
 }
 

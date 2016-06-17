@@ -1,6 +1,6 @@
 "use strict";
 import { REQUEST_POST, REQUEST_POSTS, RECEIVE_POSTS, RECEIVE_POST, PUBLISH_POST, UPDATE_POST, 
-    COMPLETE_POST, CLEAN_POST, CLEAN_EDITING_POST, LEAVE_POST, EDIT_POST, CHANGE_POST_TYPE } from '../constants/ArticleActionTypes';
+    COMPLETE_POST, CLEAN_POST, CLEAN_POSTS, CLEAN_EDITING_POST, LEAVE_POST, EDIT_POST, CHANGE_POST_TYPE } from '../constants/ArticleActionTypes';
 import merge from 'lodash/merge'
 import union from 'lodash/union'
 import assignIn from 'lodash/assignIn'
@@ -27,6 +27,7 @@ export default function articles(state = {
 	switch (action.type) {
     case REQUEST_POST:
     case REQUEST_POSTS:
+    case CLEAN_POSTS:
 		return assignIn({}, state, {
             isFetching: true,
             isUploading: false,
