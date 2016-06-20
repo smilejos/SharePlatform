@@ -27,7 +27,6 @@ class ArticleItem extends React.Component {
 class ArticleTags extends React.Component {
     render() {
         let list;
-        console.log(this.props.tag);
         if( this.props.tag && this.props.tag.length > 0) {
             list = this.props.tag.map(function(item, index){
                 return <ArticleTag key={index} value={item}  />

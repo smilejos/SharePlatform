@@ -33,7 +33,6 @@ class App extends React.Component {
     }
 
     render() {
-        //console.log( this.props.self);
         let url = 'http://cweb01/HRIS/EmployeePhoto/photo2/' +this.props.self.Id_No+ '.jpg';
         return (
             <div>

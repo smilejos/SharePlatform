@@ -4,6 +4,8 @@ import assignIn from 'lodash/assignIn'
 
 export default function common(state = {
         category: [],
+        category_counts: [],
+        author_counts: [],
         search_options: {
         	isPrivate : false,
         	author: '',         // Auto fill in this info in server side

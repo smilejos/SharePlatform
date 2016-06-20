@@ -9,8 +9,9 @@ import assignIn from 'lodash/assignIn'
 export default function articles(state = {
         isFetching: true,
         isUploading: false,
-        isFilterByAuthor: false,
+        isFilter: false,
         articles: [],
+        filter_articles: [],
         article: {
             articleNo : null,
             title : '',

@@ -15,20 +15,20 @@ class App extends React.Component {
     //     console.log('Trace componentDidMount');
     // }
 
-    // componentWillReceiveProps() {
+    // void componentWillReceiveProps(object nextProps)
     //     console.log('Trace componentWillReceiveProps');
     // }
     
-    // shouldComponentUpdate () {
+    // shouldComponentUpdate (object nextProps, object nextState) {
     //     console.log('Trace shouldComponentUpdate');
     //     return true;
     // } 
 
-    // componentWillUpdate() {
+    // componentWillUpdate(object nextProps, object nextState) {
     //     console.log('Trace componentWillUpdate');
     // }
 
-    // componentDidUpdate() {
+    // componentDidUpdate(object prevProps, object prevState) {
     //     console.log('Trace componentDidUpdate');
     // }
 

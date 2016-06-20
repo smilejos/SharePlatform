@@ -8,7 +8,6 @@ import Select from 'react-select';
 import * as ArticleActions from '../../actions/ArticleActions'
 import * as CommonActions from '../../actions/CommonActions'
 import ArticleList from '../article/ArticleList'
-import Category from '../search/Category'
 
 class Search extends React.Component {
     constructor(props){
@@ -55,7 +54,6 @@ class Search extends React.Component {
                     </Select>
                 </div>
                 <ArticleList />
-                <Category />
             </div>
         );
     }
