@@ -15,6 +15,11 @@ class Search extends React.Component {
         super(props);
     }
 
+    componentWillUnmount() {
+        let { clearFilterOptions } = this.props.commonActions;
+        clearFilterOptions();
+    }
+
     _handleTypeChange(selected_item) {
         let { setSearchOptions } = this.props.commonActions;
         setSearchOptions({

@@ -1,5 +1,5 @@
 "use strict";
-import { RETRIEVE_CATEGORY, SET_SEARCH_OPTIONS } from '../constants/CommonActionTypes';
+import { RETRIEVE_CATEGORY, SET_SEARCH_OPTIONS, SET_CATEGORY_COUNTS, SET_AUTHOR_COUNTS, CLEAR_FILTER_OPTIONS } from '../constants/CommonActionTypes';
 import assignIn from 'lodash/assignIn'
 
 export default function common(state = {
@@ -22,6 +22,19 @@ export default function common(state = {
         	return assignIn({}, state, {
                 search_options: assignIn({}, state.search_options, action.options)
         	});
+        case SET_CATEGORY_COUNTS: 
+            return assignIn({}, state, {
+                category_counts: action.list
+            });
+        case SET_AUTHOR_COUNTS: 
+            return assignIn({}, state, {
+                author_counts: action.list
+            });
+        case CLEAR_FILTER_OPTIONS: 
+            return assignIn({}, state, {
+                category_counts: [],
+                author_counts: []
+            });
 		default:
 			return state;
 	}

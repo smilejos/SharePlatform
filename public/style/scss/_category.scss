@@ -1,0 +1,38 @@
+.categoryList {
+	position: absolute;
+	top: 150px;
+	left: -250px;
+	height: auto;
+	width: 200px;
+	border: 1px solid #eee;
+	border-bottom: 0px;
+
+	.category {
+		position: relative;
+		height: 30px;
+		border-bottom: 1px solid #eee;
+		padding: 0px 10px;
+		cursor: pointer;
+		&:hover {
+			background-color: #eee;
+		}
+
+		span {
+			line-height: 20px;
+			font-size: 16px;
+			padding: 5px 10px;
+			color: #666;
+			font-style: sans-serif;
+		}
+
+		.name {
+			position: absolute;
+			left: 0px;
+		}
+
+		.count {
+			position: absolute;
+			right: 0px;
+		}
+	}
+}
