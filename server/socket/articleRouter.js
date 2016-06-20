@@ -39,6 +39,7 @@ module.exports = function(){
 
 	function _searchArticles(socket, item) {
 		item.author = socket.request.session.user.UserName;
+		item.keyword = item.keyword.length > 0 ? item.keyword.split(' ') : [];
 		ArticleHandler.getSearchArticles(item, (articles, err) => {
 	    	articles = is.array(articles) ? articles : [];
 	    	lodash.forEach(articles, function(item, index){

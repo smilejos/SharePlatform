@@ -1,7 +1,8 @@
 "use strict";
 module.exports = function(){
 	let sql = require('mssql'), 
-		config = require('../config/database');
+		config = require('../config/database'),
+		lodash  = require('lodash');
 
 	function _getNewestArticle(callback){
 		let sqlString = " select top 10 a.articleNo, a.title, b.Card_Na as authorName, a.author, a.tag, a.updateTime, a.publishTime " +
@@ -27,9 +28,18 @@ module.exports = function(){
 						" from dbo.Article a (nolock) " + 
 						" left join HRIS.dbo.NEmployee b on a.Author = b.Id_No " + 
 						" where isPrivate = 0 ";
-		
-		if( options.keyword != '' ) {
-			sqlString += " and ( a.title like '%" + options.keyword + "%' or a.content like '%" + options.keyword + "%' )";
+		console.log(options.keyword);
+		if( options.keyword &&  options.keyword.length > 0) {
+			let sqlSubString = '';
+			lodash.forEach(options.keyword, function(item, index){
+				if(sqlSubString.length == 0) {
+					sqlSubString += " ( a.title like '%" + item + "%' or a.content like '%" + item + "%' )";
+				} else {
+					sqlSubString += " or ( a.title like '%" + item + "%' or a.content like '%" + item + "%' )";
+				}			    
+	    	});
+	    	console.log(sqlSubString);
+			sqlString += " and ("+ sqlSubString+")";
 		}
 
 		if( options.isPrivate ) {
