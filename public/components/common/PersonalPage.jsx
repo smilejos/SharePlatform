@@ -34,10 +34,13 @@ class App extends React.Component {
 
     render() {
         //console.log( this.props.self);
+        let url = 'http://cweb01/HRIS/EmployeePhoto/photo2/' +this.props.self.Id_No+ '.jpg';
         return (
             <div>
                 <div className="personalBox">
-                    <div className="image"></div>
+                    <div className="image">
+                        <img src={url}></img>
+                    </div>
                     <PersonalInfo user= { this.props.self } />
                     <div className="control">
                         <div className="controlItem">

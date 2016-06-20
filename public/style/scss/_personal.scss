@@ -13,8 +13,12 @@
 		margin: 10px;
 		float: left;
 		display: inline-block;
-		border: 1px solid #eee;
-		border-radius: 20px;
+
+		img {
+			height: 130px;
+			border-radius: 20px;
+			border: 1px #eee solid;
+		}
 	}
 
 	.personal {
