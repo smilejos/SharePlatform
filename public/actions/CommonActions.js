@@ -1,5 +1,6 @@
 "use strict";
-import { RETRIEVE_CATEGORY, SET_SEARCH_OPTIONS, SET_CATEGORY_COUNTS, SET_AUTHOR_COUNTS, CLEAR_FILTER_OPTIONS } from '../constants/CommonActionTypes';
+import { RETRIEVE_CATEGORY, SET_SEARCH_OPTIONS, SET_CATEGORY_COUNTS, SET_AUTHOR_COUNTS, 
+	CLEAR_FILTER_OPTIONS, CLEAR_COUNTS } from '../constants/CommonActionTypes';
 import { socket_article as socket } from '../utility/socketHandler.js';
 import find from 'lodash/find'
 
@@ -33,7 +34,13 @@ export function setAuthorsCounts(list) {
 
 export function clearFilterOptions() {
 	return {
-		type: CLEAR_FILTER_OPTIONS,
+		type: CLEAR_FILTER_OPTIONS
+	};
+}
+
+export function clearFilterCounts() {
+	return {
+		type: CLEAR_COUNTS
 	};
 }
 

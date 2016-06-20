@@ -1,10 +1,10 @@
 "use strict";
 import { REQUEST_POST, REQUEST_POSTS, RECEIVE_POSTS, RECEIVE_POST, PUBLISH_POST, UPDATE_POST, 
-    COMPLETE_POST, CLEAN_POST, CLEAN_POSTS, CLEAN_EDITING_POST, LEAVE_POST, EDIT_POST, CHANGE_POST_TYPE } from '../constants/ArticleActionTypes';
+    COMPLETE_POST, CLEAN_POST, CLEAN_POSTS, CLEAN_EDITING_POST, LEAVE_POST, EDIT_POST, CHANGE_POST_TYPE,
+    FILTER_POST, CLEAR_FILTER_POST } from '../constants/ArticleActionTypes';
 import merge from 'lodash/merge'
 import union from 'lodash/union'
 import assignIn from 'lodash/assignIn'
-
 
 export default function articles(state = {
         isFetching: true,
@@ -85,6 +85,16 @@ export default function articles(state = {
             article : assignIn({}, state.article, {
                 isPrivate: action.isPrivate
             })
+        });
+    case FILTER_POST:
+        return assignIn({}, state, {
+            filter_articles: action.list,
+            isFilter: true
+        });
+    case CLEAR_FILTER_POST:
+        return assignIn({}, state, {
+            filter_articles: [],
+            isFilter: false
         });
     case LEAVE_POST:
 	default:

@@ -5,7 +5,7 @@ import { bindActionCreators  } from 'redux'
 import { connect } from 'react-redux'
 import * as ArticleActions from '../../actions/ArticleActions'
 import * as CommonActions from '../../actions/CommonActions'
-import {find, forEach, filter, orderBy, isArray} from 'lodash'
+import {find, forEach, filter, orderBy, includes, isArray} from 'lodash'
 
 class Category extends React.Component {
     constructor(props){
@@ -15,14 +15,11 @@ class Category extends React.Component {
     componentWillReceiveProps(nextProps) {
         if( this.props.search_options.tag != nextProps.search_options.tag || 
             this.props.articles.length != nextProps.articles.length) {
-            console.log('enter calculate');
-            console.log('tag', this.props.search_options.tag, nextProps.search_options.tag);
-            console.log('articles', this.props.articles.length, nextProps.articles.length);
-            this.calculate(nextProps);
+            this._calculate(nextProps);
         }
     }
 
-    calculate(Props) {
+    _calculate(Props) {
         let { setCategoryCounts } = this.props.commonActions;
         if( Props.category.length > 0 && Props.articles.length > 0 ) {
             let result = Props.category.map(function(item, index){
@@ -47,13 +44,46 @@ class Category extends React.Component {
         }
     }
 
+    _handleFilter(name) {
+        let { setSearchOptions } = this.props.commonActions;
+        let { filterArticle } = this.props.articleActions;
+        let result = filter(this.props.articles, function(article) { 
+            return includes(article.tag, name); 
+        });
+
+        setSearchOptions({
+            tag: name
+        });
+
+        filterArticle(result);
+    }
+
+    _handleClearFilter(name) {
+        let { clearFilterOptions } = this.props.commonActions;
+        let { clearFilterArticle } = this.props.articleActions;
+        
+        clearFilterArticle();
+        clearFilterOptions();
+    }
+
     render() {
         let list = null;
+        let self = this;
         if( this.props.category_counts.length > 0 ) {
             list = this.props.category_counts.map(function(item, index){
-                return <Tag key={index+1} name={item.name} count={item.count} />;
-            });
-            list.push(<Tag key={0} name={'Total'} count={this.props.articles.length} />);    
+                return <Tag 
+                    key={index+1} 
+                    name={item.name} 
+                    tag={this.props.search_options.tag}
+                    count={item.count}
+                    handleFilter={this._handleFilter.bind(this)} />;
+            }.bind(this));
+            list.push(<Tag 
+                    key={0} 
+                    name={'Total'} 
+                    tag={this.props.search_options.tag}
+                    count={this.props.articles.length} 
+                    handleFilter={this._handleClearFilter.bind(this)}/>);    
         }
         return (
             <div className={this.props.category_counts.length > 0 ? 'categoryList' : ''}>{list}</div>
@@ -66,10 +96,16 @@ class Tag extends React.Component {
         super(props);
     }
 
+    _handleClick(name) {
+        this.props.handleFilter(name);
+    }
+
     render() {
         return (
-            <div className="category">
-                <span className="name">{this.props.name}</span>
+            <div className={this.props.tag == this.props.name ? 'category active' : 'category'} onClick={this._handleClick.bind(this, this.props.name)}>
+                <span className='name'>
+                    {this.props.name}
+                </span>
                 <span className="count">{this.props.count}</span>
             </div>
         );

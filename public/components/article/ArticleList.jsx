@@ -17,8 +17,9 @@ class ArticleList extends React.Component {
 
     render() {
         let list;
-        if( this.props.articles && this.props.articles.length > 0) {
-            list = this.props.articles.map(function(item, index){
+        let articles = this.props.isFilter ? this.props.filter_articles : this.props.articles;
+        if( articles && articles.length > 0) {
+            list = articles.map(function(item, index){
                 return <ArticleItem key={item.articleNo} article={item}  />
             });
         }
@@ -31,7 +32,11 @@ class ArticleList extends React.Component {
 }
 
 function mapStateToProps(state) {
-    return { articles: state.articleReducer.articles }
+    return { 
+        filter_articles: state.articleReducer.filter_articles,
+        articles: state.articleReducer.articles,
+        isFilter: state.articleReducer.isFilter
+    }
 }
 
 function mapDispatchToProps(dispatch) {

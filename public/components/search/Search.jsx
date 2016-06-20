@@ -16,8 +16,10 @@ class Search extends React.Component {
     }
 
     componentWillUnmount() {
-        let { clearFilterOptions } = this.props.commonActions;
-        clearFilterOptions();
+        let { clearFilterCounts } = this.props.commonActions;
+        let { clearFilterArticle } = this.props.articleActions;
+        clearFilterArticle();
+        clearFilterCounts();
     }
 
     _handleTypeChange(selected_item) {

@@ -25,6 +25,10 @@ class ArticleSetting extends React.Component {
         return ( this.props.params.articleNo == null);
     }
 
+    _handleTitleChange(){
+        _handleUpdate(false);
+    }
+
     _handleUpdate(isUpdateServer) {
         let { updateArticle } = this.props.actions;
         updateArticle({ 
@@ -100,7 +104,7 @@ class ArticleSetting extends React.Component {
                 </div>
                 <div className="Section">
                     <div className="Title">Article Title</div>
-                    <input type="text" ref="txtTitle" value={ article.title } />
+                    <input type="text" ref="txtTitle" value={ article.title } onChange={this._handleTitleChange.bind(this)} />
                     <div className="Description">You can modify article title anytime.</div>
                 </div>
                 <div className="Section">

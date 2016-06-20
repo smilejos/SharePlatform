@@ -1,6 +1,7 @@
 "use strict";
 import { REQUEST_POST, REQUEST_POSTS, RECEIVE_POSTS, RECEIVE_POST, CREATE_POST, UPDATE_POST, 
-    COMPLETE_POST, CLEAN_POST, CLEAN_POSTS, CLEAN_EDITING_POST, LEAVE_POST, EDIT_POST, SYNC_POST, CHANGE_POST_TYPE } from '../constants/ArticleActionTypes';
+    COMPLETE_POST, CLEAN_POST, CLEAN_POSTS, CLEAN_EDITING_POST, LEAVE_POST, EDIT_POST, SYNC_POST, CHANGE_POST_TYPE,
+    FILTER_POST, CLEAR_FILTER_POST} from '../constants/ArticleActionTypes';
 import { socket_article as socket } from '../utility/socketHandler';
 
 export function requestArticleList(item) {
@@ -115,5 +116,18 @@ export function changePostType (isPrivate) {
 	return {
 		type: CHANGE_POST_TYPE,
 		isPrivate
+	};
+}
+
+export function filterArticle (list) {
+	return {
+		type: FILTER_POST,
+		list
+	};
+}
+
+export function clearFilterArticle () {
+	return {
+		type: CLEAR_FILTER_POST
 	};
 }
