@@ -1,10 +1,12 @@
-.ArticleList {
+.ArticleOverview {
 	position: relative;
 	width: 600px;
 	height: auto;
 	left: 50%;
 	margin-left: -300px;
+}
 
+.ArticleList {
 	.ArticleItem {
 		position: relative;
 		border: solid #eee 1px;
@@ -34,12 +36,6 @@
 }
 
 .ArticleList {
-	position: relative;
-	width: 600px;
-	height: auto;
-	left: 50%;
-	margin-left: -300px;
-
 	.ArticleActivity {
 		position: relative;
 		font-style: sans-serif;

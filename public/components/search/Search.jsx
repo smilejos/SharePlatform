@@ -61,8 +61,10 @@ class Search extends React.Component {
                             onChange={this._handleTypeChange.bind(this)} >
                     </Select>
                 </div>
-                <ArticleList />
-                <Category />
+                <div className="ArticleOverview">
+                    <ArticleList />
+                    <Category />
+                </div>
             </div>
         );
     }

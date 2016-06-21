@@ -28,7 +28,7 @@ module.exports = function(){
 						" from dbo.Article a (nolock) " + 
 						" left join HRIS.dbo.NEmployee b on a.Author = b.Id_No " + 
 						" where isPrivate = 0 ";
-		console.log(options.keyword);
+		
 		if( options.keyword &&  options.keyword.length > 0) {
 			let sqlSubString = '';
 			lodash.forEach(options.keyword, function(item, index){
@@ -38,7 +38,7 @@ module.exports = function(){
 					sqlSubString += " or ( a.title like '%" + item + "%' or a.content like '%" + item + "%' )";
 				}			    
 	    	});
-	    	console.log(sqlSubString);
+	    	
 			sqlString += " and ("+ sqlSubString+")";
 		}
 

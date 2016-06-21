@@ -14,7 +14,7 @@ export default class Information extends React.Component {
                     Home
                 </Link>
                 <i className="fa fa-group"></i>
-                <Link to={ "/" } className="MenuItem">
+                <Link to={ "/Group" } className="MenuItem">
                     Group
                 </Link>
                 <i className="fa fa-book"></i>
@@ -22,7 +22,7 @@ export default class Information extends React.Component {
                     Books
                 </Link>
                 <i className="fa fa-tag"></i>
-                <Link to={ "/" } className="MenuItem">
+                <Link to={ "/Category" } className="MenuItem">
                     Tag
                 </Link>
                 <i className="fa fa-search"></i>

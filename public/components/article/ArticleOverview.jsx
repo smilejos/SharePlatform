@@ -4,9 +4,11 @@ import { render } from 'react-dom'
 import moment from 'moment'
 import { Link } from 'react-router'
 import * as ArticleActions from '../../actions/ArticleActions'
+import * as CommonActions from '../../actions/CommonActions'
 import { bindActionCreators  } from 'redux'
 import { connect } from 'react-redux'
 import ArticleList from '../article/ArticleList'
+import Category from '../search/Category'
 
 class ArticleOverview extends React.Component {
     constructor(props){
@@ -14,7 +16,7 @@ class ArticleOverview extends React.Component {
     }
 
     componentWillMount() {
-        let { requestArticleList } = this.props.actions;
+        let { requestArticleList } = this.props.articleActions;
         var userId = this.props.userId;
         if( userId ) {
             requestArticleList({
@@ -28,8 +30,15 @@ class ArticleOverview extends React.Component {
         }
     }
 
+     componentWillUnmount() {
+        let { clearFilterCounts } = this.props.commonActions;
+        let { clearFilterArticle } = this.props.articleActions;
+        clearFilterArticle();
+        clearFilterCounts();
+    }
+
     componentWillReceiveProps(nextProps) {
-        let { requestArticleList } = this.props.actions;
+        let { requestArticleList } = this.props.articleActions;
         if( nextProps.userId != this.props.userId ) {
             requestArticleList({
                 isSpecificUser: true,
@@ -40,7 +49,10 @@ class ArticleOverview extends React.Component {
 
     render() {
         return (
-            <ArticleList/>
+            <div className="ArticleOverview">
+                <ArticleList/>
+                <Category />
+            </div>
         );
     }
 }
@@ -50,7 +62,10 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return { actions: bindActionCreators(ArticleActions, dispatch) }
+    return { 
+        articleActions: bindActionCreators(ArticleActions, dispatch),
+        commonActions: bindActionCreators(CommonActions, dispatch)
+    }
 }
 
 export default connect(
