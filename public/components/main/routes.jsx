@@ -11,6 +11,7 @@ import ArticlePreview from '../article/ArticlePreview'
 import BookSetting from '../book/BookSetting'
 import BookManager from '../book/BookManager'
 import Search from '../search/Search'
+import SearchResult from '../search/SearchResult'
 import CategoryMap from '../search/CategoryMap'
 import GroupMap from '../search/GroupMap'
 import App from '../common/App'
@@ -25,7 +26,8 @@ const routes = (
 	  	<Route path="ArticleEditor/:articleNo" component={ArticleEditor} />
 	  	<Route path="ArticlePreview/:articleNo" component={ArticlePreview} />
 	  	<Route path="Search" component={Search} />
-		<Route path="Category" component={CategoryMap} />
+	  	<Route path="SearchResult/:type/:keyword" component={SearchResult} />
+		<Route path="Tag" component={CategoryMap} />
 		<Route path="Group" component={GroupMap} />	  	
 	  	<Route path="BookCreator" component={BookSetting} />
 	  	<Route path="BookSetting/:bookNo" component={BookSetting} />

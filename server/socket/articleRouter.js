@@ -60,7 +60,7 @@ module.exports = function(){
 	function _getArticleList(socket, item) {
 		if(item.isSpecificUser) {
 			// console.log('_getArticleList SpecificUser', item.Id_No);
-            ArticleHandler.getSpecificAuthor(item.Id_No, (articles, err) => {
+            ArticleHandler.getArticlesByAuthor(item.Id_No, (articles, err) => {
             	lodash.forEach(articles, function(item, index){
 	    			item.tag = item.tag.length > 0 ? item.tag.split(',') : [];
 	    		});
@@ -76,6 +76,34 @@ module.exports = function(){
                 socket.emit('receiveList', articles);
             });
         }
+	}
+
+	function _getArticlesByTag(socket, item) {
+		ArticleHandler.getArticlesByTag(item, (articles, err) => {
+        	lodash.forEach(articles, function(item, index){
+    			item.tag = item.tag.length > 0 ? item.tag.split(',') : [];
+    		});
+            socket.emit('receiveList', articles);
+        });
+	}
+
+	function _getArticlesByAuthor(socket, item) {
+		ArticleHandler.getArticlesByAuthor(item, (articles, err) => {
+        	lodash.forEach(articles, function(item, index){
+    			item.tag = item.tag.length > 0 ? item.tag.split(',') : [];
+    		});
+            socket.emit('receiveList', articles);
+        });
+	}
+
+	function _getTagSummary(socket) {
+		ArticleHandler.getTagSummary((articles, err) => {
+	    	articles = is.array(articles) ? articles : [];
+	    	lodash.forEach(articles, function(item, index){
+	    		item.tag = item.tag.length > 0 ? item.tag.split(',') : [];
+	    	});
+	        socket.emit('receiveList', articles);
+	    });
 	}
 
 	function _updateTimeZone(item)
@@ -111,7 +139,6 @@ module.exports = function(){
 		       _searchArticles(socket, item);
 		    });
 
-
 		    socket.on('syncArticle', (articleNo) => {
 		    	// console.log("define requestArticle");
 		    	socket.join(articleNo);
@@ -119,12 +146,24 @@ module.exports = function(){
 		    
 		    socket.on('leaveArticle', (articleNo) => {
 		    	// console.log("define requestArticle");
-		    	socket.leave (articleNo);
+		    	socket.leave(articleNo);
 		    });
 
 		    socket.on('requestArticleList', (item) => {
 		    	// console.log("define requestArticleList");
 		       _getArticleList(socket, item);
+		    });
+
+	     	socket.on('requestArticlesByTag', (item) => {
+		       _getArticlesByTag(socket, item);
+		    });
+
+	      	socket.on('requestArticlesByAuthor', (item) => {
+		       _getArticlesByAuthor(socket, item);
+		    });
+
+		    socket.on('requestTagSummary', () => {
+		       _getTagSummary(socket);
 		    });
 
 		    socket.on('disconnect', () => {

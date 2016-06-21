@@ -13,13 +13,27 @@ module.exports = function(){
 		_executeSqlComment(sqlString, callback);
 	}
 
-	function _getSpecificAuthor(Id_No, callback){
+	function _getTagSummary(callback){
+		let sqlString = " select tag from dbo.Article (nolock) where tag != ''";
+		_executeSqlComment(sqlString, callback);
+	}
+
+	function _getArticlesByAuthor(Id_No, callback){
 		let sqlString = " select a.articleNo, a.title, b.Card_Na as authorName, a.author, a.tag, a.updateTime, a.publishTime " +
 						" from dbo.Article a (nolock) " + 
 						" left join HRIS.dbo.NEmployee b on a.Author = b.Id_No " + 
 						" where Author = '" + Id_No + "'" +
 						" order by a.UpdateTime DESC ";
 
+		_executeSqlComment(sqlString, callback);
+	}
+
+	function _getArticlesByTag(Tag, callback){
+		let sqlString = " select a.articleNo, a.title, b.Card_Na as authorName, a.author, a.tag, a.updateTime, a.publishTime " +
+						" from dbo.Article a (nolock) " + 
+						" left join HRIS.dbo.NEmployee b on a.Author = b.Id_No " + 
+						" where a.tag like '%" + Tag + "%'" +
+						" order by a.UpdateTime DESC ";
 		_executeSqlComment(sqlString, callback);
 	}
 
@@ -98,14 +112,20 @@ module.exports = function(){
 		getNewestArticle: function(callback){
 			_getNewestArticle(callback);
 		},
-		getSpecificAuthor: function(Id_No, callback){
-			_getSpecificAuthor(Id_No, callback);
+		getArticlesByAuthor: function(Id_No, callback){
+			_getArticlesByAuthor(Id_No, callback);
 		},
-		getSearchArticles : function(options, callback){
+		getArticlesByTag: function(Tag, callback){
+			_getArticlesByTag(Tag, callback);
+		},
+		getSearchArticles: function(options, callback){
 			_getSearchArticles(options, callback);
 		},
-		getSpecificArticle : function(articleNo, callback){
+		getSpecificArticle: function(articleNo, callback){
 			_getSpecificArticle(articleNo, callback);
+		},
+		getTagSummary: function(callback){
+			_getTagSummary(callback);
 		},
 		modifyArticle : function(article, callback){
 			article.content = _replaceString(article.content);

@@ -15,7 +15,6 @@ class Category extends React.Component {
     componentWillReceiveProps(nextProps) {
         if( this.props.search_options.tag != nextProps.search_options.tag || 
             this.props.articles.length != nextProps.articles.length) {
-
             this._calculate(nextProps);
         }
     }

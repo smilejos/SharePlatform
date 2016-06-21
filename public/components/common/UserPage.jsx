@@ -5,10 +5,8 @@ import { connect } from 'react-redux'
 import { render } from 'react-dom'
 import { Link } from 'react-router'
 import * as MemberActions from '../../actions/MemberActions'
-
 import ArticleOverview from '../article/ArticleOverview'
 import PersonalInfo from '../common/PersonalInfo'
-import Category from '../search/Category'
 
 class App extends React.Component {
     constructor(props){

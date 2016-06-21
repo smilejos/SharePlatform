@@ -22,7 +22,7 @@ export default class Information extends React.Component {
                     Books
                 </Link>
                 <i className="fa fa-tag"></i>
-                <Link to={ "/Category" } className="MenuItem">
+                <Link to={ "/Tag" } className="MenuItem">
                     Tag
                 </Link>
                 <i className="fa fa-search"></i>

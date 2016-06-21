@@ -1,5 +1,7 @@
 "use strict";
-import { REQUEST_POST, REQUEST_POSTS, RECEIVE_POSTS, RECEIVE_POST, CREATE_POST, UPDATE_POST, 
+import { REQUEST_POST, REQUEST_POSTS, REQUEST_TAG_SUMMARY,
+	RECEIVE_POSTS, RECEIVE_POST, 
+	CREATE_POST, UPDATE_POST, 
     COMPLETE_POST, CLEAN_POST, CLEAN_POSTS, CLEAN_EDITING_POST, LEAVE_POST, EDIT_POST, SYNC_POST, CHANGE_POST_TYPE,
     FILTER_POST, CLEAR_FILTER_POST} from '../constants/ArticleActionTypes';
 import { socket_article as socket } from '../utility/socketHandler';
@@ -17,6 +19,21 @@ export function searchArticles(options) {
 		type: REQUEST_POSTS
 	};
 }
+
+export function requestArticlesByTag(Tag) {
+	socket.emit('requestArticlesByTag', Tag);	
+	return {
+		type: REQUEST_POSTS
+	};
+}
+
+export function requestArticlesByAuthor(Id_No) {
+	socket.emit('requestArticlesByAuthor', Id_No);	
+	return {
+		type: REQUEST_POSTS
+	};
+}
+
 
 export function requestArticle(item) {
 	socket.emit('requestArticle', item);
@@ -126,8 +143,16 @@ export function filterArticle (list) {
 	};
 }
 
-export function clearFilterArticle () {
+export function clearFilterArticle() {
 	return {
 		type: CLEAR_FILTER_POST
 	};
 }
+
+export function requestTagSummary() {
+	socket.emit('requestTagSummary');
+	return {
+		type: REQUEST_TAG_SUMMARY
+	};
+}
+
