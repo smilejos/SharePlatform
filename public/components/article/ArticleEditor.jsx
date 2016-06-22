@@ -6,7 +6,6 @@ import { bindActionCreators  } from 'redux'
 import { connect } from 'react-redux'
 import marked from 'marked'
 import { highlight, highlightAuto } from 'highlight.js'
-import NotificationSystem  from 'react-notification-system';
 import * as ArticleActions from '../../actions/ArticleActions'
 
 class Article extends React.Component {
@@ -23,6 +22,7 @@ class Article extends React.Component {
 
     componentDidMount() {
         let { syncArticle, editArticle } = this.props.actions;
+        this._notification = this.refs.notification;
         syncArticle(this.props.params.articleNo);
     }
     
@@ -52,12 +52,6 @@ class Article extends React.Component {
         browserHistory.push(path);
     }
 
-    _handleTitleChange () {
-        let temp = this.props.state.article ? this.props.state.article : {};
-        temp.title = this.refs.txtTitle.value;
-        this._handleUpdate(temp);
-    }
-
     _handleKeydown (e) {
         if (e.keyCode === 9) { // tab was pressed
             var val = this.refs.textarea.value,
@@ -74,24 +68,13 @@ class Article extends React.Component {
     }
 
     _handlePostArticle (){
-        let { updateArticle, publishArticle } = this.props.actions;
+        let { modifyArticle } = this.props.actions;
         let temp = this.props.state.article;
         temp.content = this.refs.textarea.value;
-        temp.title = this.refs.txtTitle.value;
         
-        updateArticle(temp);
-        this._addNotification();
+        modifyArticle(temp);
     }
-
-    _addNotification() {
-        this._notification.addNotification({
-            message: 'Notification message',
-            level: 'success',
-            autoDismiss: 3,
-            position: 'bl'
-        });
-    }
-
+    
     render() {
         let article = this.props.state.article;
         return (
@@ -100,20 +83,15 @@ class Article extends React.Component {
                     <i className="fa fa-eye fa-lg" />
                     <Link className="ArticleEdit" to={"/ArticlePreview/" + article.articleNo }>Preview</Link>
                 </div>
-                <input 
-                    type="text" 
-                    ref="txtTitle" 
-                    placeholder="Article Title" 
-                    className="ArticleTitle" 
-                    value={ article.title } 
-                    onChange={this._handleTitleChange.bind(this)} />
+                <div className="ArticleTitle">
+                    {article.title}
+                </div>
                 <textarea
                     className="ArticleText"
                     onChange={this._handleChange.bind(this)}
                     onKeyDown={this._handleKeydown.bind(this)}
                     ref="textarea"
                     value = { article.content }/>
-                <NotificationSystem ref="notification" />
                 <button type="button" className="Button" onClick={this._handlePostArticle.bind(this)}>Post</button>
                 <button type="button" className="Button" onClick={this._handleBack.bind(this)}>Return</button>
             </div>

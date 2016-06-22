@@ -4,7 +4,8 @@
   "description": "a platform to record tech post in Biz section",
   "main": "index.js",
   "scripts": {
-    "start": "gulp"
+    "start": "node server/app.js",
+    "build": "babel public -d lib"
   },
   "keywords": [
     "Share",

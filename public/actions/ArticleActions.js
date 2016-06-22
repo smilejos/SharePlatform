@@ -73,6 +73,7 @@ export function modifyArticle(article) {
 
 export function updateArticle(article, isUpdateServer) {
 	if( isUpdateServer ) {
+		console.log('update server article');
 		socket.emit('updateArticle', article);	
 	}
 	return {

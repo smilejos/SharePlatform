@@ -2,8 +2,11 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { Link } from 'react-router'
+import { bindActionCreators  } from 'redux'
+import { connect } from 'react-redux'
 import Menu from '../common/Menu'
 import { socket_common, socket_article } from '../../utility/socketHandler'
+import NotificationSystem  from 'react-notification-system';
 
 class App extends React.Component {
 
@@ -15,10 +18,18 @@ class App extends React.Component {
     //     console.log('Trace componentDidMount');
     // }
 
-    // void componentWillReceiveProps(object nextProps)
-    //     console.log('Trace componentWillReceiveProps');
-    // }
-    
+    componentWillReceiveProps(nextProps) {
+        if( nextProps.notice && this.props.notice.datetime !=  nextProps.notice.datetime) {
+            this.refs.notification.addNotification({
+                title: nextProps.notice.title,
+                message: nextProps.notice.message,
+                level: nextProps.notice.level,
+                autoDismiss: 3,
+                position: 'bl'
+            });
+        }
+    }
+
     // shouldComponentUpdate (object nextProps, object nextState) {
     //     console.log('Trace shouldComponentUpdate');
     //     return true;
@@ -44,9 +55,21 @@ class App extends React.Component {
                 <div className="container">
                     {this.props.children}
                 </div>
+                <NotificationSystem ref="notification" />
             </div>
         )
     }
 }
 
-export default App;
+function mapStateToProps(state) {
+    return { notice: state.commonReducer.notice }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {}
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(App)

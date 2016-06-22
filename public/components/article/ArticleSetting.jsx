@@ -26,16 +26,10 @@ class ArticleSetting extends React.Component {
     }
 
     _handleTitleChange(){
-        _handleUpdate(false);
-    }
-
-    _handleUpdate(isUpdateServer) {
         let { updateArticle } = this.props.actions;
         updateArticle({ 
-            articleNo: this.props.params.articleNo,
-            title: this.refs.txtTitle.value,
-            isPrivate: this.props.state.article.isPrivate
-        }, isUpdateServer);
+            title: this.refs.txtTitle.value
+        }, false);
     }
 
     _handleRadioChange(e){
@@ -50,7 +44,8 @@ class ArticleSetting extends React.Component {
         let { createArticle } = this.props.actions;
         createArticle({ 
             title: this.refs.txtTitle.value,
-            isPrivate: this.props.state.article.isPrivate
+            isPrivate: this.props.state.article.isPrivate,
+            tag: this.props.state.article.tag
         });
     }
 
@@ -71,19 +66,20 @@ class ArticleSetting extends React.Component {
 
     _handleTagChange(list) {
         let { updateArticle } = this.props.actions;
-        updateArticle({ 
-            tag: list.map(function(item, index){
+        let result = list != null ? list.map(function(item, index){
                 return item.value;
-            })
+            }) : [];
+        updateArticle({ 
+            tag: result
         }, false);
     }
-
+    
     render() {
         let article = this.props.state.article;
         let options = this.props.category.map(function(item, index){
             return { value: item.name, label: item.name }
         });
-
+        let title = this._isNewArticle() ? 'Create a New Article' : 'Manage your Article';
         let buttons;
         if(this._isNewArticle()) {
             buttons = <div>
@@ -99,7 +95,7 @@ class ArticleSetting extends React.Component {
         return (
             <div className="ContentSetting">
                 <div className="Section">
-                    <div className="Title">Create a New Article</div>
+                    <div className="Title">{title}</div>
                     <div className="Description">A article can record program sample, environment setting and daily note.</div>
                 </div>
                 <div className="Section">

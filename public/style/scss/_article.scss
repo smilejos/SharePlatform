@@ -61,21 +61,15 @@
 	.ArticleTitle{
 		position: relative;
 		font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-		font-size: 1.2em;
+		font-size: 2.2em;
 		font-weight: bold;
-		width: 860px;
-		padding: 6px 10px;
-		border: solid #ddd 1px;
-		border-radius: 3px;
-		box-shadow: inset 0 1px 2px rgba(0,0,0,0.075);
-		background-color: #fafafa;
+		padding: 0px 0px 10px 2px;
 		line-height: 1.2;
 	}
 
 	.ArticleText {
 		position: relative;
 		resize : none;
-		margin-top: 10px;
 		width: 860px;
 		height: 600px;
 		border: solid #ddd 1px;

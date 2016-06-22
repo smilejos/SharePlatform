@@ -1,9 +1,10 @@
 "use strict";
 import { RETRIEVE_CATEGORY, SET_SEARCH_OPTIONS, SET_CATEGORY_COUNTS, SET_AUTHOR_COUNTS, 
-    CLEAR_FILTER_OPTIONS, CLEAR_COUNTS } from '../constants/CommonActionTypes';
+    CLEAR_FILTER_OPTIONS, CLEAR_COUNTS, RECEIVE_SERVER_NOTICE } from '../constants/CommonActionTypes';
 import assignIn from 'lodash/assignIn'
 
 export default function common(state = {
+        notice: {},
         category: [],
         category_counts: [],
         author_counts: [],
@@ -15,6 +16,10 @@ export default function common(state = {
         }
     }, action) {
 	switch (action.type) {
+        case RECEIVE_SERVER_NOTICE:
+            return assignIn({}, state, {
+                notice: action.notice
+            });
 		case RETRIEVE_CATEGORY:
 			return assignIn({}, state, {
                 category: action.category

@@ -4,14 +4,27 @@ module.exports = function(){
 	let is    = require('is_js');
 	let ArticleHandler = require('../database/articleHandler');
 	let lodash  = require('lodash');
+	let notice = {
+		level : 'success',
+		title : 'Article Notice',
+		message: '',
+		datetime: Date.now()
+	}
 
 	function _createArticle(socket, item) {
 		item.author = socket.request.session.user.UserName;
         ArticleHandler.createArticle(item, (recordset, err) =>{
             if( err ) {
-            	console.log('err', err);
+            	socket.emit('receiveNotice', lodash.assign(notice, {
+            		level: 'error',
+            		message: err,
+            		datetime: Date.now()
+            	}));
             } else {
-            	console.log('success');
+            	socket.emit('receiveNotice', lodash.assign(notice, {
+            		message: 'create article success',
+            		datetime: Date.now()
+            	}));
             }
         });
 	}
@@ -19,9 +32,16 @@ module.exports = function(){
 	function _modifyArticle(socket, item) {
         ArticleHandler.modifyArticle(item, (recordset, err) =>{
              if( err ) {
-            	console.log('err', err);
+            	socket.emit('receiveNotice', lodash.assign(notice, {
+            		level: 'error',
+            		message: err,
+            		datetime: Date.now()
+            	}));
             } else {
-            	console.log('success');
+            	socket.emit('receiveNotice', lodash.assign(notice, {
+            		message: 'update article content success',
+            		datetime: Date.now()
+            	}));
             }
         });
 	}
@@ -30,9 +50,16 @@ module.exports = function(){
 		item.tag = item.tag.length > 0 ? item.tag.join(',') : '';
         ArticleHandler.updateArticle(item, (recordset, err) =>{
              if( err ) {
-            	console.log('err', err);
+            	socket.emit('receiveNotice', lodash.assign(notice, {
+            		level: 'error',
+            		message: err,
+            		datetime: Date.now()
+            	}));
             } else {
-            	console.log('success');
+            	socket.emit('receiveNotice', lodash.assign(notice, {
+            		message: 'update article setting success',
+            		datetime: Date.now()
+            	}));
             }
         });
 	}
