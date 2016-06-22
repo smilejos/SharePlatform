@@ -1,6 +1,6 @@
 "use strict";
 import { RETRIEVE_CATEGORY, SET_SEARCH_OPTIONS, SET_CATEGORY_COUNTS, SET_AUTHOR_COUNTS, 
-	CLEAR_FILTER_OPTIONS, CLEAR_COUNTS, RECEIVE_SERVER_NOTICE } from '../constants/CommonActionTypes';
+	CLEAR_FILTER_OPTIONS, CLEAR_COUNTS, RECEIVE_SERVER_NOTICE, SENT_CLIENT_NOTICE } from '../constants/CommonActionTypes';
 import { socket_article as socket } from '../utility/socketHandler.js';
 import find from 'lodash/find'
 
@@ -50,6 +50,14 @@ export function receiveServerNotice(notice) {
 		notice
 	};
 }
+
+export function sentClientNotice(notice) {
+	return {
+		type: SENT_CLIENT_NOTICE,
+		notice
+	};
+}
+
 
 
 

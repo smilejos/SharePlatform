@@ -5,7 +5,6 @@ import { Link } from 'react-router'
 import { bindActionCreators  } from 'redux'
 import { connect } from 'react-redux'
 import Menu from '../common/Menu'
-import { socket_common, socket_article } from '../../utility/socketHandler'
 import NotificationSystem  from 'react-notification-system';
 
 class App extends React.Component {

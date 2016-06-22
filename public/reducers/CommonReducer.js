@@ -1,6 +1,6 @@
 "use strict";
 import { RETRIEVE_CATEGORY, SET_SEARCH_OPTIONS, SET_CATEGORY_COUNTS, SET_AUTHOR_COUNTS, 
-    CLEAR_FILTER_OPTIONS, CLEAR_COUNTS, RECEIVE_SERVER_NOTICE } from '../constants/CommonActionTypes';
+    CLEAR_FILTER_OPTIONS, CLEAR_COUNTS, RECEIVE_SERVER_NOTICE, SENT_CLIENT_NOTICE } from '../constants/CommonActionTypes';
 import assignIn from 'lodash/assignIn'
 
 export default function common(state = {
@@ -16,6 +16,7 @@ export default function common(state = {
         }
     }, action) {
 	switch (action.type) {
+        case SENT_CLIENT_NOTICE:
         case RECEIVE_SERVER_NOTICE:
             return assignIn({}, state, {
                 notice: action.notice

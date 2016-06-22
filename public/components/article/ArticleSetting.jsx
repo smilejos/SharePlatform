@@ -6,18 +6,19 @@ import { bindActionCreators  } from 'redux'
 import { connect } from 'react-redux'
 import Select from 'react-select';
 import * as ArtcileActions from '../../actions/ArticleActions'
+import * as CommonActions from '../../actions/CommonActions'
 
 class ArticleSetting extends React.Component {
     constructor(props){
         super(props);
-        let { requestArticle } = this.props.actions;
+        let { requestArticle } = this.props.articleActions;
         if (!this._isNewArticle()) {
             requestArticle(this.props.params.articleNo); 
         }
     }
 
     componentWillUnmount() {
-        let { cleanArticle } = this.props.actions;
+        let { cleanArticle } = this.props.articleActions;
         cleanArticle();
     }
 
@@ -26,14 +27,14 @@ class ArticleSetting extends React.Component {
     }
 
     _handleTitleChange(){
-        let { updateArticle } = this.props.actions;
+        let { updateArticle } = this.props.articleActions;
         updateArticle({ 
             title: this.refs.txtTitle.value
         }, false);
     }
 
     _handleRadioChange(e){
-        let { updateArticle } = this.props.actions;
+        let { updateArticle } = this.props.articleActions;
         let isPrivate = (e.target.name == "private");
         updateArticle({ 
             isPrivate: isPrivate
@@ -41,7 +42,7 @@ class ArticleSetting extends React.Component {
     }
 
     _handleCreate(){
-        let { createArticle } = this.props.actions;
+        let { createArticle } = this.props.articleActions;
         createArticle({ 
             title: this.refs.txtTitle.value,
             isPrivate: this.props.state.article.isPrivate,
@@ -50,7 +51,7 @@ class ArticleSetting extends React.Component {
     }
 
     _handleSave(){
-        let { updateArticle } = this.props.actions;
+        let { updateArticle } = this.props.articleActions;
         updateArticle({ 
             articleNo: this.props.params.articleNo,
             title: this.refs.txtTitle.value,
@@ -65,13 +66,30 @@ class ArticleSetting extends React.Component {
     }
 
     _handleTagChange(list) {
-        let { updateArticle } = this.props.actions;
-        let result = list != null ? list.map(function(item, index){
-                return item.value;
-            }) : [];
-        updateArticle({ 
-            tag: result
-        }, false);
+        let { updateArticle } = this.props.articleActions;
+        let { sentClientNotice } = this.props.commonActions;
+        
+        if( list == null) {
+            updateArticle({ 
+                tag: []
+            }, false);
+        } else if (list.length > 3) {
+            sentClientNotice({
+                level : 'info',
+                title : 'System Notice',
+                message: 'You can not pick more than 3 tags',
+                datetime: Date.now()
+            });
+            updateArticle({ 
+                tag: []
+            }, false);
+        } else {
+            updateArticle({ 
+                tag: list.map(function(item, index){
+                    return item.value;
+                })
+            }, false);     
+        }
     }
     
     render() {
@@ -168,7 +186,10 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return { actions: bindActionCreators(ArtcileActions, dispatch) }
+    return { 
+        articleActions: bindActionCreators(ArtcileActions, dispatch),
+        commonActions: bindActionCreators(CommonActions, dispatch),
+     }
 }
 
 export default connect(

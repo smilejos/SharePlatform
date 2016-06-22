@@ -22,7 +22,6 @@ class Article extends React.Component {
 
     componentDidMount() {
         let { syncArticle, editArticle } = this.props.actions;
-        this._notification = this.refs.notification;
         syncArticle(this.props.params.articleNo);
     }
     
