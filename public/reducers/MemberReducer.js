@@ -1,5 +1,7 @@
 "use strict";
-import { QUERY_USER, RECEIVE_ONLINE_DATA, REQUEST_USER_DATA, RETRIEVE_USER_DATA } from '../constants/MemberActionTypes';
+import { QUERY_USER, RECEIVE_ONLINE_DATA, REQUEST_USER_DATA, RETRIEVE_USER_DATA,
+        REQUEST_MEMBER_DATA, RECEIVE_MEMBER_DATA
+} from '../constants/MemberActionTypes';
 import merge from 'lodash/merge'
 import union from 'lodash/union'
 import find from 'lodash/find'
@@ -10,6 +12,7 @@ import sortedUniq from 'lodash/sortedUniq'
 export default function members(state = {
         user: {},
         users: [],
+        members: [],
         online_Users: [],
         self: {
         	dept_no: '',
@@ -39,7 +42,12 @@ export default function members(state = {
                 users: sortedUniq(concat(state.users, action.user)),
                 user: action.user
             });;
+        case RECEIVE_MEMBER_DATA:
+            return assignIn({}, state, {
+                members: action.members
+            });
 		case REQUEST_USER_DATA:
+        case REQUEST_MEMBER_DATA:
 		default:
 			return state;
 	}

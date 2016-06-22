@@ -106,6 +106,16 @@ module.exports = function(){
 	    });
 	}
 
+	function _getAuthorSummary(socket) {
+		ArticleHandler.getAuthorSummary((articles, err) => {
+	    	articles = is.array(articles) ? articles : [];
+	    	lodash.forEach(articles, function(item, index){
+	    		item.tag = item.tag.length > 0 ? item.tag.split(',') : [];
+	    	});
+	        socket.emit('receiveList', articles);
+	    });
+	}
+
 	function _updateTimeZone(item)
 	{
 		//To-Do Update all timezone
@@ -164,6 +174,10 @@ module.exports = function(){
 
 		    socket.on('requestTagSummary', () => {
 		       _getTagSummary(socket);
+		    });
+
+		    socket.on('requestAuthorSummary', () => {
+		       _getAuthorSummary(socket);
 		    });
 
 		    socket.on('disconnect', () => {

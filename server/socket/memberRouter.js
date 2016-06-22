@@ -1,6 +1,7 @@
 "use strict";
 module.exports = function(){
 	let handler = require('../database/memberHandler');
+	let is    = require('is_js');
 	handler.initialize();
 
 	function _login(io, socket, item) {
@@ -16,10 +17,16 @@ module.exports = function(){
         });
     };
 
+    function _requestMembers(socket) {
+		handler.getMembers((members, err) => {
+	    	members = is.array(members) ? members : [];
+	        socket.emit('receiveMembers', members);
+	    });
+	}
+
     function _getEmployeeData(io, Id_No) {
         io.emit('retrieveUser', handler.getEmployee(Id_No));
     };
-
 
     function _sendMessage(socket, item) {
         socket.to(item.target).emit('receiveMessage', {
@@ -62,6 +69,10 @@ module.exports = function(){
 
 		    socket.on('getEmployeeData', (item) => {
 		        _getEmployeeData(io, item);
+		    });
+
+		    socket.on('requestMembers', () => {
+		        _requestMembers(socket)
 		    });
 				
 			socket.on('login', (item) => {

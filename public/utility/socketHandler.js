@@ -2,7 +2,7 @@ import { createRedux } from 'redux';
 import store from '../store/store';
 import io from 'socket.io-client';
 import { receiveArticles, receiveArticle } from '../actions/ArticleActions';
-import { receiveRealTimeMember, retrieveUser } from '../actions/MemberActions';
+import { receiveRealTimeMember, retrieveUser, receiveMembers } from '../actions/MemberActions';
 import { receiveBook } from '../actions/BookActions';
 import { receiveCategory,  } from '../actions/CommonActions';
 
@@ -35,6 +35,10 @@ socket_member.on('receiveRealTimeMember', function(result) {
 
 socket_member.on('retrieveUser', function(result) {
 	store.dispatch(retrieveUser(result));
+});
+
+socket_member.on('receiveMembers', function(result) {
+	store.dispatch(receiveMembers(result));
 });
 
 // ==================================================

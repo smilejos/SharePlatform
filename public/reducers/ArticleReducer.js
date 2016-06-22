@@ -1,5 +1,5 @@
 "use strict";
-import { REQUEST_POST, REQUEST_POSTS, REQUEST_TAG_SUMMARY,
+import { REQUEST_POST, REQUEST_POSTS, REQUEST_SUMMARY,
     RECEIVE_POSTS, RECEIVE_POST, PUBLISH_POST, UPDATE_POST, 
     COMPLETE_POST, CLEAN_POST, CLEAN_POSTS, CLEAN_EDITING_POST, 
     LEAVE_POST, EDIT_POST, CHANGE_POST_TYPE,
@@ -30,7 +30,7 @@ export default function articles(state = {
 	switch (action.type) {
     case REQUEST_POST:
     case REQUEST_POSTS:
-    case REQUEST_TAG_SUMMARY:
+    case REQUEST_SUMMARY:
     case CLEAN_POSTS:
 		return assignIn({}, state, {
             isFetching: true,

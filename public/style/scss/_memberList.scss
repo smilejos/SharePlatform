@@ -1,0 +1,87 @@
+.MemberList {
+	position: relative;
+	margin-top: 20px;
+	width: 900px;
+	left: 50%;
+	margin-left: -450px;
+
+	.MemberBox {
+		width: 280px;
+		height: auto;
+		float: left;
+		padding: 10px;
+		height: 120px;
+		cursor: pointer;
+
+		&:hover {
+			background-color: blanchedalmond;
+			border-radius: 10px;
+			color: #000;
+		}
+
+		.image {
+			position: relative;
+			width: 60px;
+			height: 80px;
+			display: inline-block;
+			float: left;
+
+			img {
+				height: 80px;
+				border-radius: 5px;
+				border: 1px #eee solid;
+			}
+		}
+
+		.memberInfo {
+			font-family: Roboto,sans-serif;
+			height: 80px;
+			line-height: 25px;
+			padding: 5px 0px 0px 10px;
+			display: inline-block;
+			.primaryText {
+
+				color: #444;
+				font-size: 16px;
+			}
+
+			.secondaryText {
+				color: #999;
+				font-size: 14px;
+			}
+		}
+
+		.tagInfo {
+			.tagText {
+				position: relative;
+				height: 30px;
+				border: 1px solid #eee;
+				padding: 0px 2px;
+				width: 80px;
+				margin-right: 5px;
+				border-radius: 5px;
+				display: inline-block;
+				float: left;
+
+				span {
+					line-height: 20px;
+					font-size: 14px;
+					padding: 5px 5px;
+					color: #666;
+					font-style: sans-serif;
+
+				}
+
+				.name {
+					position: absolute;
+					left: 0px;
+				}
+
+				.count {
+					position: absolute;
+					right: 0px;
+				}
+			}
+		}
+	}
+}

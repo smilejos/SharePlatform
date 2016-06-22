@@ -14,7 +14,12 @@ module.exports = function(){
 	}
 
 	function _getTagSummary(callback){
-		let sqlString = " select tag from dbo.Article (nolock) where tag != ''";
+		let sqlString = " select tag from dbo.Article (nolock) where isPrivate = 0 and tag != ''";
+		_executeSqlComment(sqlString, callback);
+	}
+
+	function _getAuthorSummary(callback){
+		let sqlString = " select author, tag from dbo.Article (nolock) where isPrivate = 0 ";
 		_executeSqlComment(sqlString, callback);
 	}
 
@@ -22,7 +27,7 @@ module.exports = function(){
 		let sqlString = " select a.articleNo, a.title, b.Card_Na as authorName, a.author, a.tag, a.updateTime, a.publishTime " +
 						" from dbo.Article a (nolock) " + 
 						" left join HRIS.dbo.NEmployee b on a.Author = b.Id_No " + 
-						" where Author = '" + Id_No + "'" +
+						" where isPrivate = 0 and Author = '" + Id_No + "'" +
 						" order by a.UpdateTime DESC ";
 
 		_executeSqlComment(sqlString, callback);
@@ -32,7 +37,7 @@ module.exports = function(){
 		let sqlString = " select a.articleNo, a.title, b.Card_Na as authorName, a.author, a.tag, a.updateTime, a.publishTime " +
 						" from dbo.Article a (nolock) " + 
 						" left join HRIS.dbo.NEmployee b on a.Author = b.Id_No " + 
-						" where a.tag like '%" + Tag + "%'" +
+						" where isPrivate = 0 and a.tag like '%" + Tag + "%'" +
 						" order by a.UpdateTime DESC ";
 		_executeSqlComment(sqlString, callback);
 	}
@@ -126,6 +131,9 @@ module.exports = function(){
 		},
 		getTagSummary: function(callback){
 			_getTagSummary(callback);
+		},
+		getAuthorSummary: function(callback){
+			_getAuthorSummary(callback);
 		},
 		modifyArticle : function(article, callback){
 			article.content = _replaceString(article.content);

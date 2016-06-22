@@ -1,20 +1,26 @@
 "use strict";
-import { QUERY_USER, REQUEST_USER_DATA, RETRIEVE_USER_DATA, RECEIVE_ONLINE_DATA  } from '../constants/MemberActionTypes';
+import { QUERY_USER, REQUEST_USER_DATA, RETRIEVE_USER_DATA, RECEIVE_ONLINE_DATA,
+		REQUEST_MEMBER_DATA, RECEIVE_MEMBER_DATA  } from '../constants/MemberActionTypes';
 import { socket_member as socket } from '../utility/socketHandler.js';
 import find from 'lodash/find'
 
 export function getUser(Id_No) {
 	return (dispatch, getState) => {
-		console.log('getUser', Id_No );
 		let _user = find(getState().memberReducer.users, {
 			Id_No: Id_No
 		});
-		console.log('getUser', _user );
 		if( _user ) {
 			dispatch(changeUser(Id_No));
 		} else {
-			console.log('dispatch');
 			dispatch(requestUser(Id_No));
+		}
+	};
+}
+
+export function getMember() {
+	return (dispatch, getState) => {
+		if( getState().memberReducer.members.length == 0) {
+			dispatch(requestMembers());
 		}
 	};
 }
@@ -30,6 +36,20 @@ export function requestUser(Id_No) {
 	socket.emit('getEmployeeData', Id_No);
 	return {
 		type: REQUEST_USER_DATA
+	};
+}
+
+export function requestMembers() {
+	socket.emit('requestMembers');
+	return {
+		type: REQUEST_MEMBER_DATA
+	};
+}
+
+export function receiveMembers(members) {
+	return {
+		type: RECEIVE_MEMBER_DATA,
+		members
 	};
 }
 

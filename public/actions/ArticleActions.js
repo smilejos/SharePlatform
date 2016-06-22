@@ -1,5 +1,5 @@
 "use strict";
-import { REQUEST_POST, REQUEST_POSTS, REQUEST_TAG_SUMMARY,
+import { REQUEST_POST, REQUEST_POSTS, REQUEST_SUMMARY,
 	RECEIVE_POSTS, RECEIVE_POST, 
 	CREATE_POST, UPDATE_POST, 
     COMPLETE_POST, CLEAN_POST, CLEAN_POSTS, CLEAN_EDITING_POST, LEAVE_POST, EDIT_POST, SYNC_POST, CHANGE_POST_TYPE,
@@ -152,7 +152,15 @@ export function clearFilterArticle() {
 export function requestTagSummary() {
 	socket.emit('requestTagSummary');
 	return {
-		type: REQUEST_TAG_SUMMARY
+		type: REQUEST_SUMMARY
+	};
+}
+
+
+export function requestAuthorSummary() {
+	socket.emit('requestAuthorSummary');
+	return {
+		type: REQUEST_SUMMARY
 	};
 }
 
