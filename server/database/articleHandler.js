@@ -4,40 +4,52 @@ module.exports = function(){
 		config = require('../config/database'),
 		lodash  = require('lodash');
 
-	function _getNewestArticle(callback){
+	function _getNewestArticle(self_user, callback){
 		let sqlString = " select top 10 a.articleNo, a.title, b.Card_Na as authorName, a.author, a.tag, a.updateTime, a.publishTime " +
 						" from dbo.Article a (nolock) " + 
 						" left join HRIS.dbo.NEmployee b on a.Author = b.Id_No " + 
+						" where (isPrivate = 0 or a.Author = '" + self_user + "')" +
 						" order by a.UpdateTime DESC ";
 		
 		_executeSqlComment(sqlString, callback);
 	}
 
-	function _getTagSummary(callback){
-		let sqlString = " select tag from dbo.Article (nolock) where isPrivate = 0 and tag != ''";
+	function _getTagSummary(self_user, callback){
+		let sqlString = " select tag from dbo.Article (nolock) " +
+						" where (isPrivate = 0 or Author = '" + self_user + "') and tag != ''";
 		_executeSqlComment(sqlString, callback);
 	}
 
-	function _getAuthorSummary(callback){
-		let sqlString = " select author, tag from dbo.Article (nolock) where isPrivate = 0 ";
+	function _getAuthorSummary(self_user, callback){
+		let sqlString = " select author, tag from dbo.Article (nolock) " +
+						" where (isPrivate = 0 or Author = '" + self_user + "')";
 		_executeSqlComment(sqlString, callback);
 	}
 
-	function _getArticlesByAuthor(Id_No, callback){
+	function _getArticlesByAuthor(Id_No, self_user, callback){
+		let subSqlString = "";
+		if( self_user == Id_No ) {
+			subSqlString =  " and Author = '" + Id_No + "'";
+			subSqlString += " order by a.UpdateTime DESC ";
+		} else {
+			subSqlString = " and isPrivate = 0 and Author = '" + Id_No + "'";
+			subSqlString += " order by a.UpdateTime DESC ";
+		}
+
 		let sqlString = " select a.articleNo, a.title, b.Card_Na as authorName, a.author, a.tag, a.updateTime, a.publishTime " +
 						" from dbo.Article a (nolock) " + 
 						" left join HRIS.dbo.NEmployee b on a.Author = b.Id_No " + 
-						" where isPrivate = 0 and Author = '" + Id_No + "'" +
-						" order by a.UpdateTime DESC ";
+						" where 1 = 1 ";
 
-		_executeSqlComment(sqlString, callback);
+		_executeSqlComment(sqlString + subSqlString, callback);
 	}
 
-	function _getArticlesByTag(Tag, callback){
+	function _getArticlesByTag(Tag, self_user, callback){
 		let sqlString = " select a.articleNo, a.title, b.Card_Na as authorName, a.author, a.tag, a.updateTime, a.publishTime " +
 						" from dbo.Article a (nolock) " + 
 						" left join HRIS.dbo.NEmployee b on a.Author = b.Id_No " + 
-						" where isPrivate = 0 and a.tag like '%" + Tag + "%'" +
+						" where (isPrivate = 0 or Author = '" + self_user + "')" +
+						" and tag like '%" + Tag + "%'" +
 						" order by a.UpdateTime DESC ";
 		_executeSqlComment(sqlString, callback);
 	}
@@ -46,7 +58,7 @@ module.exports = function(){
 		let sqlString = " select a.articleNo, a.title, b.Card_Na as authorName, a.author, a.tag, a.updateTime, a.publishTime " +
 						" from dbo.Article a (nolock) " + 
 						" left join HRIS.dbo.NEmployee b on a.Author = b.Id_No " + 
-						" where isPrivate = 0 ";
+						" where 1 = 1 ";
 		
 		if( options.keyword &&  options.keyword.length > 0) {
 			let sqlSubString = '';
@@ -63,6 +75,8 @@ module.exports = function(){
 
 		if( options.isPrivate ) {
 			sqlString += " and a.author = '" + options.author + "'";
+		} else {
+			sqlString += " and a.isPrivate = 0 ";
 		}
 
 		sqlString += " order by a.UpdateTime DESC ";
@@ -103,7 +117,12 @@ module.exports = function(){
 		sql.connect(config, (err) => {
 			let request = new sql.Request();
 	    	request.query(sqlComment, (err, recordset) => {
-	    		callback(recordset, err);
+	    		if( err ) {
+	    			console.log('Sql Exception', sqlComment);
+	    		} else {
+	    			callback(recordset, err);	
+	    		}
+	    		
 	    	});
 		});
 	}
@@ -114,14 +133,14 @@ module.exports = function(){
 	}
 	
 	return {
-		getNewestArticle: function(callback){
-			_getNewestArticle(callback);
+		getNewestArticle: function(self_user, callback){
+			_getNewestArticle(self_user, callback);
 		},
-		getArticlesByAuthor: function(Id_No, callback){
-			_getArticlesByAuthor(Id_No, callback);
+		getArticlesByAuthor: function(Id_No, self_user, callback){
+			_getArticlesByAuthor(Id_No, self_user, callback);
 		},
-		getArticlesByTag: function(Tag, callback){
-			_getArticlesByTag(Tag, callback);
+		getArticlesByTag: function(Tag, self_user, callback){
+			_getArticlesByTag(Tag, self_user, callback);
 		},
 		getSearchArticles: function(options, callback){
 			_getSearchArticles(options, callback);
@@ -129,11 +148,11 @@ module.exports = function(){
 		getSpecificArticle: function(articleNo, callback){
 			_getSpecificArticle(articleNo, callback);
 		},
-		getTagSummary: function(callback){
-			_getTagSummary(callback);
+		getTagSummary: function(self_user, callback){
+			_getTagSummary(self_user, callback);
 		},
-		getAuthorSummary: function(callback){
-			_getAuthorSummary(callback);
+		getAuthorSummary: function(self_user, callback){
+			_getAuthorSummary(self_user, callback);
 		},
 		modifyArticle : function(article, callback){
 			article.content = _replaceString(article.content);

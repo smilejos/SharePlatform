@@ -78,16 +78,26 @@ module.exports = function(){
 
 	function _getArticle(socket, item) {
 	    ArticleHandler.getSpecificArticle(item, (article, err) => {
-	    	article = is.array(article) ? article[0] : article;
-	    	article.tag = article.tag.length > 0 ? article.tag.split(',') : [];
-	        socket.emit('retrieveArticle', article);
+	    	if( err || article == null) {
+    			socket.emit('receiveNotice', lodash.assign(notice, {
+            		level: 'error',
+            		message: err,
+            		datetime: Date.now()
+            	}));
+	    	} else {
+	    		article = is.array(article) ? article[0] : article;
+	    		article.tag = article.tag.length > 0 ? article.tag.split(',') : [];
+	        	socket.emit('retrieveArticle', article);	
+	    	}
+	    	
 	    });
 	}
 
 	function _getArticleList(socket, item) {
+		let self_user = socket.request.session.user.UserName;
 		if(item.isSpecificUser) {
 			// console.log('_getArticleList SpecificUser', item.Id_No);
-            ArticleHandler.getArticlesByAuthor(item.Id_No, (articles, err) => {
+            ArticleHandler.getArticlesByAuthor(item.Id_No, self_user, (articles, err) => {
             	lodash.forEach(articles, function(item, index){
 	    			item.tag = item.tag.length > 0 ? item.tag.split(',') : [];
 	    		});
@@ -96,7 +106,7 @@ module.exports = function(){
             
         } else {
         	// console.log('_getArticleList Non SpecificUser');
-            ArticleHandler.getNewestArticle( (articles, err) => {
+            ArticleHandler.getNewestArticle(self_user, (articles, err) => {
             	lodash.forEach(articles, function(item, index){
 	    			item.tag = item.tag.length > 0 ? item.tag.split(',') : [];
 	    		});
@@ -106,7 +116,8 @@ module.exports = function(){
 	}
 
 	function _getArticlesByTag(socket, item) {
-		ArticleHandler.getArticlesByTag(item, (articles, err) => {
+		let self_user = socket.request.session.user.UserName;
+		ArticleHandler.getArticlesByTag(item, self_user, (articles, err) => {
         	lodash.forEach(articles, function(item, index){
     			item.tag = item.tag.length > 0 ? item.tag.split(',') : [];
     		});
@@ -115,7 +126,8 @@ module.exports = function(){
 	}
 
 	function _getArticlesByAuthor(socket, item) {
-		ArticleHandler.getArticlesByAuthor(item, (articles, err) => {
+		let self_user = socket.request.session.user.UserName;
+		ArticleHandler.getArticlesByAuthor(item, self_user, (articles, err) => {
         	lodash.forEach(articles, function(item, index){
     			item.tag = item.tag.length > 0 ? item.tag.split(',') : [];
     		});
@@ -124,7 +136,8 @@ module.exports = function(){
 	}
 
 	function _getTagSummary(socket) {
-		ArticleHandler.getTagSummary((articles, err) => {
+		let self_user = socket.request.session.user.UserName;
+		ArticleHandler.getTagSummary(self_user, (articles, err) => {
 	    	articles = is.array(articles) ? articles : [];
 	    	lodash.forEach(articles, function(item, index){
 	    		item.tag = item.tag.length > 0 ? item.tag.split(',') : [];
@@ -134,7 +147,8 @@ module.exports = function(){
 	}
 
 	function _getAuthorSummary(socket) {
-		ArticleHandler.getAuthorSummary((articles, err) => {
+		let self_user = socket.request.session.user.UserName;
+		ArticleHandler.getAuthorSummary(self_user, (articles, err) => {
 	    	articles = is.array(articles) ? articles : [];
 	    	lodash.forEach(articles, function(item, index){
 	    		item.tag = item.tag.length > 0 ? item.tag.split(',') : [];
