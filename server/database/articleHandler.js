@@ -122,7 +122,6 @@ module.exports = function(){
 	    		} else {
 	    			callback(recordset, err);	
 	    		}
-	    		
 	    	});
 		});
 	}

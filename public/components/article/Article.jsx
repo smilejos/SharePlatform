@@ -39,7 +39,7 @@ class Article extends React.Component {
         if (this.props.state.article != null && this.props.state.article.author == this.props.self.Id_No ) {
             control = <ArticleEditButton articleNo = { this.props.params.articleNo } />;
         } else {
-            control = <div />;
+            control = <ArticleButton articleNo = { this.props.params.articleNo } />;
         }
 
         return (
@@ -51,14 +51,27 @@ class Article extends React.Component {
     }
 }
 
+class ArticleButton extends React.Component {
+    render() {
+        return (
+            <div className="ArticleControl">
+                <i className="fa fa-eye fa-lg" />
+                <Link className="ArticleEdit" to={ "/ArticleSource/" + this.props.articleNo }>Source</Link>
+            </div>
+        )
+    }
+}
+
 class ArticleEditButton extends React.Component {
     render() {
         return (
             <div className="ArticleControl">
+                <i className="fa fa-eye fa-lg" />
+                <Link className="ArticleEdit" to={ "/ArticleSource/" + this.props.articleNo }>Source</Link>
                 <i className="fa fa-cog fa-lg" />
-                <Link className="ArticleEdit" to={ "/articleSetting/" + this.props.articleNo }>Setting</Link>
+                <Link className="ArticleEdit" to={ "/ArticleSetting/" + this.props.articleNo }>Setting</Link>
                 <i className="fa fa-edit fa-lg" />
-                <Link className="ArticleEdit" to={ "/articleEditor/" + this.props.articleNo }>Edit</Link>
+                <Link className="ArticleEdit" to={ "/ArticleEditor/" + this.props.articleNo }>Edit</Link>
             </div>
         )
     }
