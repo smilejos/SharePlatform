@@ -24,6 +24,7 @@ module.exports = function(){
 			let request = new sql.Request();
 	    	request.query(sqlComment, (err, recordset) => {
 	    		callback(recordset, err);
+	    		recordset = null;
 	    	});
 		});
 	}

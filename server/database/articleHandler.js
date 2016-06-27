@@ -108,8 +108,6 @@ module.exports = function(){
 	function _createArticle(article, callback){
 		let sqlString = " insert into  dbo.Article (title, Author, content, Tag, UpdateTime, PublishTime, isPrivate) "+
 		                " values ('" +article.title +"','"+ article.author +"','','"+ article.tag +"', getDate(), getDate(), '"+article.isPrivate+"')";
-		
-		console.log('sql command', sqlString);
 		_executeSqlComment(sqlString, callback);
 	}
 
@@ -120,7 +118,8 @@ module.exports = function(){
 	    		if( err ) {
 	    			console.log('Sql Exception', sqlComment);
 	    		} else {
-	    			callback(recordset, err);	
+	    			callback(recordset, err);
+	    			recordset = null;
 	    		}
 	    	});
 		});
@@ -159,7 +158,6 @@ module.exports = function(){
 		},
 		updateArticle : function(article, callback){
 			article.title = _replaceString(article.title);
-			console.log('db event', article);
 			_updateArticle(article, callback);
 		},
 		createArticle : function(article, callback){

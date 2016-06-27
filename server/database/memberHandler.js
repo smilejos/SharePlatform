@@ -16,6 +16,7 @@ module.exports = function(){
 	    	request.query(sqlString, function(err, recordset) {
 	    		employees = recordset;
 	    		callback();
+	    		recordset = null;
 	    	});
 		});
 	}
@@ -32,6 +33,7 @@ module.exports = function(){
 	    	request.query(sqlString, function(err, recordset) {
 	    		members = recordset;
 	    		callback();
+	    		recordset = null;
 	    	});
 		});
 	}

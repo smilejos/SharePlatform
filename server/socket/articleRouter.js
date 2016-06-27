@@ -73,6 +73,7 @@ module.exports = function(){
 	    		item.tag = item.tag.length > 0 ? item.tag.split(',') : [];
 	    	});
 	        socket.emit('receiveList', articles);
+	        articles = null;
 	    });
 	}
 
@@ -84,10 +85,12 @@ module.exports = function(){
             		message: err,
             		datetime: Date.now()
             	}));
+            	article = null;
 	    	} else {
 	    		article = is.array(article) ? article[0] : article;
 	    		article.tag = article.tag.length > 0 ? article.tag.split(',') : [];
 	        	socket.emit('retrieveArticle', article);	
+	        	article = null;
 	    	}
 	    	
 	    });
@@ -102,6 +105,7 @@ module.exports = function(){
 	    			item.tag = item.tag.length > 0 ? item.tag.split(',') : [];
 	    		});
                 socket.emit('receiveList', articles);
+                articles = null;
             });
             
         } else {
@@ -111,6 +115,7 @@ module.exports = function(){
 	    			item.tag = item.tag.length > 0 ? item.tag.split(',') : [];
 	    		});
                 socket.emit('receiveList', articles);
+                articles = null;
             });
         }
 	}
@@ -122,6 +127,7 @@ module.exports = function(){
     			item.tag = item.tag.length > 0 ? item.tag.split(',') : [];
     		});
             socket.emit('receiveList', articles);
+            articles = null;
         });
 	}
 
@@ -132,6 +138,7 @@ module.exports = function(){
     			item.tag = item.tag.length > 0 ? item.tag.split(',') : [];
     		});
             socket.emit('receiveList', articles);
+            articles = null;
         });
 	}
 
@@ -143,6 +150,7 @@ module.exports = function(){
 	    		item.tag = item.tag.length > 0 ? item.tag.split(',') : [];
 	    	});
 	        socket.emit('receiveList', articles);
+	        articles = null;
 	    });
 	}
 
@@ -154,6 +162,7 @@ module.exports = function(){
 	    		item.tag = item.tag.length > 0 ? item.tag.split(',') : [];
 	    	});
 	        socket.emit('receiveList', articles);
+	        articles = null;
 	    });
 	}
 
@@ -166,42 +175,34 @@ module.exports = function(){
 		listen: function(io, socket) {
 			
 			socket.on('createArticle', (item) => {
-				// console.log("define publish");
 		        _createArticle(socket, item);
 		    });
 
 			socket.on('modifyArticle', (item) => {
-		    	// console.log("define update");
 		    	_modifyArticle(socket, item);
 		    }); 
 
 		    socket.on('updateArticle', (item) => {
-		    	console.log('socket event', item);
 		    	_updateArticle(socket, item);
 		    }); 
 
 		    socket.on('requestArticle', (item) => {
-		    	// console.log("define requestArticle");
 		       _getArticle(socket, item);
 		    });
 
 		    socket.on('searchArticles', (item) => {
-		    	// console.log("define requestArticle");
 		       _searchArticles(socket, item);
 		    });
 
 		    socket.on('syncArticle', (articleNo) => {
-		    	// console.log("define requestArticle");
 		    	socket.join(articleNo);
 		    });
 		    
 		    socket.on('leaveArticle', (articleNo) => {
-		    	// console.log("define requestArticle");
 		    	socket.leave(articleNo);
 		    });
 
 		    socket.on('requestArticleList', (item) => {
-		    	// console.log("define requestArticleList");
 		       _getArticleList(socket, item);
 		    });
 
@@ -222,11 +223,9 @@ module.exports = function(){
 		    });
 
 		    socket.on('disconnect', () => {
-		        // console.log('Article disconnect', socket.id);
 		    });
 
 	     	socket.on('editArticle', (item) => {
-		        //socket.broadcast.emit('editArticle', item);
 		        socket.broadcast.to(item.articleNo).emit('editArticle', item);
 		    });
 		}
