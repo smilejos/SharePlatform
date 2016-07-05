@@ -10,6 +10,7 @@ module.exports = function(){
 			let request = connection.request();
 	    	request.query(sqlComment, (err, recordset) => {
 	    		catrgories = recordset;
+	    		recordset = null;
 	    		callback();
 	    	});
 		});

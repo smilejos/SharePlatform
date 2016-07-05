@@ -6,6 +6,7 @@ module.exports = function(){
 		config = require('../config/database');
 
 	function _getRawDataFromDatabase (callback){
+		console.log('get employee');
 		let sqlString = " select a.Id_No, a.card_na, a.e_mail, a.Tel_O as tel_no, b.ETitle_na as title_na, a.dept_no, c.EDept_Na1 as dept_na, c.EDept_FuNa as dept_fullName" +
 						" from HRIS.dbo.Nemployee a " + 
 						" left join HRIS.dbo.ztitle b on a.Title_no = b.Title_no" +
@@ -22,6 +23,7 @@ module.exports = function(){
 	}
 
 	function _getBizMemberFromDatabase (callback){
+		console.log('get biz member');
 		let sqlString = " select a.Id_No, a.card_na, a.e_mail, a.Tel_O as tel_no, b.ETitle_na as title_na, a.dept_no, c.EDept_Na1 as dept_na, c.EDept_FuNa as dept_fullName" +
 						" from HRIS.dbo.Nemployee a " + 
 						" left join HRIS.dbo.ztitle b on a.Title_no = b.Title_no" +

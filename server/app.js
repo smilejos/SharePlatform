@@ -1,4 +1,8 @@
 "use strict";
+const util        = require('util');
+const moment      = require('moment');
+const v8          = require('v8');
+const lodash      = require('lodash');
 let express       = require('express');
 let ntlm          = require('express-ntlm');
 let session       = require("express-session");
@@ -11,11 +15,11 @@ let memberRouter  = require('./socket/memberRouter');
 let articleRouter = require('./socket/articleRouter');
 let bookRouter = require('./socket/bookRouter');
 let commonRouter = require('./socket/commonRouter');
-
 let app = express();
 let sessionMiddleware = session({
     secret: 'somesecrettoken'
 });
+
 
 app.use(ntlm());
 app.use(sessionMiddleware);
@@ -31,7 +35,6 @@ app.use(express.static(path.join(__dirname, '../build')))
 app.use(requestRouter);
 
 let server = app.listen(8888);
-//let server = app.listen(8080);
 let socket = io.listen(server);
 
 let member = socket.of('/Member');
@@ -67,3 +70,7 @@ common.on('connection', (client) => {
 });
 
 console.log("Start server with port:8888")
+
+setInterval(function(){
+    console.log(moment().format("MM/DD HH:mm:ss"), util.inspect(process.memoryUsage()));    
+}, 600000);
