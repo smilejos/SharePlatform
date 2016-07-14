@@ -18,11 +18,11 @@ export default class ArticleContent extends React.Component {
             renderer: new marked.Renderer(),
             gfm: true,
             tables: true,
-            breaks: false,
-            pedantic: false,
-            sanitize: true,
+            breaks: true,
+            pedantic: true,
+            sanitize: false,
             smartLists: true,
-            smartypants: false,
+            smartypants: true,
             highlight: function (code, lang) {
                 if(lang) {
                     return highlight(lang, code).value;    
