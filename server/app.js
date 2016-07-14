@@ -8,6 +8,8 @@ let ntlm          = require('express-ntlm');
 let session       = require("express-session");
 let io            = require('socket.io');
 let path 		  = require('path');
+let heapdump      = require('heapdump');
+
 //let fileRouter    = require('./router/fileRouter');
 let requestRouter    = require('./router/requestRouter');
 //let requestRouter    = require('./router/requestRouter_dev');
@@ -20,10 +22,8 @@ let sessionMiddleware = session({
     secret: 'somesecrettoken'
 });
 
-
 app.use(ntlm());
 app.use(sessionMiddleware);
-
 
 // serve our static stuff like index.css
 app.get('/', function (req, res) {
@@ -73,4 +73,5 @@ console.log("Start server with port:8888")
 
 setInterval(function(){
     console.log(moment().format("MM/DD HH:mm:ss"), util.inspect(process.memoryUsage()));    
-}, 600000);
+    heapdump.writeSnapshot('D:/HeapLog/' + Date.now() + '.heapsnapshot');
+}, 60000);

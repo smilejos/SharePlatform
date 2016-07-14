@@ -20,6 +20,7 @@
     "gulp-compass": "^2.1.0",
     "gulp-minify-css": "^1.2.4",
     "gulp-webpack": "^1.5.0",
+    "heapdump": "^0.3.7",
     "nodemon": "^1.9.1"
   },
   "dependencies": {
