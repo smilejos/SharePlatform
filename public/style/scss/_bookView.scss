@@ -10,7 +10,7 @@
 
         .ChapterSection {
             .Chapter {
-                padding: 4px 0px 4px 20px;
+                padding: 4px 0px 4px 10px;
 
                 i {
                     margin: 0px 5px;
@@ -18,13 +18,13 @@
             }
 
             .Part {
-                padding: 0px 0px 0px 60px;
+                padding: 0px 0px 0px 40px;
                 position: relative;
                 i {
                     position: absolute;
                     color: #000;
                     top: 4px;
-                    left: 45px;
+                    left: 25px;
                 }
 
                 &:hover {

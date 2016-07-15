@@ -1,6 +1,6 @@
 "use strict";
 import React from 'react'
-import { render } from 'react-dom'
+import { render, findDOMNode } from 'react-dom'
 import { Link } from 'react-router'
 import { bindActionCreators  } from 'redux'
 import { connect } from 'react-redux'
@@ -17,6 +17,10 @@ class BookView extends React.Component {
         requestBook(this.props.params.bookNo);
     }
 
+    _onChangeArticle(){
+        findDOMNode(this.refs.view).scrollTop = 0;
+    }
+
     render() {
         let chapters = this.props.state.chapters;
         let bookNo = this.props.params.bookNo;
@@ -24,15 +28,15 @@ class BookView extends React.Component {
         console.log(chapters);
         if( chapters && chapters.length > 0 ) {
             list = chapters.map(function(item, index){
-                return <Chapter key={index} chapter={item} bookNo={bookNo}  />
-            });
+                return <Chapter key={index} chapter={item} bookNo={bookNo} click={this._onChangeArticle.bind(this)} />
+            }.bind(this));
         }
         return (
             <div className="BookView">
                 <div className="BookStructure">
                     {list}
                 </div>
-                <div className="BookContent">
+                <div className="BookContent" ref='view'>
                     {this.props.children}
                 </div>
             </div>
@@ -41,14 +45,17 @@ class BookView extends React.Component {
 }
 
 class Chapter extends React.Component {
+    _onChangeArticle (){
+        this.props.click();
+    }
     render(){
         let parts = this.props.chapter.parts;
         let bookNo = this.props.bookNo;
         let list;
         if( parts && parts.length > 0 ) {
             list = parts.map(function(item, index){
-                return <Part key={index} part={item} bookNo={bookNo} />
-            });
+                return <Part key={index} part={item} bookNo={bookNo} click={this._onChangeArticle.bind(this)}/>
+            }.bind(this));
         }
         return (
             <div className="ChapterSection">
@@ -63,12 +70,18 @@ class Chapter extends React.Component {
 }
 
 class Part extends React.Component {
+    _onChangeArticle (){
+        this.props.click();
+    }
+
     render(){
         let path = this.props.bookNo + "/" + this.props.part.articleNo;
         return (
             <div className="Part">
                 <i className="fa fa-file-text-o" />
-                <Link className="ArticleEdit" to={ "/Book/" + path}>{this.props.part.partTitle}</Link>
+                <Link className="ArticleEdit" to={"/Book/" + path} onClick={this._onChangeArticle.bind(this)}>
+                    {this.props.part.partTitle}
+                </Link>
             </div>
         )    
     }

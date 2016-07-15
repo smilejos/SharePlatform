@@ -18,7 +18,7 @@ export default class Information extends React.Component {
                     Group
                 </Link>
                 <i className="fa fa-book"></i>
-                <Link to={ "/" } className="MenuItem">
+                <Link to={ "/Book/1" } className="MenuItem">
                     Books
                 </Link>
                 <i className="fa fa-tag"></i>

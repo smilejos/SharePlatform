@@ -21,22 +21,22 @@ export default function book(state = {
                 chapterOrder: 0,
                 chapterTitle: 'Basic',
                 parts: [
-                    { articleNo: 36, articleOrder: 0, partTitle: '變數'} ,
-                    { articleNo: 37, articleOrder: 1, partTitle: '解構賦值'} ,
-                    { articleNo: 38, articleOrder: 2, partTitle: '物件'} ,
-                    { articleNo: 48, articleOrder: 3, partTitle: '陣列'} ,
-                    { articleNo: 49, articleOrder: 4, partTitle: '字串'} ,
-                    { articleNo: 55, articleOrder: 5, partTitle: '函式'} ,
-                    { articleNo: 56, articleOrder: 6, partTitle: '正則'} 
+                    { articleNo: 36, articleOrder: 0, partTitle: '變數 (Variable)'} ,
+                    { articleNo: 37, articleOrder: 1, partTitle: '解構 (Destructuring)'} ,
+                    { articleNo: 38, articleOrder: 2, partTitle: '物件 (Object)'} ,
+                    { articleNo: 48, articleOrder: 3, partTitle: '陣列 (Array)'} ,
+                    { articleNo: 49, articleOrder: 4, partTitle: '字串 (String)'} ,
+                    { articleNo: 55, articleOrder: 5, partTitle: '函式 (Function)'} ,
+                    { articleNo: 56, articleOrder: 6, partTitle: '正則 (RegExp)'} 
                 ]
             } , {
                 chapterNo: 1,
                 chapterOrder: 1,
                 chapterTitle: 'Advanced',
                 parts: [
-                    { articleNo: 52, articleOrder: 0, partTitle: '類別'} ,
-                    { articleNo: 50, articleOrder: 1, partTitle: '修飾'} ,
-                    { articleNo: 51, articleOrder: 2, partTitle: '模組'} 
+                    { articleNo: 52, articleOrder: 0, partTitle: '類別 (Class)'} ,
+                    { articleNo: 50, articleOrder: 1, partTitle: '修飾 (Decorator)'} ,
+                    { articleNo: 51, articleOrder: 2, partTitle: '模組 (Module)'} 
                 ]
             }
         ],
