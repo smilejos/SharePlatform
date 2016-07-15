@@ -19,39 +19,26 @@ export default function book(state = {
             {
                 chapterNo: 0,
                 chapterOrder: 0,
-                chapterTitle: 'first sample',
+                chapterTitle: 'Basic',
                 parts: [
-                    { articleNo: 0, articleOrder: 0, partTitle: 'first part'} ,
-                    { articleNo: 1, articleOrder: 1, partTitle: 'second part'} ,
-                    { articleNo: 2, articleOrder: 2, partTitle: 'third part'} ,
-                    { articleNo: 3, articleOrder: 3, partTitle: 'fourth part'} 
+                    { articleNo: 36, articleOrder: 0, partTitle: '變數'} ,
+                    { articleNo: 37, articleOrder: 1, partTitle: '解構賦值'} ,
+                    { articleNo: 38, articleOrder: 2, partTitle: '物件'} ,
+                    { articleNo: 48, articleOrder: 3, partTitle: '陣列'} ,
+                    { articleNo: 49, articleOrder: 4, partTitle: '字串'} ,
+                    { articleNo: 55, articleOrder: 5, partTitle: '函式'} ,
+                    { articleNo: 56, articleOrder: 6, partTitle: '正則'} 
                 ]
             } , {
                 chapterNo: 1,
                 chapterOrder: 1,
-                chapterTitle: 'second sample',
+                chapterTitle: 'Advanced',
                 parts: [
-                    { articleNo: 0, articleOrder: 0, partTitle: 'first part'} ,
-                    { articleNo: 1, articleOrder: 1, partTitle: 'second part'} ,
-                    { articleNo: 2, articleOrder: 2, partTitle: 'third part'} ,
-                    { articleNo: 3, articleOrder: 3, partTitle: 'fourth part'} 
+                    { articleNo: 52, articleOrder: 0, partTitle: '類別'} ,
+                    { articleNo: 50, articleOrder: 1, partTitle: '修飾'} ,
+                    { articleNo: 51, articleOrder: 2, partTitle: '模組'} 
                 ]
-            } , {
-                chapterNo: 2,
-                chapterOrder: 2,
-                chapterTitle: 'third sample',
-                parts: [
-                    { articleNo: 0, articleOrder: 0, partTitle: 'first part'} ,
-                    { articleNo: 1, articleOrder: 1, partTitle: 'second part'}
-                ]
-            } , {
-                chapterNo: 3,
-                chapterOrder: 3,
-                chapterTitle: 'fourth sample',
-                parts: [
-                    { articleNo: 0, articleOrder: 0, partTitle: 'first part'} 
-                ]
-            }   
+            }
         ],
         isMenuShow: false,
         MenuPosition: {

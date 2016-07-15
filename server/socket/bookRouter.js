@@ -10,7 +10,6 @@ module.exports = function(){
             if( err ) {
             	console.log('createBook err', err);
             } else {
-            	console.log('createBook success');
             }
         });
 	}
@@ -22,8 +21,6 @@ module.exports = function(){
             } else {
             	book = is.array(book) ? book[0] : book;
 	        	socket.emit('retrieveBook', book);
-	        	console.log('book', book);
-            	console.log('retrieveBook success');
             }
         });
 	}

@@ -10,7 +10,7 @@ import ArticleEditor from '../article/ArticleEditor'
 import ArticlePreview from '../article/ArticlePreview'
 import ArticleSource from '../article/ArticleSource'
 import BookSetting from '../book/BookSetting'
-import BookManager from '../book/BookManager'
+import BookView from '../book/BookView'
 import Search from '../search/Search'
 import SearchResult from '../search/SearchResult'
 import CategoryMap from '../search/CategoryMap'
@@ -33,8 +33,8 @@ const routes = (
 		<Route path="Group" component={GroupMap} />	  	
 	  	<Route path="BookCreator" component={BookSetting} />
 	  	<Route path="BookSetting/:bookNo" component={BookSetting} />
-	  	<Route path="Book/:bookNo" component={BookManager}>
-	  		<Route path="Book/:bookNo/:articleNo" component={BookManager}></Route>
+	  	<Route path="Book/:bookNo" component={BookView}>
+	  		<Route path=":articleNo" component={Article}></Route>
 	  	</Route>
 	</Route>
 )

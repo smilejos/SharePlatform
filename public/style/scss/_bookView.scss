@@ -1,0 +1,60 @@
+.BookView {
+    .BookStructure {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        bottom: 0px;
+        width: 200px;
+        padding: 20px 0px 0px 0px;
+        border-right: 1px solid #eee;
+
+        .ChapterSection {
+            .Chapter {
+                padding: 4px 0px 4px 20px;
+
+                i {
+                    margin: 0px 5px;
+                }
+            }
+
+            .Part {
+                padding: 0px 0px 0px 60px;
+                position: relative;
+                i {
+                    position: absolute;
+                    color: #000;
+                    top: 4px;
+                    left: 45px;
+                }
+
+                &:hover {
+                    background-color: #eee;
+                    color: #000;
+                }
+
+                a {
+                    padding: 4px 0px 4px 5px;
+                    display: block;
+                    text-decoration: none;
+                    color: #616161;
+
+                    &:hover {
+                        color: #000;
+                    }
+                }
+
+            }
+        }
+    }
+
+    .BookContent {
+        position: absolute;
+        left: 200px;
+        top: 0px;
+        bottom: 0px;
+        right: 0px;
+        padding: 10px;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+}

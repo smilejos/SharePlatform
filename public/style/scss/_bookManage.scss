@@ -28,36 +28,3 @@
     	}
     }
 }
-
-.BookStructure {
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    bottom: 0px;
-    width: 200px;
-    padding: 10px;
-    border-right: 1px solid #bbb;
-
-    .ChapterSection {
-
-        .Chapter {
-            padding: 4px 0px 4px 10px;
-            i {
-                margin: 0px 5px;
-            }
-            &:hover {
-                background-color: #eee;
-            }
-        }
-
-        .Part {
-            padding: 4px 0px 4px 30px;
-            i {
-                margin: 0px 5px;
-            }
-            &:hover {
-                background-color: #eee;
-            }
-        }
-    }
-}

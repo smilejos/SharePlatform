@@ -14,7 +14,15 @@ class Article extends React.Component {
     constructor(props){
         super(props);
         let { requestArticle } = this.props.actions;
+        console.log(this.props.params.articleNo);
         requestArticle(this.props.params.articleNo);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        let { requestArticle } = this.props.actions;
+        if( this.props.params.articleNo != nextProps.params.articleNo) {
+            requestArticle(nextProps.params.articleNo);
+        }
     }
 
     componentDidMount() {
