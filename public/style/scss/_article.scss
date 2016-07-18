@@ -6,27 +6,59 @@
 	background-color: #fff;
 	left: 50%;
 	margin-left: -440px;
+
+	.ArticlePage{
+		.ArticleTitle{
+			position: relative;
+			font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+			font-size: 2.2em;
+			font-weight: bold;
+			padding: 0px 0px 10px 2px;
+			border-bottom: solid #eee 1px;
+			line-height: 1.2;
+		}
+		.markdown-body{
+			text-align: left;
+			margin-top: 5px;
+			position: relative;
+			overflow: auto;
+			padding: 40px;
+			border: 1px solid #eee;
+			border-radius: 5px;
+		}
+	}
+
 }
 
-.ArticlePage{
-	.ArticleTitle{
-		position: relative;
-		font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-		font-size: 2.2em;
-		font-weight: bold;
-		padding: 0px 0px 10px 2px;
-		border-bottom: solid #eee 1px;
-		line-height: 1.2;
-	}
-	.markdown-body{
-		margin-top: 5px;
-		position: relative;
-		overflow: auto;
-		padding: 40px;
-		border: 1px solid #eee;
-		border-radius: 5px;
+.ArticleSlideShow{
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;	
+	padding: 40px 100px;
+	background-color: #fff;
+	
+	.ArticlePage{
+		.markdown-body{
+			text-align: left;
+			margin-top: 5px;
+			position: relative;
+			overflow: auto;
+			padding: 40px;
+
+			pre {
+				font-size: 100%;
+			}
+
+			img {
+				width: 100%;
+			}
+		}
 	}
 }
+
+
 
 .ArticleControl {
 	position: absolute;

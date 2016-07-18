@@ -9,10 +9,6 @@ export default class ArticleContent extends React.Component {
         super(props);
     }
 
-    componentDidMount() {
-        let articleNo = this.props.article.articleNo;
-    }
-
     _renderMarkup(content) {
         marked.setOptions({
             renderer: new marked.Renderer(),
@@ -34,20 +30,9 @@ export default class ArticleContent extends React.Component {
         return { __html: marked(content)};
     }
 
-    _renderTitle(title){
-        return (
-            <span>{title}</span>
-        )
-    }
-
     render() {
         return (
-            <div className="ArticlePage">
-                <div className="ArticleTitle">
-                    { this._renderTitle(this.props.article.title)}
-                </div>
-                <div className="markdown-body" dangerouslySetInnerHTML={ this._renderMarkup(this.props.article.content) } /> 
-            </div>
+            <div className="markdown-body" dangerouslySetInnerHTML={ this._renderMarkup(this.props.content) } /> 
         );
     }
 }

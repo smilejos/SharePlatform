@@ -3,6 +3,7 @@ import { REQUEST_POST, REQUEST_POSTS, REQUEST_SUMMARY,
     RECEIVE_POSTS, RECEIVE_POST, PUBLISH_POST, UPDATE_POST, 
     COMPLETE_POST, CLEAN_POST, CLEAN_POSTS, CLEAN_EDITING_POST, 
     LEAVE_POST, EDIT_POST, CHANGE_POST_TYPE,
+    UPDATE_SLIDES, UPDATE_SLIDE_INDEX,
     FILTER_POST, CLEAR_FILTER_POST } from '../constants/ArticleActionTypes';
 import merge from 'lodash/merge'
 import union from 'lodash/union'
@@ -14,6 +15,8 @@ export default function articles(state = {
         isFilter: false,
         articles: [],
         filter_articles: [],
+        slides: [],
+        slide_index: -1,
         article: {
             articleNo : null,
             title : '',
@@ -35,7 +38,9 @@ export default function articles(state = {
 		return assignIn({}, state, {
             isFetching: true,
             isUploading: false,
-            articles: []
+            articles: [],
+            slides: [],
+            slide_index: -1
         });
 	case RECEIVE_POSTS:
         return assignIn({}, state, {
@@ -98,6 +103,14 @@ export default function articles(state = {
         return assignIn({}, state, {
             filter_articles: [],
             isFilter: false
+        });
+    case UPDATE_SLIDES:
+        return assignIn({}, state, {
+            slides: action.slides
+        });
+    case UPDATE_SLIDE_INDEX:
+        return assignIn({}, state, {
+            slide_index: action.slide_index
         });
     case LEAVE_POST:
 	default:

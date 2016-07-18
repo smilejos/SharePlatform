@@ -26,12 +26,14 @@ class Article extends React.Component {
     }
     
     render() {
-        let content;
+        let content, title;
         let articleNo = this.props.params.articleNo;
         if( this.props.state.editingArticle != null ) {
-            content = <ArticleContent article = { this.props.state.editingArticle } />;
+            content = <ArticleContent content = { this.props.state.editingArticle.content } />;
+            title = <ArticleTitle title = { this.props.state.article.title } />;
         } else {
             content = <div />;
+            title = <div />;
         }  
         return (
             <div className="ArticleContent">
@@ -39,9 +41,22 @@ class Article extends React.Component {
                     <i className="fa fa-edit fa-lg" />
                     <Link className="ArticleEdit"  onClick={this._transferToPreview.bind(this)} to={"/ArticleEditor/" + articleNo}>Return to Edit</Link>
                 </div>
-                { content }
+                <div className="ArticlePage">
+                    {title}
+                    {content}
+                </div>
             </div>
         );
+    }
+}
+
+class ArticleTitle extends React.Component {
+    render() {
+        return (
+            <div className="ArticleTitle">
+                <span>{this.props.title}</span>
+            </div>
+        )
     }
 }
 

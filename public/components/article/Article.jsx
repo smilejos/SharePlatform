@@ -1,10 +1,11 @@
 "use strict";
 import React from 'react'
-import { render } from 'react-dom'
+import { render, findDOMNode } from 'react-dom'
 import { Link } from 'react-router'
 import { bindActionCreators  } from 'redux'
 import { connect } from 'react-redux'
 import marked from 'marked'
+import screenfull from 'screenfull';
 import { highlight, highlightAuto } from 'highlight.js'
 import * as ArticleActions from '../../actions/ArticleActions'
 
@@ -37,11 +38,13 @@ class Article extends React.Component {
     }
 
     render() {
-        let content, control ;
+        let content, title, control ;
         if( this.props.state.article != null ) {
-            content = <ArticleContent article = { this.props.state.article } />;
+            content = <ArticleContent ref="content" content={ this.props.state.article.content } />;
+            title = <ArticleTitle title = { this.props.state.article.title } />;
         } else {
             content = <div />;
+            title = <div />;
         }
 
         if (this.props.state.article != null && this.props.state.article.author == this.props.self.Id_No ) {
@@ -53,9 +56,22 @@ class Article extends React.Component {
         return (
             <div className="ArticleContent">
                 { control }
-                { content }
+                <div className="ArticlePage">
+                    {title}
+                    {content}
+                </div>
             </div>
         );
+    }
+}
+
+class ArticleTitle extends React.Component {
+    render() {
+        return (
+            <div className="ArticleTitle">
+                <span>{this.props.title}</span>
+            </div>
+        )
     }
 }
 
@@ -65,6 +81,8 @@ class ArticleButton extends React.Component {
             <div className="ArticleControl">
                 <i className="fa fa-eye fa-lg" />
                 <Link className="ArticleEdit" to={ "/ArticleSource/" + this.props.articleNo }>Source</Link>
+                <i className="fa fa-laptop fa-lg" />
+                <Link className="ArticleEdit" to={ "/ArticleSlideShow/" + this.props.articleNo }>SlideShow</Link>
             </div>
         )
     }
@@ -74,6 +92,8 @@ class ArticleEditButton extends React.Component {
     render() {
         return (
             <div className="ArticleControl">
+                <i className="fa fa-laptop fa-lg" />
+                <Link className="ArticleEdit" to={ "/ArticleSlideShow/" + this.props.articleNo }>SlideShow</Link>
                 <i className="fa fa-eye fa-lg" />
                 <Link className="ArticleEdit" to={ "/ArticleSource/" + this.props.articleNo }>Source</Link>
                 <i className="fa fa-cog fa-lg" />
