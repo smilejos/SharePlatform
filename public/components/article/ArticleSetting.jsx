@@ -1,6 +1,6 @@
 "use strict";
 import React from 'react'
-import { render } from 'react-dom'
+import { render, findDOMNode } from 'react-dom'
 import { Link, browserHistory } from 'react-router'
 import { bindActionCreators  } from 'redux'
 import { connect } from 'react-redux'
@@ -41,21 +41,31 @@ class ArticleSetting extends React.Component {
         }, false);
     }
 
+    _handleSlideshowChange(e){
+        let { updateArticle } = this.props.articleActions;
+        updateArticle({ 
+            isSlideshow: findDOMNode(e.target).checked
+        }, false);
+    }
+
     _handleCreate(){
         let { createArticle } = this.props.articleActions;
         createArticle({ 
             title: this.refs.txtTitle.value,
             isPrivate: this.props.state.article.isPrivate,
+            isSlideshow: this.props.state.article.isSlideshow,
             tag: this.props.state.article.tag
         });
     }
 
     _handleSave(){
         let { updateArticle } = this.props.articleActions;
+        console.log(this.props.state.article.isPrivate);
         updateArticle({ 
             articleNo: this.props.params.articleNo,
             title: this.refs.txtTitle.value,
             isPrivate: this.props.state.article.isPrivate,
+            isSlideshow: this.props.state.article.isSlideshow,
             tag: this.props.state.article.tag
         }, true);
     }
@@ -157,7 +167,19 @@ class ArticleSetting extends React.Component {
                             options={options}
                             onChange={this._handleTagChange.bind(this)} >
                     </Select>
-                    <div className="Description">You can add some tags to help people find this article.</div>
+                    <div className="Description">You can add 3 tags at most to help people find this article.</div>
+                </div>
+                <div className="Section">
+                    <div className="Title">Properties</div>
+                    <div className="ItemSection">
+                        <div className="Action">
+                            <input type="checkbox" name="chkSlideShow" checked={article.isSlideshow} onChange={this._handleSlideshowChange.bind(this)} />
+                        </div>
+                        <div className="ItemDescription">
+                            <div className="MainDescription">Material</div>
+                            <div className="SubDescription">This article display as sildeshow.</div>
+                        </div>
+                    </div>
                 </div>
                 {buttons}
             </div>

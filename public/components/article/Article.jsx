@@ -19,10 +19,26 @@ class Article extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        let { requestArticle } = this.props.actions;
+        let { requestArticle, leaveArticle, cleanArticle } = this.props.actions;
         if( this.props.params.articleNo != nextProps.params.articleNo) {
-            requestArticle(nextProps.params.articleNo);
+            cleanArticle();
+            leaveArticle(this.props.params.articleNo);
+
+            if ( this.props.params.articleNo != '') {
+                requestArticle(nextProps.params.articleNo);
+            }
         }
+    }
+
+    shouldComponentUpdate (nextProps, nextState) {
+        // Make sure content already download from server
+        if( nextProps.state.article.articleNo != null) {
+            return true;
+        } else {
+            return false;
+        }
+
+        return true;
     }
 
     componentDidMount() {
@@ -32,33 +48,44 @@ class Article extends React.Component {
     
     componentWillUnmount() {
         let { leaveArticle, cleanArticle } = this.props.actions;
-        leaveArticle(this.props.params.articleNo);
         cleanArticle();
+        leaveArticle(this.props.params.articleNo);
+    }
+
+    _renderContent() {
+        return (
+            <div>
+                <ArticleButton article={this.props.state.article} Id_No={this.props.self.Id_No } />
+                <div className="ArticlePage">
+                    <ArticleTitle title={this.props.state.article.title} />
+                    <ArticleContent ref="content" content={this.props.state.article.content } />
+                </div>
+            </div>
+        );
+    }
+
+    _renderLoading() {
+        return (
+            <div className="ArticleLoading">
+                <i className="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+                <span className="sr-only">Loading...</span>
+            </div>
+        )
     }
 
     render() {
-        let content, title, control ;
-        if( this.props.state.article != null ) {
-            content = <ArticleContent ref="content" content={ this.props.state.article.content } />;
-            title = <ArticleTitle title = { this.props.state.article.title } />;
+        let content;
+        if ( this.props.state.article.articleNo != null ) {
+            console.log('render content');
+            content = this._renderContent.bind(this)();
         } else {
-            content = <div />;
-            title = <div />;
+            console.log('render div');
+            content = this._renderLoading();
         }
-
-        if (this.props.state.article != null && this.props.state.article.author == this.props.self.Id_No ) {
-            control = <ArticleEditButton articleNo = { this.props.params.articleNo } />;
-        } else {
-            control = <ArticleButton articleNo = { this.props.params.articleNo } />;
-        }
-
+        
         return (
             <div className="ArticleContent">
-                { control }
-                <div className="ArticlePage">
-                    {title}
-                    {content}
-                </div>
+                {content}
             </div>
         );
     }
@@ -75,30 +102,52 @@ class ArticleTitle extends React.Component {
 }
 
 class ArticleButton extends React.Component {
-    render() {
+    _renderAuthorAction() {
         return (
-            <div className="ArticleControl">
-                <i className="fa fa-eye fa-lg" />
-                <Link className="ArticleEdit" to={ "/ArticleSource/" + this.props.articleNo }>Source</Link>
-                <i className="fa fa-laptop fa-lg" />
-                <Link className="ArticleEdit" to={ "/ArticleSlideShow/" + this.props.articleNo }>SlideShow</Link>
-            </div>
-        )
-    }
-}
-
-class ArticleEditButton extends React.Component {
-    render() {
-        return (
-            <div className="ArticleControl">
-                <i className="fa fa-laptop fa-lg" />
-                <Link className="ArticleEdit" to={ "/ArticleSlideShow/" + this.props.articleNo }>SlideShow</Link>
-                <i className="fa fa-eye fa-lg" />
-                <Link className="ArticleEdit" to={ "/ArticleSource/" + this.props.articleNo }>Source</Link>
+            <span>
                 <i className="fa fa-cog fa-lg" />
-                <Link className="ArticleEdit" to={ "/ArticleSetting/" + this.props.articleNo }>Setting</Link>
+                <Link className="ArticleEdit" to={ "/ArticleSetting/" + this.props.article.articleNo }>Setting</Link>
                 <i className="fa fa-edit fa-lg" />
-                <Link className="ArticleEdit" to={ "/ArticleEditor/" + this.props.articleNo }>Edit</Link>
+                <Link className="ArticleEdit" to={ "/ArticleEditor/" + this.props.article.articleNo }>Edit</Link>
+            </span>
+        );
+    }
+
+    _renderDefaultButton() {
+        return (
+            <span>
+                <i className="fa fa-eye fa-lg" />
+                <Link className="ArticleEdit" to={ "/ArticleSource/" + this.props.article.articleNo }>Source</Link>
+            </span>
+        );
+    }
+
+    _renderSlideshowButton() {
+        return (
+            <span>
+                <i className="fa fa-laptop fa-lg" />
+                <Link className="ArticleEdit" to={ "/ArticleSlideShow/" + this.props.article.articleNo }>SlideShow</Link>
+            </span>
+        );
+    }
+
+    render() {
+        let defaultButton, authorButton, slideshowButton;
+        if( this.props.article != null ) {
+            defaultButton = this._renderDefaultButton.bind(this)();
+            authorButton = this.props.article.author == this.props.Id_No ? this._renderAuthorAction.bind(this)() : null;
+            slideshowButton = this.props.article.isSlideshow ? this._renderSlideshowButton.bind(this)() : null;
+        } else {
+            defaultButton = null;
+            authorButton = null;
+            slideshowButton = null;
+        }
+        
+        return (
+            <div className="ArticleControl">
+                { slideshowButton }
+                { defaultButton }
+                { authorButton }
             </div>
         )
     }

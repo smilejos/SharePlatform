@@ -26,7 +26,8 @@ export default function articles(state = {
             updateTime : null,
             publishTime : null,
             isBookArticle : false,
-            isPrivate : false
+            isPrivate : false,
+            isSlideshow: false
         },
         editingArticle: null
     }, action) {
@@ -53,7 +54,9 @@ export default function articles(state = {
             isFetching: false,
             isUploading: false,
             article: action.article,
-            editingArticle: action.article
+            editingArticle: action.article,
+            slides: action.article.isSlideshow ? action.article.content.split("---") : [],
+            slide_index: -1
         });
 	case PUBLISH_POST:
 	case UPDATE_POST:
@@ -76,7 +79,8 @@ export default function articles(state = {
                 updateTime : null,
                 publishTime : null,
                 isBookArticle : false,
-                isPrivate : false
+                isPrivate : false,
+                isSlideshow: false
             })
         });
     case CLEAN_EDITING_POST:

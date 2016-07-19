@@ -29,7 +29,6 @@ export default class ArticleContent extends React.Component {
         //     }
         // });
         // return { __html: marked(content)};
-        console.log('use remark to parsing');
         var md = new Remarkable('full', {
             html:         true,        // Enable HTML tags in source
             xhtmlOut:     false,        // Use '/' to close single tags (<br />)
