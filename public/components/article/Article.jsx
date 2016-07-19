@@ -4,7 +4,6 @@ import { render, findDOMNode } from 'react-dom'
 import { Link } from 'react-router'
 import { bindActionCreators  } from 'redux'
 import { connect } from 'react-redux'
-import marked from 'marked'
 import screenfull from 'screenfull';
 import { highlight, highlightAuto } from 'highlight.js'
 import * as ArticleActions from '../../actions/ArticleActions'
