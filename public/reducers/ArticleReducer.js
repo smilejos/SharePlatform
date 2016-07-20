@@ -4,6 +4,7 @@ import { REQUEST_POST, REQUEST_POSTS, REQUEST_SUMMARY,
     COMPLETE_POST, CLEAN_POST, CLEAN_POSTS, CLEAN_EDITING_POST, 
     LEAVE_POST, EDIT_POST, CHANGE_POST_TYPE,
     UPDATE_SLIDES, UPDATE_SLIDE_INDEX,
+    UPLOAD_POST,
     FILTER_POST, CLEAR_FILTER_POST } from '../constants/ArticleActionTypes';
 import merge from 'lodash/merge'
 import union from 'lodash/union'
@@ -119,6 +120,7 @@ export default function articles(state = {
             slide_index: action.slide_index
         });
     case LEAVE_POST:
+    case UPLOAD_POST:
 	default:
 		return state;
 	}

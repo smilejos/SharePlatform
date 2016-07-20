@@ -4,8 +4,10 @@ import { REQUEST_POST, REQUEST_POSTS, REQUEST_SUMMARY,
 	CREATE_POST, UPDATE_POST, 
     COMPLETE_POST, CLEAN_POST, CLEAN_POSTS, CLEAN_EDITING_POST, LEAVE_POST, EDIT_POST, SYNC_POST, CHANGE_POST_TYPE,
     UPDATE_SLIDES, UPDATE_SLIDE_INDEX,
+    UPLOAD_POST,
     FILTER_POST, CLEAR_FILTER_POST} from '../constants/ArticleActionTypes';
-import { socket_article as socket } from '../utility/socketHandler';
+import { socket_article as socket, socket_stream as ss } from '../utility/socketHandler';
+//import fs from 'fs';
 
 export function requestArticleList(item) {
 	socket.emit('requestArticleList', item);	
@@ -176,5 +178,22 @@ export function updateSlideIndex(slide_index) {
 	return {
 		type: UPDATE_SLIDE_INDEX,
 		slide_index
+	};
+}
+
+export function uploadArticle(files, articleNo) {
+	let file = files[0];
+	let stream = ss.createStream();
+	ss(socket).emit('upload', stream, articleNo);
+    ss.createBlobReadStream(file).pipe(stream);
+    // ss(socket).on('file:add:stream:success', function(data){
+    //   console.info('file uploaded to server');
+    //   console.log(data);
+    // });
+
+
+	//fs.createReadStream(file).pipe(stream);
+	return {
+		type: UPLOAD_POST
 	};
 }

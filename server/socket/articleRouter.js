@@ -2,6 +2,9 @@
 
 module.exports = function(){
 	let is    = require('is_js');
+	let ss    = require('socket.io-stream');
+	let fs    = require('fs');
+	let path  = require('path');
 	let ArticleHandler = require('../database/articleHandler');
 	let lodash  = require('lodash');
 	let notice = {
@@ -227,6 +230,19 @@ module.exports = function(){
 
 	     	socket.on('editArticle', (item) => {
 		        socket.broadcast.to(item.articleNo).emit('editArticle', item);
+		    });
+
+		    ss(socket).on('upload', (stream, item) => {
+		    	let content = '';
+		    	stream.on('data', function(chunk) {
+				    content+=chunk;
+				});
+				stream.on('end', function() {
+				    _modifyArticle(socket, {
+				    	content: content,
+				    	articleNo: item
+				    });
+				});
 		    });
 		}
 	};

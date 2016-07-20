@@ -5,10 +5,12 @@ import { Link } from 'react-router'
 import { bindActionCreators  } from 'redux'
 import { connect } from 'react-redux'
 import screenfull from 'screenfull';
+import Dropzone from'react-dropzone'
 import { highlight, highlightAuto } from 'highlight.js'
 import * as ArticleActions from '../../actions/ArticleActions'
 
 import ArticleContent from '../article/ArticleContent'
+
 
 class Article extends React.Component {
     constructor(props){
@@ -88,6 +90,20 @@ class Article extends React.Component {
         updateSlideIndex(index);
     }
 
+    _fileUpload() {
+      this.refs.dropzone.open();
+    }
+
+    _fileDownload() {
+      
+    }
+
+    _onFileUpload(files) {
+        console.log(files);
+        let { uploadArticle } = this.props.actions;
+        uploadArticle(files, this.props.params.articleNo);
+    }
+
     _isPresenting() {
         return this.props.state.slide_index > -1;
     }
@@ -105,7 +121,10 @@ class Article extends React.Component {
                     existSildeshow={this._existSildeshow.bind(this)}
                     prevSildeshow={this._prevSildeshow.bind(this)}
                     nextSildeshow={this._nextSildeshow.bind(this)}
+                    fileUpload={this._fileUpload.bind(this)}
+                    fileDownload={this._fileDownload.bind(this)}
                     isPresenting={isPresenting}
+                    content={content}
                 />
                 <div className="ArticlePage">
                     <ArticleTitle title={this.props.state.article.title} />
@@ -115,6 +134,10 @@ class Article extends React.Component {
                         maxIndex={this.props.state.slides.length}
                         currentIndex={this.props.state.slide_index} />
                 </div>
+                <div className="ArticleUpload">
+                    <Dropzone onDrop={this._onFileUpload.bind(this)} ref="dropzone"></Dropzone>
+                </div>
+                
             </div>
         );
     }
@@ -189,9 +212,19 @@ class ArticleButton extends React.Component {
         this.props.nextSildeshow();
     }
 
+    _fileUpload() {
+        this.props.fileUpload();
+    }
+
+    _fileDownload() {
+        this.props.fileDownload();
+    }
+
     _renderAuthorAction() {
         return (
             <span>
+                <i className="fa fa-upload fa-lg" />
+                <span className="ArticleEdit" onClick={this._fileUpload.bind(this)}>Upload</span>
                 <i className="fa fa-cog fa-lg" />
                 <Link className="ArticleEdit" to={ "/ArticleSetting/" + this.props.article.articleNo }>Setting</Link>
                 <i className="fa fa-edit fa-lg" />
@@ -205,6 +238,10 @@ class ArticleButton extends React.Component {
             <span>
                 <i className="fa fa-eye fa-lg" />
                 <Link className="ArticleEdit" to={ "/ArticleSource/" + this.props.article.articleNo }>Source</Link>
+                <i className="fa fa-download fa-lg" />
+                <a className="ArticleEdit" 
+                    download={"Article_"+this.props.article.articleNo+".md"} 
+                    href={"data:text/plain,"+encodeURIComponent(this.props.content)}>Download</a>
             </span>
         );
     }

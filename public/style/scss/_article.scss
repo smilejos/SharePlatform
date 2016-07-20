@@ -84,6 +84,10 @@
 			padding: 40px 100px 0px 100px;
 			width: 100%
 
+			h1 {
+				border-bottom: 1px solid #eee;
+				color: #28637F;
+			}
 			pre {
 				font-size: 100%;
 			}
@@ -183,4 +187,8 @@
 		overflow-x: hidden;
 	}
 
+}
+
+.ArticleUpload {
+	display: none;
 }

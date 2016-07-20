@@ -1,6 +1,8 @@
 import { createRedux } from 'redux';
 import store from '../store/store';
 import io from 'socket.io-client';
+import ss from 'socket.io-stream';
+
 import { receiveArticles, receiveArticle } from '../actions/ArticleActions';
 import { receiveRealTimeMember, retrieveUser, receiveMembers } from '../actions/MemberActions';
 import { receiveBook } from '../actions/BookActions';
@@ -10,6 +12,7 @@ export const socket_article = io('/Article');
 export const socket_member = io('/Member');
 export const socket_book = io('/Book');
 export const socket_common = io('/Common');
+export const socket_stream = ss;
 
 // ==================================================
 
