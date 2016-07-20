@@ -7,6 +7,12 @@
 	left: 50%;
 	margin-left: -440px;
 
+	.ArticleControl {
+		position: absolute;
+		right: 0px;
+		top: 15px;
+	}
+
 	.ArticlePage{
 		.ArticleTitle{
 			position: relative;
@@ -26,6 +32,10 @@
 			border: 1px solid #eee;
 			border-radius: 5px;
 		}
+
+		.ArticleFooter {
+			display: none;
+		}
 	}
 
 }
@@ -40,21 +50,39 @@
 }
 
 .ArticleSlideShow{
-	position: absolute;
+	position: fixed;
 	top: 0px;
 	bottom: 0px;
 	left: 0px;
-	right: 0px;	
-	padding: 40px 100px;
-	background-color: #fff;
-	
+	right: 0px;
+
+	.ArticleControl {
+		position: absolute;
+		right: 10px;
+		top: 30px;
+	}
+
 	.ArticlePage{
+		position: absolute;
+		top: 50px;
+		bottom: 0px;
+		right: 0px;
+		left: 0px;
+
+		.ArticleTitle{
+			display: none;
+		}
 		.markdown-body{
 			text-align: left;
 			margin-top: 5px;
-			position: relative;
-			overflow: auto;
-			padding: 40px;
+			position: absolute;
+			top: 0px;
+			bottom: 50px;
+			right: 0px;
+			left: 0px;
+			overflow-y: auto;
+			padding: 40px 100px 0px 100px;
+			width: 100%
 
 			pre {
 				font-size: 100%;
@@ -64,16 +92,43 @@
 				width: 100%;
 			}
 		}
+
+		.ArticleFooter {
+			font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+			font-size: 14px;
+			font-weight: bold;
+			position: absolute;
+			border-top: solid 1px #ddd;
+			height: 50px;
+			bottom: 0px;
+			width: 100%;
+
+			.PageInfo {
+				position: absolute;
+				width: 100px;
+				top: 20px;
+				left: 50%;
+				margin-left: -50px;
+			}
+
+			.Author {
+				position: absolute;
+				top: 10px;
+				right: 20px;
+			}
+
+			.Department {
+				position: absolute;
+				top: 30px;
+				right: 20px;
+			}
+		}
 	}
 }
 
 
 
 .ArticleControl {
-	position: absolute;
-	right: 0px;
-	top: 15px;
-	
 	.ArticleEdit {
 		position: relative;
 		color: #666;
@@ -82,6 +137,7 @@
 		line-height: 16px;
 		text-decoration: none;
 		margin-right: 5px;
+		cursor: pointer;
 		
 		&:hover {
 			text-decoration: underline;

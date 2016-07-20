@@ -52,13 +52,68 @@ class Article extends React.Component {
         leaveArticle(this.props.params.articleNo);
     }
 
+    _startSildeshow() {
+        let enabled = screenfull.enabled;
+        if( enabled ) {
+            let dom = findDOMNode(this.refs.content);
+            screenfull.request(dom);    
+        }
+        this._nextSildeshow();
+    }
+
+    _existSildeshow() {
+        let { updateSlideIndex } = this.props.actions;
+        let enabled = screenfull.enabled;
+        if( enabled ) {
+            screenfull.exit();
+        }
+        updateSlideIndex(-1);
+    }
+
+    _nextSildeshow() {
+        let { updateSlideIndex } = this.props.actions;
+        let index = this.props.state.slide_index + 1;
+        if( index > this.props.state.slides.length - 1) {
+            index = this.props.state.slides.length - 1;
+        }
+        updateSlideIndex(index);
+    }
+
+    _prevSildeshow() {
+        let { updateSlideIndex } = this.props.actions;
+        let index = this.props.state.slide_index - 1;
+        if( index < 0) {
+            index = 0;
+        }
+        updateSlideIndex(index);
+    }
+
+    _isPresenting() {
+        return this.props.state.slide_index > -1;
+    }
+
     _renderContent() {
+        let isPresenting = this.props.state.slide_index > -1;
+        let content = isPresenting ? this.props.state.slides[this.props.state.slide_index] : this.props.state.article.content; 
+        console.log(this.props.state.slide_index);
         return (
             <div>
-                <ArticleButton article={this.props.state.article} Id_No={this.props.self.Id_No } />
+                <ArticleButton 
+                    article={this.props.state.article} 
+                    Id_No={this.props.self.Id_No} 
+                    startSildeshow={this._startSildeshow.bind(this)}
+                    existSildeshow={this._existSildeshow.bind(this)}
+                    prevSildeshow={this._prevSildeshow.bind(this)}
+                    nextSildeshow={this._nextSildeshow.bind(this)}
+                    isPresenting={isPresenting}
+                />
                 <div className="ArticlePage">
                     <ArticleTitle title={this.props.state.article.title} />
-                    <ArticleContent ref="content" content={this.props.state.article.content } />
+                    <ArticleContent content={content } />
+                    <ArticleFooter 
+                        article={this.props.state.article} 
+                        maxIndex={this.props.state.slides.length}
+                        currentIndex={this.props.state.slide_index} />
                 </div>
             </div>
         );
@@ -84,7 +139,7 @@ class Article extends React.Component {
         }
         
         return (
-            <div className="ArticleContent">
+            <div ref="content" className={this.props.state.slide_index  > -1 ? "ArticleSlideShow" : "ArticleContent"}>
                 {content}
             </div>
         );
@@ -101,7 +156,39 @@ class ArticleTitle extends React.Component {
     }
 }
 
+class ArticleFooter extends React.Component {
+    render() {
+        return (
+            <div className="ArticleFooter">
+                <div>
+                    <div className="PageInfo">{ this.props.currentIndex+1 + "/" + this.props.maxIndex  }</div>
+                </div>
+                <div>
+                    <div className="Author"> {this.props.article.authorName}</div>
+                    <div className="Department">{this.props.article.dept_na}</div>
+                </div>
+            </div>
+        )
+    }
+}
+
 class ArticleButton extends React.Component {
+    _startSildeshow() {
+        this.props.startSildeshow();
+    }
+
+    _existSildeshow() {
+        this.props.existSildeshow();
+    }
+
+    _prevSildeshow() {
+        this.props.prevSildeshow();
+    }
+
+    _nextSildeshow() {
+        this.props.nextSildeshow();
+    }
+
     _renderAuthorAction() {
         return (
             <span>
@@ -126,25 +213,46 @@ class ArticleButton extends React.Component {
         return (
             <span>
                 <i className="fa fa-laptop fa-lg" />
-                <Link className="ArticleEdit" to={ "/ArticleSlideShow/" + this.props.article.articleNo }>SlideShow</Link>
+                <span className="ArticleEdit" onClick={this._startSildeshow.bind(this)}>SlideShow</span>
+            </span>
+        );
+    }
+
+    _renderPresentingButton() {
+        return (
+            <span>
+                <i className="fa fa-chevron-circle-left fa-lg" />
+                <span className="ArticleEdit" onClick={this._prevSildeshow.bind(this)}>Prev</span>
+                <i className="fa fa-chevron-circle-right fa-lg" />
+                <span className="ArticleEdit" onClick={this._nextSildeshow.bind(this)}>Next</span>
+                <i className="fa fa-sign-out fa-lg" />
+                <span className="ArticleEdit" onClick={this._existSildeshow.bind(this)}>Exist</span>
             </span>
         );
     }
 
     render() {
-        let defaultButton, authorButton, slideshowButton;
-        if( this.props.article != null ) {
+        let defaultButton, authorButton, slideshowButton, presentingButton;
+        if( this.props.article != null && this.props.isPresenting ) {
+            presentingButton = this._renderPresentingButton.bind(this)();
+            defaultButton = null;
+            authorButton = null;
+            slideshowButton = null;
+        } else if( this.props.article != null) {
             defaultButton = this._renderDefaultButton.bind(this)();
             authorButton = this.props.article.author == this.props.Id_No ? this._renderAuthorAction.bind(this)() : null;
             slideshowButton = this.props.article.isSlideshow ? this._renderSlideshowButton.bind(this)() : null;
+            presentingButton = null;
         } else {
             defaultButton = null;
             authorButton = null;
             slideshowButton = null;
+            presentingButton = null;
         }
-        
+
         return (
             <div className="ArticleControl">
+                { presentingButton }
                 { slideshowButton }
                 { defaultButton }
                 { authorButton }

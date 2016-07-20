@@ -21,6 +21,8 @@ export default function articles(state = {
             articleNo : null,
             title : '',
             author : '',
+            authorName: '',
+            dept_na: '',
             content : '',
             tag : [],
             updateTime : null,
