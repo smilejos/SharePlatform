@@ -95,7 +95,6 @@ module.exports = function(){
 	        	socket.emit('retrieveArticle', article);	
 	        	article = null;
 	    	}
-	    	
 	    });
 	}
 
@@ -169,6 +168,39 @@ module.exports = function(){
 	    });
 	}
 
+	function _uploadArticle(socket, item) {
+		ArticleHandler.modifyArticle(item, (recordset, err) =>{
+             if( err ) {
+            	socket.emit('receiveNotice', lodash.assign(notice, {
+            		level: 'error',
+            		message: err,
+            		datetime: Date.now()
+            	}));
+            } else {
+            	socket.emit('receiveNotice', lodash.assign(notice, {
+            		message: 'upload article content success',
+            		datetime: Date.now()
+            	}));
+
+            	ArticleHandler.getSpecificArticle(item.articleNo, (article, err) => {
+			    	if( err || article == null) {
+		    			socket.emit('receiveNotice', lodash.assign(notice, {
+		            		level: 'error',
+		            		message: err,
+		            		datetime: Date.now()
+		            	}));
+		            	article = null;
+			    	} else {
+			    		article = is.array(article) ? article[0] : article;
+			    		article.tag = article.tag.length > 0 ? article.tag.split(',') : [];
+			        	socket.emit('retrieveArticle', article);	
+			        	article = null;
+			    	}
+			    });
+            }
+        });
+	}
+
 	function _updateTimeZone(item)
 	{
 		//To-Do Update all timezone
@@ -238,7 +270,7 @@ module.exports = function(){
 				    content+=chunk;
 				});
 				stream.on('end', function() {
-				    _modifyArticle(socket, {
+				    _uploadArticle(socket, {
 				    	content: content,
 				    	articleNo: item
 				    });

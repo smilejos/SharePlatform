@@ -21,6 +21,7 @@ class Article extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
+        console.log('receive nextProps');
         let { requestArticle, leaveArticle, cleanArticle } = this.props.actions;
         if( this.props.params.articleNo != nextProps.params.articleNo) {
             cleanArticle();

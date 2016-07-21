@@ -177,7 +177,7 @@ class ArticleSetting extends React.Component {
                         </div>
                         <div className="ItemDescription">
                             <div className="MainDescription">Material</div>
-                            <div className="SubDescription">This article display as sildeshow.</div>
+                            <div className="SubDescription">To enable this article can display as sildeshow.</div>
                         </div>
                     </div>
                 </div>

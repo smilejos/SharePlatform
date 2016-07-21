@@ -84,7 +84,7 @@ module.exports = function(){
 	}
 
 	function _getSpecificArticle(articleNo, callback){
-		let sqlString = " select a.articleNo, a.title, b.Card_Na as authorName, c.EDept_Na1 as dept_na, a.author, a.tag, a.updateTime, a.publishTime, a.content, a.isPrivate, a.isBookArticle, a.isSlideshow, a.isPrivate " +
+		let sqlString = " select a.articleNo, a.title, b.Card_Na as authorName, c.EDept_Na1 as dept_na, a.author, a.tag, a.updateTime, a.publishTime, a.content, a.isPrivate, a.isBookArticle, a.isSlideshow " +
 						" from dbo.Article a (nolock) " + 
 						" left join HRIS.dbo.NEmployee b on a.Author = b.Id_No " + 
 						" left join HRIS.dbo.NSection c on b.Dept_no = c.Dept_no" +
