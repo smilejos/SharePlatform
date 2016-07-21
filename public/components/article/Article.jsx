@@ -8,9 +8,7 @@ import screenfull from 'screenfull';
 import Dropzone from'react-dropzone'
 import { highlight, highlightAuto } from 'highlight.js'
 import * as ArticleActions from '../../actions/ArticleActions'
-
 import ArticleContent from '../article/ArticleContent'
-
 
 class Article extends React.Component {
     constructor(props){

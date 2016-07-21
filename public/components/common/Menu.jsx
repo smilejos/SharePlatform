@@ -28,7 +28,11 @@ export default class Information extends React.Component {
                 <i className="fa fa-search"></i>
                 <Link to={ "/Search" } className="MenuItem">
                     Search
-                </Link>                
+                </Link>
+                <i className="fa fa-info"></i>
+                <Link to={ "/Article/68" } className="MenuItem">
+                    Log
+                </Link>
             </div>
         )
     }
