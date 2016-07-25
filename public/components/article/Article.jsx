@@ -22,22 +22,19 @@ class Article extends React.Component {
         console.log('receive nextProps');
         let { requestArticle, leaveArticle, cleanArticle } = this.props.actions;
         if( this.props.params.articleNo != nextProps.params.articleNo) {
-            cleanArticle();
-            leaveArticle(this.props.params.articleNo);
-
-            if ( this.props.params.articleNo != '') {
-                requestArticle(nextProps.params.articleNo);
-            }
+            console.log('request nextProps');
+            requestArticle(nextProps.params.articleNo);
         }
     }
 
     shouldComponentUpdate (nextProps, nextState) {
         // Make sure content already download from server
-        if( nextProps.state.article.articleNo != null) {
-            return true;
-        } else {
-            return false;
-        }
+        // if( nextProps.state.article.articleNo != null) {
+        //     console.log('shouldComponentUpdate', nextProps.state.article.articleNo);
+        //     return true;
+        // } else {
+        //     return false;
+        // }
 
         return true;
     }
@@ -57,6 +54,7 @@ class Article extends React.Component {
         let enabled = screenfull.enabled;
         if( enabled ) {
             let dom = findDOMNode(this.refs.content);
+            console.log('start fullscreen', dom);
             screenfull.request(dom);    
         }
         this._nextSildeshow();

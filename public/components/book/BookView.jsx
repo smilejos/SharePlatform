@@ -5,6 +5,7 @@ import { Link } from 'react-router'
 import { bindActionCreators  } from 'redux'
 import { connect } from 'react-redux'
 import * as BookActions from '../../actions/BookActions'
+import * as ArticleActions from '../../actions/ArticleActions'
 
 import ArticleContent from '../article/ArticleContent'
 import ArticleEditor from '../article/ArticleEditor'
@@ -13,11 +14,14 @@ import ArticlePreview from '../article/ArticlePreview'
 class BookView extends React.Component {
     constructor(props){
         super(props);
-        let { requestBook } = this.props.actions;
+        let { requestBook } = this.props.bookActions;
         requestBook(this.props.params.bookNo);
     }
 
-    _onChangeArticle(){
+    _onChangeArticle(articleNo){
+        let {  leaveArticle, cleanArticle  } = this.props.articleActions;
+        cleanArticle();
+        leaveArticle(articleNo);
         findDOMNode(this.refs.view).scrollTop = 0;
     }
 
@@ -25,7 +29,6 @@ class BookView extends React.Component {
         let chapters = this.props.state.chapters;
         let bookNo = this.props.params.bookNo;
         let list;
-        console.log(chapters);
         if( chapters && chapters.length > 0 ) {
             list = chapters.map(function(item, index){
                 return <Chapter key={index} chapter={item} bookNo={bookNo} click={this._onChangeArticle.bind(this)} />
@@ -45,9 +48,10 @@ class BookView extends React.Component {
 }
 
 class Chapter extends React.Component {
-    _onChangeArticle (){
+    _onChangeArticle (articleNo){
         this.props.click();
     }
+
     render(){
         let parts = this.props.chapter.parts;
         let bookNo = this.props.bookNo;
@@ -70,8 +74,8 @@ class Chapter extends React.Component {
 }
 
 class Part extends React.Component {
-    _onChangeArticle (){
-        this.props.click();
+    _onChangeArticle (articleNo){
+        this.props.click(articleNo);
     }
 
     render(){
@@ -79,7 +83,7 @@ class Part extends React.Component {
         return (
             <div className="Part">
                 <i className="fa fa-file-text-o" />
-                <Link className="ArticleEdit" to={"/Book/" + path} onClick={this._onChangeArticle.bind(this)}>
+                <Link className="ArticleEdit" to={"/Book/" + path} onClick={this._onChangeArticle.bind(this, this.props.part.articleNo)}>
                     {this.props.part.partTitle}
                 </Link>
             </div>
@@ -93,9 +97,14 @@ function mapStateToProps(state) {
     }
 }
 
+
 function mapDispatchToProps(dispatch) {
-    return { actions: bindActionCreators(BookActions, dispatch) }
+    return { 
+        articleActions: bindActionCreators(ArticleActions, dispatch),
+        bookActions: bindActionCreators(BookActions, dispatch) 
+    }
 }
+
 
 export default connect(
     mapStateToProps,

@@ -16,7 +16,6 @@ function renderFullPage(content, store) {
     <html>
 		<head>
 			<title>Biz Share Platform</title>
-      <link rel="stylesheet" href="/markdown.css" type="text/css" />   
       <link rel="stylesheet" href="/font-awesome.css" type="text/css" />
       <link rel="stylesheet" href="/react-select.css" type="text/css" />
       <link rel="stylesheet" href="/codeStyle.css" type="text/css" />
