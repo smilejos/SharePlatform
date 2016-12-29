@@ -58,7 +58,6 @@ module.exports = function(){
 			console.log('Member connected', socket.id);
 			let user = socket.request.session.user;
 		    if( user) {
-
 		        let IdNo = user.UserName;
 		        let self = handler.setOnline(IdNo);    
 		        console.log('Member Name:', self.card_na);

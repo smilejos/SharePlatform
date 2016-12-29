@@ -13,7 +13,9 @@
 		border-bottom: 1px solid #eee;
 		padding: 0px 10px;
 		cursor: pointer;
+
 		&:hover {
+            color: $MU_DarkGray;
 			background-color: #eee;
 		}
 
@@ -21,7 +23,7 @@
 			line-height: 20px;
 			font-size: 16px;
 			padding: 5px 10px;
-			color: #666;
+			color: $MU_DarkGray;
 			font-style: sans-serif;
 		}
 
@@ -37,6 +39,10 @@
 	}
 
 	.active {
-		background-color: blanchedalmond;
+		background-color: $MU_SkyBlue;
+        
+        span {
+            color: #fff;
+        }
 	}
 }

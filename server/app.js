@@ -70,11 +70,3 @@ common.on('connection', (client) => {
 });
 
 console.log("Start server with port:8888")
-
-setInterval(function(){
-    console.log(moment().format("MM/DD HH:mm:ss"), util.inspect(process.memoryUsage()));    
-}, 60000);
-
-setInterval(function(){
-    heapdump.writeSnapshot('D:/HeapLog/' + Date.now() + '.heapsnapshot');
-}, 360000);

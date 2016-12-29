@@ -49,7 +49,7 @@
 		.ArticleAuthor {
 			position: relative;
 			text-decoration: none;
-			color: #4078c0;
+			color: $MU_Blue;
 			font-size: 13px;
 			line-height: 14px;
 
@@ -61,7 +61,7 @@
 		.ArticleAction {
 			position: relative;
 			margin: 5px;
-			color: #666;
+			color: $MU_DarkGray;
 			font-size: 13px;
 			line-height: 14px;
 		}
@@ -69,7 +69,7 @@
 		.ArticleTitle {
 			position: relative;
 			text-decoration: none;
-			color: #4078c0;
+			color: $MU_Blue;
 			font-size: 13px;
 			line-height: 14px;
 
@@ -81,7 +81,7 @@
 		.ArticleTime {
 			position: relative;
 			margin: 5px;
-			color: #bbb;
+			color: $MU_Gray;
 			font-size: 13px;
 			line-height: 14px;
 		}
@@ -95,7 +95,7 @@
 				position: relative;
 				display: inline-block;
 				margin: 0px 2px;
-				color: #666;
+				color: $MU_Gray;
 				font-size: 12px;
 				line-height: 14px;
 				border: #eee 1px solid;

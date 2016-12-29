@@ -1,25 +1,29 @@
 .Menu{
 	position: fixed;
-	height: 15px;
+	height: 30px;
 	top: 0px;
 	left: 0px;
 	right: 0px;
 	padding: 5px 0 5px 10px;
 	border-bottom: 1px solid #eee;
-	background: #fff;
+	background: $MU_Blue;
 	z-index: 9999;
 	
 	.MenuItem{
 		position: relative;
-		color: #666;
+		color: #fff;
 		font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-		font-size: 12px;
-		line-height: 12px;
-		margin: 0 10px 0px 2px;
+		font-size: 14px;
+		line-height: 30px;
+		margin: 0 15px 0px 4px;
 		text-decoration: none;
 
 		&:hover {
 			text-decoration: underline;
 		}
 	}
+
+    i {
+       color: #fff;
+    }
 }

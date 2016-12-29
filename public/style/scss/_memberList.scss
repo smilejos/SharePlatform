@@ -16,7 +16,7 @@
 		&:hover {
 			background-color: blanchedalmond;
 			border-radius: 10px;
-			color: #000;
+			color: $MU_Black;
 		}
 
 		.image {
@@ -41,12 +41,12 @@
 			display: inline-block;
 			.primaryText {
 
-				color: #444;
+				color: $MU_DarkGray;
 				font-size: 16px;
 			}
 
 			.secondaryText {
-				color: #999;
+				color: $MU_Gray;
 				font-size: 14px;
 			}
 		}
@@ -67,7 +67,7 @@
 					line-height: 20px;
 					font-size: 14px;
 					padding: 5px 5px;
-					color: #666;
+					color: $MU_DarkGray;
 					font-style: sans-serif;
 
 				}
