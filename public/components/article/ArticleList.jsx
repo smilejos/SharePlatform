@@ -9,23 +9,59 @@ import { connect } from 'react-redux'
 import ArticleItem from '../article/ArticleItem'
 
 class ArticleList extends React.Component {
+    constructor(props) {
+        super(props);    
+    }
+
+    componentWillMount() {
+        this.setState({
+             page_index: 0
+        });
+    }
 
     componentWillUnmount() {
         let { cleanArticles } = this.props.actions;
         cleanArticles();
     }
 
+    _gotoPrevious() {
+        if (this.state.page_index == 0)
+            retrun  ;    
+        this.setState({
+            page_index: this.state.page_index - 1
+        });
+    }
+
+    _gotoNext() {
+        this.setState({
+            page_index: this.state.page_index + 1
+        });
+    }
+
     render() {
-        let list;
+        let list = [];
         let articles = this.props.isFilter ? this.props.filter_articles : this.props.articles;
-        if( articles && articles.length > 0) {
-            list = articles.map(function(item, index){
-                return <ArticleItem key={item.articleNo} article={item}  />
-            });
+        let minIndex = this.state.page_index * 10;
+        let maxIndex = (this.state.page_index + 1) * 10;
+        maxIndex = maxIndex > articles.length ? articles.length : maxIndex;
+        let isMinPage = this.state.page_index == 0;
+        let isMaxPage = maxIndex == articles.length;
+        if (articles && maxIndex > 0) {
+            for (let i = minIndex; i < maxIndex; i++){
+                list.push(<ArticleItem key={articles[i].articleNo} article={articles[i]}  />)
+            }
         }
         return (
             <div className="ArticleList">
                 {list}
+                <div className="btn-group">
+                    <span className="btn btn-default" disabled={isMinPage ? "disabled" : ""} onClick={this._gotoPrevious.bind(this)}>
+                        <i className="fa fa-chevron-left" title="Move to Previous"></i>
+                    </span>
+                    <span className="btn btn-default" disabled={isMaxPage ? "disabled" : ""} onClick={this._gotoNext.bind(this)}>
+                        <i className="fa fa-chevron-right" title="Move to Next"></i>
+                    </span>
+                </div>
             </div>
         );
     }

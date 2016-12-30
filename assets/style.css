@@ -228,6 +228,11 @@
       padding: 4px 10px;
       border-radius: 5px; }
 
+.ArticleList .btn-group {
+  position: absolute;
+  right: 0px;
+  bottom: -40px; }
+
 .page {
   background-color: #fff; }
 

@@ -66410,13 +66410,20 @@
 	var ArticleList = function (_React$Component) {
 	    _inherits(ArticleList, _React$Component);
 
-	    function ArticleList() {
+	    function ArticleList(props) {
 	        _classCallCheck(this, ArticleList);
 
-	        return _possibleConstructorReturn(this, (ArticleList.__proto__ || Object.getPrototypeOf(ArticleList)).apply(this, arguments));
+	        return _possibleConstructorReturn(this, (ArticleList.__proto__ || Object.getPrototypeOf(ArticleList)).call(this, props));
 	    }
 
 	    _createClass(ArticleList, [{
+	        key: 'componentWillMount',
+	        value: function componentWillMount() {
+	            this.setState({
+	                page_index: 0
+	            });
+	        }
+	    }, {
 	        key: 'componentWillUnmount',
 	        value: function componentWillUnmount() {
 	            var cleanArticles = this.props.actions.cleanArticles;
@@ -66424,19 +66431,53 @@
 	            cleanArticles();
 	        }
 	    }, {
+	        key: '_gotoPrevious',
+	        value: function _gotoPrevious() {
+	            if (this.state.page_index == 0) retrun;
+	            this.setState({
+	                page_index: this.state.page_index - 1
+	            });
+	        }
+	    }, {
+	        key: '_gotoNext',
+	        value: function _gotoNext() {
+	            this.setState({
+	                page_index: this.state.page_index + 1
+	            });
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var list = void 0;
+	            var list = [];
 	            var articles = this.props.isFilter ? this.props.filter_articles : this.props.articles;
-	            if (articles && articles.length > 0) {
-	                list = articles.map(function (item, index) {
-	                    return _react2.default.createElement(_ArticleItem2.default, { key: item.articleNo, article: item });
-	                });
+	            var minIndex = this.state.page_index * 10;
+	            var maxIndex = (this.state.page_index + 1) * 10;
+	            maxIndex = maxIndex > articles.length ? articles.length : maxIndex;
+	            var isMinPage = this.state.page_index == 0;
+	            var isMaxPage = maxIndex == articles.length;
+	            if (articles && maxIndex > 0) {
+	                for (var i = minIndex; i < maxIndex; i++) {
+	                    list.push(_react2.default.createElement(_ArticleItem2.default, { key: articles[i].articleNo, article: articles[i] }));
+	                }
 	            }
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'ArticleList' },
-	                list
+	                list,
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'btn-group' },
+	                    _react2.default.createElement(
+	                        'span',
+	                        { className: 'btn btn-default', disabled: isMinPage ? "disabled" : "", onClick: this._gotoPrevious.bind(this) },
+	                        _react2.default.createElement('i', { className: 'fa fa-chevron-left', title: 'Move to Previous' })
+	                    ),
+	                    _react2.default.createElement(
+	                        'span',
+	                        { className: 'btn btn-default', disabled: isMaxPage ? "disabled" : "", onClick: this._gotoNext.bind(this) },
+	                        _react2.default.createElement('i', { className: 'fa fa-chevron-right', title: 'Move to Next' })
+	                    )
+	                )
 	            );
 	        }
 	    }]);
