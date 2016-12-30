@@ -12,7 +12,7 @@
     top: 15px; }
   .ArticleContent .ArticlePage .ArticleTitle {
     position: relative;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
     font-size: 2.2em;
     font-weight: bold;
     padding: 0px 0px 10px 2px;
@@ -77,11 +77,11 @@
         width: 80%;
         -webkit-transform: translateX(-50%); }
     .ArticleSlideShow .ArticlePage .ArticleFooter {
-      font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+      font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
       font-size: 14px;
       font-weight: bold;
       position: absolute;
-      border-top: solid 1px #ddd;
+      border-top: solid 1px #eee;
       height: 50px;
       bottom: 0px;
       width: 100%; }
@@ -102,8 +102,8 @@
 
 .ArticleControl .ArticleEdit {
   position: relative;
-  color: #666;
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  color: #58595b;
+  font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
   font-size: 16px;
   line-height: 16px;
   text-decoration: none;
@@ -125,7 +125,7 @@
   margin-left: -440px; }
   .ArticleEditor .ArticleTitle {
     position: relative;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
     font-size: 2.2em;
     font-weight: bold;
     padding: 0px 0px 10px 2px;
@@ -135,7 +135,7 @@
     resize: none;
     width: 860px;
     height: 600px;
-    border: solid #ddd 1px;
+    border: solid #eee 1px;
     border-radius: 3px;
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
     background-color: #fafafa;
@@ -179,9 +179,9 @@
 
 .ArticleList .ArticleActivity {
   position: relative;
-  font-style: sans-serif;
+  font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
   padding: 1em 0 1em 0;
-  border-bottom: 1px solid #f1f1f1;
+  border-bottom: 1px solid #eee;
   width: 600px;
   font-weight: normal;
   display: block;
@@ -212,7 +212,7 @@
     position: relative;
     margin: 5px;
     color: #9a9b9d;
-    font-size: 13px;
+    font-size: 10px;
     line-height: 14px; }
   .ArticleList .ArticleActivity .ArticleTags {
     position: absolute;
@@ -230,7 +230,7 @@
       border-radius: 5px; }
 
 .page {
-  background-color: #eee; }
+  background-color: #fff; }
 
 .container {
   position: absolute;
@@ -271,7 +271,7 @@
     background-image: linear-gradient(#79d858, #569e3d); }
 
 .BookMenu {
-  border: 1px solid #c9c9c9;
+  border: 1px solid #eee;
   background-color: #fff;
   height: auto;
   width: auto;
@@ -285,13 +285,13 @@
   .BookMenu li {
     padding: 5px 15px;
     cursor: pointer;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
     font-size: 14px;
     line-height: 16px; }
     .BookMenu li i {
       width: 20px; }
     .BookMenu li:hover {
-      background-color: #428bca;
+      background-color: #45b4ff;
       color: #fff; }
 
 .BookView .BookStructure {
@@ -311,19 +311,20 @@
     position: relative; }
     .BookView .BookStructure .ChapterSection .Part i {
       position: absolute;
-      color: #000;
+      color: #2c2c2e;
       top: 4px;
       left: 25px; }
     .BookView .BookStructure .ChapterSection .Part:hover {
-      background-color: #eee;
-      color: #000; }
+      background-color: #45b4ff;
+      color: #fff; }
     .BookView .BookStructure .ChapterSection .Part a {
       padding: 4px 0px 4px 5px;
       display: block;
       text-decoration: none;
-      color: #616161; }
+      color: #58595b; }
       .BookView .BookStructure .ChapterSection .Part a:hover {
-        color: #000; }
+        background-color: #45b4ff;
+        color: #fff; }
 
 .BookView .BookContent {
   position: absolute;
@@ -350,14 +351,15 @@
     padding: 0px 10px;
     cursor: pointer; }
     .categoryList .category:hover {
-      color: #58595b;
-      background-color: #eee; }
+      background-color: #45b4ff; }
+      .categoryList .category:hover span {
+        color: #fff; }
     .categoryList .category span {
       line-height: 20px;
       font-size: 16px;
       padding: 5px 10px;
       color: #58595b;
-      font-style: sans-serif; }
+      font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif; }
     .categoryList .category .name {
       position: absolute;
       left: 0px; }
@@ -365,7 +367,7 @@
       position: absolute;
       right: 0px; }
   .categoryList .active {
-    background-color: #45b4ff; }
+    background-color: #0077c8; }
     .categoryList .active span {
       color: #fff; }
 
@@ -385,7 +387,7 @@
       font-size: 20px;
       height: 25px;
       margin: 0px 25px 0px 10px;
-      border-bottom: #ccc 1px solid;
+      border-bottom: #eee 1px solid;
       color: #58595b;
       font-weight: bolder; }
     .CategoryMap .CategoryGroup .CategoryItem {
@@ -398,11 +400,12 @@
       line-height: 16px;
       font-size: 16px;
       color: #58595b;
-      font-style: sans-serif;
+      font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
       cursor: pointer; }
       .CategoryMap .CategoryGroup .CategoryItem:hover {
-        background-color: #eee;
-        border: 1px #ddd solid; }
+        background-color: #45b4ff;
+        color: #fff;
+        border: 1px #eee solid; }
       .CategoryMap .CategoryGroup .CategoryItem .name {
         position: absolute;
         padding: 5px 5px;
@@ -422,25 +425,25 @@
   margin-left: -300px; }
   .ContentSetting .Section {
     padding: 30px 0px 5px 0px;
-    border-bottom: #ddd solid 1px;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; }
+    border-bottom: #eee solid 1px;
+    font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif; }
     .ContentSetting .Section .Title {
-      color: #333;
+      color: #2c2c2e;
       font-size: 20px;
       font-weight: bold;
       line-height: 30px; }
     .ContentSetting .Section .Description {
-      color: #767676;
+      color: #58595b;
       font-size: 14px;
       line-height: 20px; }
     .ContentSetting .Section input[type="text"] {
       position: relative;
-      font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+      font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
       font-size: 16px;
       font-weight: bold;
       width: 450px;
       padding: 3px 5px;
-      border: solid #ddd 1px;
+      border: solid #eee 1px;
       border-radius: 3px;
       box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
       background-color: #fafafa;
@@ -466,11 +469,11 @@
         height: 50px;
         width: auto; }
         .ContentSetting .Section .ItemSection .ItemDescription .MainDescription {
-          color: #333;
+          color: #2c2c2e;
           font-size: 18px;
           line-height: 20px; }
         .ContentSetting .Section .ItemSection .ItemDescription .SubDescription {
-          color: #767676;
+          color: #58595b;
           font-size: 12px;
           line-height: 14px; }
 
@@ -826,16 +829,25 @@
   left: 50%;
   margin-left: -450px; }
   .MemberList .MemberBox {
-    width: 280px;
+    width: 270px;
+    margin: 2px 3px;
     height: auto;
     float: left;
     padding: 10px;
     height: 120px;
-    cursor: pointer; }
+    cursor: pointer;
+    border-radius: 10px;
+    border: #eee 1px solid;
+    font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif; }
     .MemberList .MemberBox:hover {
-      background-color: blanchedalmond;
-      border-radius: 10px;
-      color: #2c2c2e; }
+      background-color: #45b4ff;
+      color: #fff; }
+      .MemberList .MemberBox:hover .memberInfo .primaryText {
+        color: #fff; }
+      .MemberList .MemberBox:hover .memberInfo .secondaryText {
+        color: #fff; }
+      .MemberList .MemberBox:hover .tagInfo .tagText span {
+        color: #fff; }
     .MemberList .MemberBox .image {
       position: relative;
       width: 60px;
@@ -847,13 +859,13 @@
         border-radius: 5px;
         border: 1px #eee solid; }
     .MemberList .MemberBox .memberInfo {
-      font-family: Roboto,sans-serif;
+      font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
       height: 80px;
       line-height: 25px;
       padding: 5px 0px 0px 10px;
       display: inline-block; }
       .MemberList .MemberBox .memberInfo .primaryText {
-        color: #58595b;
+        color: #2c2c2e;
         font-size: 16px; }
       .MemberList .MemberBox .memberInfo .secondaryText {
         color: #9a9b9d;
@@ -864,16 +876,16 @@
       border: 1px solid #eee;
       padding: 0px 2px;
       width: 80px;
-      margin-right: 5px;
+      margin-right: 3px;
       border-radius: 5px;
       display: inline-block;
       float: left; }
       .MemberList .MemberBox .tagInfo .tagText span {
         line-height: 20px;
-        font-size: 14px;
+        font-size: 11px;
         padding: 5px 5px;
-        color: #58595b;
-        font-style: sans-serif; }
+        color: #2c2c2e;
+        font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif; }
       .MemberList .MemberBox .tagInfo .tagText .name {
         position: absolute;
         left: 0px; }
@@ -894,7 +906,7 @@
   .Menu .MenuItem {
     position: relative;
     color: #fff;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
     font-size: 14px;
     line-height: 30px;
     margin: 0 15px 0px 4px;
@@ -910,7 +922,7 @@
   height: 150px;
   left: 50%;
   margin-left: -300px;
-  border-bottom: 1px solid #ddd; }
+  border-bottom: 1px solid #eee; }
   .personalBox .image {
     position: relative;
     width: 130px;
@@ -930,7 +942,7 @@
     padding-top: 5px;
     display: inline-block; }
     .personalBox .personal .information {
-      font-family: Roboto,sans-serif;
+      font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
       line-height: 16px;
       padding: 10px; }
       .personalBox .personal .information .primaryText {
@@ -950,7 +962,7 @@
         margin-right: 5px; }
       .personalBox .control .controlItem a {
         color: #58595b;
-        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
         font-size: 14px;
         line-height: 14px;
         text-decoration: none; }
@@ -964,28 +976,29 @@
   margin-left: -300px; }
   .SearchSetting .Section {
     padding: 50px 0px 10px 0px;
-    border-bottom: #ddd solid 1px;
+    border-bottom: #eee solid 1px;
     height: 90px;
     background-color: #fff;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
     text-align: center; }
     .SearchSetting .Section .Title {
-      color: #333;
+      color: #2c2c2e;
       font-size: 20px;
       font-weight: bold;
       line-height: 30px; }
     .SearchSetting .Section .Description {
-      color: #767676;
+      color: #58595b;
       font-size: 14px;
       line-height: 20px; }
     .SearchSetting .Section input[type="text"] {
       position: relative;
-      font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+      font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
       font-size: 16px;
       font-weight: bold;
       width: 300px;
       padding: 3px 5px;
-      border: solid #ddd 1px;
+      color: #58595b;
+      border: solid #eee 1px;
       border-radius: 3px;
       box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
       background-color: #fafafa;

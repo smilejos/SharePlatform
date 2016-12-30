@@ -1,6 +1,6 @@
 .BookMenu {
-	border: 1px solid #c9c9c9;
-	background-color: #fff;
+	border: 1px solid $ItemBorderColor;
+	background-color: $CommonBackgroundColor;
     height: auto;
     width: auto;
     position: fixed;
@@ -14,7 +14,7 @@
     li {
     	padding: 5px 15px;
     	cursor: pointer;
-        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-family: $FontFamily;
         font-size: 14px;
         line-height: 16px;
         
@@ -23,8 +23,8 @@
     	}
 
     	&:hover {
-    		background-color: #428bca;
-    		color: #fff;
+    		background-color: $HoverBackgroundColor;
+    		color: $HoverTextColor;
     	}
     }
 }

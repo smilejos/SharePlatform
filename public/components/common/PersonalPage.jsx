@@ -56,7 +56,7 @@ class App extends React.Component {
                         </div>
                     </div>
                 </div>
-                <ArticleOverview />
+                <ArticleOverview userId= { this.props.self.Id_No } />
             </div>
         )
     }

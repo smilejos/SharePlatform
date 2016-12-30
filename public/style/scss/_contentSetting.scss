@@ -3,7 +3,7 @@
 	width: 600px;
 	height: auto;
 	padding: 40px 0px 20px;
-	background-color: #fff;
+	background-color: $CommonBackgroundColor;
 	left: 50%;
 	margin-left: -300px;
 	
@@ -11,33 +11,33 @@
 	.Section
 	{
 		padding: 30px 0px 5px 0px;
-		border-bottom: #ddd solid 1px;
-		font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+		border-bottom: $ItemBorderColor solid 1px;
+		font-family: $FontFamily;
 
 		.Title {
-			color: #333;
+			color:  $TitleTextColor;
 			font-size: 20px;
 			font-weight: bold;
 			line-height: 30px;
 		}
 
 		.Description {
-			color: #767676;
+			color: $MarjoyTextColor;
 			font-size: 14px;
 			line-height: 20px;
 		}
 
 		input[type="text"] {
 			position: relative;
-			font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+			font-family: $FontFamily;
 			font-size: 16px;
 			font-weight: bold;
 			width: 450px;
 			padding: 3px 5px;
-			border: solid #ddd 1px;
+			border: solid $ItemBorderColor 1px;
 			border-radius: 3px;
 			box-shadow: inset 0 1px 2px rgba(0,0,0,0.075);
-			background-color: #fafafa;
+			background-color: $EditerBackgroundColor;
 			line-height: 1.4;
 		}
 
@@ -68,13 +68,13 @@
 				width: auto;
 
 				.MainDescription {
-					color: #333;
+					color: $TitleTextColor;
 					font-size: 18px;
 					line-height: 20px;
 				}
 
 				.SubDescription {
-					color: #767676;
+					color: $MarjoyTextColor;
 					font-size: 12px;
 					line-height: 14px;
 				}

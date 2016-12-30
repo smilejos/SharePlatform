@@ -9,7 +9,7 @@
 .ArticleList {
 	.ArticleItem {
 		position: relative;
-		border: solid #eee 1px;
+		border: solid $ItemBorderColor 1px;
 		padding: 10px 10px;
 		margin: 5px;
 		width: 600px;
@@ -38,9 +38,9 @@
 .ArticleList {
 	.ArticleActivity {
 		position: relative;
-		font-style: sans-serif;
+		font-family: $FontFamily;
 		padding: 1em 0 1em 0;
-		border-bottom: 1px solid #f1f1f1;
+		border-bottom: 1px solid $ItemBorderColor;
 		width: 600px;
 		font-weight: normal;
 		display: block;
@@ -49,7 +49,7 @@
 		.ArticleAuthor {
 			position: relative;
 			text-decoration: none;
-			color: $MU_Blue;
+			color: $LinkedTextColor;
 			font-size: 13px;
 			line-height: 14px;
 
@@ -61,7 +61,7 @@
 		.ArticleAction {
 			position: relative;
 			margin: 5px;
-			color: $MU_DarkGray;
+			color: $MarjoyTextColor;
 			font-size: 13px;
 			line-height: 14px;
 		}
@@ -69,7 +69,7 @@
 		.ArticleTitle {
 			position: relative;
 			text-decoration: none;
-			color: $MU_Blue;
+			color: $LinkedTextColor;
 			font-size: 13px;
 			line-height: 14px;
 
@@ -81,8 +81,8 @@
 		.ArticleTime {
 			position: relative;
 			margin: 5px;
-			color: $MU_Gray;
-			font-size: 13px;
+			color: $LittleTextColor;
+			font-size: 10px;
 			line-height: 14px;
 		}
 
@@ -95,10 +95,10 @@
 				position: relative;
 				display: inline-block;
 				margin: 0px 2px;
-				color: $MU_Gray;
+				color: $LittleTextColor;
 				font-size: 12px;
 				line-height: 14px;
-				border: #eee 1px solid;
+				border: $ItemBorderColor 1px solid;
 				padding: 4px 10px;
 				border-radius: 5px;
 			}

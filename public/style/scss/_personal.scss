@@ -4,7 +4,7 @@
 	height: 150px;
 	left: 50%;
 	margin-left: -300px;
-	border-bottom: 1px solid #ddd;
+	border-bottom: 1px solid $ItemBorderColor;
 
 	.image {
 		position: relative;
@@ -17,7 +17,7 @@
 		img {
 			height: 130px;
 			border-radius: 20px;
-			border: 1px #eee solid;
+			border: 1px $ItemBorderColor solid;
 		}
 	}
 
@@ -30,17 +30,17 @@
 		display: inline-block;
 
 		.information {
-			font-family: Roboto,sans-serif;
+			font-family: $FontFamily;
 			line-height: 16px;
 			padding: 10px;
 
 			.primaryText {
-				color: $MU_DarkGray;
+				color: $MarjoyTextColor;
 				font-size: 16px;
 			}
 
 			.secondaryText {
-				color: $MU_Gray;
+				color: $LittleTextColor;
 				font-size: 14px;
 			}
 		}
@@ -60,8 +60,8 @@
 			}
 
 			a {
-				color: $MU_DarkGray;
-				font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+				color: $MarjoyTextColor;
+				font-family: $FontFamily;
 				font-size: 14px;
 				line-height: 14px;
 				text-decoration: none;

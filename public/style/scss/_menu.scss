@@ -5,14 +5,14 @@
 	left: 0px;
 	right: 0px;
 	padding: 5px 0 5px 10px;
-	border-bottom: 1px solid #eee;
+	border-bottom: 1px solid $ItemBorderColor;
 	background: $MU_Blue;
 	z-index: 9999;
 	
 	.MenuItem{
 		position: relative;
 		color: #fff;
-		font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+		font-family: $MU_Font;
 		font-size: 14px;
 		line-height: 30px;
 		margin: 0 15px 0px 4px;

@@ -4,27 +4,29 @@
 	left: -250px;
 	height: auto;
 	width: 200px;
-	border: 1px solid #eee;
+	border: 1px solid $ItemBorderColor;
 	border-bottom: 0px;
 
 	.category {
 		position: relative;
 		height: 30px;
-		border-bottom: 1px solid #eee;
+		border-bottom: 1px solid $ItemBorderColor;
 		padding: 0px 10px;
 		cursor: pointer;
 
 		&:hover {
-            color: $MU_DarkGray;
-			background-color: #eee;
+			background-color: $HoverBackgroundColor;
+            span {
+                color: $HoverTextColor;
+            }
 		}
 
 		span {
 			line-height: 20px;
 			font-size: 16px;
 			padding: 5px 10px;
-			color: $MU_DarkGray;
-			font-style: sans-serif;
+			color: $MarjoyTextColor;
+			font-family: $FontFamily;
 		}
 
 		.name {
@@ -39,8 +41,7 @@
 	}
 
 	.active {
-		background-color: $MU_SkyBlue;
-        
+		background-color: $ActivedBackgroundColor;
         span {
             color: #fff;
         }

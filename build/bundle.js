@@ -35345,7 +35345,7 @@
 	                        )
 	                    )
 	                ),
-	                _react2.default.createElement(_ArticleOverview2.default, null)
+	                _react2.default.createElement(_ArticleOverview2.default, { userId: this.props.self.Id_No })
 	            );
 	        }
 	    }]);
@@ -118209,12 +118209,6 @@
 	                    _reactRouter.Link,
 	                    { to: "/Group", className: 'MenuItem' },
 	                    'Group'
-	                ),
-	                _react2.default.createElement('i', { className: 'fa fa-book' }),
-	                _react2.default.createElement(
-	                    _reactRouter.Link,
-	                    { to: "/Book/1", className: 'MenuItem' },
-	                    'Books'
 	                ),
 	                _react2.default.createElement('i', { className: 'fa fa-tag' }),
 	                _react2.default.createElement(

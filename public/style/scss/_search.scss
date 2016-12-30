@@ -6,37 +6,37 @@
 
 	.Section {
 		padding: 50px 0px 10px 0px;
-		border-bottom: #ddd solid 1px;
+		border-bottom: $ItemBorderColor solid 1px;
 		height: 90px;
-		background-color: #fff;
-		font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+		background-color: $CommonBackgroundColor;
+		font-family: $FontFamily;
  		text-align: center;
 
  		.Title {
-			color: #333;
+			color: $TitleTextColor;
 			font-size: 20px;
 			font-weight: bold;
 			line-height: 30px;
 		}
 
 		.Description {
-			color: #767676;
+			color: $MarjoyTextColor;
 			font-size: 14px;
 			line-height: 20px;
 		}
 
-
 		input[type="text"] {
 			position: relative;
-			font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+			font-family: $FontFamily;
 			font-size: 16px;
 			font-weight: bold;
 			width: 300px;
 			padding: 3px 5px;
-			border: solid #ddd 1px;
+            color: $MarjoyTextColor;
+			border: solid $ItemBorderColor 1px;
 			border-radius: 3px;
 			box-shadow: inset 0 1px 2px rgba(0,0,0,0.075);
-			background-color: #fafafa;
+			background-color: $EditerBackgroundColor;
 			line-height: 1.4;
 		}
 

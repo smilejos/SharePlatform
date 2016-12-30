@@ -6,17 +6,36 @@
 	margin-left: -450px;
 
 	.MemberBox {
-		width: 280px;
+		width: 270px;
+        margin: 2px 3px;
 		height: auto;
 		float: left;
 		padding: 10px;
 		height: 120px;
 		cursor: pointer;
+        border-radius: 10px;
+        border: $ItemBorderColor 1px solid;
+        font-family: $FontFamily;
 
 		&:hover {
-			background-color: blanchedalmond;
-			border-radius: 10px;
-			color: $MU_Black;
+			background-color: $HoverBackgroundColor;
+			color: $HoverTextColor;
+            .memberInfo {
+                .primaryText {
+                    color: $HoverTextColor;
+                }
+                .secondaryText {
+                    color: $HoverTextColor;
+                }
+            }
+
+            .tagInfo {
+                .tagText {
+                    span {
+                        color: $HoverTextColor;
+                    }
+                }
+            }
 		}
 
 		.image {
@@ -29,24 +48,23 @@
 			img {
 				height: 80px;
 				border-radius: 5px;
-				border: 1px #eee solid;
+				border: 1px $ItemBorderColor solid;
 			}
 		}
 
 		.memberInfo {
-			font-family: Roboto,sans-serif;
+			font-family: $FontFamily;
 			height: 80px;
 			line-height: 25px;
 			padding: 5px 0px 0px 10px;
 			display: inline-block;
 			.primaryText {
-
-				color: $MU_DarkGray;
+				color: $TitleTextColor;
 				font-size: 16px;
 			}
 
 			.secondaryText {
-				color: $MU_Gray;
+				color: $LittleTextColor;
 				font-size: 14px;
 			}
 		}
@@ -55,21 +73,20 @@
 			.tagText {
 				position: relative;
 				height: 30px;
-				border: 1px solid #eee;
+				border: 1px solid $ItemBorderColor;
 				padding: 0px 2px;
 				width: 80px;
-				margin-right: 5px;
+				margin-right: 3px;
 				border-radius: 5px;
 				display: inline-block;
 				float: left;
 
 				span {
 					line-height: 20px;
-					font-size: 14px;
+					font-size: 11px;
 					padding: 5px 5px;
-					color: $MU_DarkGray;
-					font-style: sans-serif;
-
+					color: $TitleTextColor;
+					font-family: $FontFamily;
 				}
 
 				.name {

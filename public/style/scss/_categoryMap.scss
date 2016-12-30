@@ -16,27 +16,28 @@
 			font-size: 20px;
 			height: 25px;
 			margin: 0px 25px 0px 10px;
-			border-bottom: #ccc 1px solid;
-			color: $MU_DarkGray;
+			border-bottom: $ItemBorderColor 1px solid;
+			color: $MarjoyTextColor;
 			font-weight: bolder;
 		}
 
 		.CategoryItem {
 			position: relative;
 			display: inline-block;
-			border: 1px #eee solid;
+			border: 1px $ItemBorderColor solid;
 			margin: 10px 12px 0px 12px;
 			width: 120px;
 			height: 26px;
 			line-height: 16px;
 			font-size: 16px;
-			color: $MU_DarkGray;
-			font-style: sans-serif;
+			color: $MarjoyTextColor;
+			font-family: $FontFamily;
 			cursor: pointer;
 
 			&:hover {
-				background-color: #eee;
-				border: 1px #ddd solid;
+				background-color: $HoverBackgroundColor;
+                color: $HoverTextColor;
+				border: 1px $ItemBorderColor solid;
 			}
 
 			.name {
