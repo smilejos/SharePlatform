@@ -1,0 +1,1227 @@
+.ArticleContent {
+  position: relative;
+  max-width: 880px;
+  height: auto;
+  padding: 40px 0px 20px;
+  background-color: #fff;
+  left: 50%;
+  margin-left: -440px;
+}
+.ArticleContent .ArticleControl {
+  position: absolute;
+  right: 0px;
+  top: 15px;
+}
+.ArticleContent .ArticlePage .ArticleTitle {
+  position: relative;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 2.2em;
+  font-weight: bold;
+  padding: 0px 0px 10px 2px;
+  border-bottom: solid #eee 1px;
+  line-height: 1.2;
+}
+.ArticleContent .ArticlePage .markdown-body {
+  text-align: left;
+  margin-top: 5px;
+  position: relative;
+  overflow: auto;
+  padding: 40px;
+  border: 1px solid #eee;
+  border-radius: 5px;
+}
+.ArticleContent .ArticlePage .ArticleFooter {
+  display: none;
+}
+
+.ArticleLoading {
+  position: fixed;
+  width: 200px;
+  height: 200px;
+  top: 30%;
+  left: 50%;
+  margin-left: -100px;
+}
+
+.ArticleSlideShow {
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+}
+.ArticleSlideShow .ArticleControl {
+  position: absolute;
+  right: 10px;
+  top: 30px;
+}
+.ArticleSlideShow .ArticlePage {
+  position: absolute;
+  top: 50px;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+}
+.ArticleSlideShow .ArticlePage .ArticleTitle {
+  display: none;
+}
+.ArticleSlideShow .ArticlePage .markdown-body {
+  text-align: left;
+  margin-top: 5px;
+  position: absolute;
+  top: 0px;
+  bottom: 50px;
+  right: 0px;
+  left: 0px;
+  overflow-y: auto;
+  padding: 40px 50px 0px 50px;
+}
+.ArticleSlideShow .ArticlePage .markdown-body h1, .ArticleSlideShow .ArticlePage .markdown-body h2 {
+  border-bottom: 1px solid #eee;
+  color: #28637F;
+}
+.ArticleSlideShow .ArticlePage .markdown-body pre {
+  font-size: 100%;
+}
+.ArticleSlideShow .ArticlePage .markdown-body img {
+  position: relative;
+  left: 50%;
+  background-color: #000;
+  width: 80%;
+  -webkit-transform: translateX(-50%);
+}
+.ArticleSlideShow .ArticlePage .ArticleFooter {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  position: absolute;
+  border-top: solid 1px #ddd;
+  height: 50px;
+  bottom: 0px;
+  width: 100%;
+}
+.ArticleSlideShow .ArticlePage .ArticleFooter .PageInfo {
+  position: absolute;
+  width: 100px;
+  top: 20px;
+  left: 50%;
+  margin-left: -50px;
+}
+.ArticleSlideShow .ArticlePage .ArticleFooter .Author {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+}
+.ArticleSlideShow .ArticlePage .ArticleFooter .Department {
+  position: absolute;
+  top: 30px;
+  right: 20px;
+}
+
+.ArticleControl .ArticleEdit {
+  position: relative;
+  color: #666;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 16px;
+  line-height: 16px;
+  text-decoration: none;
+  margin-right: 5px;
+  cursor: pointer;
+}
+.ArticleControl .ArticleEdit:hover {
+  text-decoration: underline;
+}
+.ArticleControl i {
+  margin-left: 10px;
+}
+
+.ArticleEditor {
+  position: relative;
+  max-width: 880px;
+  height: auto;
+  padding: 40px 0px;
+  background-color: #fff;
+  left: 50%;
+  margin-left: -440px;
+}
+.ArticleEditor .ArticleTitle {
+  position: relative;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 2.2em;
+  font-weight: bold;
+  padding: 0px 0px 10px 2px;
+  line-height: 1.2;
+}
+.ArticleEditor .ArticleText {
+  position: relative;
+  resize: none;
+  width: 860px;
+  height: 600px;
+  border: solid #ddd 1px;
+  border-radius: 3px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
+  background-color: #fafafa;
+  word-break: break-word;
+  white-space: pre-wrap;
+  padding: 10px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.ArticleUpload {
+  display: none;
+}
+
+.ArticleOverview {
+  position: relative;
+  width: 600px;
+  height: auto;
+  left: 50%;
+  margin-left: -300px;
+}
+
+.ArticleList .ArticleItem {
+  position: relative;
+  border: solid #eee 1px;
+  padding: 10px 10px;
+  margin: 5px;
+  width: 600px;
+  height: 40px;
+  display: block;
+  color: black;
+}
+.ArticleList .ArticleItem .ArticleTitle {
+  position: relative;
+  float: left;
+  width: 80%;
+  font-size: 18px;
+  line-height: 20px;
+}
+.ArticleList .ArticleItem .ArticleAuthor {
+  position: relative;
+  float: left;
+  width: 20%;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.ArticleList .ArticleActivity {
+  position: relative;
+  font-style: sans-serif;
+  padding: 1em 0 1em 0;
+  border-bottom: 1px solid #f1f1f1;
+  width: 600px;
+  font-weight: normal;
+  display: block;
+  color: black;
+}
+.ArticleList .ArticleActivity .ArticleAuthor {
+  position: relative;
+  text-decoration: none;
+  color: #0077c8;
+  font-size: 13px;
+  line-height: 14px;
+}
+.ArticleList .ArticleActivity .ArticleAuthor:hover {
+  text-decoration: underline;
+}
+.ArticleList .ArticleActivity .ArticleAction {
+  position: relative;
+  margin: 5px;
+  color: #58595b;
+  font-size: 13px;
+  line-height: 14px;
+}
+.ArticleList .ArticleActivity .ArticleTitle {
+  position: relative;
+  text-decoration: none;
+  color: #0077c8;
+  font-size: 13px;
+  line-height: 14px;
+}
+.ArticleList .ArticleActivity .ArticleTitle:hover {
+  text-decoration: underline;
+}
+.ArticleList .ArticleActivity .ArticleTime {
+  position: relative;
+  margin: 5px;
+  color: #9a9b9d;
+  font-size: 13px;
+  line-height: 14px;
+}
+.ArticleList .ArticleActivity .ArticleTags {
+  position: absolute;
+  right: 0px;
+  top: 12px;
+}
+.ArticleList .ArticleActivity .ArticleTags .ArticleTag {
+  position: relative;
+  display: inline-block;
+  margin: 0px 2px;
+  color: #9a9b9d;
+  font-size: 12px;
+  line-height: 14px;
+  border: #eee 1px solid;
+  padding: 4px 10px;
+  border-radius: 5px;
+}
+
+.page {
+  background-color: #eee;
+}
+
+.container {
+  position: absolute;
+  overflow-y: scroll;
+  top: 50px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+}
+
+::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+  background: #fff;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #aaa;
+  -webkit-border-radius: 6ex;
+}
+
+::-webkit-scrollbar-corner {
+  background: #fff;
+}
+
+.Button {
+  margin: 10px 5px 0px 0px;
+  position: relative;
+  display: inline-block;
+  padding: 3px 16px;
+  font-size: 13px;
+  line-height: 20px;
+  color: #fff;
+  cursor: pointer;
+  background-color: #60b044;
+  background-image: linear-gradient(#8add6d, #60b044);
+  border: 1px solid #5ca941;
+  border-radius: 3px;
+}
+.Button:hover {
+  background-color: #569e3d;
+  border-color: #4a993e;
+  background-image: linear-gradient(#79d858, #569e3d);
+}
+
+.BookMenu {
+  border: 1px solid #c9c9c9;
+  background-color: #fff;
+  height: auto;
+  width: auto;
+  position: fixed;
+  padding: 10px 0px;
+  border-radius: 5px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+  cursor: default;
+  list-style: none;
+  margin: 2px;
+}
+.BookMenu li {
+  padding: 5px 15px;
+  cursor: pointer;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  line-height: 16px;
+}
+.BookMenu li i {
+  width: 20px;
+}
+.BookMenu li:hover {
+  background-color: #428bca;
+  color: #fff;
+}
+
+.BookView .BookStructure {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  bottom: 0px;
+  width: 200px;
+  padding: 20px 0px 0px 0px;
+  border-right: 1px solid #eee;
+}
+.BookView .BookStructure .ChapterSection .Chapter {
+  padding: 4px 0px 4px 10px;
+}
+.BookView .BookStructure .ChapterSection .Chapter i {
+  margin: 0px 5px;
+}
+.BookView .BookStructure .ChapterSection .Part {
+  padding: 0px 0px 0px 40px;
+  position: relative;
+}
+.BookView .BookStructure .ChapterSection .Part i {
+  position: absolute;
+  color: #000;
+  top: 4px;
+  left: 25px;
+}
+.BookView .BookStructure .ChapterSection .Part:hover {
+  background-color: #eee;
+  color: #000;
+}
+.BookView .BookStructure .ChapterSection .Part a {
+  padding: 4px 0px 4px 5px;
+  display: block;
+  text-decoration: none;
+  color: #616161;
+}
+.BookView .BookStructure .ChapterSection .Part a:hover {
+  color: #000;
+}
+.BookView .BookContent {
+  position: absolute;
+  left: 200px;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  padding: 10px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.categoryList {
+  position: absolute;
+  top: 0px;
+  left: -250px;
+  height: auto;
+  width: 200px;
+  border: 1px solid #eee;
+  border-bottom: 0px;
+}
+.categoryList .category {
+  position: relative;
+  height: 30px;
+  border-bottom: 1px solid #eee;
+  padding: 0px 10px;
+  cursor: pointer;
+}
+.categoryList .category:hover {
+  color: #58595b;
+  background-color: #eee;
+}
+.categoryList .category span {
+  line-height: 20px;
+  font-size: 16px;
+  padding: 5px 10px;
+  color: #58595b;
+  font-style: sans-serif;
+}
+.categoryList .category .name {
+  position: absolute;
+  left: 0px;
+}
+.categoryList .category .count {
+  position: absolute;
+  right: 0px;
+}
+.categoryList .active {
+  background-color: #45b4ff;
+}
+.categoryList .active span {
+  color: #fff;
+}
+
+.CategoryMap {
+  position: relative;
+  width: 600px;
+  height: auto;
+  left: 50%;
+  margin-left: -300px;
+}
+.CategoryMap .CategoryGroup {
+  position: relative;
+  margin: 20px 0px;
+  width: 100%;
+  height: auto;
+}
+.CategoryMap .CategoryGroup .CategoryGroupName {
+  line-height: 20px;
+  font-size: 20px;
+  height: 25px;
+  margin: 0px 25px 0px 10px;
+  border-bottom: #ccc 1px solid;
+  color: #58595b;
+  font-weight: bolder;
+}
+.CategoryMap .CategoryGroup .CategoryItem {
+  position: relative;
+  display: inline-block;
+  border: 1px #eee solid;
+  margin: 10px 12px 0px 12px;
+  width: 120px;
+  height: 26px;
+  line-height: 16px;
+  font-size: 16px;
+  color: #58595b;
+  font-style: sans-serif;
+  cursor: pointer;
+}
+.CategoryMap .CategoryGroup .CategoryItem:hover {
+  background-color: #eee;
+  border: 1px #ddd solid;
+}
+.CategoryMap .CategoryGroup .CategoryItem .name {
+  position: absolute;
+  padding: 5px 5px;
+  left: 0px;
+}
+.CategoryMap .CategoryGroup .CategoryItem .count {
+  position: absolute;
+  padding: 5px 5px;
+  right: 0px;
+}
+
+.ContentSetting {
+  position: relative;
+  width: 600px;
+  height: auto;
+  padding: 40px 0px 20px;
+  background-color: #fff;
+  left: 50%;
+  margin-left: -300px;
+}
+.ContentSetting .Section {
+  padding: 30px 0px 5px 0px;
+  border-bottom: #ddd solid 1px;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.ContentSetting .Section .Title {
+  color: #333;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 30px;
+}
+.ContentSetting .Section .Description {
+  color: #767676;
+  font-size: 14px;
+  line-height: 20px;
+}
+.ContentSetting .Section input[type="text"] {
+  position: relative;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  width: 450px;
+  padding: 3px 5px;
+  border: solid #ddd 1px;
+  border-radius: 3px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
+  background-color: #fafafa;
+  line-height: 1.4;
+}
+.ContentSetting .Section .ItemSection {
+  height: 50px;
+  padding: 15px 0px 5px 0px;
+}
+.ContentSetting .Section .ItemSection .Action {
+  position: relative;
+  display: inline-block;
+  float: left;
+  height: 50px;
+  width: 30px;
+}
+.ContentSetting .Section .ItemSection .Image {
+  position: relative;
+  display: inline-block;
+  float: left;
+  height: 50px;
+  width: 50px;
+}
+.ContentSetting .Section .ItemSection .ItemDescription {
+  position: relative;
+  display: inline-block;
+  height: 50px;
+  width: auto;
+}
+.ContentSetting .Section .ItemSection .ItemDescription .MainDescription {
+  color: #333;
+  font-size: 18px;
+  line-height: 20px;
+}
+.ContentSetting .Section .ItemSection .ItemDescription .SubDescription {
+  color: #767676;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.markdown-body {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  color: #4C4C4C;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", Meiryo, "Microsoft JhengHei";
+  font-size: 16px;
+  line-height: 1.6;
+  word-wrap: break-word;
+}
+.markdown-body a {
+  background-color: transparent;
+  color: #4078c0;
+  text-decoration: none;
+}
+.markdown-body a:active, .markdown-body a:hover {
+  outline: 0;
+  text-decoration: underline;
+}
+.markdown-body a:not([href]) {
+  color: inherit;
+  text-decoration: none;
+}
+.markdown-body strong {
+  font-weight: bold;
+  color: #111;
+}
+.markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4, .markdown-body h5, .markdown-body h6 {
+  margin-top: 1em;
+  margin-bottom: 16px;
+  color: #111;
+  font-weight: bold;
+  line-height: 1.4;
+}
+.markdown-body h1 .octicon-link, .markdown-body h2 .octicon-link, .markdown-body h3 .octicon-link, .markdown-body h4 .octicon-link, .markdown-body h5 .octicon-link, .markdown-body h6 .octicon-link {
+  color: #000;
+  vertical-align: middle;
+  visibility: hidden;
+}
+.markdown-body h1:hover .anchor, .markdown-body h2:hover .anchor, .markdown-body h3:hover .anchor, .markdown-body h4:hover .anchor, .markdown-body h5:hover .anchor, .markdown-body h6:hover .anchor {
+  text-decoration: none;
+}
+.markdown-body h1:hover .anchor .octicon-link, .markdown-body h2:hover .anchor .octicon-link, .markdown-body h3:hover .anchor .octicon-link, .markdown-body h4:hover .anchor .octicon-link, .markdown-body h5:hover .anchor .octicon-link, .markdown-body h6:hover .anchor .octicon-link {
+  visibility: visible;
+}
+.markdown-body h1 {
+  margin: 0.67em 0;
+  padding-bottom: 0.3em;
+  font-size: 2.25em;
+  line-height: 1.2;
+}
+.markdown-body h2 {
+  padding-bottom: 0.3em;
+  font-size: 1.75em;
+  line-height: 1.225;
+}
+.markdown-body h3 {
+  font-size: 1.5em;
+  line-height: 1.43;
+}
+.markdown-body h4 {
+  font-size: 1.25em;
+}
+.markdown-body h5 {
+  font-size: 1em;
+}
+.markdown-body h6 {
+  font-size: 1em;
+  color: #777;
+}
+.markdown-body h1 .anchor, .markdown-body h2 .anchor {
+  line-height: 1;
+}
+.markdown-body h3 .anchor, .markdown-body h4 .anchor {
+  line-height: 1.2;
+}
+.markdown-body h5 .anchor, .markdown-body h6 .anchor {
+  line-height: 1.1;
+}
+.markdown-body img {
+  border: 0;
+  max-width: 100%;
+  box-sizing: content-box;
+  background-color: #fff;
+  vertical-align: top;
+}
+.markdown-body hr {
+  box-sizing: content-box;
+  overflow: hidden;
+  height: 1px;
+  padding: 0;
+  margin: 16px 0;
+  background-color: #e7e7e7;
+  border: 0 none;
+}
+.markdown-body hr:before {
+  display: table;
+  content: "";
+}
+.markdown-body hr:after {
+  display: table;
+  clear: both;
+  content: "";
+}
+.markdown-body input {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+  line-height: normal;
+  font: 13px / 1.4 Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+.markdown-body input[disabled] {
+  cursor: default;
+}
+.markdown-body input[type="checkbox"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+.markdown-body table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  display: block;
+  width: 100%;
+  overflow: auto;
+  word-break: normal;
+  word-break: keep-all;
+}
+.markdown-body table td, .markdown-body table th {
+  padding: 6px 13px;
+  border: 1px solid #ddd;
+}
+.markdown-body table th {
+  font-weight: bold;
+}
+.markdown-body table tr {
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+}
+.markdown-body table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+.markdown-body * {
+  box-sizing: border-box;
+}
+.markdown-body ul, .markdown-body ol {
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 2em;
+}
+.markdown-body ul ul, .markdown-body ol ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.markdown-body ul ul ol, .markdown-body ol ul ol {
+  list-style-type: lower-alpha;
+}
+.markdown-body ul ol, .markdown-body ol ol {
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style-type: lower-roman;
+}
+.markdown-body ul ol ol, .markdown-body ol ol ol {
+  list-style-type: lower-alpha;
+}
+.markdown-body code, .markdown-body kbd, .markdown-body pre {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+.markdown-body p, .markdown-body blockquote, .markdown-body ul, .markdown-body ol, .markdown-body dl, .markdown-body table, .markdown-body pre {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+.markdown-body li > p {
+  margin-top: 16px;
+}
+.markdown-body dd {
+  margin-left: 0;
+}
+.markdown-body dl {
+  padding: 0;
+}
+.markdown-body dl dt {
+  padding: 0 16px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  font-size: 1em;
+  font-style: italic;
+  font-weight: bold;
+}
+.markdown-body pre > code {
+  padding: 0;
+  margin: 0;
+  font-size: 100%;
+  word-break: normal;
+  white-space: pre;
+  background: transparent;
+  border: 0;
+  color: #4c4c4c;
+}
+.markdown-body pre {
+  overflow: auto;
+  margin-top: 0;
+  margin-bottom: 16px;
+  font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  padding: 16px;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: #f7f7f7;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  word-wrap: normal;
+}
+.markdown-body pre code {
+  display: inline;
+  max-width: initial;
+  padding: 0;
+  margin: 0;
+  overflow: initial;
+  line-height: inherit;
+  word-wrap: normal;
+  background-color: transparent;
+  border: 0;
+}
+.markdown-body pre code:before, .markdown-body pre code:after {
+  content: normal;
+}
+.markdown-body code {
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  font-size: 12px;
+  padding: 0;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  margin: 0 0.2em;
+  font-size: 85%;
+  background-color: #f9f2f4;
+  border-radius: 3px;
+  color: #c7254e;
+}
+.markdown-body code:before, .markdown-body code:after {
+  letter-spacing: -0.2em;
+  content: "\00a0";
+}
+.markdown-body kbd {
+  display: inline-block;
+  font: 11px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  padding: 3px 5px;
+  line-height: 10px;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fcfcfc;
+  border: solid 1px #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #bbb;
+}
+.markdown-body abbr {
+  cursor: help;
+  border-bottom: 1px dotted #777;
+}
+.markdown-body mark {
+  padding: 0.2em 0.4em;
+  margin: 0.2em;
+  border-radius: 3px;
+  background-color: #fff8d5;
+  color: #4c4c4c;
+  font-size: 85%;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace, "Microsoft JhengHei";
+}
+.markdown-body ins {
+  text-decoration: underline;
+}
+.markdown-body blockquote {
+  margin: 0;
+  margin-bottom: 16px;
+  padding: 0 15px;
+  color: #6C6C6C;
+  border-left: 6px solid #ddd;
+  background-color: #F7F7F7;
+}
+.markdown-body blockquote > :first-child {
+  margin-top: 0;
+}
+.markdown-body blockquote > :last-child {
+  margin-bottom: 0;
+}
+.markdown-body .select::-ms-expand {
+  opacity: 0;
+}
+.markdown-body .octicon {
+  font: normal normal normal 16px/1 octicons-link;
+  display: inline-block;
+  text-decoration: none;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.markdown-body .octicon-link:before {
+  content: '\f05c';
+}
+.markdown-body:before {
+  display: table;
+  content: "";
+}
+.markdown-body:after {
+  display: table;
+  clear: both;
+  content: "";
+}
+.markdown-body > *:first-child {
+  margin-top: 0 !important;
+}
+.markdown-body > *:last-child {
+  margin-bottom: 0 !important;
+}
+.markdown-body .anchor {
+  display: inline-block;
+  padding-right: 2px;
+  margin-left: -18px;
+}
+.markdown-body .anchor:focus {
+  outline: none;
+}
+.markdown-body .highlight {
+  margin-bottom: 16px;
+}
+.markdown-body .highlight pre {
+  padding: 16px;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: #f7f7f7;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin-bottom: 0;
+  word-break: normal;
+}
+.markdown-body .pl-c {
+  color: #969896;
+}
+.markdown-body .pl-c1,
+.markdown-body .pl-s .pl-v {
+  color: #0086b3;
+}
+.markdown-body .pl-e,
+.markdown-body .pl-en {
+  color: #795da3;
+}
+.markdown-body .pl-s .pl-s1,
+.markdown-body .pl-smi {
+  color: #333;
+}
+.markdown-body .pl-ent {
+  color: #63a35c;
+}
+.markdown-body .pl-k {
+  color: #a71d5d;
+}
+.markdown-body .pl-pds,
+.markdown-body .pl-s,
+.markdown-body .pl-s .pl-pse .pl-s1,
+.markdown-body .pl-sr,
+.markdown-body .pl-sr .pl-cce,
+.markdown-body .pl-sr .pl-sra,
+.markdown-body .pl-sr .pl-sre {
+  color: #183691;
+}
+.markdown-body .pl-v {
+  color: #ed6a43;
+}
+.markdown-body .pl-id {
+  color: #b52a1d;
+}
+.markdown-body .pl-ii {
+  background-color: #b52a1d;
+  color: #f8f8f8;
+}
+.markdown-body .pl-sr .pl-cce {
+  color: #63a35c;
+  font-weight: bold;
+}
+.markdown-body .pl-ml {
+  color: #693a17;
+}
+.markdown-body .pl-mh,
+.markdown-body .pl-mh .pl-en,
+.markdown-body .pl-ms {
+  color: #1d3e81;
+  font-weight: bold;
+}
+.markdown-body .pl-mq {
+  color: #008080;
+}
+.markdown-body .pl-mi {
+  color: #333;
+  font-style: italic;
+}
+.markdown-body .pl-mb {
+  color: #333;
+  font-weight: bold;
+}
+.markdown-body .pl-md {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+.markdown-body .pl-mi1 {
+  background-color: #eaffea;
+  color: #55a532;
+}
+.markdown-body .pl-mdr {
+  color: #795da3;
+  font-weight: bold;
+}
+.markdown-body .pl-mo {
+  color: #1d3e81;
+}
+.markdown-body .task-list-item {
+  list-style-type: none;
+}
+.markdown-body .task-list-item + .task-list-item {
+  margin-top: 3px;
+}
+.markdown-body .task-list-item input {
+  margin: 0 0.35em 0.25em -1.6em;
+  vertical-align: middle;
+}
+.markdown-body :checked + .radio-label {
+  z-index: 1;
+  position: relative;
+  border-color: #4078c0;
+}
+
+.MemberList {
+  position: relative;
+  margin-top: 20px;
+  width: 900px;
+  left: 50%;
+  margin-left: -450px;
+}
+.MemberList .MemberBox {
+  width: 280px;
+  height: auto;
+  float: left;
+  padding: 10px;
+  height: 120px;
+  cursor: pointer;
+}
+.MemberList .MemberBox:hover {
+  background-color: blanchedalmond;
+  border-radius: 10px;
+  color: #2c2c2e;
+}
+.MemberList .MemberBox .image {
+  position: relative;
+  width: 60px;
+  height: 80px;
+  display: inline-block;
+  float: left;
+}
+.MemberList .MemberBox .image img {
+  height: 80px;
+  border-radius: 5px;
+  border: 1px #eee solid;
+}
+.MemberList .MemberBox .memberInfo {
+  font-family: Roboto,sans-serif;
+  height: 80px;
+  line-height: 25px;
+  padding: 5px 0px 0px 10px;
+  display: inline-block;
+}
+.MemberList .MemberBox .memberInfo .primaryText {
+  color: #58595b;
+  font-size: 16px;
+}
+.MemberList .MemberBox .memberInfo .secondaryText {
+  color: #9a9b9d;
+  font-size: 14px;
+}
+.MemberList .MemberBox .tagInfo .tagText {
+  position: relative;
+  height: 30px;
+  border: 1px solid #eee;
+  padding: 0px 2px;
+  width: 80px;
+  margin-right: 5px;
+  border-radius: 5px;
+  display: inline-block;
+  float: left;
+}
+.MemberList .MemberBox .tagInfo .tagText span {
+  line-height: 20px;
+  font-size: 14px;
+  padding: 5px 5px;
+  color: #58595b;
+  font-style: sans-serif;
+}
+.MemberList .MemberBox .tagInfo .tagText .name {
+  position: absolute;
+  left: 0px;
+}
+.MemberList .MemberBox .tagInfo .tagText .count {
+  position: absolute;
+  right: 0px;
+}
+
+.Menu {
+  position: fixed;
+  height: 30px;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  padding: 5px 0 5px 10px;
+  border-bottom: 1px solid #eee;
+  background: #0077c8;
+  z-index: 9999;
+}
+.Menu .MenuItem {
+  position: relative;
+  color: #fff;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  line-height: 30px;
+  margin: 0 15px 0px 4px;
+  text-decoration: none;
+}
+.Menu .MenuItem:hover {
+  text-decoration: underline;
+}
+.Menu i {
+  color: #fff;
+}
+
+.personalBox {
+  position: relative;
+  width: 600px;
+  height: 150px;
+  left: 50%;
+  margin-left: -300px;
+  border-bottom: 1px solid #ddd;
+}
+.personalBox .image {
+  position: relative;
+  width: 130px;
+  height: 130px;
+  margin: 10px;
+  float: left;
+  display: inline-block;
+}
+.personalBox .image img {
+  height: 130px;
+  border-radius: 20px;
+  border: 1px #eee solid;
+}
+.personalBox .personal {
+  position: relative;
+  width: 250px;
+  height: 150px;
+  float: left;
+  padding-top: 5px;
+  display: inline-block;
+}
+.personalBox .personal .information {
+  font-family: Roboto,sans-serif;
+  line-height: 16px;
+  padding: 10px;
+}
+.personalBox .personal .information .primaryText {
+  color: #58595b;
+  font-size: 16px;
+}
+.personalBox .personal .information .secondaryText {
+  color: #9a9b9d;
+  font-size: 14px;
+}
+.personalBox .control {
+  position: absolute;
+  right: 0px;
+  bottom: 20px;
+}
+.personalBox .control .controlItem {
+  position: relative;
+  margin: 5px;
+}
+.personalBox .control .controlItem i {
+  margin-right: 5px;
+}
+.personalBox .control .controlItem a {
+  color: #58595b;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  line-height: 14px;
+  text-decoration: none;
+}
+.personalBox .control .controlItem a:hover {
+  text-decoration: underline;
+}
+
+.SearchSetting {
+  position: relative;
+  width: 600px;
+  left: 50%;
+  margin-left: -300px;
+}
+.SearchSetting .Section {
+  padding: 50px 0px 10px 0px;
+  border-bottom: #ddd solid 1px;
+  height: 90px;
+  background-color: #fff;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  text-align: center;
+}
+.SearchSetting .Section .Title {
+  color: #333;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 30px;
+}
+.SearchSetting .Section .Description {
+  color: #767676;
+  font-size: 14px;
+  line-height: 20px;
+}
+.SearchSetting .Section input[type="text"] {
+  position: relative;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  width: 300px;
+  padding: 3px 5px;
+  border: solid #ddd 1px;
+  border-radius: 3px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
+  background-color: #fafafa;
+  line-height: 1.4;
+}
+.SearchSetting .Section button {
+  height: 30px;
+  margin: 0px 5px;
+}
+.SearchSetting .Section .Select {
+  top: 10px;
+  display: inline-block;
+  width: 80px;
+  height: 30px;
+}
+.SearchSetting .Section .Select .Select-control {
+  width: 80px;
+  height: 30px;
+}
+.SearchSetting .Section .Select .Select-control .Select-value {
+  height: 30px;
+  line-height: 30px;
+  padding: 0px 5px;
+}
+.SearchSetting .Section .Select .Select-control .Select-input {
+  height: 30px;
+  line-height: 30px;
+  padding: 0px 5px;
+}
+.SearchSetting .Section .Select .Select-control .Select-clear-zone {
+  display: none;
+}
+.SearchSetting .Section .Select .Select-control .Select-arrow-zone {
+  display: none;
+}
