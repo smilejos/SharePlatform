@@ -1,112 +1,53 @@
-"use strict";
-let gulp = require('gulp'),
-	gulpWebpack = require('gulp-webpack'),
-    compass = require('gulp-compass'),
-    minifyCSS = require('gulp-minify-css'),
-    webpack = require('webpack'),
-	nodemon = require('nodemon'),
-	del = require('del');
- 
-let paths = {
-    sass: './public/style/scss/',
-    imgs: './public/style/imgs/',
-    main: './public/components/*.*',
-    build: './build/',
-    app: './server/app.js'
-};
+let gulp = require('gulp');
+let sass = require('gulp-sass');
+let util = require('gulp-util');
+let watch = require('gulp-watch');
+let connect = require('gulp-connect');
+let webpack = require('webpack');
+let nodemon = require('nodemon');
+let config = require('./webpack.config.js');
 
-let watchConfig = {
-    scss : './public/style/scss/*.scss',
-    components : './public/components/**/*.jsx',
-    program : './public/**/*.js',
-    server : './server/*.js'
-};
+gulp.task('style', function() {
+    gulp.src('./public/style/scss/*.scss')
+        .pipe(sass().on('error', sass.logError))
+        .pipe(gulp.dest('./build/'));
+});
 
-let webpackConfig = {
-    entry: './public/components/main/entry.jsx',
-    resolve: {
-        extensions: ['', '.js', '.jsx']
-    },
-    output: {
-        filename: 'bundle.js'
-    },
-    module: {
-        loaders: [{  
-                test: /\.jsx$/,  
-                loader: 'babel',
-                exclude: /node_modules/,
-                query: { 
-                    presets:['react', 'es2015'] 
-                }
-            },{
-                test: /\.js$/,
-                loader: 'babel-loader',
-                exclude: /node_modules/,
-                query: {
-                    presets: ['es2015']
-                }
-            }
-        ]
-    },
-    plugins: process.env.PROD_ENV == "production" ? [
-        new webpack.optimize.UglifyJsPlugin({
-            include: /\.js$/,
-            minimize: true,
-            compress: {
-                warnings: false
-            }
-        }) 
-    ]: []
-};
-
-var nodemonConfig = {
-    execMap: {
-        js: 'babel-node'
-    },
-    script: 'server/app.js',
-    ext: 'js',
-    watch: 'server/**/*.js'
-};
-
-gulp.task('compass', function() {
-    console.log('--------------compass--------------');
-    del(paths.build + 'style.css', function(){
-        
+gulp.task("script", function (callback) {
+    webpack(config, function (err, stats) {
+        if (err)
+            throw new util.PluginError("webpack", err);
+        util.log("[webpack]", stats.toString({
+            // output options
+        }));
+        callback();
     });
-    gulp.src(paths.main)
-        .pipe(compass({
-                css: paths.build,
-                sass: paths.sass,
-                image: paths.imgs
-            })
-        );
-    
-        // .pipe(minifyCSS({
-        //     noAdvanced: false,
-        //     keepBreaks: true,
-        //     cache: true // this add-on is gulp only
-        // }))
-        // .pipe(gulp.dest(paths.build));
 });
 
-gulp.task('copy', function() {
-    //gulp.src(source_paths.app).pipe(gulp.dest(dest_paths.main));
-    //gulp.src(source_paths.components).pipe(gulp.dest(dest_paths.components));
+gulp.task('watch', function () {
+    gulp.watch('./public/style/scss/*.scss', ['style']);
+    gulp.watch('./public/components/**/*.jsx', ['script']);
+
+    gulp.src(['build/*.css', 'build/*.js'])
+        .pipe(watch(['build/*.css', 'build/*.js']))
+        .pipe(connect.reload());
 });
 
-gulp.task('build', function() {
-    console.log('--------------build--------------');
-    gulp.src(paths.main)
-        .pipe(gulpWebpack(webpackConfig))
-        .pipe(gulp.dest(paths.build));    
+gulp.task('connect', function() {
+    connect.server({
+        livereload: true
+    });
 });
 
-gulp.task('nodemon', function() {
-    console.log('--------------nodemon--------------');
-    nodemon(nodemonConfig);
+gulp.task('server', function() {
+    nodemon({
+        execMap: {
+            js: 'babel-node'
+        },
+        script: 'server/app.js',
+        ext: 'js',
+        watch: 'server/**/*.js'
+    });
 });
 
-gulp.task('default', ['build', 'compass', 'nodemon']);  //, 'nodemon'
-gulp.watch(watchConfig.components, ['build']); //restart my server 
-gulp.watch(watchConfig.program, ['build']); //restart my server 
-gulp.watch(watchConfig.scss, ['compass']); //restart my server 
+gulp.task('default', ['server', 'connect', 'script', 'style', 'watch']);

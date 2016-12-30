@@ -4,7 +4,8 @@
   "description": "a platform to record tech post in Biz section",
   "main": "index.js",
   "scripts": {
-    "start": "node server/app.js",
+    "prod": "concurrently  \"SET NODE_ENV=production\" \"node server/app.js\"",
+    "develop": "babel-node server/app.js",
     "build": "babel public -d lib"
   },
   "keywords": [
@@ -14,22 +15,24 @@
   "author": "Jos Tung",
   "license": "ISC",
   "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.17.0",
+    "babel-loader": "^6.2.5",
+    "babel-plugin-transform-react-jsx": "^6.8.0",
+    "babel-preset-es2015": "^6.16.0",
+    "babel-preset-react": "^6.16.0",
     "del": "^2.2.0",
     "gulp": "^3.9.1",
-    "gulp-babel": "^6.1.2",
-    "gulp-compass": "^2.1.0",
-    "gulp-minify-css": "^1.2.4",
-    "gulp-webpack": "^1.5.0",
+    "gulp-connect": "^5.0.0",
+    "gulp-sass": "^2.3.2",
+    "gulp-util": "^3.0.7",
+    "gulp-watch": "^4.3.10",
     "heapdump": "^0.3.7",
-    "nodemon": "^1.9.1"
+    "nodemon": "^1.11.0",
+    "webpack": "^1.13.2"
   },
   "dependencies": {
-    "babel": "^6.5.2",
-    "babel-core": "^6.7.4",
-    "babel-loader": "^6.2.4",
-    "babel-plugin-transform-react-jsx": "^6.7.4",
-    "babel-preset-es2015": "^6.6.0",
-    "babel-preset-react": "^6.5.0",
     "express": "^4.13.4",
     "express-ntlm": "^2.1.4",
     "express-session": "^1.13.0",

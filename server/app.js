@@ -8,11 +8,14 @@ let ntlm          = require('express-ntlm');
 let session       = require("express-session");
 let io            = require('socket.io');
 let path 		  = require('path');
-let heapdump      = require('heapdump');
 
-//let fileRouter    = require('./router/fileRouter');
-//let requestRouter    = require('./router/requestRouter');
-let requestRouter    = require('./router/requestRouter_dev');
+let requestRouter = null;
+if (process.env.NODE_ENV == 'production') {
+    requestRouter = require('./router/requestRouter');
+} else {
+    requestRouter = require('./router/requestRouter_dev');
+}
+
 let memberRouter  = require('./socket/memberRouter');
 let articleRouter = require('./socket/articleRouter');
 let bookRouter = require('./socket/bookRouter');
