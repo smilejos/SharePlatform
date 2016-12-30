@@ -1,0 +1,25 @@
+{
+  "name": "SharePlatform",
+  "description": "a platform to record tech post in Biz section",
+  "main": "index.js",
+  "authors": [
+    "Jos Tung"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "Share",
+    "Program"
+  ],
+  "homepage": "https://github.com/smilejos/SharePlatform",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "font-awesome": "fontawesome#^4.7.0",
+    "bootstrap": "^3.3.7"
+  }
+}

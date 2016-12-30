@@ -9,8 +9,12 @@
 
 	.ArticleControl {
 		position: absolute;
-		right: 0px;
-		top: 15px;
+		right: -60px;
+		top: 90px;
+
+        i {
+            color: $IconColor;
+        }
 	}
 
 	.ArticlePage{
@@ -153,10 +157,6 @@
 		&:hover {
 			text-decoration: underline;
 		}
-	}
-
-	i {
-		margin-left: 10px;
 	}
 }
 

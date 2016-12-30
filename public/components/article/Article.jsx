@@ -217,37 +217,41 @@ class ArticleButton extends React.Component {
         this.props.fileDownload();
     }
 
-    _renderAuthorAction() {
+    _renderAuthorSettingAction() {
         return (
-            <span>
-                <i className="fa fa-upload fa-lg" />
-                <span className="ArticleEdit" onClick={this._fileUpload.bind(this)}>Upload</span>
-                <i className="fa fa-cog fa-lg" />
-                <Link className="ArticleEdit" to={ "/ArticleSetting/" + this.props.article.articleNo }>Setting</Link>
-                <i className="fa fa-edit fa-lg" />
-                <Link className="ArticleEdit" to={ "/ArticleEditor/" + this.props.article.articleNo }>Edit</Link>
-            </span>
+            <Link className="btn btn-default" to={ "/ArticleSetting/" + this.props.article.articleNo }>
+                <i className="fa fa-cog fa-lg" title="Article Setting"></i>
+            </Link>
+        )
+    }
+    _renderAuthorEditAction() {
+        return (
+            <Link className="btn btn-default" to={ "/ArticleEditor/" + this.props.article.articleNo }>
+                <i className="fa fa-edit fa-lg" title="Edit this Article "></i>
+            </Link>
         );
     }
-
-    _renderDefaultButton() {
+    _renderDefaultSourceButton() {
+         return (
+            <Link className="btn btn-default" to={ "/ArticleSource/" + this.props.article.articleNo }>
+                <i className="fa fa-eye fa-lg" title="View Markdown Source Text"></i>
+            </Link>
+        );
+    }
+    _renderDefaultDownloadButton() {
         return (
-            <span>
-                <i className="fa fa-eye fa-lg" />
-                <Link className="ArticleEdit" to={ "/ArticleSource/" + this.props.article.articleNo }>Source</Link>
-                <i className="fa fa-download fa-lg" />
-                <a className="ArticleEdit" 
-                    download={"Article_"+this.props.article.articleNo+".md"} 
-                    href={"data:text/plain,"+encodeURIComponent(this.props.content)}>Download</a>
-            </span>
+            <a className="btn btn-default" 
+                download={"Article_"+this.props.article.articleNo+".md"} 
+                href={"data:text/plain," + encodeURIComponent(this.props.content)}>
+                <i className="fa fa-download fa-lg" title="download"></i>
+            </a>
         );
     }
 
     _renderSlideshowButton() {
         return (
-            <span>
-                <i className="fa fa-laptop fa-lg" />
-                <span className="ArticleEdit" onClick={this._startSildeshow.bind(this)}>SlideShow</span>
+           <span className="btn btn-default" onClick={this._startSildeshow.bind(this)}>
+                <i className="fa fa-laptop fa-lg" title="SlideShow" />
             </span>
         );
     }
@@ -266,30 +270,33 @@ class ArticleButton extends React.Component {
     }
 
     render() {
-        let defaultButton, authorButton, slideshowButton, presentingButton;
+        let defaultSourceButton = null,
+            defaultDownloadButton = null,
+            authorSettingButton = null,
+            authorEditButton = null,
+            slideshowButton = null,
+            presentingButton = null;
+
         if( this.props.article != null && this.props.isPresenting ) {
             presentingButton = this._renderPresentingButton.bind(this)();
-            defaultButton = null;
-            authorButton = null;
-            slideshowButton = null;
         } else if( this.props.article != null) {
-            defaultButton = this._renderDefaultButton.bind(this)();
-            authorButton = this.props.article.author == this.props.Id_No ? this._renderAuthorAction.bind(this)() : null;
+            defaultSourceButton = this._renderDefaultSourceButton.bind(this)();
+            defaultDownloadButton = this._renderDefaultDownloadButton.bind(this)();
+            authorSettingButton = this.props.article.author == this.props.Id_No ? this._renderAuthorSettingAction.bind(this)() : null;
+            authorEditButton = this.props.article.author == this.props.Id_No ? this._renderAuthorEditAction.bind(this)() : null;
             slideshowButton = this.props.article.isSlideshow ? this._renderSlideshowButton.bind(this)() : null;
-            presentingButton = null;
-        } else {
-            defaultButton = null;
-            authorButton = null;
-            slideshowButton = null;
-            presentingButton = null;
         }
 
         return (
             <div className="ArticleControl">
-                { presentingButton }
-                { slideshowButton }
-                { defaultButton }
-                { authorButton }
+                <div className="btn-group-vertical">
+                    {presentingButton}
+                    {slideshowButton}
+                    {defaultSourceButton}
+                    {defaultDownloadButton}
+                    {authorSettingButton}
+                    {authorEditButton}
+                </div>
             </div>
         )
     }

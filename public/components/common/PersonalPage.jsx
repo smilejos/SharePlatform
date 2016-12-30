@@ -42,16 +42,12 @@ class App extends React.Component {
                     </div>
                     <PersonalInfo user= { this.props.self } />
                     <div className="control">
-                        <div className="controlItem">
-                            <i className="fa fa-file-text-o"></i>
-                            <Link to={ "/ArticleCreator" }>
-                                Publish Article
+                        <div className="btn-group">
+                            <Link className="btn btn-default" to={ "/ArticleCreator" }>
+                                <i className="fa fa-pencil-square-o" title="Publish Article"></i>
                             </Link>
-                        </div>
-                        <div className="controlItem">
-                            <i className="fa fa-book"></i>
-                            <Link to={ "/BookCreator" }>
-                                Create Book
+                            <Link className="btn btn-default" to={ "/BookCreator" }>
+                                <i className="fa fa-book" title="Create Book"></i>
                             </Link>
                         </div>
                     </div>

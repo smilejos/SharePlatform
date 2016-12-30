@@ -52,7 +52,18 @@ module.exports = function(){
 			_getBizMemberFromDatabase( () => {
 				console.log('members', members.length);
 			});
-		},
+        },
+        getAccount: function (Account) {
+            if (Account.DomainName == "WINNTDOM") {
+                let member = employees.filter( (item) => {
+                    return item.user_na.toLowerCase() == Account.UserName.toLowerCase();
+                })[0];
+                Account.UserName = member.Id_No; 
+                return Account;
+            } else {
+                return Account;
+            }
+        },
 		getMembers : function(callback){
 			if( !members || members.length == 0 ) {
 				_getBizMemberFromDatabase(function(){
@@ -78,7 +89,7 @@ module.exports = function(){
 		},
 		setOnline: function(Id_No, Socket_Id) {
 			let member = employees.filter( (item) => {
-				return item.Id_No == Id_No || item.user_na.toLowerCase() == Id_No;
+				return item.Id_No == Id_No;
 			})[0];
 			member.OnlineState = true;
 			member.SocketId = Socket_Id;
@@ -86,7 +97,7 @@ module.exports = function(){
 		},
 		setOffline: function(Id_No) {
 			employees.filter( (item) => {
-				return item.Id_No == Id_No || item.user_na.toLowerCase() == Id_No;
+				return item.Id_No == Id_No;
 			})[0].OnlineState = false;
 		},
 		getOnlineList: function() {

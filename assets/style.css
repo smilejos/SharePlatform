@@ -8,8 +8,10 @@
   margin-left: -440px; }
   .ArticleContent .ArticleControl {
     position: absolute;
-    right: 0px;
-    top: 15px; }
+    right: -60px;
+    top: 90px; }
+    .ArticleContent .ArticleControl i {
+      color: #003c64; }
   .ArticleContent .ArticlePage .ArticleTitle {
     position: relative;
     font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
@@ -111,9 +113,6 @@
   cursor: pointer; }
   .ArticleControl .ArticleEdit:hover {
     text-decoration: underline; }
-
-.ArticleControl i {
-  margin-left: 10px; }
 
 .ArticleEditor {
   position: relative;
@@ -238,7 +237,8 @@
   top: 50px;
   bottom: 0px;
   left: 0px;
-  right: 0px; }
+  right: 0px;
+  width: auto; }
 
 ::-webkit-scrollbar {
   height: 8px;
@@ -419,7 +419,6 @@
   position: relative;
   width: 600px;
   height: auto;
-  padding: 40px 0px 20px;
   background-color: #fff;
   left: 50%;
   margin-left: -300px; }
@@ -895,26 +894,18 @@
 
 .Menu {
   position: fixed;
-  height: 30px;
+  height: 40px;
   top: 0px;
   left: 0px;
   right: 0px;
-  padding: 5px 0 5px 10px;
+  padding: 0px 0 0px 10px;
   border-bottom: 1px solid #eee;
   background: #0077c8;
   z-index: 9999; }
-  .Menu .MenuItem {
-    position: relative;
-    color: #fff;
-    font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
-    font-size: 14px;
-    line-height: 30px;
-    margin: 0 15px 0px 4px;
-    text-decoration: none; }
-    .Menu .MenuItem:hover {
-      text-decoration: underline; }
+  .Menu .btn-group {
+    margin-top: 2px; }
   .Menu i {
-    color: #fff; }
+    color: #003c64; }
 
 .personalBox {
   position: relative;
@@ -955,19 +946,8 @@
     position: absolute;
     right: 0px;
     bottom: 20px; }
-    .personalBox .control .controlItem {
-      position: relative;
-      margin: 5px; }
-      .personalBox .control .controlItem i {
-        margin-right: 5px; }
-      .personalBox .control .controlItem a {
-        color: #58595b;
-        font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
-        font-size: 14px;
-        line-height: 14px;
-        text-decoration: none; }
-        .personalBox .control .controlItem a:hover {
-          text-decoration: underline; }
+    .personalBox .control i {
+      color: #003c64; }
 
 .SearchSetting {
   position: relative;
@@ -977,7 +957,7 @@
   .SearchSetting .Section {
     padding: 50px 0px 10px 0px;
     border-bottom: #eee solid 1px;
-    height: 90px;
+    height: auto;
     background-color: #fff;
     font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
     text-align: center; }

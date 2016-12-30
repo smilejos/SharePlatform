@@ -51,26 +51,9 @@
 		right: 0px;
 		bottom: 20px;
 
-		.controlItem {
-			position: relative;
-			margin: 5px;
-
-			i {
-				margin-right: 5px;
-			}
-
-			a {
-				color: $MarjoyTextColor;
-				font-family: $FontFamily;
-				font-size: 14px;
-				line-height: 14px;
-				text-decoration: none;
-
-				&:hover {
-					text-decoration: underline;
-				}
-			}
-		}
+        i {
+        color: $IconColor;
+        }
 	}
 }
 

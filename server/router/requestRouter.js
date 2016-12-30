@@ -2,11 +2,12 @@ let React                 = require('react');
 let serialize             = require('serialize-javascript');
 let renderToString        = require('react-dom/server').renderToString;
 let Provider              = require('react-redux').Provider;
-let router 		  		      = require('react-router');
+let router 		  		  = require('react-router');
 let syncHistoryWithStore  = require('react-router-redux').syncHistoryWithStore;
-let configureStore		    = require('../../lib/store/index').configureStore;
-let routes 		  		      = require('../../lib/components/main/routes').default;
-let RouterContext 		    = router.RouterContext;
+let configureStore		  = require('../../lib/store/index').configureStore;
+let routes                = require('../../lib/components/main/routes').default;
+let memberRouter          = require('../socket/memberRouter');
+let RouterContext 		  = router.RouterContext;
 let createMemoryHistory   = router.createMemoryHistory;
 let match                 = router.match;
 
@@ -33,6 +34,7 @@ function renderFullPage(content, store) {
 }
 
 function handleRender(req, res) {
+    console.log(req.ntlm);
     req.session.user = req.ntlm;
   	const memoryHistory = createMemoryHistory(req.url);
   	const store = configureStore(memoryHistory);

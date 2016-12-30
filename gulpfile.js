@@ -10,7 +10,7 @@ let config = require('./webpack.config.js');
 gulp.task('style', function() {
     gulp.src('./public/style/scss/*.scss')
         .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest('./build/'));
+        .pipe(gulp.dest('./assets/'));
 });
 
 gulp.task("script", function (callback) {
@@ -28,8 +28,8 @@ gulp.task('watch', function () {
     gulp.watch('./public/style/scss/*.scss', ['style']);
     gulp.watch('./public/components/**/*.jsx', ['script']);
 
-    gulp.src(['build/*.css', 'build/*.js'])
-        .pipe(watch(['build/*.css', 'build/*.js']))
+    gulp.src(['assets/*.css', 'assets/*.js'])
+        .pipe(watch(['assets/*.css', 'assets/*.js']))
         .pipe(connect.reload());
 });
 
@@ -44,7 +44,7 @@ gulp.task('server', function() {
         execMap: {
             js: 'babel-node'
         },
-        script: 'server/app.js',
+        script: 'app.js',
         ext: 'js',
         watch: 'server/**/*.js'
     });

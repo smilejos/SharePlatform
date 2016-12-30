@@ -79,7 +79,7 @@ module.exports = function(){
 			sqlString += " and a.isPrivate = 0 ";
 		}
 
-		sqlString += " order by a.UpdateTime DESC ";
+        sqlString += " order by a.UpdateTime DESC ";
 		_executeSqlComment(sqlString, callback);
 	}
 

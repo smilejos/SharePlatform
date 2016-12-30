@@ -9,26 +9,23 @@ export default class Information extends React.Component {
     render() {
         return (
             <div className="Menu">
-                <i className="fa fa-home"></i>
-                <Link to={ "/" } className="MenuItem">
-                    Home
-                </Link>
-                <i className="fa fa-group"></i>
-                <Link to={ "/Group" } className="MenuItem">
-                    Group
-                </Link>
-                <i className="fa fa-tag"></i>
-                <Link to={ "/Tag" } className="MenuItem">
-                    Tag
-                </Link>
-                <i className="fa fa-search"></i>
-                <Link to={ "/Search" } className="MenuItem">
-                    Search
-                </Link>
-                <i className="fa fa-info"></i>
-                <Link to={ "/Article/68" } className="MenuItem">
-                    Log
-                </Link>
+                <div className="btn-group">
+                    <Link className="btn btn-default" to={ "/" }>
+                        <i className="fa fa-home" title="Home"></i>
+                     </Link>
+                    <Link className="btn btn-default" to={ "/Group" }>
+                        <i className="fa fa-group" title="Group"></i>
+                     </Link>
+                    <Link className="btn btn-default" to={ "/Tag" }>
+                        <i className="fa fa-tag" title="Tag"></i>
+                     </Link>
+                    <Link className="btn btn-default" to={ "/Search" }>
+                        <i className="fa fa-search" title="Search"></i>
+                    </Link>
+                     <Link className="btn btn-default" to={ "/Article/68" }>
+                        <i className="fa fa-info" title="Log"></i>
+                     </Link>
+                </div>
             </div>
         )
     }

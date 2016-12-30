@@ -5,7 +5,7 @@ let config = {
         extensions: ['', '.js', '.jsx']
     },
     output: {
-        path: path.resolve(__dirname, './build/'),
+        path: path.resolve(__dirname, './assets/'),
         filename: 'bundle.js'
     },
     module: {

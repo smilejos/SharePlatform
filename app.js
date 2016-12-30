@@ -11,15 +11,15 @@ let path 		  = require('path');
 
 let requestRouter = null;
 if (process.env.NODE_ENV == 'production') {
-    requestRouter = require('./router/requestRouter');
+    requestRouter = require('./server/router/requestRouter');
 } else {
-    requestRouter = require('./router/requestRouter_dev');
+    requestRouter = require('./server/router/requestRouter_dev');
 }
 
-let memberRouter  = require('./socket/memberRouter');
-let articleRouter = require('./socket/articleRouter');
-let bookRouter = require('./socket/bookRouter');
-let commonRouter = require('./socket/commonRouter');
+let memberRouter  = require('./server/socket/memberRouter');
+let articleRouter = require('./server/socket/articleRouter');
+let bookRouter = require('./server/socket/bookRouter');
+let commonRouter = require('./server/socket/commonRouter');
 let app = express();
 let sessionMiddleware = session({
     secret: 'somesecrettoken'
@@ -29,12 +29,14 @@ app.use(ntlm());
 app.use(sessionMiddleware);
 
 // serve our static stuff like index.css
-app.get('/', function (req, res) {
-    req.session.user = req.ntlm;
-  	res.sendFile(path.join(__dirname, '../build', 'index.html'))
+app.get('/', function(req, res) {
+    console.log("====req.ntlm", req.ntlm);
+    req.session.user = memberRouter.transfer(req.ntlm);
+  	res.sendFile(path.join(__dirname, 'index.html'))
 })
 
-app.use(express.static(path.join(__dirname, '../build')))
+app.use(express.static(path.join(__dirname, '/assets/')))
+app.use(express.static(path.join(__dirname, '/bower_components/')))
 app.use(requestRouter);
 
 let server = app.listen(8888);

@@ -4,8 +4,8 @@
   "description": "a platform to record tech post in Biz section",
   "main": "index.js",
   "scripts": {
-    "prod": "concurrently  \"SET NODE_ENV=production\" \"node server/app.js\"",
-    "develop": "babel-node server/app.js",
+    "prod": "concurrently  \"SET NODE_ENV=production\" \"node app.js\"",
+    "develop": "babel-node app.js",
     "build": "babel public -d lib"
   },
   "keywords": [

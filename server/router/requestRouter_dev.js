@@ -6,6 +6,7 @@ import { createMemoryHistory, match, RouterContext } from 'react-router'
 import { syncHistoryWithStore }                      from 'react-router-redux'
 import { configureStore }                            from '../../public/store/index'
 import routes                                        from '../../public/components/main/routes'
+import memberRouter                                  from '../socket/memberRouter';
 
 const HTML = ({ content, store }) => (
   	<html>
@@ -25,8 +26,9 @@ const HTML = ({ content, store }) => (
 )
 
 function handleRender(req, res) {
+    console.log(req.ntlm);
     req.session.user = req.ntlm;
-  	const memoryHistory = createMemoryHistory(req.url);
+    const memoryHistory = createMemoryHistory(req.url);
   	const store = configureStore(memoryHistory);
   	const history = syncHistoryWithStore(memoryHistory, store);
 

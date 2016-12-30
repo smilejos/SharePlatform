@@ -53,7 +53,10 @@ module.exports = function(){
         // }
     };
 
-	return {
+    return {
+        transfer: function (Account) {
+            return handler.getAccount(Account);
+        },
 		listen: function(io, socket) {
 			console.log('Member connected', socket.id);
 			let user = socket.request.session.user;
