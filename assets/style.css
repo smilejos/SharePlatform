@@ -117,7 +117,7 @@
 .ArticleEditor {
   position: relative;
   max-width: 880px;
-  height: auto;
+  height: 80%;
   padding: 40px 0px;
   background-color: #fff;
   left: 50%;
@@ -133,7 +133,7 @@
     position: relative;
     resize: none;
     width: 860px;
-    height: 600px;
+    height: 100%;
     border: solid #eee 1px;
     border-radius: 3px;
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);

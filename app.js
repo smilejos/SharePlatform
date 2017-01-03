@@ -30,7 +30,6 @@ app.use(sessionMiddleware);
 
 // serve our static stuff like index.css
 app.get('/', function(req, res) {
-    console.log("====req.ntlm", req.ntlm);
     req.session.user = memberRouter.transfer(req.ntlm);
   	res.sendFile(path.join(__dirname, 'index.html'))
 })

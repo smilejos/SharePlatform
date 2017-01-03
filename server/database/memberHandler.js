@@ -59,6 +59,7 @@ module.exports = function(){
                     return item.user_na.toLowerCase() == Account.UserName.toLowerCase();
                 })[0];
                 Account.UserName = member.Id_No; 
+                Account.DomainName = "INOTERA";
                 return Account;
             } else {
                 return Account;

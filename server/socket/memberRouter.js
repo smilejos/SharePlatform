@@ -8,7 +8,7 @@ module.exports = function(){
 		console.log('login item', item);
         socket.request.session.user.UserName = item.IdNo;
         let self = handler.setOnline(item.IdNo, socket.id); 
-
+        
         console.log(self);
 
         io.emit('receiveRealTimeMember', {

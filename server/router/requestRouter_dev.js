@@ -12,10 +12,11 @@ const HTML = ({ content, store }) => (
   	<html>
 		<head>
 			<title>Biz Share Platform</title>
-      <link rel="stylesheet" href="/font-awesome.css" type="text/css" />
-      <link rel="stylesheet" href="/react-select.css" type="text/css" />
-      <link rel="stylesheet" href="/codeStyle.css" type="text/css" />
-      <link rel="stylesheet" href="/style.css" type="text/css" />
+            <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+            <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css" />
+            <link rel="stylesheet" href="/react-select.css" type="text/css" />
+            <link rel="stylesheet" href="/codeStyle.css" type="text/css" />
+            <link rel="stylesheet" href="/style.css" type="text/css" />
 		</head>
 		<body>
       		<div id="app" dangerouslySetInnerHTML={{ __html: content }}/>
@@ -26,8 +27,7 @@ const HTML = ({ content, store }) => (
 )
 
 function handleRender(req, res) {
-    console.log(req.ntlm);
-    req.session.user = req.ntlm;
+    req.session.user = memberRouter.transfer(req.ntlm);
     const memoryHistory = createMemoryHistory(req.url);
   	const store = configureStore(memoryHistory);
   	const history = syncHistoryWithStore(memoryHistory, store);
