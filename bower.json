@@ -20,6 +20,10 @@
   ],
   "dependencies": {
     "font-awesome": "fontawesome#^4.7.0",
-    "bootstrap": "^3.3.7"
+    "bootstrap": "^3.3.7",
+    "mermaid": "^6.0.0",
+    "js-sequence-diagrams": "bramp/js-sequence-diagrams#^2.0.1",
+    "flowchart": "^1.6.4",
+    "raphael": "^2.2.7"
   }
 }

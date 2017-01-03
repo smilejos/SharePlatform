@@ -28,6 +28,11 @@ function renderFullPage(content, store) {
 			<script>
           		window.__INITIAL_STATE__ = ${serialize(store.getState())}
         	</script>
+            <script src="/bower-webfontloader/webfont.js"></script>
+            <script src="/snap.svg/dist/snap.svg-min.js"></script>
+            <script src="/underscore/underscore-min.js"></script>
+            <script src="/js-sequence-diagrams/dist/sequence-diagram.js"></script>
+            <script src="/mermaid/dist/mermaid.min.js"></script>
 			<script src="/bundle.js"></script>
 		</body>
 	</html>

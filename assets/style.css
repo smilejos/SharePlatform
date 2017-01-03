@@ -825,6 +825,8 @@
     z-index: 1;
     position: relative;
     border-color: #4078c0; }
+  .markdown-body .mermaid {
+    text-align: center; }
 
 .MemberList {
   position: relative;

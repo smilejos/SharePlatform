@@ -101817,6 +101817,19 @@
 	                        } catch (err) {
 	                            console.log('highlight parsing error');
 	                        }
+	                    } else if (lang == "mermaid") {
+	                        return '<div class="mermaid">' + mermaid.mermaidAPI.render(str) + '</div>';
+	                    } else if (lang == "sequence") {
+	                        var diagram = Diagram.parse(str);
+	                        var node = document.createElement("div");
+	                        diagram.drawSVG(node, { theme: 'hand' });
+	                        console.log(str, node, diagram);
+	                        return '<div class="sequence-diagram">' + node.innerHTML + '</div>';
+	                    } else if (lang == "flowchart") {
+	                        var _diagram = flowchart.parse(str);
+	                        var _node = document.createElement("div");
+	                        _diagram.drawSVG(_node);
+	                        return '<div class="flowchart">' + _node.innerHTML + '</div>';
 	                    }
 
 	                    try {
@@ -101834,6 +101847,7 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
+
 	            return _react2.default.createElement('div', { className: 'markdown-body', dangerouslySetInnerHTML: this._renderMarkup(this.props.content) });
 	        }
 	    }]);
