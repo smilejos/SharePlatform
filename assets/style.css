@@ -905,14 +905,21 @@
   top: 0px;
   left: 0px;
   right: 0px;
-  padding: 0px 0 0px 10px;
+  padding: 3px 10px;
   border-bottom: 1px solid #eee;
   background: #0077c8;
   z-index: 9999; }
   .Menu .btn-group {
-    margin-top: 2px; }
+    position: relative;
+    margin-left: calc(100%/2 - 91px); }
   .Menu i {
     color: #003c64; }
+  .Menu .logo {
+    position: absolute;
+    width: 108px;
+    height: 32px;
+    background: #0077c8 url("Micron.png") no-repeat center;
+    background-size: 108px 32px; }
 
 .personalBox {
   position: relative;

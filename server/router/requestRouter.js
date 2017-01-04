@@ -19,6 +19,10 @@ function renderFullPage(content, store) {
 			<title>Biz Share Platform</title>
             <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
             <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css" />
+            <link rel="stylesheet" href="/js-sequence-diagrams/dist/sequence-diagram-min.css" type="text/css" />
+            
+            <link rel="stylesheet" href="/mermaid/dist/mermaid.css" type="text/css" />
+            
             <link rel="stylesheet" href="/react-select.css" type="text/css" />
             <link rel="stylesheet" href="/codeStyle.css" type="text/css" />
             <link rel="stylesheet" href="/style.css" type="text/css" />
@@ -32,8 +36,13 @@ function renderFullPage(content, store) {
             <script src="/snap.svg/dist/snap.svg-min.js"></script>
             <script src="/underscore/underscore-min.js"></script>
             <script src="/js-sequence-diagrams/dist/sequence-diagram.js"></script>
+            
+            <script src="/raphael/raphael.js"></script>
+            <script src="/flowchart/release/flowchart.js"></script>
+            
             <script src="/mermaid/dist/mermaid.min.js"></script>
-			<script src="/bundle.js"></script>
+            
+            <script src="/bundle.js"></script>
 		</body>
 	</html>
     `

@@ -101776,24 +101776,6 @@
 	    _createClass(ArticleContent, [{
 	        key: '_renderMarkup',
 	        value: function _renderMarkup(content) {
-	            // marked.setOptions({
-	            //     renderer: new marked.Renderer(),
-	            //     gfm: true,
-	            //     tables: true,
-	            //     breaks: true,
-	            //     pedantic: true,
-	            //     sanitize: false,
-	            //     smartLists: true,
-	            //     smartypants: true,
-	            //     highlight: function (code, lang) {
-	            //         if(lang) {
-	            //             return highlight(lang, code).value;    
-	            //         } else {
-	            //             return highlightAuto(code).value;    
-	            //         }
-	            //     }
-	            // });
-	            // return { __html: marked(content)};
 	            var md = new _remarkable2.default('full', {
 	                html: true, // Enable HTML tags in source
 	                xhtmlOut: false, // Use '/' to close single tags (<br />)
@@ -118234,6 +118216,7 @@
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'Menu' },
+	                _react2.default.createElement('div', { className: 'logo' }),
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'btn-group' },

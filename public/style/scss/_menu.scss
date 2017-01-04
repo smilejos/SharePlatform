@@ -4,16 +4,25 @@
 	top: 0px;
 	left: 0px;
 	right: 0px;
-	padding: 0px 0 0px 10px;
+    padding: 3px 10px;
 	border-bottom: 1px solid $ItemBorderColor;
 	background: $MU_Blue;
 	z-index: 9999;
 	
     .btn-group {
-        margin-top: 2px;
+        position: relative;
+        margin-left: calc(100%/2 - 91px);
     }
 
     i {
        color: $IconColor;
+    }
+
+    .logo {
+        position: absolute;
+        width: 108px;
+        height: 32px;
+        background: $MU_Blue url("Micron.png") no-repeat center; 
+        background-size: 108px 32px;
     }
 }

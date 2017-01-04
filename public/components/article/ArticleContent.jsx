@@ -11,24 +11,6 @@ export default class ArticleContent extends React.Component {
     }
 
     _renderMarkup(content) {
-        // marked.setOptions({
-        //     renderer: new marked.Renderer(),
-        //     gfm: true,
-        //     tables: true,
-        //     breaks: true,
-        //     pedantic: true,
-        //     sanitize: false,
-        //     smartLists: true,
-        //     smartypants: true,
-        //     highlight: function (code, lang) {
-        //         if(lang) {
-        //             return highlight(lang, code).value;    
-        //         } else {
-        //             return highlightAuto(code).value;    
-        //         }
-        //     }
-        // });
-        // return { __html: marked(content)};
         var md = new Remarkable('full', {
             html:         true,        // Enable HTML tags in source
             xhtmlOut:     false,        // Use '/' to close single tags (<br />)

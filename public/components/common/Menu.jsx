@@ -9,6 +9,7 @@ export default class Information extends React.Component {
     render() {
         return (
             <div className="Menu">
+                <div className="logo"></div>
                 <div className="btn-group">
                     <Link className="btn btn-default" to={ "/" }>
                         <i className="fa fa-home" title="Home"></i>
