@@ -90,8 +90,6 @@ class Article extends React.Component {
     _handlePostArticle (){
         let { modifyArticle } = this.props.actions;
         let temp = this.props.state.article;
-        temp.content = this.refs.textarea.value;
-        
         modifyArticle(temp);
     }
     
