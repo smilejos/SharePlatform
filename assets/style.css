@@ -1,3 +1,7 @@
+@import url(./codemirror/lib/codemirror.css);
+@import url(./codemirror/addon/dialog/dialog.css);
+@import url(./codemirror/addon/search/matchesonscrollbar.css);
+@import url(./codemirror/addon/search/searchcursor.css);
 .ArticleContent {
   position: relative;
   max-width: 880px;
@@ -340,6 +344,10 @@
   padding: 10px;
   overflow-x: hidden;
   overflow-y: auto; }
+
+.CodeMirror {
+  height: calc( 100vh - 250px);
+  border: #eee 1px solid; }
 
 .categoryList {
   position: absolute;
@@ -831,16 +839,16 @@
 .MemberList {
   position: relative;
   margin-top: 20px;
-  width: 900px;
+  width: 1000px;
   left: 50%;
-  margin-left: -450px; }
+  margin-left: -500px; }
   .MemberList .MemberBox {
-    width: 270px;
-    margin: 2px 3px;
+    width: 320px;
+    margin: 2px 5px;
     height: auto;
     float: left;
     padding: 10px;
-    height: 120px;
+    height: 130px;
     cursor: pointer;
     border-radius: 10px;
     border: #eee 1px solid;
@@ -881,8 +889,9 @@
       height: 30px;
       border: 1px solid #eee;
       padding: 0px 2px;
-      width: 80px;
+      width: 90px;
       margin-right: 3px;
+      margin-top: 3px;
       border-radius: 5px;
       display: inline-block;
       float: left; }

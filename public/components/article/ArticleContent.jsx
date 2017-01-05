@@ -28,28 +28,33 @@ export default class ArticleContent extends React.Component {
             // Highlighter function. Should return escaped HTML,
             // or '' if the source string is not changed
             highlight: function (str, lang) {
-               if (lang && hljs.getLanguage(lang)) {
+                if (lang && hljs.getLanguage(lang)) {
+                    console.log('in hljs');
                     try {
-                        return hljs.highlight(lang, str).value;
+                        let result = hljs.highlight(lang, str).value;
+                        //let array = result.split('\n');
+                        console.log(result, array);
+                        return result;
                     } catch (err) {
                         console.log('highlight parsing error');
                     }
                 } else if (lang == "mermaid") {
                     return '<div class="mermaid">' + mermaid.mermaidAPI.render(str) + '</div>';
                 } else if (lang == "sequence") {
-                   let diagram = Diagram.parse(str);
-                   let node = document.createElement("div");
-                   diagram.drawSVG(node, { theme: 'hand' });
-                   console.log(str, node, diagram);
-                   return '<div class="sequence-diagram">' + node.innerHTML + '</div>';
+                    let diagram = Diagram.parse(str);
+                    let node = document.createElement("div");
+                    diagram.drawSVG(node, { theme: 'hand' });
+                    //console.log(str, node, diagram);
+                    return '<div class="sequence-diagram">' + node.innerHTML + '</div>';
                 } else if (lang == "flowchart") {
-                   let diagram = flowchart.parse(str);
-                   let node = document.createElement("div");
-                   diagram.drawSVG(node);
-                   return '<div class="flowchart">' + node.innerHTML + '</div>';
+                    let diagram = flowchart.parse(str);
+                    let node = document.createElement("div");
+                    diagram.drawSVG(node);
+                    return '<div class="flowchart">' + node.innerHTML + '</div>';
                 }
 
                 try {
+                    //console.log('auto hljs');
                     return hljs.highlightAuto(str).value;
                 } catch (err) {
                     console.log('highlight parsing error');

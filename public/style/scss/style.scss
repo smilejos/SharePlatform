@@ -1,9 +1,15 @@
+@import "./codemirror/lib/codemirror.css";
+@import "./codemirror/addon/dialog/dialog.css";
+@import "./codemirror/addon/search/matchesonscrollbar.css";
+@import "./codemirror/addon/search/searchcursor.css";
+
 @import "./definition";
 @import "./article";
 @import "./articleList";
 @import "./basic";
 @import "./bookManage";
 @import "./bookView";
+@import "./codemirror";
 @import "./category";
 @import "./categoryMap";
 @import "./contentSetting";
@@ -12,3 +18,4 @@
 @import "./menu";
 @import "./personal";
 @import "./search";
+

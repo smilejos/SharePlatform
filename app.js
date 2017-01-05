@@ -9,6 +9,21 @@ let session       = require("express-session");
 let io            = require('socket.io');
 let path 		  = require('path');
 
+let jsdom = require('jsdom');
+let document = jsdom.jsdom('<!doctype html><html><body></body></html>');
+let window = document.defaultView;
+global.document = document;
+global.window = window;
+global.navigator = window.navigator;
+
+// if (typeof navigator == 'undefined') {
+//     var navigator = {
+//         userAgent: 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36',
+//         platform: 'Win32',
+//         vendor: 'Google Inc.'
+//     }
+// }       
+
 let requestRouter = null;
 if (process.env.NODE_ENV == 'production') {
     requestRouter = require('./server/router/requestRouter');
@@ -36,6 +51,7 @@ app.get('/', function(req, res) {
 
 app.use(express.static(path.join(__dirname, '/assets/')))
 app.use(express.static(path.join(__dirname, '/bower_components/')))
+app.use(express.static(path.join(__dirname, '/node_modules/')))
 app.use(requestRouter);
 
 let server = app.listen(8888);

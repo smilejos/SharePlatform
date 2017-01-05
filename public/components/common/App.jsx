@@ -8,7 +8,6 @@ import Menu from '../common/Menu'
 import NotificationSystem  from 'react-notification-system';
 
 class App extends React.Component {
-
     // componentWillMount() {
     //     console.log('Trace componentWillMount');
     // }

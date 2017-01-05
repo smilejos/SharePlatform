@@ -4,9 +4,24 @@ import { render } from 'react-dom'
 import { Link, browserHistory } from 'react-router'
 import { bindActionCreators  } from 'redux'
 import { connect } from 'react-redux'
-import marked from 'marked'
-import { highlight, highlightAuto } from 'highlight.js'
 import * as ArticleActions from '../../actions/ArticleActions'
+
+var CodeMirror = require('react-codemirror');
+
+require('codemirror/mode/markdown/markdown');
+require('codemirror/mode/javascript/javascript');
+require('codemirror/keymap/sublime');
+require('codemirror/addon/dialog/dialog');
+require('codemirror/addon/search/searchcursor');
+require('codemirror/addon/search/search');
+require('codemirror/addon/search/matchesonscrollbar');
+require('codemirror/addon/search/jump-to-line');
+require('codemirror/addon/edit/matchbrackets');
+require('codemirror/addon/edit/closebrackets');
+require('codemirror/addon/comment/comment');
+require('codemirror/addon/wrap/hardwrap');
+require('codemirror/addon/fold/foldcode');
+require('codemirror/addon/fold/brace-fold');
 
 class Article extends React.Component {
     constructor(props){
@@ -51,6 +66,12 @@ class Article extends React.Component {
         browserHistory.push(path);
     }
 
+    _updateContent(content) {
+        let temp = this.props.state.article ? this.props.state.article : {};
+        temp.content = content;
+        this._handleUpdate(temp);
+    }
+
     _handleKeydown (e) {
         if (e.keyCode === 9) { // tab was pressed
             var val = this.refs.textarea.value,
@@ -76,6 +97,18 @@ class Article extends React.Component {
     
     render() {
         let article = this.props.state.article;
+        let options = {
+            lineNumbers: true,
+            readOnly: false,
+            mode: 'markdown',
+            keyMap: 'sublime',
+            extraKeys: { "Alt-F": "findPersistent" },
+            autoCloseBrackets: true,
+            matchBrackets: true,
+            showCursorWhenSelecting: true,
+            indentUnit: 4
+        };
+
         return (
             <div className="ArticleEditor">
                 <div className="ArticleControl">
@@ -85,12 +118,7 @@ class Article extends React.Component {
                 <div className="ArticleTitle">
                     {article.title}
                 </div>
-                <textarea
-                    className="ArticleText"
-                    onChange={this._handleChange.bind(this)}
-                    onKeyDown={this._handleKeydown.bind(this)}
-                    ref="textarea"
-                    value = { article.content }/>
+                <CodeMirror value={article.content} onChange={this._updateContent.bind(this)} options={options} />
                 <button type="button" className="Button" onClick={this._handlePostArticle.bind(this)}>Post</button>
                 <button type="button" className="Button" onClick={this._handleBack.bind(this)}>Return</button>
             </div>

@@ -33,6 +33,7 @@
     "webpack": "^1.13.2"
   },
   "dependencies": {
+    "codemirror": "^5.22.0",
     "express": "^4.13.4",
     "express-ntlm": "^2.1.4",
     "express-session": "^1.13.0",
@@ -40,12 +41,14 @@
     "github-markdown-css": "^2.2.1",
     "highlight.js": "^9.3.0",
     "is_js": "^0.8.0",
+    "jsdom": "^9.9.1",
     "lodash": "^4.11.1",
     "marked": "^0.3.5",
     "material-ui": "^0.15.0-alpha.2",
     "moment": "^2.13.0",
     "mssql": "^3.1.2",
     "react": "^15.0.2",
+    "react-codemirror": "^0.3.0",
     "react-dnd": "^2.1.4",
     "react-dnd-html5-backend": "^2.1.2",
     "react-dom": "^15.0.2",

@@ -1,17 +1,17 @@
 .MemberList {
 	position: relative;
 	margin-top: 20px;
-	width: 900px;
+	width: 1000px;
 	left: 50%;
-	margin-left: -450px;
+	margin-left: -500px;
 
 	.MemberBox {
-		width: 270px;
-        margin: 2px 3px;
+		width: 320px;
+        margin: 2px 5px;
 		height: auto;
 		float: left;
 		padding: 10px;
-		height: 120px;
+		height: 130px;
 		cursor: pointer;
         border-radius: 10px;
         border: $ItemBorderColor 1px solid;
@@ -75,8 +75,9 @@
 				height: 30px;
 				border: 1px solid $ItemBorderColor;
 				padding: 0px 2px;
-				width: 80px;
+				width: 90px;
 				margin-right: 3px;
+                margin-top: 3px;
 				border-radius: 5px;
 				display: inline-block;
 				float: left;
