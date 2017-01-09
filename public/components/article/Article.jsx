@@ -9,6 +9,7 @@ import Dropzone from'react-dropzone'
 import { highlight, highlightAuto } from 'highlight.js'
 import * as ArticleActions from '../../actions/ArticleActions'
 import ArticleContent from '../article/ArticleContent'
+import FileSaver from 'file-saver'
 
 class Article extends React.Component {
     constructor(props){
@@ -88,11 +89,12 @@ class Article extends React.Component {
     }
 
     _fileUpload() {
-      this.refs.dropzone.open();
+        this.refs.dropzone.open();
     }
 
     _fileDownload() {
-      
+        var blob = new Blob([this.props.state.article.content], {type: "text/plain;charset=utf-8"});
+        FileSaver.saveAs(blob, this.props.state.article.articleNo + ".md");
     }
 
     _onFileUpload(files) {
@@ -240,11 +242,9 @@ class ArticleButton extends React.Component {
     }
     _renderDefaultDownloadButton() {
         return (
-            <a className="btn btn-default" 
-                download={"Article_"+this.props.article.articleNo+".md"} 
-                href={"data:text/plain," + encodeURIComponent(this.props.content)}>
-                <i className="fa fa-download fa-lg" title="download"></i>
-            </a>
+            <span className="btn btn-default" onClick={this._fileDownload.bind(this)}>
+                <i className="fa fa-download fa-lg" title="download" />
+            </span>    
         );
     }
 
