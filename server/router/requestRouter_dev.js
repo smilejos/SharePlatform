@@ -12,11 +12,6 @@ const HTML = ({ content, store }) => (
   	<html>
 		<head>
 			<title>Biz Share Platform</title>
-            <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
-            <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css" />
-            <link rel="stylesheet" href="/js-sequence-diagrams/dist/sequence-diagram-min.css" type="text/css" />
-            <link rel="stylesheet" href="/mermaid/dist/mermaid.css" type="text/css" />
-            <link rel="stylesheet" href="/react-select.css" type="text/css" />
             <link rel="stylesheet" href="/style.css" type="text/css" />
 		</head>
 		<body>

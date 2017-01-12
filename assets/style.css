@@ -1,20 +1,24 @@
 @import url(./codemirror/lib/codemirror.css);
 @import url(./codemirror/addon/dialog/dialog.css);
 @import url(./codemirror/addon/search/matchesonscrollbar.css);
-@import url(./codemirror/addon/search/searchcursor.css);
 @import url(./highlight.js/styles/xcode.css);
+@import url(./react-select/dist/react-select.css);
+@import url(./bootstrap/dist/css/bootstrap.min.css);
+@import url(./font-awesome/css/font-awesome.min.css);
+@import url(./js-sequence-diagrams/dist/sequence-diagram-min.css);
+@import url(./mermaid/dist/mermaid.css);
 .ArticleContent {
   position: relative;
-  max-width: 880px;
+  max-width: 60vw;
   height: auto;
   padding: 40px 0px 20px;
   background-color: #fff;
   left: 50%;
-  margin-left: -440px; }
+  margin-left: calc((60vw/2) * -1); }
   .ArticleContent .ArticleControl {
-    position: absolute;
-    right: -60px;
-    top: 90px; }
+    position: fixed;
+    left: calc((100vw/2) + (60vw/2));
+    top: 135px; }
     .ArticleContent .ArticleControl i {
       color: #003c64; }
   .ArticleContent .ArticlePage .ArticleTitle {
@@ -126,8 +130,7 @@
   position: relative;
   width: 600px;
   height: auto;
-  left: 50%;
-  margin-left: -300px; }
+  margin: 0 auto; }
 
 .ArticleList .ArticleItem {
   position: relative;
@@ -320,40 +323,46 @@
   height: calc( 100vh - 250px);
   border: #eee 1px solid; }
 
-.categoryList {
-  position: absolute;
-  top: 0px;
-  left: -250px;
-  height: auto;
-  width: 200px;
-  border: 1px solid #eee;
-  border-bottom: 0px; }
-  .categoryList .category {
-    position: relative;
-    height: 30px;
-    border-bottom: 1px solid #eee;
-    padding: 0px 10px;
-    cursor: pointer; }
-    .categoryList .category:hover {
-      background-color: #45b4ff; }
-      .categoryList .category:hover span {
-        color: #fff; }
-    .categoryList .category span {
-      line-height: 20px;
-      font-size: 16px;
-      padding: 5px 10px;
-      color: #58595b;
-      font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif; }
-    .categoryList .category .name {
-      position: absolute;
-      left: 0px; }
-    .categoryList .category .count {
-      position: absolute;
-      right: 0px; }
-  .categoryList .active {
-    background-color: #0077c8; }
-    .categoryList .active span {
-      color: #fff; }
+@media only screen and (max-width: 1200px) {
+  .categoryList {
+    visibility: hidden;
+    display: none; } }
+
+@media only screen and (min-width: 1200px) {
+  .categoryList {
+    position: absolute;
+    top: 0px;
+    left: -250px;
+    height: auto;
+    width: 200px;
+    border: 1px solid #eee;
+    border-bottom: 0px; }
+    .categoryList .category {
+      position: relative;
+      height: 30px;
+      border-bottom: 1px solid #eee;
+      padding: 0px 10px;
+      cursor: pointer; }
+      .categoryList .category:hover {
+        background-color: #45b4ff; }
+        .categoryList .category:hover span {
+          color: #fff; }
+      .categoryList .category span {
+        line-height: 20px;
+        font-size: 16px;
+        padding: 5px 10px;
+        color: #58595b;
+        font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif; }
+      .categoryList .category .name {
+        position: absolute;
+        left: 0px; }
+      .categoryList .category .count {
+        position: absolute;
+        right: 0px; }
+    .categoryList .active {
+      background-color: #0077c8; }
+      .categoryList .active span {
+        color: #fff; } }
 
 .CategoryMap {
   position: relative;

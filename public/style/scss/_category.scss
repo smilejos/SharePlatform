@@ -1,49 +1,59 @@
-.categoryList {
-	position: absolute;
-	top: 0px;
-	left: -250px;
-	height: auto;
-	width: 200px;
-	border: 1px solid $ItemBorderColor;
-	border-bottom: 0px;
 
-	.category {
-		position: relative;
-		height: 30px;
-		border-bottom: 1px solid $ItemBorderColor;
-		padding: 0px 10px;
-		cursor: pointer;
+@media only screen and (max-width:1200px){
+    .categoryList {
+        visibility: hidden;
+        display: none;
+    }
+}
 
-		&:hover {
-			background-color: $HoverBackgroundColor;
-            span {
-                color: $HoverTextColor;
+@media only screen and (min-width:1200px){
+    .categoryList {
+        position: absolute;
+        top: 0px;
+        left: -250px;
+        height: auto;
+        width: 200px;
+        border: 1px solid $ItemBorderColor;
+        border-bottom: 0px;
+
+        .category {
+            position: relative;
+            height: 30px;
+            border-bottom: 1px solid $ItemBorderColor;
+            padding: 0px 10px;
+            cursor: pointer;
+
+            &:hover {
+                background-color: $HoverBackgroundColor;
+                span {
+                    color: $HoverTextColor;
+                }
             }
-		}
 
-		span {
-			line-height: 20px;
-			font-size: 16px;
-			padding: 5px 10px;
-			color: $MarjoyTextColor;
-			font-family: $FontFamily;
-		}
+            span {
+                line-height: 20px;
+                font-size: 16px;
+                padding: 5px 10px;
+                color: $MarjoyTextColor;
+                font-family: $FontFamily;
+            }
 
-		.name {
-			position: absolute;
-			left: 0px;
-		}
+            .name {
+                position: absolute;
+                left: 0px;
+            }
 
-		.count {
-			position: absolute;
-			right: 0px;
-		}
-	}
-
-	.active {
-		background-color: $ActivedBackgroundColor;
-        span {
-            color: #fff;
+            .count {
+                position: absolute;
+                right: 0px;
+            }
         }
-	}
+
+        .active {
+            background-color: $ActivedBackgroundColor;
+            span {
+                color: #fff;
+            }
+        }
+    }
 }

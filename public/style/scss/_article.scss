@@ -1,17 +1,17 @@
 .ArticleContent {
 	position: relative;
-	max-width: 880px;
+	max-width: $ArticleContentWidth;
 	height: auto;
 	padding: 40px 0px 20px;
 	background-color: $CommonBackgroundColor;
 	left: 50%;
-	margin-left: -440px;
-
+	margin-left: calc((#{$ArticleContentWidth}/2) * -1);
+    
 	.ArticleControl {
-		position: absolute;
-		right: -60px;
-		top: 90px;
-
+		position: fixed;
+		left: calc((100vw/2) + (#{$ArticleContentWidth}/2));
+		top: 135px;
+        
         i {
             color: $IconColor;
         }

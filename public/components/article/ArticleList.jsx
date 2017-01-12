@@ -10,13 +10,11 @@ import ArticleItem from '../article/ArticleItem'
 
 class ArticleList extends React.Component {
     constructor(props) {
-        super(props);    
-    }
-
-    componentWillMount() {
-        this.setState({
-             page_index: 0
-        });
+        super(props);
+        this.state = {
+            page_index: 0,
+            list_lenght: Math.floor((( window.innerHeight - 200 ) / 45 ) / 5, 0)  * 5
+        };
     }
 
     componentWillUnmount() {
@@ -41,8 +39,8 @@ class ArticleList extends React.Component {
     render() {
         let list = [];
         let articles = this.props.isFilter ? this.props.filter_articles : this.props.articles;
-        let minIndex = this.state.page_index * 10;
-        let maxIndex = (this.state.page_index + 1) * 10;
+        let minIndex = this.state.page_index * this.state.list_lenght;
+        let maxIndex = (this.state.page_index + 1) * this.state.list_lenght;
         maxIndex = maxIndex > articles.length ? articles.length : maxIndex;
         let isMinPage = this.state.page_index == 0;
         let isMaxPage = maxIndex == articles.length;

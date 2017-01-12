@@ -1,8 +1,13 @@
 @import "./codemirror/lib/codemirror.css";
 @import "./codemirror/addon/dialog/dialog.css";
 @import "./codemirror/addon/search/matchesonscrollbar.css";
-@import "./codemirror/addon/search/searchcursor.css";
+
 @import "./highlight.js/styles/xcode.css";
+@import "./react-select/dist/react-select.css";
+@import "./bootstrap/dist/css/bootstrap.min.css";
+@import "./font-awesome/css/font-awesome.min.css";
+@import "./js-sequence-diagrams/dist/sequence-diagram-min.css";
+@import "./mermaid/dist/mermaid.css";
 
 @import "./definition";
 @import "./article";
