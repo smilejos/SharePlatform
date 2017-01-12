@@ -13,14 +13,19 @@
   height: auto;
   padding: 40px 0px 20px;
   background-color: #fff;
-  left: 50%;
-  margin-left: calc((60vw/2) * -1); }
+  margin: 0 auto; }
+  @media screen and (max-width: 800px) {
+    .ArticleContent {
+      max-width: 100vw; } }
   .ArticleContent .ArticleControl {
     position: fixed;
     left: calc((100vw/2) + (60vw/2));
     top: 135px; }
     .ArticleContent .ArticleControl i {
       color: #003c64; }
+    @media screen and (max-width: 800px) {
+      .ArticleContent .ArticleControl {
+        display: none; } }
   .ArticleContent .ArticlePage .ArticleTitle {
     position: relative;
     font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
@@ -199,12 +204,13 @@
       position: relative;
       display: inline-block;
       margin: 0px 2px;
-      color: #9a9b9d;
       font-size: 12px;
       line-height: 14px;
       border: #eee 1px solid;
       padding: 4px 10px;
-      border-radius: 5px; }
+      border-radius: 5px;
+      background-color: #0077c8;
+      color: #fff; }
 
 .ArticleList .btn-group {
   position: absolute;
@@ -818,10 +824,15 @@
 
 .MemberList {
   position: relative;
-  margin-top: 20px;
-  width: 1000px;
-  left: 50%;
-  margin-left: -500px; }
+  margin: 0 auto;
+  margin-top: 10px;
+  width: 990px; }
+  @media screen and (min-width: 700px) and (max-width: 1000px) {
+    .MemberList {
+      width: 660px; } }
+  @media screen and (max-width: 700px) {
+    .MemberList {
+      width: 330px; } }
   .MemberList .MemberBox {
     width: 320px;
     margin: 2px 5px;
