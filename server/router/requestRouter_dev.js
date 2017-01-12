@@ -17,7 +17,6 @@ const HTML = ({ content, store }) => (
             <link rel="stylesheet" href="/js-sequence-diagrams/dist/sequence-diagram-min.css" type="text/css" />
             <link rel="stylesheet" href="/mermaid/dist/mermaid.css" type="text/css" />
             <link rel="stylesheet" href="/react-select.css" type="text/css" />
-            <link rel="stylesheet" href="/codeStyle.css" type="text/css" />
             <link rel="stylesheet" href="/style.css" type="text/css" />
 		</head>
 		<body>

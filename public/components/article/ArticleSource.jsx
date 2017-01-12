@@ -60,14 +60,24 @@ class Article extends React.Component {
         };
 
         return (
-            <div className="ArticleEditor">
-                <div className="ArticleTitle">
-                    {article.title}
+            <div className="ArticleContent">
+                <div className="ArticlePage">
+                    <ArticleTitle title={article.title} />
+                    <CodeMirror value={article.content} options={options} />
                 </div>
-                <CodeMirror value={article.content} options={options} />
                 <button type="button" className="Button" onClick={this._handleBack.bind(this)}>Return</button>
             </div>
         );
+    }
+}
+
+class ArticleTitle extends React.Component {
+    render() {
+        return (
+            <div className="ArticleTitle">
+                <span>{this.props.title}</span>
+            </div>
+        )
     }
 }
 

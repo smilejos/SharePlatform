@@ -5,6 +5,7 @@ import { Link, browserHistory } from 'react-router'
 import { bindActionCreators  } from 'redux'
 import { connect } from 'react-redux'
 import * as ArticleActions from '../../actions/ArticleActions'
+import ArticleContent from '../article/ArticleContent'
 
 var CodeMirror = require('react-codemirror');
 
@@ -26,17 +27,13 @@ require('codemirror/addon/fold/brace-fold');
 class Article extends React.Component {
     constructor(props){
         super(props);
-        let { requestArticle, editArticle } = this.props.actions;
-
-        if (this._isRequestArticle()) {
-            requestArticle(this.props.params.articleNo);   
-        } else {
-            editArticle(this.props.state.article, false);
-        }
+        let { requestArticle } = this.props.actions;
+        this.state = { isEditing: true };
+        requestArticle(this.props.params.articleNo);
     }
 
     componentDidMount() {
-        let { syncArticle, editArticle } = this.props.actions;
+        let { syncArticle } = this.props.actions;
         syncArticle(this.props.params.articleNo);
     }
     
@@ -46,19 +43,16 @@ class Article extends React.Component {
         cleanArticle();
     }
 
-    _isRequestArticle(){
-        return ( this.props.state.article.content == '');
+    _changeToEditMode() {
+        this.setState({
+            isEditing: true
+        });
     }
 
-    _handleUpdate(article) {
-        let { editArticle } = this.props.actions;
-        editArticle(article, true);
-    }
-
-    _handleChange () {
-        let temp = this.props.state.article ? this.props.state.article : {};
-        temp.content = this.refs.textarea.value;
-        this._handleUpdate(temp);
+    _changeToPreviewMode() {
+        this.setState({
+            isEditing: false
+        });
     }
 
     _handleBack () {
@@ -67,27 +61,32 @@ class Article extends React.Component {
     }
 
     _updateContent(content) {
+        let { editArticle } = this.props.actions;
         let temp = this.props.state.article ? this.props.state.article : {};
         temp.content = content;
-        this._handleUpdate(temp);
+        editArticle(article, true);
     }
 
-    _handleKeydown (e) {
-        if (e.keyCode === 9) { // tab was pressed
-            var val = this.refs.textarea.value,
-                start = this.refs.textarea.selectionStart,
-                end = this.refs.textarea.selectionEnd;
-            this.refs.textarea.value = val.substring(0, start) + '\t' + val.substring(end);
-            this.refs.textarea.selectionStart = this.refs.textarea.selectionEnd = start + 1;
-            e.preventDefault();
-
-            let temp = this.props.state.article;
-            temp.content = this.refs.textarea.value;
-            this._handleUpdate(temp);
+    _renderContent(content) {
+        if (this.state.isEditing) {
+            let options = {
+                lineNumbers: true,
+                readOnly: false,
+                mode: 'markdown',
+                keyMap: 'sublime',
+                extraKeys: { "Alt-F": "findPersistent" },
+                autoCloseBrackets: true,
+                matchBrackets: true,
+                showCursorWhenSelecting: true,
+                indentUnit: 4
+            };
+            return <CodeMirror value={content} onChange={this._updateContent.bind(this)} options={options} />
+        } else {
+            return <ArticleContent content={content } />
         }
     }
 
-    _handlePostArticle (){
+    _handleSaveArticle (){
         let { modifyArticle } = this.props.actions;
         let temp = this.props.state.article;
         modifyArticle(temp);
@@ -95,32 +94,76 @@ class Article extends React.Component {
     
     render() {
         let article = this.props.state.article;
-        let options = {
-            lineNumbers: true,
-            readOnly: false,
-            mode: 'markdown',
-            keyMap: 'sublime',
-            extraKeys: { "Alt-F": "findPersistent" },
-            autoCloseBrackets: true,
-            matchBrackets: true,
-            showCursorWhenSelecting: true,
-            indentUnit: 4
-        };
-
+        let content = this._renderContent.bind(this)(article.content);
         return (
-            <div className="ArticleEditor">
-                <div className="ArticleControl">
-                    <i className="fa fa-eye fa-lg" />
-                    <Link className="ArticleEdit" to={"/ArticlePreview/" + article.articleNo }>Preview</Link>
+            <div className="ArticleContent">
+                <ArticleButton
+                    isEditing={this.state.isEditing}
+                    changeToEditMode={this._changeToEditMode.bind(this)}
+                    changeToPreviewMode={this._changeToPreviewMode.bind(this)} />
+                 <div className="ArticlePage">
+                    <ArticleTitle title={article.title} />
+                    {content}
                 </div>
-                <div className="ArticleTitle">
-                    {article.title}
-                </div>
-                <CodeMirror value={article.content} onChange={this._updateContent.bind(this)} options={options} />
-                <button type="button" className="Button" onClick={this._handlePostArticle.bind(this)}>Post</button>
+                <button type="button" className="Button" onClick={this._handleSaveArticle.bind(this)}>Save</button>
                 <button type="button" className="Button" onClick={this._handleBack.bind(this)}>Return</button>
             </div>
         );
+    }
+}
+
+class ArticleTitle extends React.Component {
+    render() {
+        return (
+            <div className="ArticleTitle">
+                <span>{this.props.title}</span>
+            </div>
+        )
+    }
+}
+
+class ArticleButton extends React.Component {
+    _changeToEditMode() {
+        this.props.changeToEditMode();
+    }
+
+    _changeToPreviewMode() {
+        this.props.changeToPreviewMode();
+    }
+
+    _renderPreviewButton() {
+        return (
+            <div className="btn-group-vertical">
+                <span className="btn btn-default" onClick={this._changeToPreviewMode.bind(this)}>
+                    <i className="fa fa-eye fa-lg" title="Preview" />
+                </span>
+            </div>
+        )
+    }
+
+    _renderEditButton() {
+        return (
+            <div className="btn-group-vertical">
+                <span className="btn btn-default" onClick={this._changeToEditMode.bind(this)}>
+                    <i className="fa fa-edit fa-lg" title="Edit" />
+                </span>
+            </div>
+        );
+    }
+
+    render() {
+        let controlButton = null;
+        if( this.props.isEditing) {
+            controlButton = this._renderPreviewButton.bind(this)();
+        } else {
+            controlButton = this._renderEditButton.bind(this)();
+        }
+
+        return (
+            <div className="ArticleControl">
+                {controlButton}
+            </div>
+        )
     }
 }
 

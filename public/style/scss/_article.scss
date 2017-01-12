@@ -160,42 +160,6 @@
 	}
 }
 
-.ArticleEditor {
-	position: relative;
-	max-width: 880px;
-	height: 80%;
-	padding: 40px 0px;
-	background-color: $CommonBackgroundColor;
-	left: 50%;
-	margin-left: -440px;
-
-	.ArticleTitle{
-		position: relative;
-		font-family: $FontFamily;
-		font-size: 2.2em;
-		font-weight: bold;
-		padding: 0px 0px 10px 2px;
-		line-height: 1.2;
-	}
-
-	.ArticleText {
-		position: relative;
-		resize : none;
-		width: 860px;
-		height: 100%;
-		border: solid $ItemBorderColor 1px;
-		border-radius: 3px;
-		box-shadow: inset 0 1px 2px rgba(0,0,0,0.075);
-		background-color: $EditerBackgroundColor;
-		word-break: break-word;
-		white-space: pre-wrap;
-		padding: 10px;
-		overflow-y: auto;
-		overflow-x: hidden;
-	}
-
-}
-
 .ArticleUpload {
 	display: none;
 }

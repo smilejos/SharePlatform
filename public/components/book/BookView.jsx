@@ -9,7 +9,6 @@ import * as ArticleActions from '../../actions/ArticleActions'
 
 import ArticleContent from '../article/ArticleContent'
 import ArticleEditor from '../article/ArticleEditor'
-import ArticlePreview from '../article/ArticlePreview'
 
 class BookView extends React.Component {
     constructor(props){
