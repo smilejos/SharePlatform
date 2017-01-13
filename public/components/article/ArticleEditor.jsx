@@ -64,7 +64,7 @@ class Article extends React.Component {
         let { editArticle } = this.props.actions;
         let temp = this.props.state.article ? this.props.state.article : {};
         temp.content = content;
-        editArticle(article, true);
+        editArticle(temp, true);
     }
 
     _renderContent(content) {

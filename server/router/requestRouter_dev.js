@@ -11,7 +11,8 @@ import memberRouter                                  from '../socket/memberRoute
 const HTML = ({ content, store }) => (
   	<html>
 		<head>
-			<title>Biz Share Platform</title>
+            <title>Biz Share Platform</title>
+            <link rel="icon" href="/Sharing.png" />
             <link rel="stylesheet" href="/style.css" type="text/css" />
 		</head>
 		<body>

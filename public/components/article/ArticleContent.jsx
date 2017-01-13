@@ -10,7 +10,7 @@ export default class ArticleContent extends React.Component {
         super(props);
     }
 
-    _renderMarkup(content) {
+    _renderMarkdown(content) {
         var md = new Remarkable('full', {
             html:         true,        // Enable HTML tags in source
             xhtmlOut:     false,        // Use '/' to close single tags (<br />)
@@ -64,13 +64,35 @@ export default class ArticleContent extends React.Component {
             }
         });
 
-        return { __html: md.render(content) };
+        return md.render(content);
+    }
+
+    _renderCheckBox(content) {
+        // [x] -> <input type="checkbox" checked disabled />
+        if (/\[[x|\s]\]/g.test(content)) {
+            content = content.replace(/\[\s\]/g, '<input type="checkbox" disabled />');
+            content = content.replace(/\[x\]/g, '<input type="checkbox" checked disabled />');
+        }
+        return content;
+    }
+
+    _renderIcon(content) {
+        // (i)[fa-user] -> <i class="fa fa-user"></i>
+        if (/\(i\)\[(.*)\]/g.test(content)) {
+            content = content.replace(/\(i\)\[(.*)\]/g, '<i class="fa $1"></i>');
+        }
+        return content;
     }
 
     render() {
-        
+        let content = this.props.content;
+        content = this._renderMarkdown(content);
+        content = this._renderCheckBox(content);
+        content = this._renderIcon(content);
+
+        //console.log(content);
         return (
-            <div className="markdown-body" dangerouslySetInnerHTML={ this._renderMarkup(this.props.content) } /> 
+            <div className="markdown-body" dangerouslySetInnerHTML={{ __html: content }} /> 
         );
     }
 }
