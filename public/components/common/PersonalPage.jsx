@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import { render } from 'react-dom'
 import { Link } from 'react-router'
+import Tooltip from 'rc-tooltip';
 import * as ArticleActions from '../../actions/ArticleActions'
 
 import ArticleOverview from '../article/ArticleOverview'
@@ -43,12 +44,16 @@ class App extends React.Component {
                     <PersonalInfo user= { this.props.self } />
                     <div className="control">
                         <div className="btn-group">
-                            <Link className="btn btn-default" to={ "/ArticleCreator" }>
-                                <i className="fa fa-pencil-square-o" title="Publish Article"></i>
-                            </Link>
-                            <Link className="btn btn-default" to={ "/BookCreator" }>
-                                <i className="fa fa-book" title="Create Book"></i>
-                            </Link>
+                            <Tooltip placement="top" animation="zoom" overlay="Publish Article">
+                                <Link className="btn btn-default" to={ "/ArticleCreator" }>
+                                    <i className="fa fa-pencil-square-o"></i>
+                                </Link>
+                            </Tooltip>
+                            <Tooltip placement="top" animation="zoom" overlay="Create Book">
+                                <Link className="btn btn-default" to={ "/BookCreator" }>
+                                    <i className="fa fa-book"></i>
+                                </Link>
+                            </Tooltip>
                         </div>
                     </div>
                 </div>

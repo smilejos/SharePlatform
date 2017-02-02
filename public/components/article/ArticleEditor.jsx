@@ -6,7 +6,7 @@ import { bindActionCreators  } from 'redux'
 import { connect } from 'react-redux'
 import * as ArticleActions from '../../actions/ArticleActions'
 import ArticleContent from '../article/ArticleContent'
-
+import Tooltip from 'rc-tooltip';
 var CodeMirror = require('react-codemirror');
 
 require('codemirror/mode/markdown/markdown');
@@ -134,9 +134,11 @@ class ArticleButton extends React.Component {
     _renderPreviewButton() {
         return (
             <div className="btn-group-vertical">
-                <span className="btn btn-default" onClick={this._changeToPreviewMode.bind(this)}>
-                    <i className="fa fa-eye fa-lg" title="Preview" />
-                </span>
+                <Tooltip placement="right" animation="zoom" overlay="Preview">
+                    <span className="btn btn-default" onClick={this._changeToPreviewMode.bind(this)}>
+                        <i className="fa fa-eye fa-lg"/>
+                    </span>
+                </Tooltip>
             </div>
         )
     }
@@ -144,9 +146,11 @@ class ArticleButton extends React.Component {
     _renderEditButton() {
         return (
             <div className="btn-group-vertical">
-                <span className="btn btn-default" onClick={this._changeToEditMode.bind(this)}>
-                    <i className="fa fa-edit fa-lg" title="Edit" />
-                </span>
+                <Tooltip placement="right" animation="zoom" overlay="Edit">
+                    <span className="btn btn-default" onClick={this._changeToEditMode.bind(this)}>
+                        <i className="fa fa-edit fa-lg"/>
+                    </span>
+                </Tooltip>
             </div>
         );
     }

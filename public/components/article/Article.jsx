@@ -5,7 +5,8 @@ import { Link } from 'react-router'
 import { bindActionCreators  } from 'redux'
 import { connect } from 'react-redux'
 import screenfull from 'screenfull';
-import Dropzone from'react-dropzone'
+import Dropzone from 'react-dropzone'
+import Tooltip from 'rc-tooltip';
 import { highlight, highlightAuto } from 'highlight.js'
 import * as ArticleActions from '../../actions/ArticleActions'
 import ArticleContent from '../article/ArticleContent'
@@ -221,38 +222,48 @@ class ArticleButton extends React.Component {
 
     _renderAuthorSettingAction() {
         return (
-            <Link className="btn btn-default" to={ "/ArticleSetting/" + this.props.article.articleNo }>
-                <i className="fa fa-cog fa-lg" title="Article Setting"></i>
-            </Link>
+            <Tooltip placement="right" animation="zoom" overlay="Article Setting">
+                <Link className="btn btn-default" to={ "/ArticleSetting/" + this.props.article.articleNo }>
+                    <i className="fa fa-cog fa-lg"></i>
+                </Link>
+            </Tooltip>
         )
     }
     _renderAuthorEditAction() {
         return (
-            <Link className="btn btn-default" to={ "/ArticleEditor/" + this.props.article.articleNo }>
-                <i className="fa fa-edit fa-lg" title="Edit this Article "></i>
-            </Link>
+            <Tooltip placement="right" animation="zoom" overlay="Edit Article">
+                <Link className="btn btn-default" to={ "/ArticleEditor/" + this.props.article.articleNo }>
+                    <i className="fa fa-edit fa-lg"></i>
+                </Link>
+            </Tooltip>
         );
     }
     _renderDefaultSourceButton() {
          return (
-            <Link className="btn btn-default" to={ "/ArticleSource/" + this.props.article.articleNo }>
-                <i className="fa fa-eye fa-lg" title="View Markdown Source Text"></i>
-            </Link>
+            <Tooltip placement="right" animation="zoom" overlay="View Source">
+                <Link className="btn btn-default" to={ "/ArticleSource/" + this.props.article.articleNo }>
+                    <i className="fa fa-eye fa-lg"></i>
+                </Link>
+            </Tooltip>
         );
     }
     _renderDefaultDownloadButton() {
         return (
-            <span className="btn btn-default" onClick={this._fileDownload.bind(this)}>
-                <i className="fa fa-download fa-lg" title="download" />
-            </span>    
+            <Tooltip placement="right" animation="zoom" overlay="Download">
+                <span className="btn btn-default" onClick={this._fileDownload.bind(this)}>
+                    <i className="fa fa-download fa-lg"/>
+                </span>
+            </Tooltip>
         );
     }
 
     _renderSlideshowButton() {
         return (
-           <span className="btn btn-default" onClick={this._startSildeshow.bind(this)}>
-                <i className="fa fa-laptop fa-lg" title="SlideShow" />
-            </span>
+            <Tooltip placement="right" animation="zoom" overlay="SlideShow">
+                <span className="btn btn-default" onClick={this._startSildeshow.bind(this)}>
+                    <i className="fa fa-laptop fa-lg"/>
+                </span>
+            </Tooltip>    
         );
     }
 
