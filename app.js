@@ -1,20 +1,27 @@
 "use strict";
-const util        = require('util');
-const moment      = require('moment');
-const v8          = require('v8');
-const lodash      = require('lodash');
-let express       = require('express');
-let ntlm          = require('express-ntlm');
-let session       = require("express-session");
-let io            = require('socket.io');
-let path 		  = require('path');
+const util              = require('util');
+const moment            = require('moment');
+const v8                = require('v8');
+const lodash            = require('lodash');
+let express             = require('express');
+let ntlm                = require('express-ntlm');
+let session             = require("express-session");
+let io                  = require('socket.io');
+let path 		        = require('path');
+let jsdom               = require('jsdom');
+let fs                  = require("fs");
+let rimraf              = require("rimraf");
+let mkdirp              = require("mkdirp");
+let multiparty          = require('multiparty');
+const XMLHttpRequest    = require("xmlhttprequest").XMLHttpRequest;
 
-let jsdom = require('jsdom');
+// Here to generate visual window object
 let document = jsdom.jsdom('<!doctype html><html><body></body></html>');
 let window = document.defaultView;
 global.document = document;
 global.window = window;
 global.navigator = window.navigator;
+global.XMLHttpRequest = XMLHttpRequest;
 
 let requestRouter = null;
 if (process.env.NODE_ENV == 'production') {
@@ -27,6 +34,7 @@ let memberRouter  = require('./server/socket/memberRouter');
 let articleRouter = require('./server/socket/articleRouter');
 let bookRouter = require('./server/socket/bookRouter');
 let commonRouter = require('./server/socket/commonRouter');
+let imageHandler = require('./server/file/imageHandler');
 let app = express();
 let sessionMiddleware = session({
     secret: 'somesecrettoken'
@@ -41,9 +49,13 @@ app.get('/', function(req, res) {
   	res.sendFile(path.join(__dirname, 'index.html'))
 })
 
+app.post("/uploads", imageHandler.onUpload);
+app.delete("/uploads/:uuid", imageHandler.onDeleteFile);
+
 app.use(express.static(path.join(__dirname, '/assets/')))
 app.use(express.static(path.join(__dirname, '/bower_components/')))
 app.use(express.static(path.join(__dirname, '/node_modules/')))
+app.use(express.static(path.join(__dirname, '/images/')))
 app.use(requestRouter);
 
 let server = app.listen(8888);

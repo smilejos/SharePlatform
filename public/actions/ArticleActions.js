@@ -1,7 +1,8 @@
 "use strict";
 import { REQUEST_POST, REQUEST_POSTS, REQUEST_SUMMARY,
 	RECEIVE_POSTS, RECEIVE_POST, 
-	CREATE_POST, UPDATE_POST, 
+    CREATE_POST, UPDATE_POST, 
+    RECEIVE_IMAGES, UPDATE_IMAGES, APPEND_IMAGE, DELETE_IMAGE,
     COMPLETE_POST, CLEAN_POST, CLEAN_POSTS, CLEAN_EDITING_POST, LEAVE_POST, EDIT_POST, SYNC_POST, CHANGE_POST_TYPE,
     UPDATE_SLIDES, UPDATE_SLIDE_INDEX,
     UPLOAD_POST,
@@ -37,11 +38,47 @@ export function requestArticlesByAuthor(Id_No) {
 	};
 }
 
+export function requestArticleImages(item) {
+	socket.emit('requestArticleImages', item);
+	return {
+		type: REQUEST_POST,
+	};
+}
+
 
 export function requestArticle(item) {
 	socket.emit('requestArticle', item);
 	return {
 		type: REQUEST_POST,
+	};
+}
+
+export function retrieveArticleImages(list) {
+	return {
+        type: RECEIVE_IMAGES,
+        list: list
+	};
+}
+
+
+export function updateArticleImages(list) {
+	return {
+        type: UPDATE_IMAGES,
+        list: list
+	};
+}
+
+export function addArticleImage(item) {
+	return {
+        type: APPEND_IMAGE,
+        item: item
+	};
+}
+
+export function deleteArticleImage(item) {
+	return {
+        type: DELETE_IMAGE,
+        item: item
 	};
 }
 

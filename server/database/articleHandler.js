@@ -109,12 +109,35 @@ module.exports = function(){
 		let sqlString = " insert into  dbo.Article (title, Author, content, Tag, UpdateTime, PublishTime, isPrivate, isSlideshow) "+
 		                " values ('" +article.title +"','"+ article.author +"','','"+ article.tag +"', getDate(), getDate(), '"+article.isPrivate+"', '"+article.isSlideshow+"')";
 		_executeSqlComment(sqlString, callback);
-	}
+    }
+    
+    function _getArticleImages(articleNo, callback){
+		let sqlString = " select articleNo, UID, fileName, fileSize, dtime, CONVERT(INT, ROW_NUMBER() OVER (ORDER BY dtime) - 1) as id " +
+						" from dbo.Image (nolock) where articleNo = '" + articleNo + "'" +
+                        " order by dtime ";
 
-	function _executeSqlComment(sqlComment, callback) {
-		sql.connect(config, (err) => {
-			let request = new sql.Request();
-			
+		_executeSqlComment(sqlString, callback);
+    }
+    
+    function _uploadImage(articleNo, UID, fileName, fileSize, callback) {
+        let sqlString = " insert into  dbo.Image (ArticleNo, UID, FileName, FileSize, dtime) " +
+            " values ('" + articleNo + "','" + UID + "','" + fileName + "'," + fileSize + ", getDate())";
+		_executeSqlComment(sqlString, callback);
+    }
+
+    function _deleteImageByUID(UID, callback) {
+        let sqlString = " delete from dbo.Image where UID = '" + UID + "'";
+		_executeSqlComment(sqlString, callback);
+    }
+
+    function _deleteImageByArticle(articleNo, callback) {
+        let sqlString = " delete from dbo.Image where articleNo = '" + articleNo + "'";
+		_executeSqlComment(sqlString, callback);
+    }
+
+    function _executeSqlComment(sqlComment, callback) {
+        let connection = new sql.Connection(config, (err) => {
+			let request = connection.request();
 	    	request.query(sqlComment, (err, recordset) => {
 	    		if( err ) {
 	    			console.log('Sql Exception ', err);
@@ -165,6 +188,18 @@ module.exports = function(){
 		createArticle : function(article, callback){
 			article.title = _replaceString(article.title);
 			_createArticle(article, callback);
-		}
+        },
+        getArticleImages: function (articleNo, callback) {
+            _getArticleImages(articleNo, callback);
+        },
+        uploadImage: function (articleNo, UID, fileName, fileSize, callback) {
+            _uploadImage(articleNo, UID, fileName, fileSize, callback);
+        },
+        deleteImageByUID: function (UID, callback) {
+            _deleteImageByUID(UID, callback);
+        },
+        deleteImageByArticle: function (articleNo, callback) { 
+            _deleteImageByArticle(articleNo, callback);
+        }
 	}
-}();
+} ();

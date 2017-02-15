@@ -3,7 +3,7 @@ import store from '../store/store';
 import io from 'socket.io-client';
 import ss from 'socket.io-stream';
 
-import { receiveArticles, receiveArticle } from '../actions/ArticleActions';
+import { receiveArticles, receiveArticle, retrieveArticleImages } from '../actions/ArticleActions';
 import { receiveRealTimeMember, retrieveUser, receiveMembers } from '../actions/MemberActions';
 import { receiveBook } from '../actions/BookActions';
 import { receiveCategory, receiveServerNotice } from '../actions/CommonActions';
@@ -30,6 +30,10 @@ socket_article.on('editArticle', function(article) {
 
 socket_article.on('receiveNotice', function(notice) {
 	store.dispatch(receiveServerNotice(notice));
+});
+
+socket_article.on('retrieveArticleImages', function (list) {
+	store.dispatch(retrieveArticleImages(list));
 });
 
 // ==================================================

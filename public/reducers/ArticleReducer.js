@@ -1,6 +1,7 @@
 "use strict";
 import { REQUEST_POST, REQUEST_POSTS, REQUEST_SUMMARY,
     RECEIVE_POSTS, RECEIVE_POST, PUBLISH_POST, UPDATE_POST, 
+    RECEIVE_IMAGES, UPDATE_IMAGES, APPEND_IMAGE, DELETE_IMAGE,
     COMPLETE_POST, CLEAN_POST, CLEAN_POSTS, CLEAN_EDITING_POST, 
     LEAVE_POST, EDIT_POST, CHANGE_POST_TYPE,
     UPDATE_SLIDES, UPDATE_SLIDE_INDEX,
@@ -9,6 +10,7 @@ import { REQUEST_POST, REQUEST_POSTS, REQUEST_SUMMARY,
 import merge from 'lodash/merge'
 import union from 'lodash/union'
 import assignIn from 'lodash/assignIn'
+import concat from 'lodash/concat'
 
 export default function articles(state = {
         isFetching: true,
@@ -18,6 +20,7 @@ export default function articles(state = {
         filter_articles: [],
         slides: [],
         slide_index: -1,
+        images: [],
         article: {
             articleNo : null,
             title : '',
@@ -61,6 +64,18 @@ export default function articles(state = {
             slides: action.article.isSlideshow ? action.article.content.split("---") : [],
             slide_index: -1
         });
+    case RECEIVE_IMAGES:
+    case UPDATE_IMAGES:
+        return assignIn({}, state, {
+            isFetching: false,
+            isUploading: false,
+            images: action.list
+        });
+    case APPEND_IMAGE:
+        return assignIn({}, state, {
+            images: concat(state.images, action.item)
+        });
+    case DELETE_IMAGE:
 	case PUBLISH_POST:
 	case UPDATE_POST:
 		return assignIn({}, state, {

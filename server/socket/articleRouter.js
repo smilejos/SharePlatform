@@ -80,7 +80,7 @@ module.exports = function(){
 	    });
 	}
 
-	function _getArticle(socket, item) {
+    function _getArticle(socket, item) {
 	    ArticleHandler.getSpecificArticle(item, (article, err) => {
 	    	if( err || article == null) {
     			socket.emit('receiveNotice', lodash.assign(notice, {
@@ -96,7 +96,24 @@ module.exports = function(){
 	        	article = null;
 	    	}
 	    });
-	}
+    }
+    
+    function _getArticleImages(socket, item) {
+        ArticleHandler.getArticleImages(item, (list, err) => {
+            if (err) {
+                socket.emit('receiveNotice', lodash.assign(notice, {
+            		level: 'error',
+            		message: err,
+            		datetime: Date.now()
+            	}));
+            	list = null;
+            } else {
+	        	socket.emit('retrieveArticleImages', list);	
+	        	list = null;
+	    	}
+	    });
+    }
+	
 
 	function _getArticleList(socket, item) {
 		let self_user = socket.request.session.user.UserName;
@@ -223,7 +240,11 @@ module.exports = function(){
 
 		    socket.on('requestArticle', (item) => {
 		       _getArticle(socket, item);
-		    });
+            });
+            
+            socket.on('requestArticleImages', (item) => {
+		       _getArticleImages(socket, item);
+            });
 
 		    socket.on('searchArticles', (item) => {
 		       _searchArticles(socket, item);

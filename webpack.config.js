@@ -14,7 +14,12 @@ let config = {
             loader: 'babel',
             exclude: /node_modules/,
             query: { 
-                presets:['react', 'es2015'] 
+                presets: ['react', 'es2015'],
+                plugins: [
+                    "syntax-class-properties",
+                    "transform-class-properties",
+                    "transform-object-rest-spread"
+                ]
             }
         },{
             test: /\.js$/,
