@@ -6,8 +6,8 @@
 	left: 50%;
 	margin-left: -300px;
 	
-	.Section
-	{
+	.Section {
+
 		padding: 30px 0px 5px 0px;
 		border-bottom: $ItemBorderColor solid 1px;
 		font-family: $FontFamily;
@@ -78,5 +78,9 @@
 				}
 			}
 		}
-	}	
+	}
+
+    .btn-group {
+        margin-top: 5px;
+    }	
 }

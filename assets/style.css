@@ -3,11 +3,11 @@
 @import url(./codemirror/addon/search/matchesonscrollbar.css);
 @import url(./rc-tooltip/assets/bootstrap.css);
 @import url(./highlight.js/styles/xcode.css);
-@import url(./react-select/dist/react-select.css);
 @import url(./bootstrap/dist/css/bootstrap.min.css);
 @import url(./font-awesome/css/font-awesome.min.css);
 @import url(./js-sequence-diagrams/dist/sequence-diagram-min.css);
 @import url(./mermaid/dist/mermaid.css);
+@import url(./react-select/dist/react-select.css);
 .ArticleContent {
   position: relative;
   max-width: 60vw;
@@ -18,6 +18,8 @@
   @media screen and (max-width: 800px) {
     .ArticleContent {
       max-width: 100vw; } }
+  .ArticleContent .btn-group {
+    margin-top: 5px; }
   .ArticleContent .ArticleControl {
     position: fixed;
     left: calc((100vw/2) + (60vw/2));
@@ -128,6 +130,11 @@
   cursor: pointer; }
   .ArticleControl .ArticleEdit:hover {
     text-decoration: underline; }
+
+.ArticleControl .active {
+  background-color: #0077c8; }
+  .ArticleControl .active i {
+    color: #fff; }
 
 .ArticleUpload {
   display: none; }
@@ -478,6 +485,8 @@
           color: #58595b;
           font-size: 12px;
           line-height: 14px; }
+  .ContentSetting .btn-group {
+    margin-top: 5px; }
 
 .markdown-body {
   -webkit-text-size-adjust: 100%;
@@ -1002,28 +1011,10 @@
       background-color: #fafafa;
       line-height: 1.4; }
     .SearchSetting .Section button {
-      height: 30px;
-      margin: 0px 5px; }
-    .SearchSetting .Section .Select {
-      top: 10px;
-      display: inline-block;
-      width: 80px;
-      height: 30px; }
-      .SearchSetting .Section .Select .Select-control {
-        width: 80px;
-        height: 30px; }
-        .SearchSetting .Section .Select .Select-control .Select-value {
-          height: 30px;
-          line-height: 30px;
-          padding: 0px 5px; }
-        .SearchSetting .Section .Select .Select-control .Select-input {
-          height: 30px;
-          line-height: 30px;
-          padding: 0px 5px; }
-        .SearchSetting .Section .Select .Select-control .Select-clear-zone {
-          display: none; }
-        .SearchSetting .Section .Select .Select-control .Select-arrow-zone {
-          display: none; }
+      position: relative;
+      margin: -4px 5px 0px; }
+    .SearchSetting .Section .react-toggle {
+      margin: 0px 0px -8px 0px; }
 
 [hidden] {
   display: none !important; }
@@ -1260,3 +1251,95 @@
 .react-fine-uploader-gallery-retry-button {
   left: -18px;
   top: -12px; }
+
+.react-toggle {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  background-color: transparent;
+  padding: 0; }
+
+.react-toggle-screenreader-only {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px; }
+
+.react-toggle--disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  -webkit-transition: opacity 0.25s;
+  transition: opacity 0.25s; }
+
+.react-toggle-track {
+  width: 60px;
+  height: 30px;
+  padding: 0;
+  border-radius: 30px;
+  border: #adadad 1px solid;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  transition: all 0.2s ease; }
+
+.react-toggle-track-check {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  top: 0px;
+  bottom: 0px;
+  margin-top: auto;
+  margin-bottom: auto;
+  line-height: 0;
+  left: 10px;
+  opacity: 0;
+  -webkit-transition: opacity 0.25s ease;
+  -moz-transition: opacity 0.25s ease;
+  transition: opacity 0.25s ease; }
+
+.react-toggle--checked .react-toggle-track-check {
+  opacity: 1;
+  -webkit-transition: opacity 0.25s ease;
+  -moz-transition: opacity 0.25s ease;
+  transition: opacity 0.25s ease; }
+
+.react-toggle-track-x {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  top: 0px;
+  bottom: 0px;
+  margin-top: auto;
+  margin-bottom: auto;
+  line-height: 0;
+  right: 13px;
+  opacity: 1;
+  -webkit-transition: opacity 0.25s ease;
+  -moz-transition: opacity 0.25s ease;
+  transition: opacity 0.25s ease; }
+
+.react-toggle--checked .react-toggle-track-x {
+  opacity: 0; }
+
+.react-toggle-thumb {
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #9a9b9d;
+  border-radius: 50%;
+  background-color: #fff;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 0.25s ease;
+  -moz-transition: all 0.25s ease;
+  transition: all 0.25s ease; }
+
+.react-toggle--checked .react-toggle-thumb {
+  left: 30px; }

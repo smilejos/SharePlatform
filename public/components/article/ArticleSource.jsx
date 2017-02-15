@@ -65,7 +65,11 @@ class Article extends React.Component {
                     <ArticleTitle title={article.title} />
                     <CodeMirror value={article.content} options={options} />
                 </div>
-                <button type="button" className="Button" onClick={this._handleBack.bind(this)}>Return</button>
+                <div className="btn-group">
+                    <button type="button" className="btn btn-default" onClick={this._handleBack.bind(this)}>
+                        <i className="fa fa-reply"/> Return
+                    </button>
+                </div>
             </div>
         );
     }

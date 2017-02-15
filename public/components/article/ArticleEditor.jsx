@@ -222,6 +222,7 @@ class Article extends React.Component {
         return (
             <div className="ArticleContent">
                 <ArticleButton
+                    mode={this.state.mode}
                     isEditing={this.state.isEditing}
                     changeMode={this._changeMode.bind(this)} />
                     
@@ -229,8 +230,14 @@ class Article extends React.Component {
                     <ArticleTitle title={article.title} />
                     {content}
                 </div>
-                <button type="button" className="Button" onClick={this._handleSaveArticle.bind(this)}>Save</button>
-                <button type="button" className="Button" onClick={this._handleBack.bind(this)}>Return</button>
+                <div className="btn-group">
+                    <button type="button" className="btn btn-default" onClick={this._handleSaveArticle.bind(this)}>
+                        <i className="fa fa-file"/> Save
+                    </button>
+                    <button type="button" className="btn btn-default" onClick={this._handleBack.bind(this)}>
+                        <i className="fa fa-window-close"/> Cancel
+                    </button>
+                </div>
             </div>
         );
     }
@@ -256,22 +263,22 @@ class ArticleButton extends React.Component {
             <div className="ArticleControl">
                 <div className="btn-group-vertical">
                     <Tooltip placement="right" animation="zoom" overlay="Preview">
-                        <span className="btn btn-default" onClick={this._changeMode.bind(this, 'Preview')}>
+                        <span className= {"btn btn-default " + (this.props.mode == "Preview" ? "active" : "")} onClick={this._changeMode.bind(this, 'Preview')}>
                             <i className="fa fa-eye fa-lg"/>
                         </span>
                     </Tooltip>
                     <Tooltip placement="right" animation="zoom" overlay="Edit">
-                        <span className="btn btn-default" onClick={this._changeMode.bind(this, 'Edit')}>
+                        <span className={"btn btn-default " + (this.props.mode == "Edit" ? "active" : "")} onClick={this._changeMode.bind(this, 'Edit')}>
                             <i className="fa fa-edit fa-lg"/>
                         </span>
                     </Tooltip>
                     <Tooltip placement="right" animation="zoom" overlay="Image Upload">
-                        <span className="btn btn-default" onClick={this._changeMode.bind(this, 'Upload')}>
+                        <span className={"btn btn-default " + (this.props.mode == "Upload" ? "active" : "")} onClick={this._changeMode.bind(this, 'Upload')}>
                             <i className="fa fa-upload fa-lg"/>
                         </span>
                     </Tooltip>
                     <Tooltip placement="right" animation="zoom" overlay="Image Gallery">
-                        <span className="btn btn-default" onClick={this._changeMode.bind(this, 'Gallery')}>
+                        <span className={"btn btn-default " + (this.props.mode == "Gallery" ? "active" : "")} onClick={this._changeMode.bind(this, 'Gallery')}>
                             <i className="fa fa-file-image-o fa-lg"/>
                         </span>
                     </Tooltip>

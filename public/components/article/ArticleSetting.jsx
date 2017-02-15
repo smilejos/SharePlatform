@@ -110,14 +110,24 @@ class ArticleSetting extends React.Component {
         let title = this._isNewArticle() ? 'Create a New Article' : 'Manage your Article';
         let buttons;
         if(this._isNewArticle()) {
-            buttons = <div>
-                <button type="button" className="Button" onClick={this._handleCreate.bind(this)}>Create</button>
-            </div>;
+            buttons = (
+                <div className="btn-group">
+                    <button type="button" className="btn btn-default" onClick={this._handleCreate.bind(this)}>
+                        <i className="fa fa-plus-square"/> Create
+                    </button>
+                </div>
+            )
         } else {
-            buttons = <div>
-                <button type="button" className="Button" onClick={this._handleSave.bind(this)}>Save</button>
-                <button type="button" className="Button" onClick={this._handleBack.bind(this)}>Return</button>
-            </div>;
+            buttons = (
+                <div className="btn-group">
+                    <button type="button" className="btn btn-default" onClick={this._handleSave.bind(this)}>
+                        <i className="fa fa-file"/> Save
+                    </button>
+                    <button type="button" className="btn btn-default" onClick={this._handleBack.bind(this)}>
+                        <i className="fa fa-window-close"/> Cancel
+                    </button>
+                </div>
+            );
         }
 
         return (

@@ -38,40 +38,15 @@
 			box-shadow: inset 0 1px 2px rgba(0,0,0,0.075);
 			background-color: $EditerBackgroundColor;
 			line-height: 1.4;
-		}
+        }
 
-		button {
-			height: 30px;
-			margin: 0px 5px;
-		}
-
-		.Select {
-			top: 10px;
-			display: inline-block;
-			width: 80px;
-			height: 30px;
-			.Select-control {
-				width: 80px;
-				height: 30px;
-				.Select-value {
-					height: 30px;
-					line-height: 30px;
-					padding: 0px 5px;
-				}
-				.Select-input {
-					height: 30px;
-					line-height: 30px;
-					padding: 0px 5px;
-				}
-				.Select-clear-zone {
-					display: none;
-				}
-				.Select-arrow-zone {
-					display: none;	
-				}
-			}
-		}
-
+        button {
+            position: relative;
+            margin: -4px 5px 0px;
+        }
 		
+        .react-toggle {
+            margin: 0px 0px -8px 0px;
+        }
 	}	
 }
