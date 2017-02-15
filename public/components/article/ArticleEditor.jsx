@@ -267,11 +267,6 @@ class ArticleButton extends React.Component {
                             <i className="fa fa-eye fa-lg"/>
                         </span>
                     </Tooltip>
-                    <Tooltip placement="right" animation="zoom" overlay="Edit">
-                        <span className={"btn btn-default " + (this.props.mode == "Edit" ? "active" : "")} onClick={this._changeMode.bind(this, 'Edit')}>
-                            <i className="fa fa-edit fa-lg"/>
-                        </span>
-                    </Tooltip>
                     <Tooltip placement="right" animation="zoom" overlay="Image Upload">
                         <span className={"btn btn-default " + (this.props.mode == "Upload" ? "active" : "")} onClick={this._changeMode.bind(this, 'Upload')}>
                             <i className="fa fa-upload fa-lg"/>
@@ -280,6 +275,11 @@ class ArticleButton extends React.Component {
                     <Tooltip placement="right" animation="zoom" overlay="Image Gallery">
                         <span className={"btn btn-default " + (this.props.mode == "Gallery" ? "active" : "")} onClick={this._changeMode.bind(this, 'Gallery')}>
                             <i className="fa fa-file-image-o fa-lg"/>
+                        </span>
+                    </Tooltip>
+                    <Tooltip placement="right" animation="zoom" overlay="Edit">
+                        <span className={"btn btn-default " + (this.props.mode == "Edit" ? "active" : "")} onClick={this._changeMode.bind(this, 'Edit')}>
+                            <i className="fa fa-edit fa-lg"/>
                         </span>
                     </Tooltip>
                 </div>

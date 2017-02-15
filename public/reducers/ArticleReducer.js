@@ -88,16 +88,17 @@ export default function articles(state = {
 		});
     case CLEAN_POST:
         return assignIn({}, state, {
-            article : assignIn({}, state.article, {
-                articleNo : null,
-                title : '',
-                author : '',
-                content : '',
-                tag : [],
-                updateTime : null,
-                publishTime : null,
-                isBookArticle : false,
-                isPrivate : false,
+            images: [],
+            article: assignIn({}, state.article, {
+                articleNo: null,
+                title: '',
+                author: '',
+                content: '',
+                tag: [],
+                updateTime: null,
+                publishTime: null,
+                isBookArticle: false,
+                isPrivate: false,
                 isSlideshow: false
             })
         });
