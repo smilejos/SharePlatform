@@ -170,7 +170,7 @@
 .ArticleList .ArticleActivity {
   position: relative;
   font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
-  padding: 0.8em 0 0.8em 0;
+  padding: 10px 0;
   border-bottom: 1px solid #eee;
   width: 600px;
   font-weight: normal;
@@ -925,6 +925,9 @@
   .Menu .btn-group {
     position: relative;
     margin-left: calc(100%/2 - 91px); }
+    @media screen and (max-width: 800px) {
+      .Menu .btn-group {
+        display: none; } }
   .Menu i {
     color: #003c64; }
   .Menu .logo {
@@ -933,6 +936,68 @@
     height: 32px;
     background: #0077c8 url("Micron.png") no-repeat center;
     background-size: 108px 32px; }
+    @media screen and (max-width: 800px) {
+      .Menu .logo {
+        left: 50%;
+        margin-left: -54px; } }
+
+.bm-burger-button {
+  position: fixed;
+  width: 36px;
+  height: 30px;
+  left: 20px;
+  top: 4px; }
+  @media screen and (min-width: 800px) {
+    .bm-burger-button {
+      display: none; } }
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+  background: #fff; }
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  height: 24px;
+  width: 24px; }
+
+/* Color/shape of close button cross */
+.bm-cross {
+  background: #bdc3c7; }
+
+/* General sidebar styles */
+.bm-menu {
+  background: #373a47;
+  background: #003c64;
+  padding: 2.5em 1.5em 0;
+  font-size: 1.15em;
+  overflow: hidden; }
+
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+  fill: #373a47; }
+
+/* Wrapper for item list */
+.bm-item-list {
+  padding: 0.8em; }
+  .bm-item-list a {
+    color: #b8b7ad;
+    padding: 0.8em; }
+    .bm-item-list a i {
+      color: #b8b7ad;
+      width: 20px;
+      text-align: center; }
+    .bm-item-list a span {
+      margin-left: 10px; }
+
+.bm-menu-wrap {
+  top: 0px;
+  left: 0px; }
+
+/* Styling of overlay */
+.bm-overlay {
+  background: rgba(0, 0, 0, 0.3);
+  top: 0px;
+  left: 0px; }
 
 .personalBox {
   position: relative;

@@ -13,7 +13,7 @@ class ArticleList extends React.Component {
         super(props);
         this.state = {
             page_index: this.props.page_index ? this.props.page_index : 0,
-            list_lenght: Math.floor((( window.innerHeight - 200 ) / 45 ) / 5, 0)  * 5
+            list_lenght: Math.floor((( window.innerHeight - 250 ) / 45 ) / 5, 1)  * 5
         };
     }
 
