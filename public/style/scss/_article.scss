@@ -37,6 +37,10 @@
 			padding: 0px 0px 10px 2px;
 			border-bottom: solid $ItemBorderColor 1px;
 			line-height: 1.2;
+
+            @media screen and (max-width: 800px){
+                text-align: center;
+            }
 		}
 		.markdown-body{
 			text-align: left;

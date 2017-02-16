@@ -9,7 +9,17 @@ let RadiumLink = Radium(Link);
 export default class Information extends React.Component {
     constructor(props){
         super(props);
+        this.state = {
+            isVisiable: false
+        }
     }
+
+    _onMenuClick() {
+        this.setState({
+            isVisiable: !this.state.isVisiable
+        })
+    }
+    
     render() {
         return (
             <div className="Menu">
@@ -41,7 +51,7 @@ export default class Information extends React.Component {
                         </Link>
                     </Tooltip>
                 </div>
-                <Menu>
+                <Menu isOpen={this.state.isVisiable} onClick={ this._onMenuClick }>
                     <RadiumLink className="menu-item" to="/">
                         <i className="fa fa-home"></i>
                         <span>Home</span>

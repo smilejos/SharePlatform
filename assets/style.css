@@ -37,6 +37,9 @@
     padding: 0px 0px 10px 2px;
     border-bottom: solid #eee 1px;
     line-height: 1.2; }
+    @media screen and (max-width: 800px) {
+      .ArticleContent .ArticlePage .ArticleTitle {
+        text-align: center; } }
   .ArticleContent .ArticlePage .markdown-body {
     text-align: left;
     margin-top: 5px;
