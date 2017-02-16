@@ -18,50 +18,18 @@ class Images extends Component {
 
     constructor() {
         super()
-
-        this.state = {
-            visibleFiles: []
-        }
-
-        this._onStatusChange = (id, oldStatus, status) => {
-            if (status === 'submitted') {
-                const visibleFiles = this.state.visibleFiles
-
-                visibleFiles.push({ id })
-                this.setState({ visibleFiles })
-            }
-            else if (isFileGone(status)) {
-                this._removeVisibleFile(id)
-            }
-            else if (status === 'upload successful' || status === 'upload failed') {
-                this._updateVisibleFileStatus(id, status)
-            }
-        }
-    }
-
-    componentDidMount() {
-        this.props.uploader.on('statusChange', this._onStatusChange)
-        if (this.props.visibleFiles && this.props.visibleFiles.length > 0) {   
-            this.setState({
-                visibleFiles: this.props.visibleFiles
-            });
-        }
-    }
-
-    componentWillUnmount() {
-        this.props.uploader.off('statusChange', this._onStatusChange)
     }
     
     _onClick(id) {
         let UID = this.props.uploader.methods.getUuid(id);
         let FileName = this.props.uploader.methods.getName(id);
         let Article = this.props.articleNo;
-        let path = `![${FileName}](/${this.props.articleNo}/${UID}/${FileName})`;
+        let path = `![](/${this.props.articleNo}/${UID}/${FileName})`;
         this.props.appendLine(path);
     }
 
     _renderImages(uploader) {
-        return this.state.visibleFiles.map(({ id, status }) => (
+        return this.props.visibleFiles.map(({ id, status }) => (
             <li key={ id }  className='react-fine-uploader-gallery-file' >
                 <Thumbnail className='react-fine-uploader-gallery-thumbnail' id={id} uploader={uploader} />
                 <Tooltip placement="right" animation="zoom" overlay="Insert Image">
@@ -91,41 +59,7 @@ class Images extends Component {
             </ReactCssTransitionGroup>
         )
     }
-
-    _removeVisibleFile(id) {
-        let visibleFileIndex = -1
-
-        this.state.visibleFiles.some((file, index) => {
-            if (file.id === id) {
-                visibleFileIndex = index
-                return true
-            }
-        })
-
-        if (visibleFileIndex >= 0) {
-            const visibleFiles = this.state.visibleFiles
-
-            visibleFiles.splice(visibleFileIndex, 1)
-            this.setState({ visibleFiles })
-        }
-    }
-
-    _updateVisibleFileStatus(id, status) {
-        this.state.visibleFiles.some(file => {
-            if (file.id === id) {
-                file.status = status
-                this.setState({ visibleFiles: this.state.visibleFiles })
-                return true
-            }
-        })
-    }
 }
 
-const isFileGone = status => {
-    return [
-        'canceled',
-        'deleted',
-    ].indexOf(status) >= 0
-}
 
 export default Images

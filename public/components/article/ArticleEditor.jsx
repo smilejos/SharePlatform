@@ -99,6 +99,22 @@ class Article extends React.Component {
             scrollInfo: null,
             cursorInfo: null
         };
+
+        this._onStatusChange = (id, oldStatus, status) => {
+            if (status === 'submitted') {
+                const visibleFiles = this.state.visibleFiles
+
+                visibleFiles.push({ id })
+                this.setState({ visibleFiles })
+            }
+            else if (isFileGone(status)) {
+                this._removeVisibleFile(id)
+            }
+            else if (status === 'upload successful' || status === 'upload failed') {
+                this._updateVisibleFileStatus(id, status)
+            }
+        }
+
         requestArticle(this.props.params.articleNo);
         requestArticleImages(this.props.params.articleNo);
     }
@@ -132,7 +148,10 @@ class Article extends React.Component {
                 };
             });
             let visibleFiles = nextProps.state.images.map((item, id) => {
-                return { id: item.id }
+                return {
+                    id: item.id,
+                    status: 'upload successful'
+                }
             });
 
             this.setState({ visibleFiles: visibleFiles });
@@ -143,12 +162,41 @@ class Article extends React.Component {
     componentDidMount() {
         let { syncArticle } = this.props.actions;
         syncArticle(this.props.params.articleNo);
+
+        uploader.on('statusChange', this._onStatusChange);
     }
     
     componentWillUnmount() {
         let { leaveArticle, cleanArticle } = this.props.actions;
         leaveArticle(this.props.params.articleNo);
         cleanArticle();
+    }
+
+    _removeVisibleFile(id) {
+        let visibleFileIndex = -1
+
+        this.state.visibleFiles.some((file, index) => {
+            if (file.id === id) {
+                visibleFileIndex = index
+                return true
+            }
+        })
+
+        if (visibleFileIndex >= 0) {
+            const visibleFiles = this.state.visibleFiles
+            visibleFiles.splice(visibleFileIndex, 1)
+            this.setState({ visibleFiles })
+        }
+    }
+
+    _updateVisibleFileStatus(id, status) {
+        this.state.visibleFiles.some(file => {
+            if (file.id === id) {
+                file.status = status
+                this.setState({ visibleFiles: this.state.visibleFiles })
+                return true
+            }
+        })
     }
 
     _changeMode(mode) {

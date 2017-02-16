@@ -56,7 +56,7 @@ module.exports = function(){
         getAccount: function (Account) {
             if (Account.DomainName == "WINNTDOM") {
                 let member = employees.filter( (item) => {
-                    return item.user_na.toLowerCase() == Account.UserName.toLowerCase();
+                    return item.user_na.toUpperCase() == Account.UserName.toUpperCase();
                 })[0];
                 Account.UserName = member.Id_No; 
                 Account.DomainName = "INOTERA";
@@ -85,12 +85,12 @@ module.exports = function(){
 		},
 		getEmployee : function(Id_No){
 			return employees.filter( (item) => {
-				return item.Id_No == Id_No;
+				return item.Id_No.toUpperCase() == Id_No.toUpperCase();
 			})[0];
 		},
 		setOnline: function(Id_No, Socket_Id) {
 			let member = employees.filter( (item) => {
-				return item.Id_No == Id_No;
+				return item.Id_No.toUpperCase() == Id_No.toUpperCase();
 			})[0];
 			member.OnlineState = true;
 			member.SocketId = Socket_Id;
@@ -98,7 +98,7 @@ module.exports = function(){
 		},
 		setOffline: function(Id_No) {
 			employees.filter( (item) => {
-				return item.Id_No == Id_No;
+				return item.Id_No.toUpperCase() == Id_No.toUpperCase();
 			})[0].OnlineState = false;
 		},
 		getOnlineList: function() {

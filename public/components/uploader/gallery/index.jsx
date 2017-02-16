@@ -47,40 +47,8 @@ class Gallery extends Component {
 
     constructor() {
         super()
-
-        this.state = {
-            visibleFiles: []
-        }
-
-        this._onStatusChange = (id, oldStatus, status) => {
-            if (status === 'submitted') {
-                const visibleFiles = this.state.visibleFiles
-
-                visibleFiles.push({ id })
-                this.setState({ visibleFiles })
-            }
-            else if (isFileGone(status)) {
-                this._removeVisibleFile(id)
-            }
-            else if (status === 'upload successful' || status === 'upload failed') {
-                this._updateVisibleFileStatus(id, status)
-            }
-        }
     }
-
-    componentDidMount() {
-        this.props.uploader.on('statusChange', this._onStatusChange)
-        if (this.props.visibleFiles && this.props.visibleFiles.length > 0) {   
-            this.setState({
-                visibleFiles: this.props.visibleFiles
-            });
-        }
-    }
-
-    componentWillUnmount() {
-        this.props.uploader.off('statusChange', this._onStatusChange)
-    }
-
+    
     render() {
         const cancelButtonProps = getComponentProps('cancelButton', this.props)
         const dropzoneProps = getComponentProps('dropzone', this.props)
@@ -100,7 +68,7 @@ class Gallery extends Component {
 
         return (
             <MaybeDropzone content={ this.props.children }
-                           hasVisibleFiles={ this.state.visibleFiles.length > 0 }
+                           hasVisibleFiles={ this.props.visibleFiles.length > 0 }
                            uploader={ uploader }
                            { ...dropzoneProps }
             >
@@ -121,7 +89,7 @@ class Gallery extends Component {
                                          transitionName='react-fine-uploader-gallery-files'
                 >
                 {
-                    this.state.visibleFiles.map(({ id, status }) => (
+                    this.props.visibleFiles.map(({ id, status }) => (
                         <li key={ id }
                              className='react-fine-uploader-gallery-file'
                         >
@@ -188,34 +156,6 @@ class Gallery extends Component {
                 </ReactCssTransitionGroup>
             </MaybeDropzone>
         )
-    }
-
-    _removeVisibleFile(id) {
-        let visibleFileIndex = -1
-
-        this.state.visibleFiles.some((file, index) => {
-            if (file.id === id) {
-                visibleFileIndex = index
-                return true
-            }
-        })
-
-        if (visibleFileIndex >= 0) {
-            const visibleFiles = this.state.visibleFiles
-
-            visibleFiles.splice(visibleFileIndex, 1)
-            this.setState({ visibleFiles })
-        }
-    }
-
-    _updateVisibleFileStatus(id, status) {
-        this.state.visibleFiles.some(file => {
-            if (file.id === id) {
-                file.status = status
-                this.setState({ visibleFiles: this.state.visibleFiles })
-                return true
-            }
-        })
     }
 }
 

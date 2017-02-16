@@ -58,12 +58,11 @@ module.exports = function(){
             return handler.getAccount(Account);
         },
 		listen: function(io, socket) {
-			console.log('Member connected', socket.id);
-			let user = socket.request.session.user;
+            let user = socket.request.session.user;
+            console.log('Member connected', socket.id, user);
 		    if( user) {
 		        let IdNo = user.UserName;
 		        let self = handler.setOnline(IdNo);    
-		        console.log('Member Name:', self.card_na);
 		        socket.emit('receiveRealTimeMember', {
 		        	List : handler.getOnlineList(),
 		        	self : self
