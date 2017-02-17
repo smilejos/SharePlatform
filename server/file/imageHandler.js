@@ -41,7 +41,7 @@ function onSimpleUpload(fields, file, res) {
             fileName: fields.qqfilename[0],
             fileSize: file.size,
             uuid: fields.qquuid[0],
-            thumbnailUrl: `http://localhost:8888/${fields.articleNo[0]}/${fields.qquuid[0]}/${fields.qqfilename[0]}`
+            thumbnailUrl: `/${fields.articleNo[0]}/${fields.qquuid[0]}/${fields.qqfilename[0]}`
         };
         
     file.name = fields.qqfilename;
