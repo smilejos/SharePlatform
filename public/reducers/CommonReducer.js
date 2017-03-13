@@ -1,6 +1,6 @@
 "use strict";
 import { RETRIEVE_CATEGORY, SET_SEARCH_OPTIONS, SET_CATEGORY_COUNTS, SET_AUTHOR_COUNTS, 
-    CLEAR_FILTER_OPTIONS, CLEAR_COUNTS, RECEIVE_SERVER_NOTICE, SENT_CLIENT_NOTICE } from '../constants/CommonActionTypes';
+    CLEAR_FILTER_OPTIONS, CLEAR_CATEGORY_COUNTS, CLEAR_COUNTS, RECEIVE_SERVER_NOTICE, SENT_CLIENT_NOTICE } from '../constants/CommonActionTypes';
 import assignIn from 'lodash/assignIn'
 
 export default function common(state = {
@@ -41,6 +41,10 @@ export default function common(state = {
             return assignIn({}, state, {
                 search_options: assignIn({}, 
                     state.search_options, {tag: ''})
+            });
+        case CLEAR_CATEGORY_COUNTS:
+            return assignIn({}, state, {
+                category_counts: []
             });
         case CLEAR_COUNTS: 
             return assignIn({}, state, {

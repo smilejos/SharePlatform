@@ -8,13 +8,13 @@ class ArticleItem extends React.Component {
     render() {
         return (
             <div className="ArticleActivity">
-                <Link to={ "/User/" + this.props.article.author } className="ArticleAuthor">
-                    { this.props.article.authorName }
+                <Link to={ "/Page/User/" + this.props.article.author } className="ArticleAuthor">
+                    { this.props.article.author_name }
                 </Link>
                 <span className="ArticleAction">
                     { moment(this.props.article.updateTime).isSame(this.props.article.publishTime ) ? "Publish" : "Update" }
                 </span>
-                <Link to={ "/Article/" + this.props.article.articleNo } className="ArticleTitle">
+                <Link to={ "Page/Article/View/" + this.props.article.articleNo } className="ArticleTitle">
                     { this.props.article.title }
                 </Link>
                 <span className="ArticleTime">{ moment( this.props.article.updateTime.replace("Z", "") ).fromNow() }</span>

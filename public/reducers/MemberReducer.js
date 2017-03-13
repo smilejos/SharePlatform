@@ -1,5 +1,5 @@
 "use strict";
-import { QUERY_USER, RECEIVE_ONLINE_DATA, REQUEST_USER_DATA, RETRIEVE_USER_DATA,
+import { QUERY_USER, RECEIVE_LOGIN_USER, REQUEST_USER_DATA, RETRIEVE_USER_DATA,
         REQUEST_MEMBER_DATA, RECEIVE_MEMBER_DATA
 } from '../constants/MemberActionTypes';
 import merge from 'lodash/merge'
@@ -13,28 +13,26 @@ export default function members(state = {
         user: {},
         users: [],
         members: [],
-        online_Users: [],
         self: {
         	dept_no: '',
         	dept_na: '',
-        	dept_fullname: '',
         	title_na: '',
         	card_na: '',
-        	tel_no: '',
-        	Id_No: ''
+            tel_no: '',
+            legacy_Id_No: '',
+            user_name: '',
+            worker_no: 0
         }
     }, action) {
 	switch (action.type) {
         case QUERY_USER:
             return assignIn({}, state, {
                 user: find(state.users, {
-                    Id_No: action.Id_No
+                    worker_no: action.worker_no
                 })
             });
-		case RECEIVE_ONLINE_DATA:
+		case RECEIVE_LOGIN_USER:
 			return assignIn({}, state, {
-                users: action.online_Users,
-          		online_Users: action.online_Users,
           		self: action.self
         	});
         case RETRIEVE_USER_DATA:

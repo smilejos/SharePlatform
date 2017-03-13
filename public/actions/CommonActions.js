@@ -1,6 +1,6 @@
 "use strict";
 import { RETRIEVE_CATEGORY, SET_SEARCH_OPTIONS, SET_CATEGORY_COUNTS, SET_AUTHOR_COUNTS, 
-	CLEAR_FILTER_OPTIONS, CLEAR_COUNTS, RECEIVE_SERVER_NOTICE, SENT_CLIENT_NOTICE } from '../constants/CommonActionTypes';
+	CLEAR_FILTER_OPTIONS, CLEAR_CATEGORY_COUNTS, CLEAR_COUNTS, RECEIVE_SERVER_NOTICE, SENT_CLIENT_NOTICE } from '../constants/CommonActionTypes';
 import { socket_article as socket } from '../utility/socketHandler.js';
 import find from 'lodash/find'
 
@@ -44,6 +44,12 @@ export function clearFilterCounts() {
 	};
 }
 
+export function clearCategoryCounts() {
+	return {
+		type: CLEAR_CATEGORY_COUNTS
+	};
+}
+
 export function receiveServerNotice(notice) {
 	return {
 		type: RECEIVE_SERVER_NOTICE,
@@ -57,8 +63,3 @@ export function sentClientNotice(notice) {
 		notice
 	};
 }
-
-
-
-
-

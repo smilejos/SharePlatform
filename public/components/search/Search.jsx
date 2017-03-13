@@ -6,6 +6,7 @@ import { bindActionCreators  } from 'redux'
 import { connect } from 'react-redux'
 import Select from 'react-select';
 import * as ArticleActions from '../../actions/ArticleActions'
+import * as CommonActions from '../../actions/CommonActions'
 import ArticleList from '../article/ArticleList'
 import Category from '../search/Category'
 import Toggle from 'react-toggle'
@@ -25,6 +26,10 @@ class Search extends React.Component {
         clearFilterArticle();
     }
 
+    componentDidMount() {
+         this.refs.txtKeyword.focus(); 
+    }
+
     _handleTypeChange() {
         this.setState({
             isPrivate: !this.state.isPrivate
@@ -37,8 +42,17 @@ class Search extends React.Component {
         });
     }
 
+    _handleKeyDown(event) {
+        if (event.key == 'Enter') {
+            this._handleSearch();
+        }
+    }
+
     _handleSearch() {
         let { searchArticles } = this.props.articleActions;
+        let { clearCategoryCounts } = this.props.CommonActions;
+        
+        clearCategoryCounts();
         searchArticles(this.state);
     }
 
@@ -48,7 +62,9 @@ class Search extends React.Component {
             <div className="SearchSetting">
                 <div className="Section">
                     <div className="Title">Search Article</div>
-                    <input type="text" ref="txtKeyword" value={ this.state.keyword } onChange={this._handleKeywordChange.bind(this)} />
+                    <input type="text" ref="txtKeyword" value={this.state.keyword}
+                        onChange={this._handleKeywordChange.bind(this)} 
+                        onKeyPress={this._handleKeyDown.bind(this)} />
                     <button type="button" className="btn btn-default" onClick={this._handleSearch.bind(this)}>
                         <i className="fa fa-search" aria-hidden="true"></i> Search
                     </button>
@@ -79,7 +95,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return { 
-        articleActions: bindActionCreators(ArticleActions, dispatch)
+        articleActions: bindActionCreators(ArticleActions, dispatch),
+        CommonActions: bindActionCreators(CommonActions, dispatch)
     }
 }
 

@@ -207,7 +207,7 @@ class Article extends React.Component {
     }
 
     _handleBack () {
-        let path = '/Article/' + this.props.params.articleNo;
+        let path = '/Page/Article/View/' + this.props.params.articleNo;
         browserHistory.push(path);
     }
 

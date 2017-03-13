@@ -6,17 +6,15 @@ module.exports = function(){
 		config = require('../config/database');
 
 	function _getRawDataFromDatabase (callback){
-		console.log('get employee');
-        let sqlString = " select a.Id_No, a.card_na, d.username as user_na, a.e_mail, a.Tel_O as tel_no, b.ETitle_na as title_na, a.dept_no, c.EDept_Na1 as dept_na, c.EDept_FuNa as dept_fullName" +
-                        " from HRIS.dbo.Nemployee a " +
-                        " left join HRIS.dbo.ztitle b on a.Title_no = b.Title_no" +
-                        " left join HRIS.dbo.NSection c on a.Dept_no = c.Dept_no" +
-                        " left join HRIS.dbo.GED_Xref d on a.Id_No = d.Id_No" +
-                        " where d.username is not null";
-                
-		let connection = new sql.Connection(config, function(err) {
-			let request = connection.request();
-	    	request.query(sqlString, function(err, recordset) {
+        let sqlString = " select Emp_Id as worker_no, RTRIM(Micron_UserName) as user_name, Legacy_ID_No as legacy_Id_No, card_na, RTRIM(Tel_o) as tel_no, Title_no as title_na, RTRIM(EDept_funa) as dept_na, e_mail as email " +
+                        " from HRIS.dbo.SAP_Nemployee a " +
+                        " left join HRIS.dbo.SAP_NSection b on a.Dept_no = b.Dept_no  where a.Dept_no in ('70130800', '70130852')";
+        
+        let connection = new sql.Connection(config, function (err) {
+            console.log(err);
+            let request = connection.request();
+            request.query(sqlString, function (err, recordset) {
+                console.log(err);
 	    		employees = recordset;
 	    		callback();
 	    		recordset = null;
@@ -25,17 +23,15 @@ module.exports = function(){
 	}
 
 	function _getBizMemberFromDatabase (callback){
-		console.log('get biz member');
-        let sqlString = " select a.Id_No, a.card_na, d.username as user_na, a.e_mail, a.Tel_O as tel_no, b.ETitle_na as title_na, a.dept_no, c.EDept_Na1 as dept_na, c.EDept_FuNa as dept_fullName" +
-                        " from HRIS.dbo.Nemployee a " +
-                        " left join HRIS.dbo.ztitle b on a.Title_no = b.Title_no" +
-                        " left join HRIS.dbo.NSection c on a.Dept_no = c.Dept_no" +
-                        " left join HRIS.dbo.GED_Xref d on a.Id_No = d.Id_No" +
-                        " where a.dept_no in ('1131', '1133') order by a.dept_no ASC, a.G_Code DESC";
-
-		let connection = new sql.Connection(config, function(err) {
-			let request = connection.request();
-	    	request.query(sqlString, function(err, recordset) {
+        let sqlString = " select Emp_Id as worker_no, RTRIM(Micron_UserName) as user_name, Legacy_ID_No as legacy_Id_No, card_na, RTRIM(Tel_o) as tel_no, Title_no as title_na, RTRIM(EDept_funa) as dept_na, e_mail as email " +
+                        " from HRIS.dbo.SAP_Nemployee a " +
+                        " left join HRIS.dbo.SAP_NSection b on a.Dept_no = b.Dept_no where a.Dept_no in ('70130800', '70130852')";
+        
+        let connection = new sql.Connection(config, function (err) {
+            let request = connection.request();
+            console.log(err);
+            request.query(sqlString, function (err, recordset) {
+                console.log(err);
 	    		members = recordset;
 	    		callback();
 	    		recordset = null;
@@ -53,17 +49,23 @@ module.exports = function(){
 				console.log('members', members.length);
 			});
         },
-        getAccount: function (Account) {
-            if (Account.DomainName == "WINNTDOM") {
-                let member = employees.filter( (item) => {
-                    return item.user_na.toUpperCase() == Account.UserName.toUpperCase();
+        getAccount: function(loginInfo) {
+            console.log('start to transfer', loginInfo);
+            let member = null;
+            if (loginInfo.DomainName.toUpperCase() == "INOTERA") {
+                member = employees.filter((item) => {
+                    return item.legacy_Id_No.toUpperCase().trim() === loginInfo.UserName.toUpperCase();
                 })[0];
-                Account.UserName = member.Id_No; 
-                Account.DomainName = "INOTERA";
-                return Account;
             } else {
-                return Account;
-            }
+                member = employees.filter((item) => {
+                    return item.user_name.toUpperCase().trim() === loginInfo.UserName.toUpperCase();
+                })[0];
+            }   
+            
+            loginInfo.WorkerNo = member.worker_no;
+            //loginInfo.UserName = member.user_name; 
+            loginInfo.DomainName = "WINNTDOM";
+            return loginInfo;
         },
 		getMembers : function(callback){
 			if( !members || members.length == 0 ) {
@@ -83,22 +85,24 @@ module.exports = function(){
 				callback(employees);
 			}
 		},
-		getEmployee : function(Id_No){
+		getEmployee : function(worker_no){
 			return employees.filter( (item) => {
-				return item.Id_No.toUpperCase() == Id_No.toUpperCase();
+				return item.worker_no == worker_no;
 			})[0];
-		},
-		setOnline: function(Id_No, Socket_Id) {
-			let member = employees.filter( (item) => {
-				return item.Id_No.toUpperCase() == Id_No.toUpperCase();
+        },
+
+        // We don't use below function, wait to real-time chat or something feature.
+		setOnline: function(worker_no, Socket_Id) {
+            let member = employees.filter((item) => {
+				return item.worker_no == worker_no;
 			})[0];
 			member.OnlineState = true;
 			member.SocketId = Socket_Id;
 			return member;
 		},
-		setOffline: function(Id_No) {
+		setOffline: function(worker_no) {
 			employees.filter( (item) => {
-				return item.Id_No.toUpperCase() == Id_No.toUpperCase();
+				return item.worker_no == worker_no;
 			})[0].OnlineState = false;
 		},
 		getOnlineList: function() {

@@ -25,8 +25,6 @@ export default function articles(state = {
             articleNo : null,
             title : '',
             author : '',
-            authorName: '',
-            dept_na: '',
             content : '',
             tag : [],
             updateTime : null,
@@ -45,6 +43,8 @@ export default function articles(state = {
 		return assignIn({}, state, {
             isFetching: true,
             isUploading: false,
+            isFilter: false,
+            filter_articles: [],
             articles: [],
             slides: [],
             slide_index: -1

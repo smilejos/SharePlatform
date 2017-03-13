@@ -59,14 +59,9 @@ module.exports = function(){
         },
 		listen: function(io, socket) {
             let user = socket.request.session.user;
-            console.log('Member connected', socket.id, user);
-		    if( user) {
-		        let IdNo = user.UserName;
-		        let self = handler.setOnline(IdNo);    
-		        socket.emit('receiveRealTimeMember', {
-		        	List : handler.getOnlineList(),
-		        	self : self
-		    	});
+            if (user) {
+                let self = handler.getEmployee(user.WorkerNo);
+		        socket.emit('receiveLoginUser', self);
 		    }
 
 		    socket.on('getEmployeeData', (item) => {

@@ -1,18 +1,18 @@
 "use strict";
-import { QUERY_USER, REQUEST_USER_DATA, RETRIEVE_USER_DATA, RECEIVE_ONLINE_DATA,
+import { QUERY_USER, REQUEST_USER_DATA, RETRIEVE_USER_DATA, RECEIVE_LOGIN_USER,
 		REQUEST_MEMBER_DATA, RECEIVE_MEMBER_DATA  } from '../constants/MemberActionTypes';
 import { socket_member as socket } from '../utility/socketHandler.js';
 import find from 'lodash/find'
 
-export function getUser(Id_No) {
+export function getUser(worker_no) {
 	return (dispatch, getState) => {
 		let _user = find(getState().memberReducer.users, {
-			Id_No: Id_No
-		});
+			worker_no: worker_no
+        });
 		if( _user ) {
-			dispatch(changeUser(Id_No));
+			dispatch(changeUser(worker_no));
 		} else {
-			dispatch(requestUser(Id_No));
+			dispatch(requestUser(worker_no));
 		}
 	};
 }
@@ -25,15 +25,15 @@ export function getMember() {
 	};
 }
 
-export function changeUser(Id_No) {
+export function changeUser(worker_no) {
 	return {
 		type: QUERY_USER,
-		Id_No
+		worker_no
 	};
 }
 
-export function requestUser(Id_No) {
-	socket.emit('getEmployeeData', Id_No);
+export function requestUser(worker_no) {
+	socket.emit('getEmployeeData', worker_no);
 	return {
 		type: REQUEST_USER_DATA
 	};
@@ -60,10 +60,9 @@ export function retrieveUser(user) {
 	};
 }
 
-export function receiveRealTimeMember(result) {
+export function receiveLoginUser(self) {
 	return {
-		type: RECEIVE_ONLINE_DATA,
-		online_users: result.List,
-		self: result.self
+		type: RECEIVE_LOGIN_USER,
+		self: self
 	};
 }

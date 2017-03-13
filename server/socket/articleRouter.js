@@ -15,7 +15,7 @@ module.exports = function(){
 	}
 
 	function _createArticle(socket, item) {
-		item.author = socket.request.session.user.UserName;
+		item.author = socket.request.session.user.WorkerNo;
         ArticleHandler.createArticle(item, (recordset, err) =>{
             if( err ) {
             	socket.emit('receiveNotice', lodash.assign(notice, {
@@ -68,13 +68,11 @@ module.exports = function(){
 	}
 
 	function _searchArticles(socket, item) {
-		item.author = socket.request.session.user.UserName;
+		item.worker_no = socket.request.session.user.WorkerNo;
 		item.keyword = item.keyword.length > 0 ? item.keyword.split(' ') : [];
 		ArticleHandler.getSearchArticles(item, (articles, err) => {
 	    	articles = is.array(articles) ? articles : [];
-	    	lodash.forEach(articles, function(item, index){
-	    		item.tag = item.tag.length > 0 ? item.tag.split(',') : [];
-	    	});
+	    	articles = _separateByTag(articles);
 	        socket.emit('receiveList', articles);
 	        articles = null;
 	    });
@@ -91,7 +89,7 @@ module.exports = function(){
             	article = null;
 	    	} else {
 	    		article = is.array(article) ? article[0] : article;
-	    		article.tag = article.tag.length > 0 ? article.tag.split(',') : [];
+                article.tag = article.tag.length > 0 ? article.tag.split(',') : [];
 	        	socket.emit('retrieveArticle', article);	
 	        	article = null;
 	    	}
@@ -116,23 +114,17 @@ module.exports = function(){
 	
 
 	function _getArticleList(socket, item) {
-		let self_user = socket.request.session.user.UserName;
+		let worker_no = socket.request.session.user.WorkerNo;
 		if(item.isSpecificUser) {
-			// console.log('_getArticleList SpecificUser', item.Id_No);
-            ArticleHandler.getArticlesByAuthor(item.Id_No, self_user, (articles, err) => {
-            	lodash.forEach(articles, function(item, index){
-	    			item.tag = item.tag.length > 0 ? item.tag.split(',') : [];
-	    		});
+            ArticleHandler.getArticlesByAuthor(item.worker_no, (articles, err) => {
+            	articles = _separateByTag(articles);
                 socket.emit('receiveList', articles);
                 articles = null;
             });
             
         } else {
-        	// console.log('_getArticleList Non SpecificUser');
-            ArticleHandler.getNewestArticle(self_user, (articles, err) => {
-            	lodash.forEach(articles, function(item, index){
-	    			item.tag = item.tag.length > 0 ? item.tag.split(',') : [];
-	    		});
+            ArticleHandler.getNewestArticle(worker_no, (articles, err) => {
+            	articles = _separateByTag(articles);
                 socket.emit('receiveList', articles);
                 articles = null;
             });
@@ -140,46 +132,45 @@ module.exports = function(){
 	}
 
 	function _getArticlesByTag(socket, item) {
-		let self_user = socket.request.session.user.UserName;
-		ArticleHandler.getArticlesByTag(item, self_user, (articles, err) => {
-        	lodash.forEach(articles, function(item, index){
-    			item.tag = item.tag.length > 0 ? item.tag.split(',') : [];
-    		});
+		let worker_no = socket.request.session.user.WorkerNo;
+		ArticleHandler.getArticlesByTag(item, worker_no, (articles, err) => {
+        	articles = _separateByTag(articles);
             socket.emit('receiveList', articles);
             articles = null;
         });
 	}
 
 	function _getArticlesByAuthor(socket, item) {
-		let self_user = socket.request.session.user.UserName;
-		ArticleHandler.getArticlesByAuthor(item, self_user, (articles, err) => {
-        	lodash.forEach(articles, function(item, index){
-    			item.tag = item.tag.length > 0 ? item.tag.split(',') : [];
-    		});
-            socket.emit('receiveList', articles);
-            articles = null;
-        });
+        let worker_no = socket.request.session.user.WorkerNo;
+        if (item == worker_no) {
+            ArticleHandler.getArticlesBySelf(worker_no, (articles, err) => {
+                articles = _separateByTag(articles);
+                socket.emit('receiveList', articles);
+                articles = null;
+            });
+        } else {
+            ArticleHandler.getArticlesByAuthor(worker_no, (articles, err) => {
+                articles = _separateByTag(articles);
+                socket.emit('receiveList', articles);
+                articles = null;
+            });
+        }
+		
 	}
 
 	function _getTagSummary(socket) {
-		let self_user = socket.request.session.user.UserName;
-		ArticleHandler.getTagSummary(self_user, (articles, err) => {
-	    	articles = is.array(articles) ? articles : [];
-	    	lodash.forEach(articles, function(item, index){
-	    		item.tag = item.tag.length > 0 ? item.tag.split(',') : [];
-	    	});
+		let worker_no = socket.request.session.user.WorkerNo;
+		ArticleHandler.getTagSummary(worker_no, (articles, err) => {
+            articles = _separateByTag(articles);
 	        socket.emit('receiveList', articles);
 	        articles = null;
 	    });
 	}
 
 	function _getAuthorSummary(socket) {
-		let self_user = socket.request.session.user.UserName;
-		ArticleHandler.getAuthorSummary(self_user, (articles, err) => {
-	    	articles = is.array(articles) ? articles : [];
-	    	lodash.forEach(articles, function(item, index){
-	    		item.tag = item.tag.length > 0 ? item.tag.split(',') : [];
-	    	});
+		let worker_no = socket.request.session.user.WorkerNo;
+        ArticleHandler.getAuthorSummary(worker_no, (articles, err) => {
+            articles = _separateByTag(articles);
 	        socket.emit('receiveList', articles);
 	        articles = null;
 	    });
@@ -209,7 +200,8 @@ module.exports = function(){
 		            	article = null;
 			    	} else {
 			    		article = is.array(article) ? article[0] : article;
-			    		article.tag = article.tag.length > 0 ? article.tag.split(',') : [];
+                        article.tag = article.tag.length > 0 ? article.tag.split(',') : [];
+                        article.author_name = article.card_na.toLowerCase().replace(/\b\w/g, l => l.toUpperCase());
 			        	socket.emit('retrieveArticle', article);	
 			        	article = null;
 			    	}
@@ -218,14 +210,22 @@ module.exports = function(){
         });
 	}
 
-	function _updateTimeZone(item)
-	{
-		//To-Do Update all timezone
-	}
+    function _updateTimeZone(item) {
+        //To-Do Update all timezone
+    }
+
+    function _separateByTag(articles, err) {
+        lodash.forEach(articles, function(item, index){
+            item.tag = item.tag.length > 0 ? item.tag.split(',') : [];
+            item.author_name = item.card_na ? item.card_na.toLowerCase().replace(/\b\w/g, l => l.toUpperCase()) : "";
+        });
+        return articles;
+    }
 
 	return {
-		listen: function(io, socket) {
-			
+        listen: function(io, socket) {
+            
+
 			socket.on('createArticle', (item) => {
 		        _createArticle(socket, item);
 		    });

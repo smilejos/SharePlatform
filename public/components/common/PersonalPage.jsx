@@ -34,7 +34,7 @@ class App extends React.Component {
     }
 
     render() {
-        let url = 'http://cweb01/HRIS/EmployeePhoto/photo2/' +this.props.self.Id_No+ '.jpg';
+        let url = 'http://imgprod.micron.com/corp/emppics/Thumbnails/' +this.props.self.worker_no+ '.jpg';
         return (
             <div>
                 <div className="personalBox">
@@ -45,19 +45,19 @@ class App extends React.Component {
                     <div className="control">
                         <div className="btn-group">
                             <Tooltip placement="top" animation="zoom" overlay="Publish Article">
-                                <Link className="btn btn-default" to={ "/ArticleCreator" }>
+                                <Link className="btn btn-default" to={ "/Page/Article/Creator" }>
                                     <i className="fa fa-pencil-square-o"></i>
                                 </Link>
                             </Tooltip>
                             <Tooltip placement="top" animation="zoom" overlay="Create Book">
-                                <Link className="btn btn-default" to={ "/BookCreator" }>
+                                <Link className="btn btn-default" to={ "/Page/Book/Creator" }>
                                     <i className="fa fa-book"></i>
                                 </Link>
                             </Tooltip>
                         </div>
                     </div>
                 </div>
-                <ArticleOverview userId= { this.props.self.Id_No } />
+                <ArticleOverview worker_no= { this.props.self.worker_no } />
             </div>
         )
     }

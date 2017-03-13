@@ -4,7 +4,7 @@ import io from 'socket.io-client';
 import ss from 'socket.io-stream';
 
 import { receiveArticles, receiveArticle, retrieveArticleImages } from '../actions/ArticleActions';
-import { receiveRealTimeMember, retrieveUser, receiveMembers } from '../actions/MemberActions';
+import { receiveLoginUser, retrieveUser, receiveMembers } from '../actions/MemberActions';
 import { receiveBook } from '../actions/BookActions';
 import { receiveCategory, receiveServerNotice } from '../actions/CommonActions';
 
@@ -38,8 +38,8 @@ socket_article.on('retrieveArticleImages', function (list) {
 
 // ==================================================
 
-socket_member.on('receiveRealTimeMember', function(result) {
-	store.dispatch(receiveRealTimeMember(result));
+socket_member.on('receiveLoginUser', function(result) {
+	store.dispatch(receiveLoginUser(result));
 });
 
 socket_member.on('retrieveUser', function(result) {

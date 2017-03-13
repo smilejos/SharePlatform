@@ -10,26 +10,18 @@ export default class Information extends React.Component {
             <div className="personal">
                 <div className="information">
                     <div className="primaryText">
-                        { this.props.user.dept_no + "-" + this.props.user.dept_na } 
+                        { this.props.user ? this.props.user.card_na : "" } 
                     </div>
                     <div className="secondaryText"> 
-                        { this.props.user.dept_fullName }
+                        { "#" + this.props.user ? this.props.user.tel_no : "" }
                     </div>
                 </div>
                 <div className="information">
-                    <div className="primaryText">
-                        { this.props.user.title_na } 
+                    <div className="primaryText"> 
+                        { this.props.user ? this.props.user.dept_na : "" }
                     </div>
-                    <div className="secondaryText"> 
-                        
-                    </div>
-                </div>
-                <div className="information">
-                    <div className="primaryText">
-                        { this.props.user.card_na } 
-                    </div>
-                    <div className="secondaryText"> 
-                        { "#" + this.props.user.tel_no }
+                    <div className="secondaryText">
+                        { this.props.user ? this.props.user.title_na : "" } 
                     </div>
                 </div>
             </div>

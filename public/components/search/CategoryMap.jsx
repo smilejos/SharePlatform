@@ -91,7 +91,7 @@ class CategoryItem extends React.Component {
 
     render() {
         return (
-            <Link className="CategoryItem" to={ "/SearchResult/Tag/" + this.props.item.name }>
+            <Link className="CategoryItem" to={ "/Page/Search/Result/Tag/" + this.props.item.name }>
                 <span className="name">{this.props.item.name}</span>
                 <span className="count">{this.props.item.count}</span>
             </Link>

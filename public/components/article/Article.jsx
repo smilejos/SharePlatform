@@ -116,7 +116,7 @@ class Article extends React.Component {
             <div>
                 <ArticleButton 
                     article={this.props.state.article} 
-                    Id_No={this.props.self.Id_No} 
+                    worker_no={this.props.self.worker_no} 
                     startSildeshow={this._startSildeshow.bind(this)}
                     existSildeshow={this._existSildeshow.bind(this)}
                     prevSildeshow={this._prevSildeshow.bind(this)}
@@ -187,8 +187,7 @@ class ArticleFooter extends React.Component {
                     <div className="PageInfo">{ this.props.currentIndex+1 + "/" + this.props.maxIndex  }</div>
                 </div>
                 <div>
-                    <div className="Author"> {this.props.article.authorName}</div>
-                    <div className="Department">{this.props.article.dept_na}</div>
+                    <div className="Author"> {this.props.article.author_name}</div>
                 </div>
             </div>
         )
@@ -223,7 +222,7 @@ class ArticleButton extends React.Component {
     _renderAuthorSettingAction() {
         return (
             <Tooltip placement="right" animation="zoom" overlay="Article Setting">
-                <Link className="btn btn-default" to={ "/ArticleSetting/" + this.props.article.articleNo }>
+                <Link className="btn btn-default" to={ "/Page/Article/Setting/" + this.props.article.articleNo }>
                     <i className="fa fa-cog fa-lg"></i>
                 </Link>
             </Tooltip>
@@ -232,7 +231,7 @@ class ArticleButton extends React.Component {
     _renderAuthorEditAction() {
         return (
             <Tooltip placement="right" animation="zoom" overlay="Edit Article">
-                <Link className="btn btn-default" to={ "/ArticleEditor/" + this.props.article.articleNo }>
+                <Link className="btn btn-default" to={ "/Page/Article/Editor/" + this.props.article.articleNo }>
                     <i className="fa fa-edit fa-lg"></i>
                 </Link>
             </Tooltip>
@@ -241,7 +240,7 @@ class ArticleButton extends React.Component {
     _renderDefaultSourceButton() {
          return (
             <Tooltip placement="right" animation="zoom" overlay="View Source">
-                <Link className="btn btn-default" to={ "/ArticleSource/" + this.props.article.articleNo }>
+                <Link className="btn btn-default" to={ "/Page/Article/Source/" + this.props.article.articleNo }>
                     <i className="fa fa-eye fa-lg"></i>
                 </Link>
             </Tooltip>
@@ -293,8 +292,8 @@ class ArticleButton extends React.Component {
         } else if( this.props.article != null) {
             defaultSourceButton = this._renderDefaultSourceButton.bind(this)();
             defaultDownloadButton = this._renderDefaultDownloadButton.bind(this)();
-            authorSettingButton = this.props.article.author == this.props.Id_No ? this._renderAuthorSettingAction.bind(this)() : null;
-            authorEditButton = this.props.article.author == this.props.Id_No ? this._renderAuthorEditAction.bind(this)() : null;
+            authorSettingButton = this.props.article.author == this.props.worker_no ? this._renderAuthorSettingAction.bind(this)() : null;
+            authorEditButton = this.props.article.author == this.props.worker_no ? this._renderAuthorEditAction.bind(this)() : null;
             slideshowButton = this.props.article.isSlideshow ? this._renderSlideshowButton.bind(this)() : null;
         }
 

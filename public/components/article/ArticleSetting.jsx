@@ -71,7 +71,7 @@ class ArticleSetting extends React.Component {
     }
 
     _handleBack() {
-        let path = '/Article/' + this.props.params.articleNo;
+        let path = '/Page/Article/View/' + this.props.params.articleNo;
         browserHistory.push(path);
     }
 
@@ -202,9 +202,9 @@ class ActionButton extends React.Component {
         return (
             <div className="ArticleControl">
                 <i className="fa fa-cog fa-lg" />
-                <Link className="ArticleEdit" to={ "/articleSetting/" + this.props.articleNo }>Setting</Link>
+                <Link className="ArticleEdit" to={ "/Page/Article/Setting/" + this.props.articleNo }>Setting</Link>
                 <i className="fa fa-edit fa-lg" />
-                <Link className="ArticleEdit" to={ "/articleEditor/" + this.props.articleNo }>Edit</Link>
+                <Link className="ArticleEdit" to={ "/Page/Article/Editor/" + this.props.articleNo }>Edit</Link>
             </div>
         )
     }

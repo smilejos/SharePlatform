@@ -1,21 +1,21 @@
 .personalBox {
 	position: relative;
 	width: 600px;
-	height: 150px;
+	height: 120px;
 	left: 50%;
 	margin-left: -300px;
 	border-bottom: 1px solid $ItemBorderColor;
 
 	.image {
 		position: relative;
-		width: 130px;
-		height: 130px;
+		width: 100px;
+		height: 100px;
 		margin: 10px;
 		float: left;
 		display: inline-block;
 
 		img {
-			height: 130px;
+			height: 100px;
 			border-radius: 20px;
 			border: 1px $ItemBorderColor solid;
 		}
@@ -24,7 +24,7 @@
 	.personal {
 		position: relative;
 		width: 250px;
-		height: 150px;
+		height: 120px;
 		float: left;
 		padding-top: 5px;
 		display: inline-block;
@@ -41,7 +41,7 @@
 
 			.secondaryText {
 				color: $LittleTextColor;
-				font-size: 14px;
+				font-size: 12px;
 			}
 		}
 	}
@@ -49,7 +49,7 @@
 	.control {
 		position: absolute;
 		right: 0px;
-		bottom: 20px;
+		bottom: 10px;
 
         i {
         color: $IconColor;

@@ -35,9 +35,10 @@ class GroupMap extends React.Component {
      _calculate(Props) {
         let { setAuthorsCounts } = this.props.commonActions;
         let result = Props.members;
+        console.log(Props.members, Props.articles);
         forEach(result, function(member, index) {
             let tmp_list = [], tmp_tag = [];
-            let articles = filter(Props.articles, { author: member.Id_No });
+            let articles = filter(Props.articles, { author: member.worker_no });
             forEach(articles, function(article){
                 tmp_list = concat(tmp_list, article.tag);
             });
@@ -71,12 +72,12 @@ class Member extends React.Component {
     }
 
     render() {
-        let url = 'http://cweb01/HRIS/EmployeePhoto/photo2/' +this.props.user.Id_No+ '.jpg';
+        let url = 'http://imgprod.micron.com/corp/emppics/Thumbnails/' + this.props.user.worker_no + '.jpg';
         let list = this.props.user.tag.map(function(item, index){
             return <Tag item={item} key={index} />
         })
         return (
-            <Link to={ "/User/" + this.props.user.Id_No } className="MemberBox">
+            <Link to={ "/Page/User/" + this.props.user.worker_no } className="MemberBox">
                 <div className="image">
                     <img src={url}></img>
                 </div>

@@ -210,7 +210,7 @@
   .ArticleList .ArticleActivity .ArticleTags {
     position: absolute;
     right: 0px;
-    top: 12px; }
+    top: 25%; }
     .ArticleList .ArticleActivity .ArticleTags .ArticleTag {
       position: relative;
       display: inline-block;
@@ -872,11 +872,12 @@
     .MemberList .MemberBox .image {
       position: relative;
       width: 60px;
-      height: 80px;
+      height: 60px;
       display: inline-block;
+      padding: 5px 0px;
       float: left; }
       .MemberList .MemberBox .image img {
-        height: 80px;
+        height: 60px;
         border-radius: 5px;
         border: 1px #eee solid; }
     .MemberList .MemberBox .memberInfo {
@@ -1005,25 +1006,25 @@
 .personalBox {
   position: relative;
   width: 600px;
-  height: 150px;
+  height: 120px;
   left: 50%;
   margin-left: -300px;
   border-bottom: 1px solid #eee; }
   .personalBox .image {
     position: relative;
-    width: 130px;
-    height: 130px;
+    width: 100px;
+    height: 100px;
     margin: 10px;
     float: left;
     display: inline-block; }
     .personalBox .image img {
-      height: 130px;
+      height: 100px;
       border-radius: 20px;
       border: 1px #eee solid; }
   .personalBox .personal {
     position: relative;
     width: 250px;
-    height: 150px;
+    height: 120px;
     float: left;
     padding-top: 5px;
     display: inline-block; }
@@ -1036,11 +1037,11 @@
         font-size: 16px; }
       .personalBox .personal .information .secondaryText {
         color: #9a9b9d;
-        font-size: 14px; }
+        font-size: 12px; }
   .personalBox .control {
     position: absolute;
     right: 0px;
-    bottom: 20px; }
+    bottom: 10px; }
     .personalBox .control i {
       color: #003c64; }
 

@@ -4,69 +4,68 @@ module.exports = function(){
 		config = require('../config/database'),
 		lodash  = require('lodash');
 
-	function _getNewestArticle(self_user, callback){
-		let sqlString = " select top 10 a.articleNo, a.title, b.Card_Na as authorName, a.author, a.tag, a.updateTime, a.publishTime, a.isSlideshow, a.isPrivate " +
-						" from dbo.Article a (nolock) " + 
-						" left join HRIS.dbo.NEmployee b on a.Author = b.Id_No " + 
-						" where (isPrivate = 0 or a.Author = '" + self_user + "')" +
-						" order by a.UpdateTime DESC ";
-		
+	function _getNewestArticle(worker_no, callback){
+		let sqlString = " select top 10 articleNo, title, author, card_na, tag, updateTime, publishTime, isSlideshow, isPrivate " +
+                        " from dbo.Article a (nolock) " +
+                        " left join HRIS.dbo.SAP_Nemployee b (nolock)  on a.author = b.Emp_id " +
+						" where (isPrivate = 0 or Author = '" + worker_no + "')" +
+						" order by UpdateTime DESC ";
+        
 		_executeSqlComment(sqlString, callback);
 	}
 
-	function _getTagSummary(self_user, callback){
+	function _getTagSummary(worker_no, callback){
 		let sqlString = " select tag from dbo.Article (nolock) " +
-						" where (isPrivate = 0 or Author = '" + self_user + "') and tag != ''";
+						" where (isPrivate = 0 or Author = '" + worker_no + "') and tag != ''";
 		_executeSqlComment(sqlString, callback);
 	}
 
-	function _getAuthorSummary(self_user, callback){
+	function _getAuthorSummary(worker_no, callback){
 		let sqlString = " select author, tag from dbo.Article (nolock) " +
-						" where (isPrivate = 0 or Author = '" + self_user + "')";
+						" where (isPrivate = 0 or Author = '" + worker_no + "')";
 		_executeSqlComment(sqlString, callback);
 	}
 
-	function _getArticlesByAuthor(Id_No, self_user, callback){
-		let subSqlString = "";
-		if( self_user == Id_No ) {
-			subSqlString =  " and Author = '" + Id_No + "'";
-			subSqlString += " order by a.UpdateTime DESC ";
-		} else {
-			subSqlString = " and isPrivate = 0 and Author = '" + Id_No + "'";
-			subSqlString += " order by a.UpdateTime DESC ";
-		}
-
-		let sqlString = " select a.articleNo, a.title, b.Card_Na as authorName, a.author, a.tag, a.updateTime, a.publishTime, a.isSlideshow, a.isPrivate " +
-						" from dbo.Article a (nolock) " + 
-						" left join HRIS.dbo.NEmployee b on a.Author = b.Id_No " + 
-						" where 1 = 1 ";
-
-		_executeSqlComment(sqlString + subSqlString, callback);
+    function _getArticlesBySelf(worker_no, callback) {
+        let sqlString = " select articleNo, title, author, card_na, tag, updateTime, publishTime, isSlideshow, isPrivate " +
+				        " from dbo.Article a (nolock) " +
+                        " left join HRIS.dbo.SAP_Nemployee b (nolock)  on a.author = b.Emp_id " +
+                        " where isPrivate = 0 and Author = '" + worker_no + "' order by UpdateTime DESC";
+        
+        _executeSqlComment(sqlString, callback);
+    }
+	function _getArticlesByAuthor(worker_no, callback){
+		let sqlString = " select articleNo, title, author, card_na, tag, updateTime, publishTime, isSlideshow, isPrivate " +
+                        " from dbo.Article a (nolock) " +
+                        " left join HRIS.dbo.SAP_Nemployee b (nolock)  on a.author = b.Emp_id " +  
+                        " where Author = '" + worker_no + "' order by UpdateTime DESC";
+        
+		_executeSqlComment(sqlString, callback);
 	}
 
-	function _getArticlesByTag(Tag, self_user, callback){
-		let sqlString = " select a.articleNo, a.title, b.Card_Na as authorName, a.author, a.tag, a.updateTime, a.publishTime, a.isSlideshow, a.isPrivate " +
-						" from dbo.Article a (nolock) " + 
-						" left join HRIS.dbo.NEmployee b on a.Author = b.Id_No " + 
-						" where (isPrivate = 0 or Author = '" + self_user + "')" +
+	function _getArticlesByTag(Tag, worker_no, callback){
+		let sqlString = " select articleNo, title, author, card_na, tag, updateTime, publishTime, isSlideshow, isPrivate " +
+						" from dbo.Article a (nolock) " +
+                        " left join HRIS.dbo.SAP_Nemployee b (nolock)  on a.author = b.Emp_id " +
+						" where (isPrivate = 0 or Author = '" + worker_no + "')" +
 						" and tag like '%" + Tag + "%'" +
-						" order by a.UpdateTime DESC ";
+						" order by UpdateTime DESC ";
 		_executeSqlComment(sqlString, callback);
 	}
 
 	function _getSearchArticles(options, callback){
-		let sqlString = " select a.articleNo, a.title, b.Card_Na as authorName, a.author, a.tag, a.updateTime, a.publishTime, a.isSlideshow, a.isPrivate " +
-						" from dbo.Article a (nolock) " + 
-						" left join HRIS.dbo.NEmployee b on a.Author = b.Id_No " + 
+		let sqlString = " select articleNo, title, author, card_na, tag, updateTime, publishTime, isSlideshow, isPrivate " +
+						" from dbo.Article a (nolock) " +
+                        " left join HRIS.dbo.SAP_Nemployee b (nolock)  on a.author = b.Emp_id " +
 						" where 1 = 1 ";
 		
 		if( options.keyword &&  options.keyword.length > 0) {
 			let sqlSubString = '';
 			lodash.forEach(options.keyword, function(item, index){
 				if(sqlSubString.length == 0) {
-					sqlSubString += " ( a.title like '%" + item + "%' or a.content like '%" + item + "%' )";
+					sqlSubString += " ( title like '%" + item + "%' or content like '%" + item + "%' )";
 				} else {
-					sqlSubString += " or ( a.title like '%" + item + "%' or a.content like '%" + item + "%' )";
+					sqlSubString += " or ( title like '%" + item + "%' or content like '%" + item + "%' )";
 				}			    
 	    	});
 	    	
@@ -74,20 +73,18 @@ module.exports = function(){
 		}
 
 		if( options.isPrivate ) {
-			sqlString += " and a.author = '" + options.author + "'";
+			sqlString += " and author = '" + options.worker_no + "'";
 		} else {
-			sqlString += " and a.isPrivate = 0 ";
+			sqlString += " and isPrivate = 0 ";
 		}
 
-        sqlString += " order by a.UpdateTime DESC ";
+        sqlString += " order by UpdateTime DESC ";
 		_executeSqlComment(sqlString, callback);
 	}
 
 	function _getSpecificArticle(articleNo, callback){
-		let sqlString = " select a.articleNo, a.title, b.Card_Na as authorName, c.EDept_Na1 as dept_na, a.author, a.tag, a.updateTime, a.publishTime, a.content, a.isPrivate, a.isBookArticle, a.isSlideshow " +
-						" from dbo.Article a (nolock) " + 
-						" left join HRIS.dbo.NEmployee b on a.Author = b.Id_No " + 
-						" left join HRIS.dbo.NSection c on b.Dept_no = c.Dept_no " +
+		let sqlString = " select articleNo, title, author, tag, updateTime, publishTime, content, isPrivate, isBookArticle, isSlideshow " +
+						" from dbo.Article (nolock) " + 
 						" where ArticleNo = '" + articleNo + "'";
 
 		_executeSqlComment(sqlString, callback);
@@ -156,14 +153,17 @@ module.exports = function(){
 	}
 	
 	return {
-		getNewestArticle: function(self_user, callback){
-			_getNewestArticle(self_user, callback);
+		getNewestArticle: function(worker_no, callback){
+			_getNewestArticle(worker_no, callback);
+        },
+        getArticlesBySelf: function(worker_no, callback){
+			_getArticlesBySelf(worker_no, callback);
 		},
-		getArticlesByAuthor: function(Id_No, self_user, callback){
-			_getArticlesByAuthor(Id_No, self_user, callback);
+		getArticlesByAuthor: function(worker_no, callback){
+			_getArticlesByAuthor(worker_no, callback);
 		},
-		getArticlesByTag: function(Tag, self_user, callback){
-			_getArticlesByTag(Tag, self_user, callback);
+		getArticlesByTag: function(Tag, worker_no, callback){
+			_getArticlesByTag(Tag, worker_no, callback);
 		},
 		getSearchArticles: function(options, callback){
 			_getSearchArticles(options, callback);
@@ -171,11 +171,11 @@ module.exports = function(){
 		getSpecificArticle: function(articleNo, callback){
 			_getSpecificArticle(articleNo, callback);
 		},
-		getTagSummary: function(self_user, callback){
-			_getTagSummary(self_user, callback);
+		getTagSummary: function(worker_no, callback){
+			_getTagSummary(worker_no, callback);
 		},
-		getAuthorSummary: function(self_user, callback){
-			_getAuthorSummary(self_user, callback);
+		getAuthorSummary: function(worker_no, callback){
+			_getAuthorSummary(worker_no, callback);
 		},
 		modifyArticle : function(article, callback){
 			article.content = _replaceString(article.content);

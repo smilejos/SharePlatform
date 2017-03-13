@@ -17,11 +17,11 @@ class ArticleOverview extends React.Component {
 
     componentWillMount() {
         let { requestArticleList } = this.props.articleActions;
-        var userId = this.props.userId;
-        if( userId ) {
+        var worker_no = this.props.worker_no;
+        if( worker_no ) {
             requestArticleList({
                 isSpecificUser: true,
-                Id_No: userId
+                worker_no: worker_no
             });
         } else {
             requestArticleList({

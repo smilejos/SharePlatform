@@ -1,67 +1,35 @@
-let React                 = require('react');
-let serialize             = require('serialize-javascript');
-let renderToString        = require('react-dom/server').renderToString;
-let Provider              = require('react-redux').Provider;
-let router 		  		  = require('react-router');
-let syncHistoryWithStore  = require('react-router-redux').syncHistoryWithStore;
-let configureStore		  = require('../../lib/store/index').configureStore;
-let routes                = require('../../lib/components/main/routes').default;
-let memberRouter          = require('../socket/memberRouter');
-let RouterContext 		  = router.RouterContext;
-let createMemoryHistory   = router.createMemoryHistory;
-let match                 = router.match;
+let express             = require('express');
+let XMLHttpRequest      = require("xmlhttprequest").XMLHttpRequest;
+let path 		        = require('path');
+let jsdom               = require('jsdom');
+let passport            = require('passport');
+let imageHandler        = require('../file/imageHandler');
+let memberRouter        = require('../socket/memberRouter');
+let requestRender = null;
+let router = express.Router();
 
-function renderFullPage(content, store) {
-  return `
-    <!doctype html>
-    <html>
-		<head>
-			<title>Biz Share Platform</title>
-            <link rel="icon" href="/Sharing.png" />
-            <link rel="stylesheet" href="/style.css" type="text/css" />
-		</head>
-		<body>
-			<div id='app'>${content}</div>
-			<script>
-          		window.__INITIAL_STATE__ = ${serialize(store.getState())}
-        	</script>
-            <script src="/bower-webfontloader/webfont.js"></script>
-            <script src="/snap.svg/dist/snap.svg-min.js"></script>
-            <script src="/underscore/underscore-min.js"></script>
-            <script src="/js-sequence-diagrams/dist/sequence-diagram.js"></script>
-            
-            <script src="/raphael/raphael.js"></script>
-            <script src="/flowchart/release/flowchart.js"></script>
-            
-            <script src="/mermaid/dist/mermaid.min.js"></script>
-            
-            <script src="/bundle.js"></script>
-		</body>
-	</html>
-    `
+// Here to generate visual window object
+let document = jsdom.jsdom('<!doctype html><html><body></body></html>');
+let window = document.defaultView;
+global.document = document;
+global.window = window;
+global.navigator = window.navigator;
+global.XMLHttpRequest = XMLHttpRequest;
+
+if (process.env.NODE_ENV == 'production') {
+    requestRender = require('./requestRender');
+} else {
+    requestRender = require('./requestRender_dev');
 }
 
-function handleRender(req, res) {
+router.get('/', function (req, res) {
     req.session.user = memberRouter.transfer(req.ntlm);
-  	const memoryHistory = createMemoryHistory(req.url);
-  	const store = configureStore(memoryHistory);
-  	const history = syncHistoryWithStore(memoryHistory, store);
+    res.sendFile(path.join(global.rootPath, 'index.html'));
+});
 
-  	match({ history, routes, location: req.url }, (error, redirectLocation, renderProps) => {
-    	if (error) {
-      		res.status(500).send(error.message)
-    	} else if (redirectLocation) {
-      		res.redirect(302, redirectLocation.pathname + redirectLocation.search)
-    	} else if (renderProps) {
+router.get('/Page/*', requestRender);
+router.post("/uploads", imageHandler.onUpload);
+router.delete("/uploads/:uuid", imageHandler.onDeleteFile);
 
-        const content = renderToString(React.createElement(
-            Provider, { store: store }, React.createElement(RouterContext, renderProps)
-		    ));
-      	res.send(renderFullPage(content, store));
-    	} else {
-    		res.status(404).send('Not found');
-    	}
-  	})
-}
+module.exports = router;
 
-module.exports = handleRender;
