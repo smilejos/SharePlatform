@@ -15,7 +15,8 @@ global.document = document;
 global.window = window;
 global.navigator = window.navigator;
 global.XMLHttpRequest = XMLHttpRequest;
-
+global.location = window.location;
+    
 if (process.env.NODE_ENV == 'production') {
     requestRender = require('./requestRender');
 } else {

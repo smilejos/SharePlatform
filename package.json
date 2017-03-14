@@ -31,7 +31,6 @@
     "gulp-sass": "^2.3.2",
     "gulp-util": "^3.0.7",
     "gulp-watch": "^4.3.10",
-    "heapdump": "^0.3.7",
     "nodemon": "^1.11.0",
     "webpack": "^1.13.2"
   },
