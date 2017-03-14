@@ -12,6 +12,7 @@ const HTML = ({ content, store }) => (
   	<html>
 		<head>
             <title>Biz Share Platform</title>
+            <meta http-equiv="X-UA-Compatible" content="chrome=1" />
             <link rel="icon" href="/Sharing.png" />
             <link rel="stylesheet" href="/style.css" type="text/css" />
 		</head>
