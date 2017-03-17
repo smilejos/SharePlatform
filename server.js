@@ -14,7 +14,7 @@ var Strategy = require('passport-facebook').Strategy;
 passport.use(new Strategy({
     clientID: '1289438404475100',
     clientSecret: 'b38ec4c5af15129830a8b53b1e0865cb',
-    callbackURL: "http://jos.link:8888/auth/facebook/callback",
+    callbackURL: "http://localhost:8888/auth/facebook/callback",
     passReqToCallback : true,
     profileFields: ['id', 'emails', 'name'] //This
 }, function (accessToken, refreshToken, profile, cb) {
@@ -76,11 +76,11 @@ app.get('/login', function (req, res) {
 });
 
 app.get('/auth/facebook', passport.authenticate('facebook'));
-
-app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }), function (req, res) {
-
-    res.redirect('/');
-});
+app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }),
+    function (req, res) {
+        res.redirect('/');
+    }
+);
 
 
 app.listen(8888);

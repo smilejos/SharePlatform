@@ -39,10 +39,10 @@ class ArticleOverview extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         let { requestArticleList } = this.props.articleActions;
-        if( nextProps.userId != this.props.userId ) {
+        if( nextProps.worker_no != this.props.worker_no ) {
             requestArticleList({
                 isSpecificUser: true,
-                Id_No: nextProps.userId
+                worker_no: nextProps.worker_no
             });
         }
     }

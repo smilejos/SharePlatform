@@ -34,7 +34,8 @@ class App extends React.Component {
     }
 
     render() {
-        let url = 'http://imgprod.micron.com/corp/emppics/Thumbnails/' +this.props.self.worker_no+ '.jpg';
+        let url = 'http://imgprod.micron.com/corp/emppics/Thumbnails/' + this.props.self.worker_no + '.jpg';
+        console.log('self', this.props.self);
         return (
             <div>
                 <div className="personalBox">

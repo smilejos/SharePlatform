@@ -52,8 +52,8 @@ class CodeMirror extends Component {
             this.codeMirror.getDoc().setCursor(this.props.cursorInfo);
         }
 
-        if (this.props.text && this.props.text.length > 0 && this.props.cursorInfo) {
-            this.codeMirror.replaceRange("\n" + this.props.text, {
+        if (this.props.newline && this.props.newline.length > 0 && this.props.cursorInfo) {
+            this.codeMirror.replaceRange("\n" + this.props.newline, {
                 line: this.props.cursorInfo.line == 0 ? this.codeMirror.lastLine() : this.props.cursorInfo.line,
                 ch: this.props.cursorInfo.line == 0 ? this.codeMirror.getLineHandle(this.codeMirror.lastLine()).length : this.props.cursorInfo.ch 
             });
@@ -67,7 +67,7 @@ class CodeMirror extends Component {
 		}
     }
 
-    componentWillReceiveProps (nextProps) {
+    componentWillReceiveProps(nextProps) {
 		if (this.codeMirror && nextProps.value !== undefined && normalizeLineEndings(this.codeMirror.getValue()) !== normalizeLineEndings(nextProps.value)) {
 			if (this.props.preserveScrollPosition) {
 				var prevScrollPosition = this.codeMirror.getScrollInfo();
@@ -83,7 +83,16 @@ class CodeMirror extends Component {
 					this.codeMirror.setOption(optionName, nextProps.options[optionName]);
 				}
 			}
-		}
+        }
+
+        if (nextProps.newline && nextProps.newline.length > 0 && nextProps.cursorInfo) {
+            this.codeMirror.replaceRange("\n" + nextProps.newline, {
+                line: nextProps.cursorInfo.line == 0 ? this.codeMirror.lastLine() : nextProps.cursorInfo.line,
+                ch: nextProps.cursorInfo.line == 0 ? this.codeMirror.getLineHandle(this.codeMirror.lastLine()).length : nextProps.cursorInfo.ch 
+            });
+            this._cursorChanged(this.codeMirror);
+        }
+
     }
 
     _getCodeMirror() {

@@ -1225,10 +1225,10 @@
   vertical-align: top;
   width: 130px; }
 
-.react-fine-uploader-gallery-file .btn {
+.react-fine-uploader-gallery-file .btn-group-vertical {
   position: absolute;
   top: 0px;
-  right: -10px; }
+  right: -20px; }
 
 .react-fine-uploader-gallery-thumbnail-container {
   display: block;

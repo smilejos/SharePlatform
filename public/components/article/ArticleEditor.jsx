@@ -80,10 +80,10 @@ const uploader = new FineUploaderTraditional({
 class Article extends React.Component {
     constructor(props){
         super(props);
-        let { requestArticle, requestArticleImages } = this.props.actions;
         this.state = {
             mode: 'Edit',       // Edit, Preview, Gallery, Upload
-            text: '',           // New content for in new line
+            newline: '',        // New content for in new line
+            pickedImages: [],       // Picked images list
             options: {
                 lineNumbers: true,
                 readOnly: false,
@@ -113,13 +113,14 @@ class Article extends React.Component {
             else if (status === 'upload successful' || status === 'upload failed') {
                 this._updateVisibleFileStatus(id, status)
             }
-        }
-
-        requestArticle(this.props.params.articleNo);
-        requestArticleImages(this.props.params.articleNo);
+        }     
     }
 
     componentWillMount() {
+        let { requestArticle, requestArticleImages } = this.props.actions;
+        requestArticle(this.props.params.articleNo);
+        requestArticleImages(this.props.params.articleNo);
+
         // Assign additional parameter in post-form
         // To deliver articleNo to server to store articleNo in image table 
         uploader.methods.setParams({
@@ -129,6 +130,19 @@ class Article extends React.Component {
         uploader.methods.setDeleteFileParams({
             articleNo: this.props.params.articleNo
         });
+    }
+
+    componentDidMount() {
+        let { syncArticle } = this.props.actions;
+        syncArticle(this.props.params.articleNo);
+
+        uploader.on('statusChange', this._onStatusChange);
+    }
+    
+    componentWillUnmount() {
+        let { leaveArticle, cleanArticle } = this.props.actions;
+        leaveArticle(this.props.params.articleNo);
+        cleanArticle();
     }
 
     componentWillReceiveProps(nextProps) {
@@ -157,19 +171,6 @@ class Article extends React.Component {
             this.setState({ visibleFiles: visibleFiles });
             uploader.methods.addInitialFiles(list);
         }
-    }
-    
-    componentDidMount() {
-        let { syncArticle } = this.props.actions;
-        syncArticle(this.props.params.articleNo);
-
-        uploader.on('statusChange', this._onStatusChange);
-    }
-    
-    componentWillUnmount() {
-        let { leaveArticle, cleanArticle } = this.props.actions;
-        leaveArticle(this.props.params.articleNo);
-        cleanArticle();
     }
 
     _removeVisibleFile(id) {
@@ -201,7 +202,7 @@ class Article extends React.Component {
 
     _changeMode(mode) {
         this.setState({
-            text: "",
+            newline: "",
             mode: mode
         });
     }
@@ -226,7 +227,8 @@ class Article extends React.Component {
 
     _cursorChanged(cursorInfo) {
         this.setState({
-            cursorInfo: cursorInfo
+            cursorInfo: cursorInfo,
+            newline: null
         });
     }
 
@@ -235,7 +237,7 @@ class Article extends React.Component {
             case "Edit":
                 return <CodeMirror
                     value={content}
-                    text={this.state.text}
+                    newline={this.state.newline}
                     scrollInfo={this.state.scrollInfo}
                     cursorInfo={this.state.cursorInfo}
                     onChange={this._updateContent.bind(this)}
@@ -245,16 +247,55 @@ class Article extends React.Component {
             case "Preview":
                 return <ArticleContent content={content} />;
             case "Upload":
-                return <Gallery deleteButton-onlyRenderIfDeletable={false}  visibleFiles={this.state.visibleFiles} uploader={uploader} />; 
+                return <Gallery
+                    deleteButton-onlyRenderIfDeletable={false}
+                    visibleFiles={this.state.visibleFiles}
+                    uploader={uploader} />; 
             case "Gallery":
-                return <Images visibleFiles={this.state.visibleFiles} uploader={uploader} appendLine={this._appendLineToCodeMirror.bind(this)} articleNo={this.props.params.articleNo} />;
+                return <Images
+                    visibleFiles={this.state.visibleFiles}
+                    uploader={uploader}
+                    appendLine={this._appendLineToCodeMirror.bind(this)}
+                    pickImage={this._pickImage.bind(this)}
+                    pickedImages={this.state.pickedImages}
+                    articleNo={this.props.params.articleNo} />;
         }
     }
 
-    _appendLineToCodeMirror(text) {
+    _pickImage(id) {
+        let pickedImages = this.state.pickedImages;
+        let index = pickedImages.indexOf(id);
+        if (index > -1) {
+            pickedImages.splice(index, 1);
+        } else {
+            pickedImages.push(id);
+        }
+        this.setState({
+            pickedImages: pickedImages
+        });
+    }
+
+    _handleInsertImage() {
+        let multiLine = "";
+        let Article = this.props.params.articleNo;
+        this.state.pickedImages.forEach(function (id) { 
+            let UID = uploader.methods.getUuid(id);
+            let FileName = uploader.methods.getName(id);
+            let path = `![](/${Article}/${UID}/${FileName})`;
+            multiLine = multiLine + path + "\n";
+        })
+        
         this.setState({
             mode: "Edit",
-            text: text
+            newline: multiLine,
+            pickedImages: []
+        });
+    }
+
+    _appendLineToCodeMirror(newline) {
+        this.setState({
+            mode: "Edit",
+            newline: newline
         });
     }
 
@@ -285,6 +326,12 @@ class Article extends React.Component {
                     <button type="button" className="btn btn-default" onClick={this._handleBack.bind(this)}>
                         <i className="fa fa-window-close"/> Cancel
                     </button>
+                    {
+                        this.state.pickedImages.length > 0 &&
+                        <button type="button" className="btn btn-default" onClick={this._handleInsertImage.bind(this)}>
+                            <i className="fa fa-window-close"/> Batch Insert
+                        </button>
+                    }
                 </div>
             </div>
         );
