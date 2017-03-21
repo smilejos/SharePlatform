@@ -9,12 +9,9 @@ let path                = require('path');
 // let cookieParser        = require('cookie-parser')();
 // let bodyParser          = require('body-parser').urlencoded({ extended: true });
 // let FacebookStrategy    = require('passport-facebook').Strategy;
-let memberRouter        = require('./server/socket/memberRouter');
-let articleRouter       = require('./server/socket/articleRouter');
-let bookRouter          = require('./server/socket/bookRouter');
-let commonRouter        = require('./server/socket/commonRouter');
 let dbConfig            = require('./server/config/database');
 let requestRouter       = require('./server/router/requestRouter');
+let registerSocketRouter= require('./server/router/socketRouter');
 let authConfig          = require('./server/config/authentication');
 
 // Assign root path of app
@@ -65,37 +62,6 @@ app.use(express.static(path.join(__dirname, '/images/')))
 
 let server = app.listen(8888);
 let socket = io.listen(server);
-
-let member = socket.of('/Member');
-let article = socket.of('/Article');
-let book = socket.of('/Book');
-let common = socket.of('/Common');
-
-socket.use(function(socket, next){
-    sessionMiddleware(socket.request, socket.request.res, next);
-});
-
-socket.on('connection', (client) => {
-    console.log('sockets connected', client.id);
-    client.on('disconnect', () => {
-       console.log('sockets disconnect', client.id);
-    });
-});
-
-member.on('connection', (client) => {
-    memberRouter.listen(member, client);
-});
-
-article.on('connection', (client) => {
-    articleRouter.listen(article, client);
-});
-
-book.on('connection', (client) => {
-    bookRouter.listen(book, client);
-});
-
-common.on('connection', (client) => {
-    commonRouter.listen(common, client);
-});
+registerSocketRouter(socket, sessionMiddleware);
 
 console.log("Start server with port:8888")

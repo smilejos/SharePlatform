@@ -112,7 +112,6 @@ module.exports = function(){
 	    });
     }
 	
-
 	function _getArticleList(socket, item) {
 		let worker_no = socket.request.session.user.WorkerNo;
 		if(item.isSpecificUser) {
@@ -224,8 +223,6 @@ module.exports = function(){
 
 	return {
         listen: function(io, socket) {
-            
-
 			socket.on('createArticle', (item) => {
 		        _createArticle(socket, item);
 		    });
