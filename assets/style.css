@@ -222,6 +222,8 @@
       border-radius: 5px;
       background-color: #0077c8;
       color: #fff; }
+      .ArticleList .ArticleActivity .ArticleTags .ArticleTag:hover {
+        text-decoration: none; }
 
 .ArticleList .btn-group {
   position: absolute;

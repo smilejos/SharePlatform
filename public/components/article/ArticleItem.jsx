@@ -43,7 +43,9 @@ class ArticleTags extends React.Component {
 class ArticleTag extends React.Component {
     render() {
         return (
-            <div className="ArticleTag"> {this.props.value}</div>
+            <Link to={ "/Page/Search/Result/Tag/" + this.props.value } className="ArticleTag">
+                    { this.props.value }
+            </Link>
         );
     }
 }

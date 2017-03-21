@@ -20,6 +20,18 @@ class Search extends React.Component {
             requestArticlesByAuthor(this.props.params.keyword);
         }
     }
+    
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.params.keyword != this.props.params.keyword ||
+            nextProps.params.type != this.props.params.type) {
+            let { requestArticlesByTag, requestArticlesByAuthor } = this.props.articleActions;
+            if (nextProps.params.type == 'Tag') {
+                requestArticlesByTag(nextProps.params.keyword);
+            } else {
+                requestArticlesByAuthor(nextProps.params.keyword);
+            }
+        }
+    }
 
     componentWillUnmount() {
         let { clearFilterCounts } = this.props.commonActions;
