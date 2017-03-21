@@ -237,6 +237,7 @@ class ArticleButton extends React.Component {
             </Tooltip>
         );
     }
+
     _renderDefaultSourceButton() {
          return (
             <Tooltip placement="right" animation="zoom" overlay="View Source">
@@ -246,12 +247,23 @@ class ArticleButton extends React.Component {
             </Tooltip>
         );
     }
+
     _renderDefaultDownloadButton() {
         return (
-            <Tooltip placement="right" animation="zoom" overlay="Download">
+            <Tooltip placement="right" animation="zoom" overlay="Markdown Download">
                 <span className="btn btn-default" onClick={this._fileDownload.bind(this)}>
                     <i className="fa fa-download fa-lg"/>
                 </span>
+            </Tooltip>
+        );
+    }
+
+    _renderPDFDownloadButton() {
+        return (
+            <Tooltip placement="right" animation="zoom" overlay="PDF Download">
+                <a className="btn btn-default" href={"/download/" + this.props.article.articleNo} taget="_blank">
+                    <i className="fa fa-file-pdf-o fa-lg"/>
+                </a>
             </Tooltip>
         );
     }
@@ -282,6 +294,7 @@ class ArticleButton extends React.Component {
     render() {
         let defaultSourceButton = null,
             defaultDownloadButton = null,
+            defaultPDFButton = null,
             authorSettingButton = null,
             authorEditButton = null,
             slideshowButton = null,
@@ -292,6 +305,7 @@ class ArticleButton extends React.Component {
         } else if( this.props.article != null) {
             defaultSourceButton = this._renderDefaultSourceButton.bind(this)();
             defaultDownloadButton = this._renderDefaultDownloadButton.bind(this)();
+            defaultPDFButton = this._renderPDFDownloadButton.bind(this)();
             authorSettingButton = this.props.article.author == this.props.worker_no ? this._renderAuthorSettingAction.bind(this)() : null;
             authorEditButton = this.props.article.author == this.props.worker_no ? this._renderAuthorEditAction.bind(this)() : null;
             slideshowButton = this.props.article.isSlideshow ? this._renderSlideshowButton.bind(this)() : null;
@@ -304,6 +318,7 @@ class ArticleButton extends React.Component {
                     {slideshowButton}
                     {defaultSourceButton}
                     {defaultDownloadButton}
+                    {defaultPDFButton}
                     {authorSettingButton}
                     {authorEditButton}
                 </div>

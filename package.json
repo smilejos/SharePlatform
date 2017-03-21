@@ -50,6 +50,7 @@
     "is_js": "^0.8.0",
     "jsdom": "^9.9.1",
     "lodash": "^4.11.1",
+    "markdown-pdf": "^7.0.0",
     "marked": "^0.3.5",
     "material-ui": "^0.15.0-alpha.2",
     "mkdirp": "^0.5.1",

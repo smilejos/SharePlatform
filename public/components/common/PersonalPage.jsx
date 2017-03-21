@@ -50,10 +50,10 @@ class App extends React.Component {
                                     <i className="fa fa-pencil-square-o"></i>
                                 </Link>
                             </Tooltip>
-                            <Tooltip placement="top" animation="zoom" overlay="Create Book">
-                                <Link className="btn btn-default" to={ "/Page/Book/Creator" }>
+                            <Tooltip placement="top" animation="zoom" overlay="Create Book (This function is comming soon)">
+                                <div className="btn btn-default" to={ "/Page/Book/Creator" }>
                                     <i className="fa fa-book"></i>
-                                </Link>
+                                </div>
                             </Tooltip>
                         </div>
                     </div>
