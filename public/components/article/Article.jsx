@@ -16,15 +16,12 @@ class Article extends React.Component {
     constructor(props){
         super(props);
         let { requestArticle } = this.props.actions;
-        console.log(this.props.params.articleNo);
         requestArticle(this.props.params.articleNo);
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log('receive nextProps');
         let { requestArticle, leaveArticle, cleanArticle } = this.props.actions;
         if( this.props.params.articleNo != nextProps.params.articleNo) {
-            console.log('request nextProps');
             requestArticle(nextProps.params.articleNo);
         }
     }
@@ -56,7 +53,6 @@ class Article extends React.Component {
         let enabled = screenfull.enabled;
         if( enabled ) {
             let dom = findDOMNode(this.refs.content);
-            console.log('start fullscreen', dom);
             screenfull.request(dom);    
         }
         this._nextSildeshow();
@@ -111,7 +107,6 @@ class Article extends React.Component {
     _renderContent() {
         let isPresenting = this.props.state.slide_index > -1;
         let content = isPresenting ? this.props.state.slides[this.props.state.slide_index] : this.props.state.article.content; 
-        console.log(this.props.state.slide_index);
         return (
             <div>
                 <ArticleButton 
@@ -154,10 +149,8 @@ class Article extends React.Component {
     render() {
         let content;
         if ( this.props.state.article.articleNo != null ) {
-            console.log('render content');
             content = this._renderContent.bind(this)();
         } else {
-            console.log('render div');
             content = this._renderLoading();
         }
         
@@ -261,7 +254,7 @@ class ArticleButton extends React.Component {
     _renderPDFDownloadButton() {
         return (
             <Tooltip placement="right" animation="zoom" overlay="PDF Download">
-                <a className="btn btn-default" href={"/download/" + this.props.article.articleNo} taget="_blank">
+                <a className="btn btn-default" href={"/download/" + this.props.article.articleNo} target="_blank">
                     <i className="fa fa-file-pdf-o fa-lg"/>
                 </a>
             </Tooltip>

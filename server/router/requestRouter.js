@@ -25,8 +25,13 @@ if (process.env.NODE_ENV == 'production') {
 }
 
 router.get('/', function (req, res) {
-    req.session.user = memberRouter.transfer(req.ntlm);
-    res.sendFile(path.join(global.rootPath, 'index.html'));
+    let user = memberRouter.transfer(req.ntlm);
+    if (user) {
+        req.session.user = user;
+        res.sendFile(path.join(global.rootPath, 'index.html'));
+    } else {
+        res.status(301).send("Your account is not available.");
+    }
 });
 
 router.get('/Page/*', requestRender);

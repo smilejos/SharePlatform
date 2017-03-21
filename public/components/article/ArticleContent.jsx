@@ -29,11 +29,8 @@ export default class ArticleContent extends React.Component {
             // or '' if the source string is not changed
             highlight: function (str, lang) {
                 if (lang && hljs.getLanguage(lang)) {
-                    console.log('in hljs');
                     try {
                         let result = hljs.highlight(lang, str).value;
-                        //let array = result.split('\n');
-                        console.log(result, array);
                         return result;
                     } catch (err) {
                         console.log('highlight parsing error');

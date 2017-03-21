@@ -43,26 +43,32 @@ function renderFullPage(content, store) {
 }
 
 function handleRender(req, res) {
-    req.session.user = memberRouter.transfer(req.ntlm);
-  	const memoryHistory = createMemoryHistory(req.url);
-  	const store = configureStore(memoryHistory);
-  	const history = syncHistoryWithStore(memoryHistory, store);
+    let user = memberRouter.transfer(req.ntlm);
+    if (user) {
+        req.session.user = user;
+        const memoryHistory = createMemoryHistory(req.url);
+        const store = configureStore(memoryHistory);
+        const history = syncHistoryWithStore(memoryHistory, store);
 
-  	match({ history, routes, location: req.url }, (error, redirectLocation, renderProps) => {
-    	if (error) {
-      		res.status(500).send(error.message)
-    	} else if (redirectLocation) {
-      		res.redirect(302, redirectLocation.pathname + redirectLocation.search)
-    	} else if (renderProps) {
+        match({ history, routes, location: req.url }, (error, redirectLocation, renderProps) => {
+            if (error) {
+                res.status(500).send(error.message)
+            } else if (redirectLocation) {
+                res.redirect(302, redirectLocation.pathname + redirectLocation.search)
+            } else if (renderProps) {
 
-        const content = renderToString(React.createElement(
-            Provider, { store: store }, React.createElement(RouterContext, renderProps)
-		    ));
-      	res.send(renderFullPage(content, store));
-    	} else {
-    		res.status(404).send('Not found');
-    	}
-  	})
+            const content = renderToString(React.createElement(
+                Provider, { store: store }, React.createElement(RouterContext, renderProps)
+                ));
+            res.send(renderFullPage(content, store));
+            } else {
+                res.status(404).send('Not found');
+            }
+        })
+    } else {
+        res.status(301).send("Your account is not available.");
+    }
+    
 }
 
 module.exports = handleRender;

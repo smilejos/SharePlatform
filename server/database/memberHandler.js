@@ -62,10 +62,13 @@ module.exports = function(){
                 })[0];
             }   
             
-            loginInfo.WorkerNo = member.worker_no;
-            //loginInfo.UserName = member.user_name; 
-            loginInfo.DomainName = "WINNTDOM";
-            return loginInfo;
+            if (member != null) {
+                loginInfo.WorkerNo = member.worker_no;
+                loginInfo.DomainName = "WINNTDOM";    
+                return loginInfo;
+            } else {
+                return null;
+            }
         },
 		getMembers : function(callback){
 			if( !members || members.length == 0 ) {

@@ -89,7 +89,7 @@ module.exports = function(){
             	article = null;
 	    	} else {
 	    		article = is.array(article) ? article[0] : article;
-                article.tag = article.tag.length > 0 ? article.tag.split(',') : [];
+                article.tag = article.tag && article.tag.length > 0 ? article.tag.split(',') : [];
 	        	socket.emit('retrieveArticle', article);	
 	        	article = null;
 	    	}
@@ -199,7 +199,7 @@ module.exports = function(){
 		            	article = null;
 			    	} else {
 			    		article = is.array(article) ? article[0] : article;
-                        article.tag = article.tag.length > 0 ? article.tag.split(',') : [];
+                        article.tag = article.tag && article.tag.length > 0 ? article.tag.split(',') : [];
                         article.author_name = article.card_na.toLowerCase().replace(/\b\w/g, l => l.toUpperCase());
 			        	socket.emit('retrieveArticle', article);	
 			        	article = null;
@@ -215,7 +215,7 @@ module.exports = function(){
 
     function _separateByTag(articles, err) {
         lodash.forEach(articles, function(item, index){
-            item.tag = item.tag.length > 0 ? item.tag.split(',') : [];
+            item.tag = item.tag && item.tag.length > 0 ? item.tag.split(',') : [];
             item.author_name = item.card_na ? item.card_na.toLowerCase().replace(/\b\w/g, l => l.toUpperCase()) : "";
         });
         return articles;

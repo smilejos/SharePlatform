@@ -51,8 +51,6 @@ function preProcessMd() {
         if (data.match(regex)) {
             let serverName = "http://vtd003";
             let [,,articleNo, uuid, filename] = data.match(regex) || [];
-            console.log(articleNo, uuid, filename);
-            console.log(data.replace(regex, `![](${serverName}/${articleNo}/${uuid}/${filename})`));
             this.queue(data.replace(regex, `![](${serverName}/${articleNo}/${uuid}/${filename})`) + "\n");
         } else { 
             this.queue(data + "\n");
