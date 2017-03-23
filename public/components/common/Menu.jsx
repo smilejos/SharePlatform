@@ -49,9 +49,14 @@ export default class Information extends React.Component {
                             <i className="fa fa-search"></i>
                         </Link>
                     </Tooltip>
+                    <Tooltip placement="bottom" animation="zoom" overlay="Help">
+                        <Link className="btn btn-default" to={ "/Page/Article/View/105" }>
+                            <i className="fa fa-question-circle"></i>
+                        </Link>
+                    </Tooltip>
                     <Tooltip placement="bottom" animation="zoom" overlay="System Log">
                         <Link className="btn btn-default" to={ "/Page/Article/View/68" }>
-                            <i className="fa fa-info"></i>
+                            <i className="fa fa-info-circle"></i>
                         </Link>
                     </Tooltip>
                 </div>

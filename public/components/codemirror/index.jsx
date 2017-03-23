@@ -41,7 +41,8 @@ class CodeMirror extends Component {
 		this.codeMirror.on('blur', this._focusChanged.bind(this, false));
         this.codeMirror.on('scroll', this._scrollChanged.bind(this, this.codeMirror));
         this.codeMirror.on('cursorActivity', this._cursorChanged.bind(this));
-        
+        this.codeMirror.addKeyMap(customKeymap);
+
         this.codeMirror.setValue(this.props.defaultValue || this.props.value || '');
         if (this.props.scrollInfo) {
             this.codeMirror.scrollTo(this.props.scrollInfo.left, this.props.scrollInfo.top);    
@@ -52,6 +53,7 @@ class CodeMirror extends Component {
             this.codeMirror.getDoc().setCursor(this.props.cursorInfo);
         }
 
+        // When we have new line, we have to append it
         if (this.props.newline && this.props.newline.length > 0 && this.props.cursorInfo) {
             this.codeMirror.replaceRange("\n" + this.props.newline, {
                 line: this.props.cursorInfo.line == 0 ? this.codeMirror.lastLine() : this.props.cursorInfo.line,
@@ -147,5 +149,30 @@ const normalizeLineEndings = str => {
     else 
         return str.replace(/\r\n|\r/g, '\n');
 }
+
+function queryCaseInsensitive(query) {
+    return typeof query == "string" && query == query.toLowerCase();
+}
+
+function getSearchCursor(cm, query, pos) {
+// Heuristic: if the query string is all lowercase, do a case insensitive search.
+    return cm.getSearchCursor(query, pos, queryCaseInsensitive(query));
+}
+
+// We add this pupular function in Sublime.
+const customKeymap = {
+    "Alt-Enter": function (cm) {  
+        let query = cm.getSelection() || getSearchState(cm).lastQuery;
+        let lineRanges = [];
+        for (var cursor = getSearchCursor(cm, query); cursor.findNext();) {
+            lineRanges.push({
+                anchor: cursor.from(),
+                head: cursor.to()
+            });
+        }
+        cm.setSelections(lineRanges, 0);
+    }
+};
+
 
 module.exports = CodeMirror;
