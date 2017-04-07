@@ -74,9 +74,9 @@ export default class ArticleContent extends React.Component {
     }
 
     _renderIcon(content) {
-        // (i)[fa-user] -> <i class="fa fa-user"></i>
-        if (/\(i\)\[(.*)\]/g.test(content)) {
-            content = content.replace(/\(i\)\[(.*)\]/g, '<i class="fa $1"></i>');
+        // (i)[fa-user] (i)[fa-user] -> <i class="fa fa-user"></i>
+        if (/\(i\)\[([\w|-]*)\]/g.test(content)) {
+            content = content.replace(/\(i\)\[([\w|-]*)\]/g, '<i class="fa $1"></i>');
         }
         return content;
     }

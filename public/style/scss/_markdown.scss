@@ -103,11 +103,11 @@
 
 
 	img {
-		border: 0;
+		border: 1px solid #eee;
 		max-width: 100%;
-		box-sizing: content-box;
+        display: block;
+        margin: 0 auto;
 		background-color: #fff;
-		vertical-align: top;
 	}
 
 	hr {
@@ -276,24 +276,7 @@
 		}
 	}
 
-	code {
-		font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
-		font-size: 12px;
-		padding: 0;
-		padding-top: 0.2em;
-		padding-bottom: 0.2em;
-		margin: 0 0.2em;
-		font-size: 85%;
-		background-color: #f9f2f4;
-		border-radius: 3px;
-		color: #c7254e;
-
-		&:before,
-		&:after {
-			letter-spacing: -0.2em;
-			content: "\00a0";
-		}
-	} 
+	
 
 	kbd {
 		display: inline-block;
@@ -315,14 +298,21 @@
 		border-bottom: 1px dotted #777;
 	}
 
-	mark {
+    code {
+		font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace, "Microsoft JhengHei";
 		padding: 0.2em 0.4em;
-		margin: 0.2em;
-		border-radius: 3px;
+        font-size: 85%;
+		margin: 0 0.1em;
+		background-color: #f9f2f4;
+		color: #c7254e;
+	} 
+
+	mark {
+        font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace, "Microsoft JhengHei";
+		padding: 0 0.2em;
+		margin: 0 0.1em;
 		background-color: #fff8d5;
 		color: #4c4c4c;
-		font-size: 85%;
-		font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace, "Microsoft JhengHei";
 	}
 
 	ins {
@@ -331,11 +321,15 @@
 
 	blockquote {
 		margin: 0;
-		margin-bottom: 16px;
-		padding: 0 15px;
+		margin-bottom: 2px;
+		padding: 0 10px;
+        font-size: 100%;
 		color: #6C6C6C;
 		border-left: 6px solid #ddd;
 		background-color: #F7F7F7;
+        p {
+            margin-bottom: 2px;
+        }
 	}
 
 	blockquote>:first-child {

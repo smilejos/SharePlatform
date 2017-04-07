@@ -5,6 +5,7 @@ import { Link, browserHistory } from 'react-router'
 import { bindActionCreators  } from 'redux'
 import { connect } from 'react-redux'
 import Tooltip from 'rc-tooltip'
+import keydown from 'react-keydown';
 
 // internal related components or lib 
 import store from '../../store/store';
@@ -211,7 +212,7 @@ class Article extends React.Component {
         let path = '/Page/Article/View/' + this.props.params.articleNo;
         browserHistory.push(path);
     }
-
+    
     _updateContent(content) {
         let { editArticle } = this.props.actions;
         let temp = this.props.state.article ? this.props.state.article : {};
@@ -299,10 +300,12 @@ class Article extends React.Component {
         });
     }
 
-    _handleSaveArticle (){
+    @keydown('ctrl+s')
+    _handleSaveArticle (e){
         let { modifyArticle } = this.props.actions;
         let temp = this.props.state.article;
         modifyArticle(temp);
+        e.preventDefault();
     }
     
     render() {

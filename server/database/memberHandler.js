@@ -8,7 +8,7 @@ module.exports = function(){
 	function _getRawDataFromDatabase (callback){
         let sqlString = " select Emp_Id as worker_no, RTRIM(Micron_UserName) as user_name, Legacy_ID_No as legacy_Id_No, card_na, RTRIM(Tel_o) as tel_no, Title_no as title_na, RTRIM(EDept_funa) as dept_na, e_mail as email " +
                         " from HRIS.dbo.SAP_Nemployee a " +
-                        " left join HRIS.dbo.SAP_NSection b on a.Dept_no = b.Dept_no  where a.Dept_no in ('70130800', '70130852')";
+                        " left join HRIS.dbo.SAP_NSection b on a.Dept_no = b.Dept_no  where a.Dept_no in ('70130800', '70130852', '70130683')";
         
         let connection = new sql.Connection(config, function (err) {
             console.log(err);
@@ -25,7 +25,7 @@ module.exports = function(){
 	function _getBizMemberFromDatabase (callback){
         let sqlString = " select Emp_Id as worker_no, RTRIM(Micron_UserName) as user_name, Legacy_ID_No as legacy_Id_No, card_na, RTRIM(Tel_o) as tel_no, Title_no as title_na, RTRIM(EDept_funa) as dept_na, e_mail as email " +
                         " from HRIS.dbo.SAP_Nemployee a " +
-                        " left join HRIS.dbo.SAP_NSection b on a.Dept_no = b.Dept_no where a.Dept_no in ('70130800', '70130852')";
+                        " left join HRIS.dbo.SAP_NSection b on a.Dept_no = b.Dept_no where a.Dept_no in ('70130800', '70130852', '70130683')";
         
         let connection = new sql.Connection(config, function (err) {
             let request = connection.request();

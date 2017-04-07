@@ -17,6 +17,7 @@ let config = {
                 presets: ['react', 'es2015'],
                 plugins: [
                     "syntax-class-properties",
+                    "transform-decorators-legacy",
                     "transform-class-properties",
                     "transform-object-rest-spread"
                 ]

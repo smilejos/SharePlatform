@@ -554,11 +554,11 @@
   .markdown-body h5 .anchor, .markdown-body h6 .anchor {
     line-height: 1.1; }
   .markdown-body img {
-    border: 0;
+    border: 1px solid #eee;
     max-width: 100%;
-    box-sizing: content-box;
-    background-color: #fff;
-    vertical-align: top; }
+    display: block;
+    margin: 0 auto;
+    background-color: #fff; }
   .markdown-body hr {
     box-sizing: content-box;
     overflow: hidden;
@@ -673,20 +673,6 @@
       border: 0; }
       .markdown-body pre code:before, .markdown-body pre code:after {
         content: normal; }
-  .markdown-body code {
-    font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
-    font-size: 12px;
-    padding: 0;
-    padding-top: 0.2em;
-    padding-bottom: 0.2em;
-    margin: 0 0.2em;
-    font-size: 85%;
-    background-color: #f9f2f4;
-    border-radius: 3px;
-    color: #c7254e; }
-    .markdown-body code:before, .markdown-body code:after {
-      letter-spacing: -0.2em;
-      content: "\00a0"; }
   .markdown-body kbd {
     display: inline-block;
     font: 11px Consolas, "Liberation Mono", Menlo, Courier, monospace;
@@ -702,23 +688,31 @@
   .markdown-body abbr {
     cursor: help;
     border-bottom: 1px dotted #777; }
-  .markdown-body mark {
+  .markdown-body code {
+    font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace, "Microsoft JhengHei";
     padding: 0.2em 0.4em;
-    margin: 0.2em;
-    border-radius: 3px;
-    background-color: #fff8d5;
-    color: #4c4c4c;
     font-size: 85%;
-    font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace, "Microsoft JhengHei"; }
+    margin: 0 0.1em;
+    background-color: #f9f2f4;
+    color: #c7254e; }
+  .markdown-body mark {
+    font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace, "Microsoft JhengHei";
+    padding: 0 0.2em;
+    margin: 0 0.1em;
+    background-color: #fff8d5;
+    color: #4c4c4c; }
   .markdown-body ins {
     text-decoration: underline; }
   .markdown-body blockquote {
     margin: 0;
-    margin-bottom: 16px;
-    padding: 0 15px;
+    margin-bottom: 2px;
+    padding: 0 10px;
+    font-size: 100%;
     color: #6C6C6C;
     border-left: 6px solid #ddd;
     background-color: #F7F7F7; }
+    .markdown-body blockquote p {
+      margin-bottom: 2px; }
   .markdown-body blockquote > :first-child {
     margin-top: 0; }
   .markdown-body blockquote > :last-child {
