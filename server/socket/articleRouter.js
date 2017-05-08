@@ -112,24 +112,6 @@ module.exports = function(){
 	    });
     }
 	
-	function _getArticleList(socket, item) {
-		let worker_no = socket.request.session.user.WorkerNo;
-		if(item.isSpecificUser) {
-            ArticleHandler.getArticlesByAuthor(item.worker_no, (articles, err) => {
-            	articles = _separateByTag(articles);
-                socket.emit('receiveList', articles);
-                articles = null;
-            });
-            
-        } else {
-            ArticleHandler.getNewestArticle(worker_no, (articles, err) => {
-            	articles = _separateByTag(articles);
-                socket.emit('receiveList', articles);
-                articles = null;
-            });
-        }
-	}
-
 	function _getArticlesByTag(socket, item) {
 		let worker_no = socket.request.session.user.WorkerNo;
 		ArticleHandler.getArticlesByTag(item, worker_no, (articles, err) => {
@@ -141,14 +123,17 @@ module.exports = function(){
 
 	function _getArticlesByAuthor(socket, item) {
         let worker_no = socket.request.session.user.WorkerNo;
-        if (item == worker_no) {
-            ArticleHandler.getArticlesBySelf(worker_no, (articles, err) => {
+
+        if (item.worker_no == worker_no) {
+            console.log('getArticlesBySelf');
+            ArticleHandler.getArticlesBySelf(item.worker_no, (articles, err) => {
                 articles = _separateByTag(articles);
                 socket.emit('receiveList', articles);
                 articles = null;
             });
         } else {
-            ArticleHandler.getArticlesByAuthor(worker_no, (articles, err) => {
+            console.log('getArticlesByAuthor');
+            ArticleHandler.getArticlesByAuthor(item.worker_no, (articles, err) => {
                 articles = _separateByTag(articles);
                 socket.emit('receiveList', articles);
                 articles = null;
@@ -253,12 +238,8 @@ module.exports = function(){
 		    
 		    socket.on('leaveArticle', (articleNo) => {
 		    	socket.leave(articleNo);
-		    });
-
-		    socket.on('requestArticleList', (item) => {
-		       _getArticleList(socket, item);
-		    });
-
+            });
+            
 	     	socket.on('requestArticlesByTag', (item) => {
 		       _getArticlesByTag(socket, item);
 		    });

@@ -4,16 +4,6 @@ module.exports = function(){
 		config = require('../config/database'),
 		lodash  = require('lodash');
 
-	function _getNewestArticle(worker_no, callback){
-		let sqlString = " select top 10 articleNo, title, author, card_na, tag, updateTime, publishTime, isSlideshow, isPrivate " +
-                        " from dbo.Article a (nolock) " +
-                        " left join HRIS.dbo.SAP_Nemployee b (nolock)  on a.author = b.Emp_id " +
-						" where (isPrivate = 0 or Author = '" + worker_no + "')" +
-						" order by UpdateTime DESC ";
-        
-		_executeSqlComment(sqlString, callback);
-	}
-
 	function _getTagSummary(worker_no, callback){
 		let sqlString = " select tag from dbo.Article (nolock) " +
 						" where (isPrivate = 0 or Author = '" + worker_no + "') and tag != ''";
@@ -26,7 +16,7 @@ module.exports = function(){
 		_executeSqlComment(sqlString, callback);
 	}
 
-    function _getArticlesBySelf(worker_no, callback) {
+    function _getArticlesByAuthor(worker_no, callback) {
         let sqlString = " select articleNo, title, author, card_na, tag, updateTime, publishTime, isSlideshow, isPrivate " +
 				        " from dbo.Article a (nolock) " +
                         " left join HRIS.dbo.SAP_Nemployee b (nolock)  on a.author = b.Emp_id " +
@@ -34,7 +24,7 @@ module.exports = function(){
         
         _executeSqlComment(sqlString, callback);
     }
-	function _getArticlesByAuthor(worker_no, callback){
+	function _getArticlesBySelf(worker_no, callback){
 		let sqlString = " select articleNo, title, author, card_na, tag, updateTime, publishTime, isSlideshow, isPrivate " +
                         " from dbo.Article a (nolock) " +
                         " left join HRIS.dbo.SAP_Nemployee b (nolock)  on a.author = b.Emp_id " +  

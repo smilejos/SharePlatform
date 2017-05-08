@@ -16,16 +16,11 @@ class ArticleOverview extends React.Component {
     }
 
     componentWillMount() {
-        let { requestArticleList } = this.props.articleActions;
+        let { requestArticlesByAuthor } = this.props.articleActions;
         var worker_no = this.props.worker_no;
-        if( worker_no ) {
-            requestArticleList({
-                isSpecificUser: true,
+        if (worker_no) {
+            requestArticlesByAuthor({
                 worker_no: worker_no
-            });
-        } else {
-            requestArticleList({
-                isSpecificUser: false
             });
         }
     }
@@ -38,10 +33,9 @@ class ArticleOverview extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        let { requestArticleList } = this.props.articleActions;
+        let { requestArticlesByAuthor } = this.props.articleActions;
         if( nextProps.worker_no != this.props.worker_no ) {
-            requestArticleList({
-                isSpecificUser: true,
+            requestArticlesByAuthor({
                 worker_no: nextProps.worker_no
             });
         }
