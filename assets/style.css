@@ -705,14 +705,17 @@
     text-decoration: underline; }
   .markdown-body blockquote {
     margin: 0;
-    margin-bottom: 2px;
-    padding: 0 10px;
+    margin-bottom: 15px;
+    padding: 5px 10px;
     font-size: 100%;
     color: #6C6C6C;
+    border: 0px;
     border-left: 6px solid #ddd;
     background-color: #F7F7F7; }
     .markdown-body blockquote p {
       margin-bottom: 2px; }
+  .markdown-body > blockquote {
+    border-bottom: 1px solid #ddd; }
   .markdown-body blockquote > :first-child {
     margin-top: 0; }
   .markdown-body blockquote > :last-child {
