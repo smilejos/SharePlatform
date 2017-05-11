@@ -60,7 +60,6 @@ class ArticleSetting extends React.Component {
 
     _handleSave(){
         let { updateArticle } = this.props.articleActions;
-        console.log(this.props.state.article.isPrivate);
         updateArticle({ 
             articleNo: this.props.params.articleNo,
             title: this.refs.txtTitle.value,

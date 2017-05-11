@@ -35,7 +35,6 @@ class GroupMap extends React.Component {
      _calculate(Props) {
         let { setAuthorsCounts } = this.props.commonActions;
         let result = Props.members;
-        console.log(Props.members, Props.articles);
         forEach(result, function(member, index) {
             let tmp_list = [], tmp_tag = [];
             let articles = filter(Props.articles, { author: member.worker_no });
@@ -95,7 +94,6 @@ class Tag extends React.Component {
         super(props);
     }
     render() {
-        console.log(this.props.item);
         return (
             <div className="tagText">
                 <span className="name"> {this.props.item.name} </span>

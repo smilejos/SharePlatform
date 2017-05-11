@@ -24,8 +24,10 @@ export default function articles(state = {
         article: {
             articleNo : null,
             title : '',
-            author : '',
-            content : '',
+            author: '',
+            editor: '',
+            content: '',
+            editors: [],
             tag : [],
             updateTime : null,
             publishTime : null,

@@ -9,8 +9,7 @@ import * as ArticleActions from '../../actions/ArticleActions'
 
 import ArticleOverview from '../article/ArticleOverview'
 import PersonalInfo from '../common/PersonalInfo'
-
-
+import Avatar from '../common/Avatar'
 class App extends React.Component {
     constructor(props){
         super(props);
@@ -34,14 +33,11 @@ class App extends React.Component {
     }
 
     render() {
-        let url = 'http://imgprod.micron.com/corp/emppics/Thumbnails/' + this.props.self.worker_no + '.jpg';
         console.log('self', this.props.self);
         return (
             <div>
                 <div className="personalBox">
-                    <div className="image">
-                        <img src={url}></img>
-                    </div>
+                    <Avatar worker_no={this.props.self.worker_no} />
                     <PersonalInfo user= { this.props.self } />
                     <div className="control">
                         <div className="btn-group">

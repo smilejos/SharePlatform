@@ -9,42 +9,36 @@ import Dropzone from 'react-dropzone'
 import Tooltip from 'rc-tooltip';
 import { highlight, highlightAuto } from 'highlight.js'
 import * as ArticleActions from '../../actions/ArticleActions'
+import * as CommonActions from '../../actions/CommonActions'
 import ArticleContent from '../article/ArticleContent'
+import ArticleInfo from '../article/ArticleInfo'
 import FileSaver from 'file-saver'
 
 class Article extends React.Component {
     constructor(props){
         super(props);
-        let { requestArticle } = this.props.actions;
+        let { requestArticle } = this.props.articleActions;
         requestArticle(this.props.params.articleNo);
     }
 
     componentWillReceiveProps(nextProps) {
-        let { requestArticle, leaveArticle, cleanArticle } = this.props.actions;
+        let { requestArticle, leaveArticle, cleanArticle } = this.props.articleActions;
         if( this.props.params.articleNo != nextProps.params.articleNo) {
             requestArticle(nextProps.params.articleNo);
         }
     }
 
-    shouldComponentUpdate (nextProps, nextState) {
-        // Make sure content already download from server
-        // if( nextProps.state.article.articleNo != null) {
-        //     console.log('shouldComponentUpdate', nextProps.state.article.articleNo);
-        //     return true;
-        // } else {
-        //     return false;
-        // }
-
-        return true;
+    componentDidUpdate() {
+        /// To-Do: Wait to check scroll behavior when document presenting and change page.
     }
 
     componentDidMount() {
-        let { syncArticle } = this.props.actions;
+        let { syncArticle } = this.props.articleActions;
         syncArticle(this.props.params.articleNo);
     }
     
     componentWillUnmount() {
-        let { leaveArticle, cleanArticle } = this.props.actions;
+        let { leaveArticle, cleanArticle } = this.props.articleActions;
         cleanArticle();
         leaveArticle(this.props.params.articleNo);
     }
@@ -59,7 +53,7 @@ class Article extends React.Component {
     }
 
     _existSildeshow() {
-        let { updateSlideIndex } = this.props.actions;
+        let { updateSlideIndex } = this.props.articleActions;
         let enabled = screenfull.enabled;
         if( enabled ) {
             screenfull.exit();
@@ -68,7 +62,7 @@ class Article extends React.Component {
     }
 
     _nextSildeshow() {
-        let { updateSlideIndex } = this.props.actions;
+        let { updateSlideIndex } = this.props.articleActions;
         let index = this.props.state.slide_index + 1;
         if( index > this.props.state.slides.length - 1) {
             index = this.props.state.slides.length - 1;
@@ -77,7 +71,7 @@ class Article extends React.Component {
     }
 
     _prevSildeshow() {
-        let { updateSlideIndex } = this.props.actions;
+        let { updateSlideIndex } = this.props.articleActions;
         let index = this.props.state.slide_index - 1;
         if( index < 0) {
             index = 0;
@@ -95,9 +89,17 @@ class Article extends React.Component {
     }
 
     _onFileUpload(files) {
-        console.log(files);
-        let { uploadArticle } = this.props.actions;
+        let { uploadArticle } = this.props.articleActions;
         uploadArticle(files, this.props.params.articleNo);
+    }
+
+    _scrollToTop() {
+        document.getElementsByClassName("container")[0].scrollTop = 0;
+    }
+
+    _scrollToBottom() {
+        let node = findDOMNode(this.refs.content);
+        document.getElementsByClassName("container")[0].scrollTop = node.scrollHeight;
     }
 
     _isPresenting() {
@@ -118,8 +120,14 @@ class Article extends React.Component {
                     nextSildeshow={this._nextSildeshow.bind(this)}
                     fileUpload={this._fileUpload.bind(this)}
                     fileDownload={this._fileDownload.bind(this)}
+                    scrollToTop={this._scrollToTop.bind(this)}
+                    scrollToBottom={this._scrollToBottom.bind(this)}
                     isPresenting={isPresenting}
-                    content={content}
+                    commonActions= {this.props.commonActions}
+                />
+                <ArticleInfo
+                    article={this.props.state.article}
+                    isPresenting={isPresenting}
                 />
                 <div className="ArticlePage">
                     <ArticleTitle title={this.props.state.article.title} />
@@ -179,40 +187,33 @@ class ArticleFooter extends React.Component {
                 <div>
                     <div className="PageInfo">{ this.props.currentIndex+1 + "/" + this.props.maxIndex  }</div>
                 </div>
-                <div>
-                    <div className="Author"> {this.props.article.author_name}</div>
-                </div>
             </div>
         )
     }
 }
 
 class ArticleButton extends React.Component {
-    _startSildeshow() {
-        this.props.startSildeshow();
+    _isAllowToEdit() {
+        let isAuthor = this.props.article.author == this.props.worker_no;
+        let isCoEditor = this.props.article.editors.indexOf(this.props.worker_no) > -1;
+        if (isCoEditor) {
+            let { sentClientNotice } = this.props.commonActions;
+            sentClientNotice({
+                level : 'info',
+                title : 'System Notice',
+                message: 'You are authorized to edit this article by author.',
+                autoDismiss: 5,
+                datetime: Date.now()
+            });
+        }
+        return isAuthor || isCoEditor;
     }
 
-    _existSildeshow() {
-        this.props.existSildeshow();
+    _isAuthor() {
+        return this.props.article.author == this.props.worker_no;
     }
 
-    _prevSildeshow() {
-        this.props.prevSildeshow();
-    }
-
-    _nextSildeshow() {
-        this.props.nextSildeshow();
-    }
-
-    _fileUpload() {
-        this.props.fileUpload();
-    }
-
-    _fileDownload() {
-        this.props.fileDownload();
-    }
-
-    _renderAuthorSettingAction() {
+    _renderAuthorSettingButton() {
         return (
             <Tooltip placement="right" animation="zoom" overlay="Article Setting">
                 <Link className="btn btn-default" to={ "/Page/Article/Setting/" + this.props.article.articleNo }>
@@ -221,7 +222,18 @@ class ArticleButton extends React.Component {
             </Tooltip>
         )
     }
-    _renderAuthorEditAction() {
+
+    _renderAuthorAssignButton() {
+        return (
+            <Tooltip placement="right" animation="zoom" overlay="Assign Co-Editor">
+                <Link className="btn btn-default" to={ "/Page/Article/Assign/" + this.props.article.articleNo }>
+                    <i className="fa fa-address-book fa-lg"></i>
+                </Link>
+            </Tooltip>
+        )
+    }
+
+    _renderArticleEditButton() {
         return (
             <Tooltip placement="right" animation="zoom" overlay="Edit Article">
                 <Link className="btn btn-default" to={ "/Page/Article/Editor/" + this.props.article.articleNo }>
@@ -244,7 +256,7 @@ class ArticleButton extends React.Component {
     _renderDefaultDownloadButton() {
         return (
             <Tooltip placement="right" animation="zoom" overlay="Markdown Download">
-                <span className="btn btn-default" onClick={this._fileDownload.bind(this)}>
+                <span className="btn btn-default" onClick={this.props.fileDownload}>
                     <i className="fa fa-download fa-lg"/>
                 </span>
             </Tooltip>
@@ -264,23 +276,43 @@ class ArticleButton extends React.Component {
     _renderSlideshowButton() {
         return (
             <Tooltip placement="right" animation="zoom" overlay="SlideShow">
-                <span className="btn btn-default" onClick={this._startSildeshow.bind(this)}>
+                <span className="btn btn-default" onClick={this.props.startSildeshow}>
                     <i className="fa fa-laptop fa-lg"/>
                 </span>
             </Tooltip>    
         );
     }
 
+    _renderScrollButton() {
+        return (
+            <div className="btn-group-vertical">
+                <Tooltip placement="right" animation="zoom" overlay="Scroll to top">
+                    <span className="btn btn-default" onClick={this.props.scrollToTop}>
+                        <i className="fa fa-arrow-circle-up fa-lg"/>
+                    </span>
+                </Tooltip>
+                <Tooltip placement="right" animation="zoom" overlay="Scroll to bottom">
+                    <span className="btn btn-default" onClick={this.props.scrollToBottom}>
+                        <i className="fa fa-arrow-circle-down fa-lg"/>
+                    </span>
+                </Tooltip>
+            </div>
+        );
+    }
+
     _renderPresentingButton() {
         return (
-            <span>
-                <i className="fa fa-chevron-circle-left fa-lg" />
-                <span className="ArticleEdit" onClick={this._prevSildeshow.bind(this)}>Prev</span>
-                <i className="fa fa-chevron-circle-right fa-lg" />
-                <span className="ArticleEdit" onClick={this._nextSildeshow.bind(this)}>Next</span>
-                <i className="fa fa-sign-out fa-lg" />
-                <span className="ArticleEdit" onClick={this._existSildeshow.bind(this)}>Exist</span>
-            </span>
+            <div className="btn-group">
+                <a className="btn btn-default" onClick={this.props.prevSildeshow}>
+                    <i className="fa fa-chevron-circle-left fa-lg"/>
+                </a>
+                <a className="btn btn-default" onClick={this.props.nextSildeshow}>
+                    <i className="fa fa-chevron-circle-right fa-lg"/>
+                </a>
+                <a className="btn btn-default" onClick={this.props.existSildeshow}>
+                    <i className="fa fa-sign-out fa-lg"/>
+                </a>    
+            </div>
         );
     }
 
@@ -289,32 +321,40 @@ class ArticleButton extends React.Component {
             defaultDownloadButton = null,
             defaultPDFButton = null,
             authorSettingButton = null,
-            authorEditButton = null,
+            authorAssignButton = null,
+            articleEditButton = null,
             slideshowButton = null,
-            presentingButton = null;
+            presentingButton = null,
+            scrollButton = null;
 
         if( this.props.article != null && this.props.isPresenting ) {
             presentingButton = this._renderPresentingButton.bind(this)();
-        } else if( this.props.article != null) {
+        } else if (this.props.article != null) {
             defaultSourceButton = this._renderDefaultSourceButton.bind(this)();
             defaultDownloadButton = this._renderDefaultDownloadButton.bind(this)();
             defaultPDFButton = this._renderPDFDownloadButton.bind(this)();
-            authorSettingButton = this.props.article.author == this.props.worker_no ? this._renderAuthorSettingAction.bind(this)() : null;
-            authorEditButton = this.props.article.author == this.props.worker_no ? this._renderAuthorEditAction.bind(this)() : null;
+            authorSettingButton = this._isAuthor.bind(this)() ? this._renderAuthorSettingButton.bind(this)() : null;
+            authorAssignButton = this._isAuthor.bind(this)() ? this._renderAuthorAssignButton.bind(this)() : null;
+            articleEditButton = this._isAllowToEdit.bind(this)() ? this._renderArticleEditButton.bind(this)() : null;
             slideshowButton = this.props.article.isSlideshow ? this._renderSlideshowButton.bind(this)() : null;
+            scrollButton = this._renderScrollButton.bind(this)();
         }
 
         return (
             <div className="ArticleControl">
                 <div className="btn-group-vertical">
-                    {presentingButton}
                     {slideshowButton}
                     {defaultSourceButton}
                     {defaultDownloadButton}
                     {defaultPDFButton}
-                    {authorSettingButton}
-                    {authorEditButton}
                 </div>
+                <div className="btn-group-vertical">
+                    {authorSettingButton}
+                    {authorAssignButton}
+                    {articleEditButton}
+                </div>
+                {scrollButton}
+                {presentingButton}
             </div>
         )
     }
@@ -328,7 +368,10 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return { actions: bindActionCreators(ArticleActions, dispatch) }
+    return {
+        articleActions: bindActionCreators(ArticleActions, dispatch),
+        commonActions: bindActionCreators(CommonActions, dispatch),
+    }
 }
 
 export default connect(

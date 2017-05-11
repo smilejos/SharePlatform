@@ -22,7 +22,6 @@ class Category extends React.Component {
     _calculate(Props) {
         let { setCategoryCounts } = this.props.commonActions;
         if( Props.category.length > 0 && Props.articles.length > 0 ) {
-            console.log('calculate');
             let result = Props.category.map(function(item, index){
                 return {
                     name : item.name,

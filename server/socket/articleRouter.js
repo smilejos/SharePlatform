@@ -1,12 +1,11 @@
-"use strict";
-
 module.exports = function(){
 	let is    = require('is_js');
 	let ss    = require('socket.io-stream');
 	let fs    = require('fs');
 	let path  = require('path');
 	let ArticleHandler = require('../database/articleHandler');
-	let lodash  = require('lodash');
+    let lodash = require('lodash');
+    let Promise = require("bluebird");
 	let notice = {
 		level : 'success',
 		title : 'Article Notice',
@@ -32,7 +31,8 @@ module.exports = function(){
         });
 	}
 
-	function _modifyArticle(socket, item) {
+    function _modifyArticle(socket, item) {
+        item.editor = socket.request.session.user.WorkerNo;
         ArticleHandler.modifyArticle(item, (recordset, err) =>{
              if( err ) {
             	socket.emit('receiveNotice', lodash.assign(notice, {
@@ -49,7 +49,8 @@ module.exports = function(){
         });
 	}
 
-	function _updateArticle(socket, item) {
+    function _updateArticle(socket, item) {
+        item.editor = socket.request.session.user.WorkerNo;
 		item.tag = item.tag.length > 0 ? item.tag.join(',') : '';
         ArticleHandler.updateArticle(item, (recordset, err) =>{
              if( err ) {
@@ -78,22 +79,50 @@ module.exports = function(){
 	    });
 	}
 
-    function _getArticle(socket, item) {
-	    ArticleHandler.getSpecificArticle(item, (article, err) => {
-	    	if( err || article == null) {
-    			socket.emit('receiveNotice', lodash.assign(notice, {
-            		level: 'error',
-            		message: err,
-            		datetime: Date.now()
-            	}));
-            	article = null;
-	    	} else {
-	    		article = is.array(article) ? article[0] : article;
-                article.tag = article.tag && article.tag.length > 0 ? article.tag.split(',') : [];
-	        	socket.emit('retrieveArticle', article);	
-	        	article = null;
-	    	}
-	    });
+    function _getArticle(socket, articleNo) {
+        let getSpecificArticle = function () {
+            return new Promise(function (resolve, reject) {
+                ArticleHandler.getSpecificArticle(articleNo, (article, err) => {
+                    if (err || article == null ) {
+                        reject(err);
+                    } else {
+                        article = is.array(article) ? article[0] : article;
+                        article.tag = article.tag && article.tag.length > 0 ? article.tag.split(',') : [];
+                        resolve(article);
+                    }
+                });
+            });
+        };
+
+        let getCoEditors = function () {
+            return new Promise(function (resolve, reject) {
+                ArticleHandler.getCollaboratedEditors(articleNo, (editors, err) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        if (is.array(editors) && editors.length > 0) {
+                            editors = editors.map(function (obj, index) { 
+                                return obj.editor;
+                            });
+                        } else {
+                            editors = [];
+                        }
+                        resolve(editors);
+                    }
+                });
+            });
+        };
+
+        Promise.all([getSpecificArticle(), getCoEditors()]).spread(function (article, editors) { 
+            article.editors = editors;
+            socket.emit('retrieveArticle', article);
+        }).catch(function (err) { 
+            socket.emit('receiveNotice', lodash.assign(notice, {
+                level: 'error',
+                message: err,
+                datetime: Date.now()
+            }));
+        })
     }
     
     function _getArticleImages(socket, item) {
@@ -123,23 +152,19 @@ module.exports = function(){
 
 	function _getArticlesByAuthor(socket, item) {
         let worker_no = socket.request.session.user.WorkerNo;
-
         if (item.worker_no == worker_no) {
-            console.log('getArticlesBySelf');
             ArticleHandler.getArticlesBySelf(item.worker_no, (articles, err) => {
                 articles = _separateByTag(articles);
                 socket.emit('receiveList', articles);
                 articles = null;
             });
         } else {
-            console.log('getArticlesByAuthor');
             ArticleHandler.getArticlesByAuthor(item.worker_no, (articles, err) => {
                 articles = _separateByTag(articles);
                 socket.emit('receiveList', articles);
                 articles = null;
             });
         }
-		
 	}
 
 	function _getTagSummary(socket) {
@@ -224,6 +249,22 @@ module.exports = function(){
 		       _getArticle(socket, item);
             });
             
+            socket.on('requestArticlesByTag', (item) => {
+		       _getArticlesByTag(socket, item);
+		    });
+
+	      	socket.on('requestArticlesByAuthor', (item) => {
+		       _getArticlesByAuthor(socket, item);
+		    });
+
+		    socket.on('requestTagSummary', () => {
+		       _getTagSummary(socket);
+		    });
+
+		    socket.on('requestAuthorSummary', () => {
+		       _getAuthorSummary(socket);
+            });
+            
             socket.on('requestArticleImages', (item) => {
 		       _getArticleImages(socket, item);
             });
@@ -239,22 +280,6 @@ module.exports = function(){
 		    socket.on('leaveArticle', (articleNo) => {
 		    	socket.leave(articleNo);
             });
-            
-	     	socket.on('requestArticlesByTag', (item) => {
-		       _getArticlesByTag(socket, item);
-		    });
-
-	      	socket.on('requestArticlesByAuthor', (item) => {
-		       _getArticlesByAuthor(socket, item);
-		    });
-
-		    socket.on('requestTagSummary', () => {
-		       _getTagSummary(socket);
-		    });
-
-		    socket.on('requestAuthorSummary', () => {
-		       _getAuthorSummary(socket);
-		    });
 
 		    socket.on('disconnect', () => {
 		    });

@@ -14,6 +14,46 @@
         margin-top: 5px;
     }
 
+    .ArticleEditInfo {
+        position: fixed;
+		left: calc((100vw/2) - (#{$ArticleContentWidth}/2) - (140px));
+        top: 135px;
+
+        .information {
+			font-family: $FontFamily;
+			line-height: 16px;
+			padding: 5px;
+
+			.primaryText {
+				color: $MarjoyTextColor;
+                font-weight: bold;
+				font-size: 16px;
+			}
+
+			.secondaryText {
+				color: $LittleTextColor;
+				font-size: 14px;
+			}
+		}
+
+        .image {
+			position: relative;
+			width: 140px;
+			height: 140px;
+            padding: 5px 0px;
+			
+			img {
+				height: 100%;
+				border-radius: 10px;
+				border: 1px $ItemBorderColor solid;
+			}
+		}
+
+        @media screen and (max-width: 800px){
+            display: none;
+        }
+    }
+
 	.ArticleControl {
 		position: fixed;
 		left: calc((100vw/2) + (#{$ArticleContentWidth}/2));
@@ -21,6 +61,33 @@
         
         i {
             color: $IconColor;
+        }
+
+        .ArticleEdit {
+            position: relative;
+            color: $MarjoyTextColor;
+            font-family: $MU_Font;
+            font-size: 16px;
+            line-height: 16px;
+            text-decoration: none;
+            margin-right: 5px;
+            cursor: pointer;
+            
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        .btn-group-vertical {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .active {
+            background-color: $MU_Blue;
+            i {
+                color: #fff;
+            }
         }
 
         @media screen and (max-width: 800px){
@@ -75,9 +142,10 @@
 	right: 0px;
 
 	.ArticleControl {
-		position: absolute;
+		position: fixed;
 		right: 10px;
-		top: 30px;
+		bottom: 5px;
+        z-index: 1;
 	}
 	
 	.ArticlePage{
@@ -131,6 +199,7 @@
 			height: 50px;
 			bottom: 0px;
 			width: 100%;
+            z-index: 0;
 
 			.PageInfo {
 				position: absolute;
@@ -139,47 +208,8 @@
 				left: 50%;
 				margin-left: -50px;
 			}
-
-			.Author {
-				position: absolute;
-				top: 10px;
-				right: 20px;
-			}
-
-			.Department {
-				position: absolute;
-				top: 30px;
-				right: 20px;
-			}
 		}
 	}
-}
-
-
-
-.ArticleControl {
-	.ArticleEdit {
-		position: relative;
-		color: $MarjoyTextColor;
-		font-family: $MU_Font;
-		font-size: 16px;
-		line-height: 16px;
-		text-decoration: none;
-		margin-right: 5px;
-		cursor: pointer;
-		
-		&:hover {
-			text-decoration: underline;
-		}
-	}
-
-    
-    .active {
-        background-color: $MU_Blue;
-        i {
-            color: #fff;
-        }
-    }
 }
 
 .ArticleUpload {

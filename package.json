@@ -36,6 +36,7 @@
     "webpack": "^1.13.2"
   },
   "dependencies": {
+    "bluebird": "^3.5.0",
     "body-parser": "^1.17.1",
     "classnames": "^2.2.5",
     "codemirror": "^5.22.0",

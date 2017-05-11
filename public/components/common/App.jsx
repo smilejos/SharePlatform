@@ -22,7 +22,7 @@ class App extends React.Component {
                 title: nextProps.notice.title,
                 message: nextProps.notice.message,
                 level: nextProps.notice.level,
-                autoDismiss: 3,
+                autoDismiss: nextProps.notice.autoDismiss ? nextProps.notice.autoDismiss : 3,
                 position: 'bl'
             });
         }
