@@ -28,8 +28,8 @@ export default class Article extends React.Component {
         }
 
         let { sentClientNotice } = this.props.commonActions;
-        let isCoEditor = nextProps.article ? nextProps.article.editors.indexOf(nextProps.worker_no) > -1 : false;
-        if (isCoEditor) {    
+        let isCoEditor = nextProps.state.article ? nextProps.state.article.editors.indexOf(nextProps.self.worker_no) > -1 : false;
+        if (isCoEditor) {
             sentClientNotice({
                 level : 'info',
                 title : 'System Notice',
