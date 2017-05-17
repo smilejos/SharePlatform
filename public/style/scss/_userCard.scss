@@ -1,0 +1,66 @@
+.userCard {
+    width: 260px;
+    margin: 2px 5px;
+    float: left;
+    padding: 5px;
+    height: 80px;
+    cursor: pointer;
+    background-color: #fff;
+    border-radius: 10px;
+    border: $ItemBorderColor 1px solid;
+    font-family: $FontFamily;
+
+    &:hover {
+        background-color: $HoverBackgroundColor;
+        color: $HoverTextColor;
+        .userInfo {
+            .primaryText {
+                color: $HoverTextColor;
+            }
+            .secondaryText {
+                color: $HoverTextColor;
+            }
+        }
+
+        .tagInfo {
+            .tagText {
+                span {
+                    color: $HoverTextColor;
+                }
+            }
+        }
+    }
+
+    .image {
+        position: relative;
+        width: 65px;
+        height: 65px;
+        display: inline-block;
+        float: left;
+
+        img {
+            height: 100%;
+            border-radius: 5px;
+            border: 1px $ItemBorderColor solid;
+        }
+    }
+
+    .userInfo {
+        font-family: $FontFamily;
+        line-height: 25px;
+        padding: 0px 0px 0px 10px;
+        display: inline-block;
+
+        .primaryText {
+            color: $TitleTextColor;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .secondaryText {
+            color: $LittleTextColor;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+    }
+}

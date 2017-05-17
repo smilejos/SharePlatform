@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import * as ArticleActions from '../../actions/ArticleActions'
 import * as CommonActions from '../../actions/CommonActions'
 import * as MemberActions from '../../actions/MemberActions'
-import MemberInfo from '../common/MemberInfo'
+import UserCard from '../common/UserCard'
 import {forEach, filter, orderBy, concat, countBy, groupBy, forIn, take} from 'lodash'
 
 class GroupMap extends React.Component {
@@ -71,16 +71,12 @@ class Member extends React.Component {
     }
 
     render() {
-        let url = 'http://imgprod.micron.com/corp/emppics/Thumbnails/' + this.props.user.worker_no + '.jpg';
         let list = this.props.user.tag.map(function(item, index){
             return <Tag item={item} key={index} />
         })
         return (
             <Link to={ "/Page/User/" + this.props.user.worker_no } className="MemberBox">
-                <div className="image">
-                    <img src={url}></img>
-                </div>
-                <MemberInfo user={this.props.user} />
+                <UserCard user={this.props.user} option={ "Article Count: " + this.props.user.count} />
                 <div className="tagInfo">
                     {list}
                 </div>

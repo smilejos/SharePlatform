@@ -8,6 +8,92 @@
 @import url(./js-sequence-diagrams/dist/sequence-diagram-min.css);
 @import url(./mermaid/dist/mermaid.css);
 @import url(./react-select/dist/react-select.css);
+.page {
+  background-color: #fff; }
+
+.container {
+  position: absolute;
+  overflow-y: scroll;
+  top: 50px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  width: auto; }
+
+::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+  background: #fff; }
+
+::-webkit-scrollbar-thumb {
+  background: #aaa;
+  -webkit-border-radius: 6ex; }
+
+::-webkit-scrollbar-corner {
+  background: #fff; }
+
+.Button {
+  margin: 10px 5px 0px 0px;
+  position: relative;
+  display: inline-block;
+  padding: 3px 16px;
+  font-size: 13px;
+  line-height: 20px;
+  color: #fff;
+  cursor: pointer;
+  background-color: #60b044;
+  background-image: linear-gradient(#8add6d, #60b044);
+  border: 1px solid #5ca941;
+  border-radius: 3px; }
+  .Button:hover {
+    background-color: #569e3d;
+    border-color: #4a993e;
+    background-image: linear-gradient(#79d858, #569e3d); }
+
+.userCard {
+  width: 260px;
+  margin: 2px 5px;
+  float: left;
+  padding: 5px;
+  height: 80px;
+  cursor: pointer;
+  background-color: #fff;
+  border-radius: 10px;
+  border: #eee 1px solid;
+  font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif; }
+  .userCard:hover {
+    background-color: #45b4ff;
+    color: #fff; }
+    .userCard:hover .userInfo .primaryText {
+      color: #fff; }
+    .userCard:hover .userInfo .secondaryText {
+      color: #fff; }
+    .userCard:hover .tagInfo .tagText span {
+      color: #fff; }
+  .userCard .image {
+    position: relative;
+    width: 65px;
+    height: 65px;
+    display: inline-block;
+    float: left; }
+    .userCard .image img {
+      height: 100%;
+      border-radius: 5px;
+      border: 1px #eee solid; }
+  .userCard .userInfo {
+    font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
+    line-height: 25px;
+    padding: 0px 0px 0px 10px;
+    display: inline-block; }
+    .userCard .userInfo .primaryText {
+      color: #2c2c2e;
+      font-size: 16px;
+      line-height: 1.5; }
+    .userCard .userInfo .secondaryText {
+      color: #9a9b9d;
+      font-size: 12px;
+      line-height: 1.8; }
+
 .ArticleContent {
   position: relative;
   max-width: 60vw;
@@ -252,48 +338,6 @@
   right: 0px;
   bottom: -40px; }
 
-.page {
-  background-color: #fff; }
-
-.container {
-  position: absolute;
-  overflow-y: scroll;
-  top: 50px;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
-  width: auto; }
-
-::-webkit-scrollbar {
-  height: 8px;
-  width: 8px;
-  background: #fff; }
-
-::-webkit-scrollbar-thumb {
-  background: #aaa;
-  -webkit-border-radius: 6ex; }
-
-::-webkit-scrollbar-corner {
-  background: #fff; }
-
-.Button {
-  margin: 10px 5px 0px 0px;
-  position: relative;
-  display: inline-block;
-  padding: 3px 16px;
-  font-size: 13px;
-  line-height: 20px;
-  color: #fff;
-  cursor: pointer;
-  background-color: #60b044;
-  background-image: linear-gradient(#8add6d, #60b044);
-  border: 1px solid #5ca941;
-  border-radius: 3px; }
-  .Button:hover {
-    background-color: #569e3d;
-    border-color: #4a993e;
-    background-image: linear-gradient(#79d858, #569e3d); }
-
 .BookMenu {
   border: 1px solid #eee;
   background-color: #fff;
@@ -514,6 +558,33 @@
           line-height: 14px; }
   .ContentSetting .btn-group {
     margin-top: 5px; }
+
+.EditorAssignLayer {
+  position: relative;
+  max-width: 60vw;
+  height: 100%;
+  padding: 40px 0px 20px;
+  background-color: #fff;
+  margin: 0 auto; }
+  .EditorAssignLayer .CardsLayout {
+    position: relative;
+    width: 50%;
+    height: 100%;
+    float: left;
+    padding: 5px; }
+    .EditorAssignLayer .CardsLayout .Title {
+      color: #003c64;
+      font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
+      font-size: 18px;
+      font-weight: bold; }
+    .EditorAssignLayer .CardsLayout .CardsContainer {
+      position: relative;
+      width: 100%;
+      height: 95%;
+      display: inline-block;
+      padding: 5px;
+      border: 1px solid #eee;
+      overflow: auto; }
 
 .markdown-body {
   -webkit-text-size-adjust: 100%;
@@ -873,10 +944,9 @@
   .MemberList .MemberBox {
     width: 320px;
     margin: 2px 5px;
-    height: auto;
     float: left;
     padding: 10px;
-    height: 130px;
+    height: 120px;
     cursor: pointer;
     border-radius: 10px;
     border: #eee 1px solid;
@@ -884,58 +954,39 @@
     .MemberList .MemberBox:hover {
       background-color: #45b4ff;
       color: #fff; }
-      .MemberList .MemberBox:hover .memberInfo .primaryText {
-        color: #fff; }
-      .MemberList .MemberBox:hover .memberInfo .secondaryText {
-        color: #fff; }
       .MemberList .MemberBox:hover .tagInfo .tagText span {
         color: #fff; }
-    .MemberList .MemberBox .image {
+    .MemberList .MemberBox .userCard {
+      border: 0px;
+      height: auto;
+      margin: 0px;
+      padding: 0px; }
+    .MemberList .MemberBox .tagInfo {
       position: relative;
-      width: 60px;
-      height: 60px;
-      display: inline-block;
-      padding: 5px 0px;
-      float: left; }
-      .MemberList .MemberBox .image img {
-        height: 60px;
-        border-radius: 5px;
-        border: 1px #eee solid; }
-    .MemberList .MemberBox .memberInfo {
-      font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
-      height: 80px;
-      line-height: 25px;
-      padding: 5px 0px 0px 10px;
       display: inline-block; }
-      .MemberList .MemberBox .memberInfo .primaryText {
-        color: #2c2c2e;
-        font-size: 16px; }
-      .MemberList .MemberBox .memberInfo .secondaryText {
-        color: #9a9b9d;
-        font-size: 14px; }
-    .MemberList .MemberBox .tagInfo .tagText {
-      position: relative;
-      height: 30px;
-      border: 1px solid #eee;
-      padding: 0px 2px;
-      width: 90px;
-      margin-right: 3px;
-      margin-top: 3px;
-      border-radius: 5px;
-      display: inline-block;
-      float: left; }
-      .MemberList .MemberBox .tagInfo .tagText span {
-        line-height: 20px;
-        font-size: 11px;
-        padding: 5px 5px;
-        color: #2c2c2e;
-        font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif; }
-      .MemberList .MemberBox .tagInfo .tagText .name {
-        position: absolute;
-        left: 0px; }
-      .MemberList .MemberBox .tagInfo .tagText .count {
-        position: absolute;
-        right: 0px; }
+      .MemberList .MemberBox .tagInfo .tagText {
+        position: relative;
+        height: 30px;
+        border: 1px solid #eee;
+        padding: 0px 2px;
+        width: 90px;
+        margin-right: 3px;
+        margin-top: 3px;
+        border-radius: 5px;
+        display: inline-block;
+        float: left; }
+        .MemberList .MemberBox .tagInfo .tagText span {
+          line-height: 20px;
+          font-size: 11px;
+          padding: 5px 5px;
+          color: #2c2c2e;
+          font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif; }
+        .MemberList .MemberBox .tagInfo .tagText .name {
+          position: absolute;
+          left: 0px; }
+        .MemberList .MemberBox .tagInfo .tagText .count {
+          position: absolute;
+          right: 0px; }
 
 .Menu {
   position: fixed;

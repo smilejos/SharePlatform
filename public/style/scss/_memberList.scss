@@ -11,29 +11,20 @@
         width: 330px;
     }
 
-	.MemberBox {
-		width: 320px;
+    .MemberBox {
+        width: 320px;
         margin: 2px 5px;
-		height: auto;
-		float: left;
-		padding: 10px;
-		height: 130px;
-		cursor: pointer;
+        float: left;
+        padding: 10px;
+        height: 120px;
+        cursor: pointer;
         border-radius: 10px;
         border: $ItemBorderColor 1px solid;
         font-family: $FontFamily;
 
-		&:hover {
-			background-color: $HoverBackgroundColor;
-			color: $HoverTextColor;
-            .memberInfo {
-                .primaryText {
-                    color: $HoverTextColor;
-                }
-                .secondaryText {
-                    color: $HoverTextColor;
-                }
-            }
+         &:hover {
+            background-color: $HoverBackgroundColor;
+            color: $HoverTextColor;
 
             .tagInfo {
                 .tagText {
@@ -42,71 +33,50 @@
                     }
                 }
             }
-		}
+        }
+        
+        .userCard {
+            border: 0px;
+            height: auto;
+            margin: 0px;
+            padding: 0px;
+        }
 
-		.image {
-			position: relative;
-			width: 60px;
-			height: 60px;
-			display: inline-block;
-            padding: 5px 0px;
-			float: left;
+        .tagInfo {
+            position: relative;
+            display: inline-block;
 
-			img {
-				height: 60px;
-				border-radius: 5px;
-				border: 1px $ItemBorderColor solid;
-			}
-		}
-
-		.memberInfo {
-			font-family: $FontFamily;
-			height: 80px;
-			line-height: 25px;
-			padding: 5px 0px 0px 10px;
-			display: inline-block;
-			.primaryText {
-				color: $TitleTextColor;
-				font-size: 16px;
-			}
-
-			.secondaryText {
-				color: $LittleTextColor;
-				font-size: 14px;
-			}
-		}
-
-		.tagInfo {
-			.tagText {
-				position: relative;
-				height: 30px;
-				border: 1px solid $ItemBorderColor;
-				padding: 0px 2px;
-				width: 90px;
-				margin-right: 3px;
+            .tagText {
+                position: relative;
+                height: 30px;
+                border: 1px solid $ItemBorderColor;
+                padding: 0px 2px;
+                width: 90px;
+                margin-right: 3px;
                 margin-top: 3px;
-				border-radius: 5px;
-				display: inline-block;
-				float: left;
+                border-radius: 5px;
+                display: inline-block;
+                float: left;
 
-				span {
-					line-height: 20px;
-					font-size: 11px;
-					padding: 5px 5px;
-					color: $TitleTextColor;
-					font-family: $FontFamily;
-				}
+                span {
+                    line-height: 20px;
+                    font-size: 11px;
+                    padding: 5px 5px;
+                    color: $TitleTextColor;
+                    font-family: $FontFamily;
+                }
 
-				.name {
-					position: absolute;
-					left: 0px;
-				}
+                .name {
+                    position: absolute;
+                    left: 0px;
+                }
 
-				.count {
-					position: absolute;
-					right: 0px;
-				}
-			}
-		}
-	}
+                .count {
+                    position: absolute;
+                    right: 0px;
+                }
+            }
+        }
+    }
+    
 }

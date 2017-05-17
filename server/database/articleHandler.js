@@ -118,7 +118,7 @@ function getSpecificArticle(articleNo, callback){
  */
 function modifyArticle(article, callback){
     let sqlString = ` update dbo.Article set 
-                      content = '${article.content}', 
+                      content = '${_replaceString(article.content)}', 
                       editor = '${article.editor}', 
                       UpdateTime = getDate() where ArticleNo = '${article.articleNo}' `;
     _executeSqlComment(sqlString, callback);
@@ -137,7 +137,7 @@ function modifyArticle(article, callback){
  */
 function updateArticle(article, callback){
     let sqlString = ` update dbo.Article set 
-                      title = '${article.title}', 
+                      title = '${_replaceString(article.title)}', 
                       Tag = '${article.tag}',
                       isPrivate = '${article.isPrivate}', 
                       isSlideshow = '${article.isSlideshow}',
@@ -209,8 +209,8 @@ function getCollaboratedEditors(articleNo, callback) {
  * @param  {} editor - Micron worker number
  * @param  {} callback
  */
-function deleteCollaboratedEditor(articleNo, editor, callback) {
-    let sqlString = ` insert into dbo.CoEditor (ArticleNo, Editor, AssginTime)
+function assignCollaboratedEditor(articleNo, editor, callback) {
+    let sqlString = ` insert into dbo.CoEditor (ArticleNo, Editor, AssignTime)
                       values ('${articleNo}','${editor}',getDate())`;
     _executeSqlComment(sqlString, callback);
 }
@@ -220,7 +220,7 @@ function deleteCollaboratedEditor(articleNo, editor, callback) {
  * @param  {} editor - Micron worker number
  * @param  {} callback
  */
-function assignCollaboratedEditor(articleNo, editor, callback) {
+function deleteCollaboratedEditor(articleNo, editor, callback) {
     let sqlString = ` delete from dbo.CoEditor where ArticleNo = '${articleNo}' and editor = '${editor}' `;
     _executeSqlComment(sqlString, callback);
 }
@@ -251,6 +251,11 @@ function _executeSqlComment(sqlComment, callback) {
             }
         });
     });
+}
+
+function _replaceString(content) {
+    let regex = /'/gi;
+    return content.replace(regex, "''");
 }
 
 module.exports = {

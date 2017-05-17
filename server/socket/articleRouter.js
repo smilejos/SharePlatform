@@ -183,7 +183,41 @@ module.exports = function(){
 	        socket.emit('receiveList', articles);
 	        articles = null;
 	    });
-	}
+    }
+    
+    function _assignCoEditor(socket, item) {
+        ArticleHandler.assignCollaboratedEditor(item.article_no, item.worker_no, (recordset, err) => {
+            if( err ) {
+            	socket.emit('receiveNotice', lodash.assign(notice, {
+            		level: 'error',
+            		message: err,
+            		datetime: Date.now()
+            	}));
+            } else {
+            	socket.emit('receiveNotice', lodash.assign(notice, {
+            		message: 'assign article co-editor success',
+            		datetime: Date.now()
+            	}));
+            }
+	    });
+    }
+
+    function _removeCoEditor(socket, item) {
+         ArticleHandler.deleteCollaboratedEditor(item.article_no, item.worker_no, (recordset, err) => {
+           if( err ) {
+            	socket.emit('receiveNotice', lodash.assign(notice, {
+            		level: 'error',
+            		message: err,
+            		datetime: Date.now()
+            	}));
+            } else {
+            	socket.emit('receiveNotice', lodash.assign(notice, {
+            		message: 'remove article co-editor success',
+            		datetime: Date.now()
+            	}));
+            }
+	    });
+    }
 
 	function _uploadArticle(socket, item) {
 		ArticleHandler.modifyArticle(item, (recordset, err) =>{
@@ -280,6 +314,15 @@ module.exports = function(){
 		    socket.on('leaveArticle', (articleNo) => {
 		    	socket.leave(articleNo);
             });
+
+            socket.on('assignCoEditor', (item) => {
+		       _assignCoEditor(socket, item);
+            });
+            
+            socket.on('removeCoEditor', (item) => {
+		       _removeCoEditor(socket, item);
+            });
+            
 
 		    socket.on('disconnect', () => {
 		    });

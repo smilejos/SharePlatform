@@ -1,4 +1,3 @@
-"use strict";
 import React from 'react'
 import { render, findDOMNode } from 'react-dom'
 import { Link } from 'react-router'
@@ -14,7 +13,8 @@ import ArticleContent from '../article/ArticleContent'
 import ArticleInfo from '../article/ArticleInfo'
 import FileSaver from 'file-saver'
 
-class Article extends React.Component {
+@connect(mapStateToProps, mapDispatchToProps)
+export default class Article extends React.Component {
     constructor(props){
         super(props);
         let { requestArticle } = this.props.articleActions;
@@ -25,6 +25,18 @@ class Article extends React.Component {
         let { requestArticle, leaveArticle, cleanArticle } = this.props.articleActions;
         if( this.props.params.articleNo != nextProps.params.articleNo) {
             requestArticle(nextProps.params.articleNo);
+        }
+
+        let { sentClientNotice } = this.props.commonActions;
+        let isCoEditor = nextProps.article ? nextProps.article.editors.indexOf(nextProps.worker_no) > -1 : false;
+        if (isCoEditor) {    
+            sentClientNotice({
+                level : 'info',
+                title : 'System Notice',
+                message: 'You are authorized to edit this article by author.',
+                autoDismiss: 5,
+                datetime: Date.now()
+            });
         }
     }
 
@@ -196,16 +208,6 @@ class ArticleButton extends React.Component {
     _isAllowToEdit() {
         let isAuthor = this.props.article.author == this.props.worker_no;
         let isCoEditor = this.props.article.editors.indexOf(this.props.worker_no) > -1;
-        if (isCoEditor) {
-            let { sentClientNotice } = this.props.commonActions;
-            sentClientNotice({
-                level : 'info',
-                title : 'System Notice',
-                message: 'You are authorized to edit this article by author.',
-                autoDismiss: 5,
-                datetime: Date.now()
-            });
-        }
         return isAuthor || isCoEditor;
     }
 
@@ -226,7 +228,7 @@ class ArticleButton extends React.Component {
     _renderAuthorAssignButton() {
         return (
             <Tooltip placement="right" animation="zoom" overlay="Assign Co-Editor">
-                <Link className="btn btn-default" to={ "/Page/Article/Assign/" + this.props.article.articleNo }>
+                <Link className="btn btn-default" to={ "/Page/Coauthor/Assign/" + this.props.article.articleNo }>
                     <i className="fa fa-address-book fa-lg"></i>
                 </Link>
             </Tooltip>
@@ -373,9 +375,3 @@ function mapDispatchToProps(dispatch) {
         commonActions: bindActionCreators(CommonActions, dispatch),
     }
 }
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Article)
-

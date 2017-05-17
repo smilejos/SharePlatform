@@ -10,6 +10,7 @@ import ArticleSetting from '../article/ArticleSetting'
 import ArticleEditor from '../article/ArticleEditor'
 import ArticleSource from '../article/ArticleSource'
 import ArticleSlideShow from '../article/ArticleSlideShow'
+import CoauthorAssign from '../coauthor'
 import BookSetting from '../book/BookSetting'
 import BookView from '../book/BookView'
 import Search from '../search/Search'
@@ -25,10 +26,11 @@ const routes = (
 	  	<Route path="Page/User/:worker_no" component={UserPage} />
 	  	<Route path="Page/Article/View/:articleNo" component={Article} />
 	  	<Route path="Page/Article/Creator" component={ArticleSetting} />
-	  	<Route path="Page/Article/Setting/:articleNo" component={ArticleSetting} />
+        <Route path="Page/Article/Setting/:articleNo" component={ArticleSetting} />
 	  	<Route path="Page/Article/Editor/:articleNo" component={ArticleEditor} />
 	  	<Route path="Page/Article/SlideShow/:articleNo" component={ArticleSlideShow} />
-	  	<Route path="Page/Article/Source/:articleNo" component={ArticleSource} />
+        <Route path="Page/Article/Source/:articleNo" component={ArticleSource} />
+        <Route path="Page/Coauthor/Assign/:articleNo" component={CoauthorAssign} />
 	  	<Route path="Page/Search" component={Search} />
 	  	<Route path="Page/Search/Result/:type/:keyword" component={SearchResult} />
 		<Route path="Page/Tag" component={CategoryMap} />

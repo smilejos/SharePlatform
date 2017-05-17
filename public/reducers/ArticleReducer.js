@@ -5,12 +5,13 @@ import { REQUEST_POST, REQUEST_POSTS, REQUEST_SUMMARY,
     COMPLETE_POST, CLEAN_POST, CLEAN_POSTS, CLEAN_EDITING_POST, 
     LEAVE_POST, EDIT_POST, CHANGE_POST_TYPE,
     UPDATE_SLIDES, UPDATE_SLIDE_INDEX,
-    UPLOAD_POST,
-    FILTER_POST, CLEAR_FILTER_POST } from '../constants/ArticleActionTypes';
-import merge from 'lodash/merge'
-import union from 'lodash/union'
-import assignIn from 'lodash/assignIn'
-import concat from 'lodash/concat'
+    UPLOAD_POST, FILTER_POST, CLEAR_FILTER_POST,
+    ASSIGN_CO_EDITOR, REMOVE_CO_EDITOR} from '../constants/ArticleActionTypes';
+// import merge from 'lodash/merge'
+// import union from 'lodash/union'
+// import assignIn from 'lodash/assignIn'
+// import concat from 'lodash/concat'
+import { merge, union, assignIn, concat, filter, sortedUniq, remove } from 'lodash'
 
 export default function articles(state = {
         isFetching: true,
@@ -95,7 +96,9 @@ export default function articles(state = {
                 articleNo: null,
                 title: '',
                 author: '',
+                editor: '',
                 content: '',
+                editors: [],
                 tag: [],
                 updateTime: null,
                 publishTime: null,
@@ -137,8 +140,21 @@ export default function articles(state = {
         return assignIn({}, state, {
             slide_index: action.slide_index
         });
+    case ASSIGN_CO_EDITOR:
+        return assignIn({}, state, {
+            article: assignIn({}, state.article, {
+                editors: sortedUniq(concat(state.article.editors, action.worker_no)),
+            })
+    	});        
+    case REMOVE_CO_EDITOR:    
+        return assignIn({}, state, {
+            article: assignIn({}, state.article, {
+                editors: filter(state.article.editors, function (worker_no) { return worker_no != action.worker_no }),
+            })
+    	});        
     case LEAVE_POST:
     case UPLOAD_POST:
+    
 	default:
 		return state;
 	}

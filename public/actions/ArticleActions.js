@@ -5,8 +5,8 @@ import { REQUEST_POST, REQUEST_POSTS, REQUEST_SUMMARY,
     RECEIVE_IMAGES, UPDATE_IMAGES, APPEND_IMAGE, DELETE_IMAGE,
     COMPLETE_POST, CLEAN_POST, CLEAN_POSTS, CLEAN_EDITING_POST, LEAVE_POST, EDIT_POST, SYNC_POST, CHANGE_POST_TYPE,
     UPDATE_SLIDES, UPDATE_SLIDE_INDEX,
-    UPLOAD_POST,
-    FILTER_POST, CLEAR_FILTER_POST} from '../constants/ArticleActionTypes';
+    UPLOAD_POST, FILTER_POST, CLEAR_FILTER_POST,
+    ASSIGN_CO_EDITOR, REMOVE_CO_EDITOR} from '../constants/ArticleActionTypes';
 import { socket_article as socket, socket_stream as ss } from '../utility/socketHandler';
 //import fs from 'fs';
 
@@ -232,5 +232,34 @@ export function uploadArticle(files, articleNo) {
 	//fs.createReadStream(file).pipe(stream);
 	return {
 		type: UPLOAD_POST
+	};
+}
+
+export function requestCoEditor(article_no) {
+    socket.emit('requestCoEditor', item);	
+	return {
+		type: REQUEST_POSTS
+	};
+}
+
+export function assignCoEditor(article_no, worker_no) {
+    socket.emit('assignCoEditor', {
+        article_no: article_no,
+        worker_no: worker_no
+    });	
+    return {
+		type: ASSIGN_CO_EDITOR,
+		worker_no
+	};
+}
+
+export function removeCoEditor(article_no, worker_no) {
+    socket.emit('removeCoEditor', {
+        article_no: article_no,
+        worker_no: worker_no
+    });	
+    return {
+		type: REMOVE_CO_EDITOR,
+		worker_no
 	};
 }
