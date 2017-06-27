@@ -158,7 +158,7 @@ function updateArticle(article, callback){
  */
 function createArticle(article, callback){
     let sqlString = ` insert into  dbo.Article (title, Author, editor, content, Tag, UpdateTime, PublishTime, isPrivate, isSlideshow)
-                      values ('${article.title}','${article.author}','${article.author}','${article.tag}', getDate(), getDate(), '${article.isPrivate}', '${article.isSlideshow}')`;
+                      values ('${article.title}','${article.author}','${article.author}','','${article.tag}', getDate(), getDate(), '${article.isPrivate}', '${article.isSlideshow}')`;
     _executeSqlComment(sqlString, callback);
 }
 
